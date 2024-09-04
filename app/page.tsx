@@ -12,8 +12,8 @@ export default async function HomeGora()
 		},
 	};
 	
-	const result : any = await GetPets(true, "Dog");
-	const result2  : any = await GetPets(true, "Cat");
+	// const result : any = await GetPets(true, "Dog");
+	// const result2  : any = await GetPets(true, "Cat");
 
 
 	return (
