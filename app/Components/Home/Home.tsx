@@ -16,139 +16,138 @@ export default function Home({Dogs, Cats}: any) {
         setExpandedCard(expandedCard === id ? null : id);
     };
 
-    const cardsDogs = [
-        {
-            id: 1,
-            image: 'Guau1.png',
-            title: 'Doggi',
-            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-        },
-        {
-            id: 2,
-            image: 'Guau2.png',
-            title: 'Doggi',
-            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-        },
-        {
-            id: 3,
-            image: 'Guau3.png',
-            title: 'Doggi',
-            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-        },
-        {
-            id: 4,
-            image: 'Guau4.png',
-            title: 'Doggi',
-            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-        },
-        {
-            id: 5,
-            image: 'Guau1.png',
-            title: 'Doggi',
-            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-        },
-        {
-            id: 6,
-            image: 'Guau2.png',
-            title: 'Doggi',
-            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-        },
-        {
-            id: 7,
-            image: 'Guau1.png',
-            title: 'Doggi',
-            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-        },
-        {
-            id: 8,
-            image: 'Guau3.png',
-            title: 'Doggi',
-            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-        },
-        {
-            id: 8,
-            image: 'Guau4.png',
-            title: 'Doggi',
-            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-        },
-    ];
+    // const cardsDogs = [
+    //     {
+    //         id: 1,
+    //         image: 'Guau1.png',
+    //         title: 'Doggi',
+    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+    //     },
+    //     {
+    //         id: 2,
+    //         image: 'Guau2.png',
+    //         title: 'Doggi',
+    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+    //     },
+    //     {
+    //         id: 3,
+    //         image: 'Guau3.png',
+    //         title: 'Doggi',
+    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+    //     },
+    //     {
+    //         id: 4,
+    //         image: 'Guau4.png',
+    //         title: 'Doggi',
+    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+    //     },
+    //     {
+    //         id: 5,
+    //         image: 'Guau1.png',
+    //         title: 'Doggi',
+    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+    //     },
+    //     {
+    //         id: 6,
+    //         image: 'Guau2.png',
+    //         title: 'Doggi',
+    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+    //     },
+    //     {
+    //         id: 7,
+    //         image: 'Guau1.png',
+    //         title: 'Doggi',
+    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+    //     },
+    //     {
+    //         id: 8,
+    //         image: 'Guau3.png',
+    //         title: 'Doggi',
+    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+    //     },
+    //     {
+    //         id: 8,
+    //         image: 'Guau4.png',
+    //         title: 'Doggi',
+    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+    //     },
+    // ];
 
-    const cardsCats = [
-        {
-            id: 1,
-            image: 'Miaus1.png',
-            title: 'Kitty',
-            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-        },
-        {
-            id: 2,
-            image: 'Miaus2.png',
-            title: 'Doggi',
-            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-        },
-        {
-            id: 3,
-            image: 'Miaus3.png',
-            title: 'Doggi',
-            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-        },
-        {
-            id: 4,
-            image: 'Miaus4.png',
-            title: 'Doggi',
-            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-        },
-        {
-            id: 5,
-            image: 'Miaus5.png',
-            title: 'Doggi',
-            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-        },
-        {
-            id: 6,
-            image: 'Miaus6.png',
-            title: 'Doggi',
-            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-        },
-        {
-            id: 7,
-            image: 'Miaus2.png',
-            title: 'Doggi',
-            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-        },
-        {
-            id: 8,
-            image: 'Miaus3.png',
-            title: 'Doggi',
-            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-        },
-        {
-            id: 8,
-            image: 'Miaus1.png',
-            title: 'Doggi',
-            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-        },
-    ];
+    // const cardsCats = [
+    //     {
+    //         id: 1,
+    //         image: 'Miaus1.png',
+    //         title: 'Kitty',
+    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+    //     },
+    //     {
+    //         id: 2,
+    //         image: 'Miaus2.png',
+    //         title: 'Doggi',
+    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+    //     },
+    //     {
+    //         id: 3,
+    //         image: 'Miaus3.png',
+    //         title: 'Doggi',
+    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+    //     },
+    //     {
+    //         id: 4,
+    //         image: 'Miaus4.png',
+    //         title: 'Doggi',
+    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+    //     },
+    //     {
+    //         id: 5,
+    //         image: 'Miaus5.png',
+    //         title: 'Doggi',
+    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+    //     },
+    //     {
+    //         id: 6,
+    //         image: 'Miaus6.png',
+    //         title: 'Doggi',
+    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+    //     },
+    //     {
+    //         id: 7,
+    //         image: 'Miaus2.png',
+    //         title: 'Doggi',
+    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+    //     },
+    //     {
+    //         id: 8,
+    //         image: 'Miaus3.png',
+    //         title: 'Doggi',
+    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+    //     },
+    //     {
+    //         id: 8,
+    //         image: 'Miaus1.png',
+    //         title: 'Doggi',
+    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+    //     },
+    // ];
 
-    
     return(
         <div>
             {/* BANNER */}
@@ -192,129 +191,6 @@ export default function Home({Dogs, Cats}: any) {
                                                         <Input type="Phone" variant={'faded'} label="Celular" />
                                                     </div>
                                                 </div> 
-                                                {/* <h1 className='text-center py-4 text-blackGora font-semibold'>
-                                                    ¿Dónde viviría tu nueva mascota?
-                                                </h1>
-                                                <p className='text-blackGora px-4 text-sm'> 
-                                                    Cuéntanos un poco sobre tu hogar y el espacio que tienes disponible para un nuevo compañero.
-                                                </p>
-                                                <div className='flex flex-row justify-center my-2 gap-2 space-x-2'>
-                                                    <Checkbox 
-                                                        classNames={{
-                                                            base: cn(
-                                                            "inline-flex w-36 max-w-md bg-content1",
-                                                            "hover:bg-content2 items-center justify-start",
-                                                            "cursor-pointer rounded-lg p-2 border-2 border-transparent",
-                                                            "data-[selected=true]:border-primary",
-                                                            ),
-                                                            label: "w-full",
-                                                        }}
-                                                        >
-                                                        <div className="flex justify-between gap-2 text-blackGora text-sm">
-                                                            Casa
-                                                        </div>
-                                                    </Checkbox>
-                                                    <Checkbox 
-                                                        classNames={{
-                                                            base: cn(
-                                                            "inline-flex w-36 max-w-md bg-content1",
-                                                            "hover:bg-content2 items-center justify-start",
-                                                            "cursor-pointer rounded-lg p-2 border-2 border-transparent",
-                                                            "data-[selected=true]:border-primary",
-                                                            ),
-                                                            label: "w-full",
-                                                        }}
-                                                        >
-                                                        <div className="flex justify-between gap-2 text-blackGora text-sm">
-                                                            Apartamento
-                                                        </div>
-                                                    </Checkbox>
-                                                    <Checkbox 
-                                                        classNames={{
-                                                            base: cn(
-                                                            "inline-flex w-36 max-w-md bg-content1",
-                                                            "hover:bg-content2 items-center justify-start",
-                                                            "cursor-pointer rounded-lg p-2 border-2 border-transparent",
-                                                            "data-[selected=true]:border-primary",
-                                                            ),
-                                                            label: "w-full",
-                                                        }}
-                                                        >
-                                                        <div className="flex justify-between gap-2 text-blackGora text-sm">
-                                                            Finca
-                                                        </div>
-                                                    </Checkbox>
-                                                    <Checkbox 
-                                                        classNames={{
-                                                            base: cn(
-                                                            "inline-flex w-36 max-w-md bg-content1",
-                                                            "hover:bg-content2 items-center justify-start",
-                                                            "cursor-pointer rounded-lg p-2 border-2 border-transparent",
-                                                            "data-[selected=true]:border-primary",
-                                                            ),
-                                                            label: "w-full",
-                                                        }}
-                                                        >
-                                                        <div className="flex justify-between gap-2 text-blackGora text-sm">
-                                                            Otra
-                                                        </div>
-                                                    </Checkbox>
-                                                </div>
-                                                <div className='flex flex-row justify-start px-8 mx-6 my-2 gap-2 space-x-2'>
-                                                    <Checkbox 
-                                                        classNames={{
-                                                            base: cn(
-                                                            "inline-flex w-36 max-w-md bg-content1",
-                                                            "hover:bg-content2 items-center justify-start",
-                                                            "cursor-pointer rounded-lg p-2 border-2 border-transparent",
-                                                            "data-[selected=true]:border-primary",
-                                                            ),
-                                                            label: "w-full",
-                                                        }}
-                                                        >
-                                                        <div className="flex justify-between gap-2 text-blackGora text-sm">
-                                                            Propia
-                                                        </div>
-                                                    </Checkbox>
-                                                    <Checkbox 
-                                                        classNames={{
-                                                            base: cn(
-                                                            "inline-flex w-36 max-w-md bg-content1",
-                                                            "hover:bg-content2 items-center justify-start",
-                                                            "cursor-pointer rounded-lg p-2 border-2 border-transparent",
-                                                            "data-[selected=true]:border-primary",
-                                                            ),
-                                                            label: "w-full",
-                                                        }}
-                                                        >
-                                                        <div className="flex justify-between gap-2 text-blackGora text-sm">
-                                                            Familiar
-                                                        </div>
-                                                    </Checkbox>
-                                                    <Checkbox 
-                                                        classNames={{
-                                                            base: cn(
-                                                            "inline-flex w-36 max-w-md bg-content1",
-                                                            "hover:bg-content2 items-center justify-start",
-                                                            "cursor-pointer rounded-lg p-2 border-2 border-transparent",
-                                                            "data-[selected=true]:border-primary",
-                                                            ),
-                                                            label: "w-full",
-                                                        }}
-                                                        >
-                                                        <div className="flex justify-between text-blackGora text-sm">
-                                                            Arrendada
-                                                        </div>
-                                                    </Checkbox>
-                                                </div>
-                                                <div className='flex flex-row my-2 px-4 space-x-1'>
-                                                    <p className='text-blackGora text-sm'> 
-                                                        ¿En caso de ser arrendador, el dueño del inmueble tiene conocimiento de la posible adopción 
-                                                        y dio autorización para llevarla a cabo?
-                                                    </p>
-                                                    <Checkbox className='text-blackGora text-sm p-2 border-2 border-greenGora rounded-xl'>Si</Checkbox>
-                                                    <Checkbox className='text-blackGora text-sm p-2 border-2 border-greenGora rounded-xl'>No</Checkbox>
-                                                </div> */}
                                             </ModalBody>
                                             <ModalFooter className='flex justify-center'>
                                                 <div className='flex flex-col w-full'>
@@ -378,7 +254,7 @@ export default function Home({Dogs, Cats}: any) {
                             >
                                 <ScrollShadow className="mn:w-[360px] mn:h-[600px] md:w-[1280px] md:h-[600px] mt-6 mb-6" size={0}>
                                     <div className='flex flex-wrap justify-evenly'>
-                                        {cardsDogs.map((card: any) => (
+                                        {Dogs.map((card: any) => (
                                             <Card key={card.id} className={`m-4 w-96 transition-all duration-300 ${expandedCard === card.id ? 'h-full' : 'h-50'}`}>
                                                 <div className={`flex items-center ${expandedCard === card.id ? 'flex flex-col gap-2' : ''}`}>
                                                     <Image
@@ -652,3 +528,129 @@ export default function Home({Dogs, Cats}: any) {
         </div>
     )
 }
+
+
+{ /* Estructura formulario
+<h1 className='text-center py-4 text-blackGora font-semibold'>
+    ¿Dónde viviría tu nueva mascota?
+</h1>
+<p className='text-blackGora px-4 text-sm'> 
+    Cuéntanos un poco sobre tu hogar y el espacio que tienes disponible para un nuevo compañero.
+</p>
+<div className='flex flex-row justify-center my-2 gap-2 space-x-2'>
+    <Checkbox 
+        classNames={{
+            base: cn(
+            "inline-flex w-36 max-w-md bg-content1",
+            "hover:bg-content2 items-center justify-start",
+            "cursor-pointer rounded-lg p-2 border-2 border-transparent",
+            "data-[selected=true]:border-primary",
+            ),
+            label: "w-full",
+        }}
+        >
+        <div className="flex justify-between gap-2 text-blackGora text-sm">
+            Casa
+        </div>
+    </Checkbox>
+    <Checkbox 
+        classNames={{
+            base: cn(
+            "inline-flex w-36 max-w-md bg-content1",
+            "hover:bg-content2 items-center justify-start",
+            "cursor-pointer rounded-lg p-2 border-2 border-transparent",
+            "data-[selected=true]:border-primary",
+            ),
+            label: "w-full",
+        }}
+        >
+        <div className="flex justify-between gap-2 text-blackGora text-sm">
+            Apartamento
+        </div>
+    </Checkbox>
+    <Checkbox 
+        classNames={{
+            base: cn(
+            "inline-flex w-36 max-w-md bg-content1",
+            "hover:bg-content2 items-center justify-start",
+            "cursor-pointer rounded-lg p-2 border-2 border-transparent",
+            "data-[selected=true]:border-primary",
+            ),
+            label: "w-full",
+        }}
+        >
+        <div className="flex justify-between gap-2 text-blackGora text-sm">
+            Finca
+        </div>
+    </Checkbox>
+    <Checkbox 
+        classNames={{
+            base: cn(
+            "inline-flex w-36 max-w-md bg-content1",
+            "hover:bg-content2 items-center justify-start",
+            "cursor-pointer rounded-lg p-2 border-2 border-transparent",
+            "data-[selected=true]:border-primary",
+            ),
+            label: "w-full",
+        }}
+        >
+        <div className="flex justify-between gap-2 text-blackGora text-sm">
+            Otra
+        </div>
+    </Checkbox>
+</div>
+<div className='flex flex-row justify-start px-8 mx-6 my-2 gap-2 space-x-2'>
+    <Checkbox 
+        classNames={{
+            base: cn(
+            "inline-flex w-36 max-w-md bg-content1",
+            "hover:bg-content2 items-center justify-start",
+            "cursor-pointer rounded-lg p-2 border-2 border-transparent",
+            "data-[selected=true]:border-primary",
+            ),
+            label: "w-full",
+        }}
+        >
+        <div className="flex justify-between gap-2 text-blackGora text-sm">
+            Propia
+        </div>
+    </Checkbox>
+    <Checkbox 
+        classNames={{
+            base: cn(
+            "inline-flex w-36 max-w-md bg-content1",
+            "hover:bg-content2 items-center justify-start",
+            "cursor-pointer rounded-lg p-2 border-2 border-transparent",
+            "data-[selected=true]:border-primary",
+            ),
+            label: "w-full",
+        }}
+        >
+        <div className="flex justify-between gap-2 text-blackGora text-sm">
+            Familiar
+        </div>
+    </Checkbox>
+    <Checkbox 
+        classNames={{
+            base: cn(
+            "inline-flex w-36 max-w-md bg-content1",
+            "hover:bg-content2 items-center justify-start",
+            "cursor-pointer rounded-lg p-2 border-2 border-transparent",
+            "data-[selected=true]:border-primary",
+            ),
+            label: "w-full",
+        }}
+        >
+        <div className="flex justify-between text-blackGora text-sm">
+            Arrendada
+        </div>
+    </Checkbox>
+</div>
+<div className='flex flex-row my-2 px-4 space-x-1'>
+    <p className='text-blackGora text-sm'> 
+        ¿En caso de ser arrendador, el dueño del inmueble tiene conocimiento de la posible adopción 
+        y dio autorización para llevarla a cabo?
+    </p>
+    <Checkbox className='text-blackGora text-sm p-2 border-2 border-greenGora rounded-xl'>Si</Checkbox>
+    <Checkbox className='text-blackGora text-sm p-2 border-2 border-greenGora rounded-xl'>No</Checkbox>
+</div> */}
