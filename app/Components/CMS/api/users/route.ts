@@ -44,7 +44,7 @@ export async function PATCH(request: NextRequest) {
     try 
     {
 
-        const { data: { token } } = await axios.get(`${process.env.HOST_API}/Api/TokenGora`, {
+        const { data: { token } } = await axios.get(`${process.env.HOST_API}/Api/Gora/TokenGora`, {
             headers: {
                 "x-api-key":<string>process.env.API_KEY
             }
