@@ -5,10 +5,10 @@ import {ScrollShadow} from "@nextui-org/react";
 import {Divider} from "@nextui-org/divider";
 import MotionTransition from '../MotionTransition/MotionTransition';
 import 'primeicons/primeicons.css';
-
-export default function Home({Dogs, Cats}: any) {
+//{Dogs, Cats}: any
+export default function Home() {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
-    // const [expand, setExpand] = useState(false);
+    //const [expand, setExpand] = useState(false);
     const [isDog, setIsDog] = useState(true);
     const [expandedCard, setExpandedCard] = useState<number | null>(null);
 
@@ -16,137 +16,137 @@ export default function Home({Dogs, Cats}: any) {
         setExpandedCard(expandedCard === id ? null : id);
     };
 
-    // const cardsDogs = [
-    //     {
-    //         id: 1,
-    //         image: 'Guau1.png',
-    //         title: 'Doggi',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    //     {
-    //         id: 2,
-    //         image: 'Guau2.png',
-    //         title: 'Doggi',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    //     {
-    //         id: 3,
-    //         image: 'Guau3.png',
-    //         title: 'Doggi',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    //     {
-    //         id: 4,
-    //         image: 'Guau4.png',
-    //         title: 'Doggi',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    //     {
-    //         id: 5,
-    //         image: 'Guau1.png',
-    //         title: 'Doggi',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    //     {
-    //         id: 6,
-    //         image: 'Guau2.png',
-    //         title: 'Doggi',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    //     {
-    //         id: 7,
-    //         image: 'Guau1.png',
-    //         title: 'Doggi',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    //     {
-    //         id: 8,
-    //         image: 'Guau3.png',
-    //         title: 'Doggi',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    //     {
-    //         id: 8,
-    //         image: 'Guau4.png',
-    //         title: 'Doggi',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    // ];
+    const cardsDogs = [
+        {
+            id: 1,
+            image: 'Guau1.png',
+            title: 'Doggi',
+            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+        },
+        {
+            id: 2,
+            image: 'Guau2.png',
+            title: 'Doggi',
+            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+        },
+        {
+            id: 3,
+            image: 'Guau3.png',
+            title: 'Doggi',
+            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+        },
+        {
+            id: 4,
+            image: 'Guau4.png',
+            title: 'Doggi',
+            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+        },
+        {
+            id: 5,
+            image: 'Guau1.png',
+            title: 'Doggi',
+            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+        },
+        {
+            id: 6,
+            image: 'Guau2.png',
+            title: 'Doggi',
+            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+        },
+        {
+            id: 7,
+            image: 'Guau1.png',
+            title: 'Doggi',
+            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+        },
+        {
+            id: 8,
+            image: 'Guau3.png',
+            title: 'Doggi',
+            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+        },
+        {
+            id: 8,
+            image: 'Guau4.png',
+            title: 'Doggi',
+            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+        },
+    ];
 
-    // const cardsCats = [
-    //     {
-    //         id: 1,
-    //         image: 'Miaus1.png',
-    //         title: 'Kitty',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    //     {
-    //         id: 2,
-    //         image: 'Miaus2.png',
-    //         title: 'Doggi',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    //     {
-    //         id: 3,
-    //         image: 'Miaus3.png',
-    //         title: 'Doggi',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    //     {
-    //         id: 4,
-    //         image: 'Miaus4.png',
-    //         title: 'Doggi',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    //     {
-    //         id: 5,
-    //         image: 'Miaus5.png',
-    //         title: 'Doggi',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    //     {
-    //         id: 6,
-    //         image: 'Miaus6.png',
-    //         title: 'Doggi',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    //     {
-    //         id: 7,
-    //         image: 'Miaus2.png',
-    //         title: 'Doggi',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    //     {
-    //         id: 8,
-    //         image: 'Miaus3.png',
-    //         title: 'Doggi',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    //     {
-    //         id: 8,
-    //         image: 'Miaus1.png',
-    //         title: 'Doggi',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    // ];
+    const cardsCats = [
+        {
+            id: 1,
+            image: 'Miaus1.png',
+            title: 'Kitty',
+            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+        },
+        {
+            id: 2,
+            image: 'Miaus2.png',
+            title: 'Doggi',
+            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+        },
+        {
+            id: 3,
+            image: 'Miaus3.png',
+            title: 'Doggi',
+            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+        },
+        {
+            id: 4,
+            image: 'Miaus4.png',
+            title: 'Doggi',
+            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+        },
+        {
+            id: 5,
+            image: 'Miaus5.png',
+            title: 'Doggi',
+            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+        },
+        {
+            id: 6,
+            image: 'Miaus6.png',
+            title: 'Doggi',
+            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+        },
+        {
+            id: 7,
+            image: 'Miaus2.png',
+            title: 'Doggi',
+            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+        },
+        {
+            id: 8,
+            image: 'Miaus3.png',
+            title: 'Doggi',
+            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+        },
+        {
+            id: 8,
+            image: 'Miaus1.png',
+            title: 'Doggi',
+            shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+            longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
+        },
+    ];
 
     return(
         <div>
@@ -232,12 +232,34 @@ export default function Home({Dogs, Cats}: any) {
                                 Encuentra a tu {<span className='text-greenGora'>Mejor amigo</span>}
                             </h2>
                             <div className="flex gap-4 mn:my-4 md:my-8 mn:justify-center md:justify-start">
-                                <Button  onClick={(e)=> [setIsDog(true)]} className={`bg-transparent border  ${isDog ? "bg-greenGora text-OrangeLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-OrangeLightGora`} radius="full" size="lg">
+                                <div className="group relative flex flex-col items-center mt-10">
+                                    <div className="absolute bottom-12 left-0 flex justify-center items-center w-full h-full transform translate-y-full opacity-0 group-hover:-translate-y-2 group-hover:opacity-100 transition-all duration-300">
+                                    <Image
+                                        alt="guauButton"
+                                        src="guauButton.gif"
+                                        height="100"
+                                        width="100"
+                                    />
+                                    </div>
+                                    <Button
+                                    onClick={(e) => setIsDog(true)}
+                                    className={`bg-transparent border ${isDog ? "bg-greenGora text-OrangeLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-OrangeLightGora`}
+                                    radius="full"
+                                    size="lg"
+                                    >
                                     Guaus
-                                </Button>
-                                <Button onClick={(e)=> setIsDog(false)} className={`bg-transparent border ${!isDog ? "bg-greenGora text-OrangeLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-OrangeLightGora`} radius="full" size="lg">
+                                    </Button>
+                                </div>
+                                <div className="mt-10">
+                                    <Button
+                                    onClick={(e) => setIsDog(false)}
+                                    className={`bg-transparent border ${!isDog ? "bg-greenGora text-OrangeLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-OrangeLightGora`}
+                                    radius="full"
+                                    size="lg"
+                                    >
                                     Miaus
-                                </Button>
+                                    </Button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -254,7 +276,7 @@ export default function Home({Dogs, Cats}: any) {
                             >
                                 <ScrollShadow className="mn:w-[360px] mn:h-[600px] md:w-[1280px] md:h-[600px] mt-6 mb-6" size={0}>
                                     <div className='flex flex-wrap justify-evenly'>
-                                        {Dogs.map((card: any) => (
+                                        {cardsDogs.map((card: any) => (
                                             <Card key={card.id} className={`m-4 w-96 transition-all duration-300 ${expandedCard === card.id ? 'h-full' : 'h-50'}`}>
                                                 <div className={`flex items-center ${expandedCard === card.id ? 'flex flex-col gap-2' : ''}`}>
                                                     <Image
@@ -313,7 +335,7 @@ export default function Home({Dogs, Cats}: any) {
                             >
                                 <ScrollShadow className="mn:w-[360px] mn:h-[600px] md:w-[1280px] md:h-[600px] mt-4 mb-4" size={0}>
                                     <div className='flex flex-wrap justify-evenly'>
-                                        {Cats.map((card: any) => (
+                                        {cardsCats.map((card: any) => (
                                             <Card key={card.id} className={`m-4 w-96 transition-all duration-300 ${expandedCard === card.id ? 'h-full' : 'h-50'}`}>
                                                 <div className={`flex items-center ${expandedCard === card.id ? 'flex flex-col gap-2' : ''}`}>
                                                     <Image

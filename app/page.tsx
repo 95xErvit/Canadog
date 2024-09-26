@@ -12,19 +12,28 @@ export default async function HomeGora()
 		},
 	};
 	
-	const result : any = await GetPets(true, "Dog");
-	const result2  : any = await GetPets(true, "Cat");
+	try{
+		// const result : any = await GetPets(true, "Dog");
+		// const result2  : any = await GetPets(true, "Cat");
 
-	return (
-		<>
-			<Header/>
-				<main className="bg-cover bg-center" style={{backgroundImage:'url("")'}}>
-					<Home 
-						Dogs={result.data.result} /*{[]}*/
-						Cats={result2.data.result} /*{[]}*/
-					/>
-				</main>
-			<Footer/>
-		</>
-	)
+		return (
+			<>
+				<Header/>
+					<main className="bg-cover bg-center" style={{backgroundImage:'url("")'}}>
+						<Home 
+							//Dogs={result.data.result} /*{[]}*/
+							// Cats={result2.data.result} {[]}
+						/>
+					</main>
+				<Footer/>
+			</>
+		)
+	}
+	catch(error){
+		return(
+			<div>
+				Ocurrio un error
+			</div>
+		)
+	}
 }
