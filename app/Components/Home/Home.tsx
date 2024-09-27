@@ -250,7 +250,15 @@ export default function Home() {
                                     Guaus
                                     </Button>
                                 </div>
-                                <div className="mt-10">
+                                <div className="group relative flex flex-col items-center mt-10">
+                                    <div className="absolute bottom-12 left-0 flex justify-center items-center w-full h-full transform translate-y-full opacity-0 group-hover:-translate-y-1.5 group-hover:opacity-100 transition-all duration-300">
+                                    <Image
+                                        alt="guauButton"
+                                        src="CatIcon.gif"
+                                        height="100"
+                                        width="100"
+                                    />
+                                    </div>
                                     <Button
                                     onClick={(e) => setIsDog(false)}
                                     className={`bg-transparent border ${!isDog ? "bg-greenGora text-OrangeLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-OrangeLightGora`}
