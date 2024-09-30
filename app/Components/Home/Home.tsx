@@ -285,43 +285,41 @@ export default function Home() {
                                 <ScrollShadow className="mn:w-[360px] mn:h-[600px] md:w-[1280px] md:h-[600px] mt-6 mb-6" size={0}>
                                     <div className='flex flex-wrap justify-evenly'>
                                         {cardsDogs.map((card: any) => (
-                                            <Card key={card.id} className={`m-4 w-96 transition-all duration-300 ${expandedCard === card.id ? 'h-full' : 'h-50'}`}>
-                                                <div className={`flex items-center ${expandedCard === card.id ? 'flex flex-col gap-2' : ''}`}>
+                                            <Card key={card.id} className={`m-4 transition-all duration-300 ${expandedCard === card.id ? 'w-[340px] h-[424px]' : 'w-[340px] h-[200px]'}`}>
+                                                <div className={`flex items-center ${expandedCard === card.id ? 'flex flex-col gap-4' : ''}`}>
                                                     <Image
                                                         alt="Album cover"
-                                                        className={`object-cover shadow-md transition-all duration-300 ${expandedCard === card.id ? 'w-96 h-60' : ''}`}
+                                                        className={`object-cover shadow-md transition-all duration-300 rounded-none ${expandedCard === card.id ? 'w-[340px] h-[200px]' : 'w-[170px] h-[200px]'}`}
                                                         src={card.image}
-                                                        height={250}
-                                                        width={500}
                                                     />
-                                                    <CardBody className={`${expandedCard === card.id ? 'mt-2' : ''}`}>
-                                                        <div className='flex flex-col'>
-                                                            <div className={` ${expandedCard === card.id ? 'flex justify-around' : ''}`}>
-                                                                <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start text-3xl' : 'justify-end text-2xl'}`}>
-                                                                    Do<span className='text-greenGora'>ggi</span>
-                                                                </h1>
-                                                                {expandedCard === card.id && (
-                                                                    <div className='flex flex-cols'>
-                                                                        <div className='ml-4'>
-                                                                            <Button className='bg-greenGora border border-greenGora text-white px-6' radius="full" size="md">Adoptame</Button>
-                                                                        </div>
-                                                                        <div className='flex justify-center items-center ml-4'>
-                                                                            <Button onClick={() => toggleExpand(card.id)} className='bg-transparent border border-greenGora text-greenGora' radius="full" size="md" endContent={<i className="pi pi-arrow-circle-up" style={{ color: '#489E84' }} />} />
-                                                                        </div>
+                                                    <CardBody className={`${expandedCard === card.id ? 'w-[340px] h-[180px]' : 'w-[170px] h-[200px] flex flex-col justify-around'}`}>
+                                                        <div className={` ${expandedCard === card.id ? 'flex justify-around' : ''}`}>
+                                                            <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start text-3xl' : 'justify-end mn:text-xl md:text-2xl'}`}>
+                                                                Do<span className='text-greenGora'>ggi</span>
+                                                            </h1>
+                                                            {expandedCard === card.id && (
+                                                                <div className='flex'>
+                                                                    <div className='flex items-center'>
+                                                                        <Button className='bg-greenGora border border-greenGora text-white h-8' radius="full" >Adoptame</Button>
                                                                     </div>
-                                                                )}
-                                                            </div>
-                                                            <p className={`flex text-md ${expandedCard === card.id ? 'w-full py-4 px-2' : 'w-full mt-2'}`}>
-                                                                {expandedCard === card.id ? card.longDescription : card.shortDescription}
-                                                            </p>
-                                                            {expandedCard !== card.id && (
-                                                                <div className="mt-4">
-                                                                    <Button onClick={() => toggleExpand(card.id)} className='bg-transparent border border-greenGora text-greenGora' radius="full" size="md" endContent={<i className="pi pi-arrow-circle-down" style={{ color: '#489E84' }} />}>
-                                                                        Más sobre mi
-                                                                    </Button>
+                                                                    <div className='flex items-center'>
+                                                                        <Button onClick={() => toggleExpand(card.id)} className='bg-transparent text-greenGora px-0 text-end' radius="full" endContent={<i className="pi pi-arrow-circle-up" style={{ color: '#489E84', fontSize: '1.5rem' }} />} />
+                                                                    </div>
                                                                 </div>
                                                             )}
                                                         </div>
+
+                                                        <p className={`flex font-normal ${expandedCard === card.id ? 'w-[308px] h-[120px] mt-4' : 'w-[135px] h-[58px] text-xs'}`}>
+                                                            {expandedCard === card.id ? card.longDescription : card.shortDescription}
+                                                        </p>
+
+                                                        {expandedCard !== card.id && (
+                                                            <div className="">
+                                                                <Button onClick={() => toggleExpand(card.id)} className='bg-transparent border border-greenGora text-greenGora' radius="full" endContent={<i className="pi pi-arrow-circle-down" style={{ color: '#489E84' }} />}>
+                                                                    Más sobre mi
+                                                                </Button>
+                                                            </div>
+                                                        )}
                                                     </CardBody>
                                                 </div>
                                             </Card>
