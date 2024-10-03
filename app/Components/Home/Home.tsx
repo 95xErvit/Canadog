@@ -9,7 +9,7 @@ import 'primeicons/primeicons.css';
 export default function Home({Dogs, Cats}: any) {
     console.log(Dogs, Cats)
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
-    // const [expand, setExpand] = useState(false);
+    //const [expand, setExpand] = useState(false);
     const [isDog, setIsDog] = useState(true);
     const [expandedCard, setExpandedCard] = useState<number | null>(null);
 
@@ -167,12 +167,42 @@ export default function Home({Dogs, Cats}: any) {
                                 Encuentra a tu {<span className='text-greenGora'>Mejor amigo</span>}
                             </h2>
                             <div className="flex gap-4 mn:my-4 md:my-8 mn:justify-center md:justify-start">
-                                <Button  onClick={(e)=> [setIsDog(true)]} className={`bg-transparent border  ${isDog ? "bg-greenGora text-OrangeLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-OrangeLightGora`} radius="full" size="lg">
+                                <div className="group relative flex flex-col items-center mt-10">
+                                    <div className="absolute bottom-12 left-0 flex justify-center items-center w-full h-full transform translate-y-full opacity-0 group-hover:-translate-y-2 group-hover:opacity-100 transition-all duration-300">
+                                    <Image
+                                        alt="guauButton"
+                                        src="guauButton.gif"
+                                        height="100"
+                                        width="100"
+                                    />
+                                    </div>
+                                    <Button
+                                    onClick={(e) => setIsDog(true)}
+                                    className={`bg-transparent border ${isDog ? "bg-greenGora text-OrangeLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-OrangeLightGora`}
+                                    radius="full"
+                                    size="lg"
+                                    >
                                     Guaus
-                                </Button>
-                                <Button onClick={(e)=> setIsDog(false)} className={`bg-transparent border ${!isDog ? "bg-greenGora text-OrangeLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-OrangeLightGora`} radius="full" size="lg">
+                                    </Button>
+                                </div>
+                                <div className="group relative flex flex-col items-center mt-10">
+                                    <div className="absolute bottom-12 left-0 flex justify-center items-center w-full h-full transform translate-y-full opacity-0 group-hover:-translate-y-1.5 group-hover:opacity-100 transition-all duration-300">
+                                    <Image
+                                        alt="guauButton"
+                                        src="CatIcon.gif"
+                                        height="100"
+                                        width="100"
+                                    />
+                                    </div>
+                                    <Button
+                                    onClick={(e) => setIsDog(false)}
+                                    className={`bg-transparent border ${!isDog ? "bg-greenGora text-OrangeLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-OrangeLightGora`}
+                                    radius="full"
+                                    size="lg"
+                                    >
                                     Miaus
-                                </Button>
+                                    </Button>
+                                </div>
                             </div>
                         </div>
                     </div>
