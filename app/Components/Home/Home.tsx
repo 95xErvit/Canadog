@@ -7,6 +7,7 @@ import MotionTransition from '../MotionTransition/MotionTransition';
 import 'primeicons/primeicons.css';
 
 export default function Home({Dogs, Cats}: any) {
+    console.log(Dogs, Cats)
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     // const [expand, setExpand] = useState(false);
     const [isDog, setIsDog] = useState(true);
@@ -16,7 +17,6 @@ export default function Home({Dogs, Cats}: any) {
         setExpandedCard(expandedCard === id ? null : id);
     };
 
-    // const cardsDogs = [
     //     {
     //         id: 1,
     //         image: 'Guau1.png',
@@ -82,72 +82,7 @@ export default function Home({Dogs, Cats}: any) {
     //     },
     // ];
 
-    // const cardsCats = [
-    //     {
-    //         id: 1,
-    //         image: 'Miaus1.png',
-    //         title: 'Kitty',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    //     {
-    //         id: 2,
-    //         image: 'Miaus2.png',
-    //         title: 'Doggi',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    //     {
-    //         id: 3,
-    //         image: 'Miaus3.png',
-    //         title: 'Doggi',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    //     {
-    //         id: 4,
-    //         image: 'Miaus4.png',
-    //         title: 'Doggi',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    //     {
-    //         id: 5,
-    //         image: 'Miaus5.png',
-    //         title: 'Doggi',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    //     {
-    //         id: 6,
-    //         image: 'Miaus6.png',
-    //         title: 'Doggi',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    //     {
-    //         id: 7,
-    //         image: 'Miaus2.png',
-    //         title: 'Doggi',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    //     {
-    //         id: 8,
-    //         image: 'Miaus3.png',
-    //         title: 'Doggi',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    //     {
-    //         id: 8,
-    //         image: 'Miaus1.png',
-    //         title: 'Doggi',
-    //         shortDescription: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //         longDescription: 'Conoce a Doggi, un encantador cachorro de ojos brillantes y cola siempre en movimiento. Su pelaje suave y sus orejas caídas hacen que sea imposible resistirse a darle un abrazo. ¡Con Max a tu lado, cada día estará lleno de alegría y aventuras compartidas.',
-    //     },
-    // ];
-
+    // 
     return(
         <div>
             {/* BANNER */}
@@ -255,7 +190,9 @@ export default function Home({Dogs, Cats}: any) {
                                 <ScrollShadow className="mn:w-[360px] mn:h-[600px] md:w-[1280px] md:h-[600px] mt-6 mb-6" size={0}>
                                     <div className='flex flex-wrap justify-evenly'>
                                         {Dogs.map((card: any) => (
+                                            
                                             <Card key={card.id} className={`m-4 w-96 transition-all duration-300 ${expandedCard === card.id ? 'h-full' : 'h-50'}`}>
+                                                <>{console.log(card)}</>
                                                 <div className={`flex items-center ${expandedCard === card.id ? 'flex flex-col gap-2' : ''}`}>
                                                     <Image
                                                         alt="Album cover"
@@ -268,7 +205,7 @@ export default function Home({Dogs, Cats}: any) {
                                                         <div className='flex flex-col'>
                                                             <div className={` ${expandedCard === card.id ? 'flex justify-around' : ''}`}>
                                                                 <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start text-3xl' : 'justify-end text-2xl'}`}>
-                                                                    Do<span className='text-greenGora'>ggi</span>
+                                                                    {`${card.title} Edad:${card.old}`}
                                                                 </h1>
                                                                 {expandedCard === card.id && (
                                                                     <div className='flex flex-cols'>
@@ -327,7 +264,7 @@ export default function Home({Dogs, Cats}: any) {
                                                         <div className='flex flex-col'>
                                                             <div className={` ${expandedCard === card.id ? 'flex justify-around' : ''}`}>
                                                                 <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start text-3xl' : 'justify-end text-2xl'}`}>
-                                                                    Ki<span className='text-greenGora'>tty</span>
+                                                                    {`${card.title} Edad:${card.old}`}
                                                                 </h1>
                                                                 {expandedCard === card.id && (
                                                                     <div className='flex flex-cols'>

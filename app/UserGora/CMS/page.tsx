@@ -11,14 +11,14 @@ export default async function Home()
 		},
 	};
 
-	// const result : any = await GetPets(true, "Dog");
-	// const result2  : any = await GetPets(true, "Cat");
+	const result : any = await GetPets(true, "Dog");
+	const result2  : any = await GetPets(true, "Cat");
 
 	return (
 		<>
 			<Header/>
 				<main className="bg-cover bg-center" style={{backgroundImage:'url("")'}}>
-					<CMS Dogs={[]}/*{result.data.resultsult} */ Cats={[]} /*{result2.data.result}*//>
+					<CMS Dogs={result.data.result.recordset.length} Cats={result2.data.result.recordset}/>
 				</main>
 			<Footer/>
 		</>
