@@ -11,29 +11,194 @@ export default async function HomeGora()
 		  cookie: headers().get('cookie'),
 		},
 	};
-	
-	try{
-		// const result : any = await GetPets(true, "Dog");
-		// const result2  : any = await GetPets(true, "Cat");
 
-		return (
-			<>
-				<Header/>
-					<main className="bg-cover bg-center" style={{backgroundImage:'url("")'}}>
-						<Home 
-							//Dogs={result.data.result} /*{[]}*/
-							// Cats={result2.data.result} {[]}
-						/>
-					</main>
-				<Footer/>
-			</>
-		)
+	const result : any = await GetPets(true, "Dog");
+	const result2  : any = await GetPets(true, "Cat");
+
+	let cardsCats : any = []
+	let cardsDogs : any = []
+
+	console.log(result2.data.result.recordset)
+	console.log(result2.data.result.recordset.length)
+	if(result2.data.result.recordset.length <= 4)
+	{
+		cardsCats = [
+			{
+				id: 1,
+				image: 'Miaus1.png',
+				title: result2.data.result.recordset[0].ANIMALS_NAME,
+				shortDescription: result2.data.result.recordset[0].ANIMALS_DESCRIPTION,
+				longDescription: result2.data.result.recordset[0].ANIMALS_DESCRIPTION,
+				old: result2.data.result.recordset[0].ANIMALS_OLDDATE
+				
+			},
+			{
+				id: 2,
+				image: 'Miaus2.png',
+				title: result2.data.result.recordset[1].ANIMALS_NAME,
+				shortDescription: result2.data.result.recordset[1].ANIMALS_DESCRIPTION,
+				longDescription: result2.data.result.recordset[1].ANIMALS_DESCRIPTION,
+				old: result2.data.result.recordset[1].ANIMALS_OLDDATE
+			},
+			{
+				id: 3,
+				image: 'Miaus3.png',
+				title: result2.data.result.recordset[2].ANIMALS_NAME,
+				shortDescription: result2.data.result.recordset[2].ANIMALS_DESCRIPTION,
+				longDescription: result2.data.result.recordset[2].ANIMALS_DESCRIPTION,
+				old: result2.data.result.recordset[2].ANIMALS_OLDDATE
+			},
+			{
+				id: 4,
+				image: 'Miaus3.png',
+				title: result2.data.result.recordset[3].ANIMALS_NAME,
+				shortDescription: result2.data.result.recordset[3].ANIMALS_DESCRIPTION,
+				longDescription: result2.data.result.recordset[3].ANIMALS_DESCRIPTION,
+				old: result2.data.result.recordset[3].ANIMALS_OLDDATE
+			}
+
+		];
+	}else if(result2.data.result.recordset.length === 5){
+		cardsCats = [
+			{
+				id: 1,
+				image: 'Miaus1.png',
+				title: result2.data.result.recordset[0].ANIMALS_NAME,
+				shortDescription: result2.data.result.recordset[0].ANIMALS_DESCRIPTION,
+				longDescription: result2.data.result.recordset[0].ANIMALS_DESCRIPTION,
+				old: result2.data.result.recordset[0].ANIMALS_OLDDATE
+			},
+			{
+				id: 2,
+				image: 'Miaus2.png',
+				title: result2.data.result.recordset[1].ANIMALS_NAME,
+				shortDescription: result2.data.result.recordset[1].ANIMALS_DESCRIPTION,
+				longDescription: result2.data.result.recordset[1].ANIMALS_DESCRIPTION,
+				old: result2.data.result.recordset[1].ANIMALS_OLDDATE
+			},
+			{
+				id: 3,
+				image: 'Miaus3.png',
+				title: result2.data.result.recordset[2].ANIMALS_NAME,
+				shortDescription: result2.data.result.recordset[2].ANIMALS_DESCRIPTION,
+				longDescription: result2.data.result.recordset[2].ANIMALS_DESCRIPTION,
+				old: result2.data.result.recordset[2].ANIMALS_OLDDATE
+			},
+			{
+				id: 4,
+				image: 'Miaus3.png',
+				title: result2.data.result.recordset[3].ANIMALS_NAME,
+				shortDescription: result2.data.result.recordset[3].ANIMALS_DESCRIPTION,
+				longDescription: result2.data.result.recordset[3].ANIMALS_DESCRIPTION,
+				old: result2.data.result.recordset[3].ANIMALS_OLDDATE
+			},
+			{
+				id: 5,
+				image: 'Miaus3.png',
+				title: result2.data.result.recordset[4].ANIMALS_NAME,
+				shortDescription: result2.data.result.recordset[4].ANIMALS_DESCRIPTION,
+				longDescription: result2.data.result.recordset[4].ANIMALS_DESCRIPTION,
+				old: result2.data.result.recordset[4].ANIMALS_OLDDATE
+			}
+
+		];
 	}
-	catch(error){
-		return(
-			<div>
-				Ocurrio un error
-			</div>
-		)
+
+	if(result.data.result.recordset.length <= 4)
+	{
+		cardsDogs = [
+			{
+				id: 1,
+				image: 'Guau2.png',
+				title: result.data.result.recordset[0].ANIMALS_NAME,
+				shortDescription: result.data.result.recordset[0].ANIMALS_DESCRIPTION,
+				longDescription: result.data.result.recordset[0].ANIMALS_DESCRIPTION,
+				old: result.data.result.recordset[0].ANIMALS_OLDDATE
+			},
+			{
+				id: 2,
+				image: 'Guau1.png',
+				title: result.data.result.recordset[1].ANIMALS_NAME,
+				shortDescription: result.data.result.recordset[1].ANIMALS_DESCRIPTION,
+				longDescription: result.data.result.recordset[1].ANIMALS_DESCRIPTION,
+				old: result.data.result.recordset[1].ANIMALS_OLDDATE
+			},
+			{
+				id: 3,
+				image: 'Guau3.png',
+				title: result.data.result.recordset[2].ANIMALS_NAME,
+				shortDescription: result.data.result.recordset[2].ANIMALS_DESCRIPTION,
+				longDescription: result.data.result.recordset[2].ANIMALS_DESCRIPTION,
+				old: result.data.result.recordset[2].ANIMALS_OLDDATE
+			},
+			{
+				id: 4,
+				image: 'Guau1.png',
+				title: result.data.result.recordset[3].ANIMALS_NAME,
+				shortDescription: result.data.result.recordset[3].ANIMALS_DESCRIPTION,
+				longDescription: result.data.result.recordset[3].ANIMALS_DESCRIPTION,
+				old: result.data.result.recordset[3].ANIMALS_OLDDATE,
+				
+			}
+
+		];
+	}else if(result.data.result.recordset.length === 5){
+		cardsDogs = [
+			{
+				id: 1,
+				image: 'Guau2.png',
+				title: result.data.result.recordset[0].ANIMALS_NAME,
+				shortDescription: result.data.result.recordset[0].ANIMALS_DESCRIPTION,
+				longDescription: result.data.result.recordset[0].ANIMALS_DESCRIPTION,
+				old: result.data.result.recordset[0].ANIMALS_OLDDATE
+			},
+			{
+				id: 2,
+				image: 'Guau3.png',
+				title: result.data.result.recordset[1].ANIMALS_NAME,
+				shortDescription: result.data.result.recordset[1].ANIMALS_DESCRIPTION,
+				longDescription: result.data.result.recordset[1].ANIMALS_DESCRIPTION,
+				old: result.data.result.recordset[1].ANIMALS_OLDDATE
+			},
+			{
+				id: 3,
+				image: 'Guau.png',
+				title: result.data.result.recordset[2].ANIMALS_NAME,
+				shortDescription: result.data.result.recordset[2].ANIMALS_DESCRIPTION,
+				longDescription: result.data.result.recordset[2].ANIMALS_DESCRIPTION,
+				old: result.data.result.recordset[2].ANIMALS_OLDDATE
+			},
+			{
+				id: 4,
+				image: 'Guau4.png',
+				title: result.data.result.recordset[3].ANIMALS_NAME,
+				shortDescription: result.data.result.recordset[3].ANIMALS_DESCRIPTION,
+				longDescription: result.data.result.recordset[3].ANIMALS_DESCRIPTION,
+				old: result.data.result.recordset[3].ANIMALS_OLDDATE
+			},
+			{
+				id: 5,
+				image: 'Guau1.png',
+				title: result.data.result.recordset[4].ANIMALS_NAME,
+				shortDescription: result.data.result.recordset[4].ANIMALS_DESCRIPTION,
+				longDescription: result.data.result.recordset[4].ANIMALS_DESCRIPTION,
+				old: result.data.result.recordset[4].ANIMALS_OLDDATE
+			}
+
+		];
 	}
+	console.log(cardsDogs,cardsCats )
+
+	return (
+		<>
+			<Header/>
+				<main className="bg-cover bg-center" style={{backgroundImage:'url("")'}}>
+					<Home 
+						Dogs={cardsDogs} /*{[]}*/
+						Cats={cardsCats} /*{[]}*/
+					/>
+				</main>
+			<Footer/>
+		</>
+	)
 }

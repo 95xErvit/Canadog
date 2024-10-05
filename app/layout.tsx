@@ -15,7 +15,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html className='h-full' id="id" lang="es">
-        <body className={popinsFont.className}>{children}</body>
+      <head>
+        <script async 
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6282415433232444"
+          crossOrigin="anonymous">
+        </script>
+      </head>
+      <body className={popinsFont.className}>{children}</body>
     </html>
   )
 }
