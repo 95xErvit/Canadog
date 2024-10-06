@@ -50,7 +50,7 @@ export default function CMS({Dogs, Cats}: any)
         });
 
         setTotalSize(_totalSize);
-        toast.current?.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
+        toast.current?.show({ severity: 'info', summary: 'Correcto', detail: 'File Uploaded' });
     };
 
     const onTemplateRemove = (file: File, callback: Function) => {
