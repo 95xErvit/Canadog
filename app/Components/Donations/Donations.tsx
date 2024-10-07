@@ -1,4 +1,5 @@
 "use client"
+import Image from "next/image"
 import React from "react"
 
 export default function Donations() {
@@ -63,7 +64,7 @@ export default function Donations() {
                                         </div>
 
                                         <div className="flex items-center mt-8">
-                                            <img className="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-male-1.png" alt="" />
+                                            <Image className="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-male-1.png" alt="" />
                                             <div className="ml-4">
                                                 <p className="text-base font-bold text-gray-900 font-pj">Leslie Alexander</p>
                                                 <p className="mt-0.5 text-sm font-pj text-gray-600">Freelance React Developer</p>
@@ -109,7 +110,7 @@ export default function Donations() {
                                         </div>
 
                                         <div className="flex items-center mt-8">
-                                            <img className="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-male-2.png" alt="" />
+                                            <Image className="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-male-2.png" alt="" />
                                             <div className="ml-4">
                                                 <p className="text-base font-bold text-gray-900 font-pj">Jacob Jones</p>
                                                 <p className="mt-0.5 text-sm font-pj text-gray-600">Digital Marketer</p>
@@ -155,7 +156,7 @@ export default function Donations() {
                                         </div>
 
                                         <div className="flex items-center mt-8">
-                                            <img className="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-female.png" alt="" />
+                                            <Image className="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-female.png" alt="" />
                                             <div className="ml-4">
                                                 <p className="text-base font-bold text-gray-900 font-pj">Jenny Wilson</p>
                                                 <p className="mt-0.5 text-sm font-pj text-gray-600">Graphic Designer</p>
