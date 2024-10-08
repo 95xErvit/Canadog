@@ -194,8 +194,8 @@ export default async function HomeGora()
 			<Header/>
 				<main className="bg-cover bg-center" style={{backgroundImage:'url("")'}}>
 					<Home 
-						Dogs={cardsDogs} /*{[]}*/
-						Cats={cardsCats} /*{[]}*/
+						//Dogs={cardsDogs} /*{[]}*/
+						//Cats={cardsCats} /*{[]}*/
 					/>
 				</main>
 			<Footer/>

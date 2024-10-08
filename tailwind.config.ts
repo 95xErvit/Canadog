@@ -28,12 +28,13 @@ module.exports = {
       colors: {
         white: '#FFFFFF',
         gray: '#5C5C5C',  
-        RedLightGora: '#FCBCAC',
+        pinkGora: '#FCBCAC',
         blackGora: '#3F3F3F',
         greenGora: '#489E84',
         orangeGora: '#FDB104',
-        OrangeLightGora: '#FCEBD7',
+        pinkLightGora: '#FCEBD7',
         purpleGora: '#5418AD',
+        redGora: '#DF6536',
       },
       fontFamily: {
         AkrobatBL: [
