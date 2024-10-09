@@ -2,13 +2,6 @@
 import React, { useState, useRef } from 'react';
 import { Button, Textarea, Card, Input,CardBody, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@nextui-org/react";
 import {ScrollShadow} from "@nextui-org/react";
-import  Guau1  from "@/public/Guau1.png"
-import  Guau2  from "@/public/Guau2.png"
-import  Guau3  from "@/public/Guau3.png"
-import  Guau4  from "@/public/Guau4.png"
-import  Miaus1  from "@/public/Miaus1.png"
-import  Miaus2  from "@/public/Miaus2.png"
-import  Miaus3  from "@/public/Miaus3.png"
 import { Toast } from 'primereact/toast';
 import { FileUpload, FileUploadHeaderTemplateOptions, FileUploadSelectEvent, FileUploadUploadEvent, ItemTemplateOptions,} from 'primereact/fileupload';
 import { ProgressBar } from 'primereact/progressbar';
@@ -17,19 +10,20 @@ import 'primeicons/primeicons.css';
 import axios from 'axios';
 
 export default function CMS({Dogs, Cats}: any) 
-{
+{   
+    const toast = useRef<Toast>(null);
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     const [isEdit, setIsEdit] = useState(false);
     const [name, setName] = useState<string>('');
     const [yearOlds, setYearosld] = useState<string>('');
     const [description, setDescription] = useState<string>('');
-    const [files, setFiles] = useState<Array<any>>([]);
+    const [file, setFile] = useState<any>();
     const [isDog, setIsDog] = useState(true);
-    const toast = useRef<Toast>(null);
     const [totalSize, setTotalSize] = useState(0);
     const fileUploadRef = useRef<FileUpload>(null);
 
     const onTemplateSelect = (e: FileUploadSelectEvent) => {
+        console.log("Hola subiendo")
         let _totalSize = totalSize;
         let files = e.files;
 
@@ -37,21 +31,44 @@ export default function CMS({Dogs, Cats}: any)
             _totalSize += files[i].size || 0;
         }
 
+        if (e.files.length > 0) {
+
+            /*const isValidImage = await validateImage(e.files[0]);
+
+            if (!isValidImage) {
+                
+                return;
+            }*/
+            const reader = new FileReader();
+            
+            reader.onloadend = function (event:any) {
+                const base64Text = event.target.result;
+                console.log(base64Text);
+                setFile(base64Text);
+            }
+
+            reader.readAsDataURL(e.files[0]);
+            
+        }
+      
+        toast.current?.show({ severity: 'info', summary: 'CARGA EXITOSA', detail: 'Imagen cargada exitosamente'});
         setTotalSize(_totalSize);
     };
 
-    const onTemplateUpload = (e: FileUploadUploadEvent) => {
+    const onTemplateUpload = async (e : any) => {
+        console.log("Hola subiendo")
+        console.log(e.files[0])
         let _totalSize = 0;
 
-        e.files.forEach((file, index) => {
-            files.push(file)
-            setFiles(files)
-            _totalSize += file.size || 0;
+        e.files.forEach((file: any) => {
+          _totalSize += file.size || 0;
         });
-
+      
         setTotalSize(_totalSize);
-        toast.current?.show({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
-    };
+
+        
+      };
+
 
     const onTemplateRemove = (file: File, callback: Function) => {
         setTotalSize(totalSize - file.size);
@@ -101,7 +118,7 @@ export default function CMS({Dogs, Cats}: any)
             <div className="flex align-items-center flex-column">
                 <i className="pi pi-image mt-3 p-5" style={{ fontSize: '5em', borderRadius: '50%', backgroundColor: 'var(--surface-b)', color: 'var(--surface-d)' }}></i>
                 <span style={{ fontSize: '1.2em', color: 'var(--text-color-secondary)' }} className="my-5">
-                    Arratre y suelte la imagen aqui!.
+                    Arrastre y suelte la imagen aqui!.
                 </span>
             </div>
         );
@@ -112,13 +129,13 @@ export default function CMS({Dogs, Cats}: any)
     
         try
         {
-            const emailReponse = await axios.post("/CMS/api/pets",{data:{name: name, yearsOld:yearOlds, description:description, type:isDog ? "PERRO" : "GATO", images: files}})
+            const emailReponse = await axios.post("/UserGora/CMS/api/pets",{data:{User:"Adminitrador",Enable: 1, Name: name, OldDate:yearOlds, Description:description, Type:isDog ? "DOG" : "CAT", Images: file}})
             console.log('Contesto:', emailReponse);
         }
         catch(err){
             console.log(err)
         }
-      };
+    };
 
     const chooseOptions = { icon: 'pi pi-fw pi-images', iconOnly: true, className: 'custom-choose-btn p-button-rounded p-button-outlined' };
     const uploadOptions = { icon: 'pi pi-fw pi-cloud-upload', iconOnly: true, className: 'custom-upload-btn p-button-success p-button-rounded p-button-outlined' };
@@ -127,6 +144,7 @@ export default function CMS({Dogs, Cats}: any)
     return(
         <div> 
             <div className="flex mn:my-8 mn:justify-center md:justify-start">
+            
                 <Modal isOpen={isOpen} onOpenChange={onOpenChange} size='5xl'>
                     <ModalContent>
                     {(onClose) => (
@@ -160,10 +178,21 @@ export default function CMS({Dogs, Cats}: any)
                                     <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
                                     <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
 
-                                    <FileUpload ref={fileUploadRef} name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000}
-                                        onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
-                                        headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate}
-                                        chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
+                                    <FileUpload 
+                                         ref={fileUploadRef} 
+                                         name="demo[]" 
+                                         multiple accept="image/*"
+                                         maxFileSize={1000000}
+                                         onUpload={onTemplateUpload} 
+                                         onSelect={onTemplateSelect} 
+                                         onError={onTemplateClear} 
+                                         onClear={onTemplateClear}
+                                         headerTemplate={headerTemplate} 
+                                         itemTemplate={itemTemplate} 
+                                         emptyTemplate={emptyTemplate}
+                                         uploadHandler={(event) => [onTemplateUpload(event)]}
+                                         chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} 
+                                         customUpload/>
                                 </div>
                             </ModalBody>
                             <ModalFooter className='flex justify-center'>
@@ -267,16 +296,13 @@ export default function CMS({Dogs, Cats}: any)
                                                         <div className="flex gap-6 md:gap-2">
                                                             <Image
                                                                 alt="Album cover"
-                                                                className="object-cover"
-                                                                shadow="md"
+                                                                className={`object-cover shadow-md transition-all duration-300 rounded-none w-full h-[200px]`}
                                                                 src={card.image}
-                                                                height={250}
-                                                                width={500}
                                                             />
                                                             <CardBody>
                                                                 <div className='flex flex-col'>
                                                                     <h1 className="flex justify-end font-semibold text-purpleGora text-2xl">
-                                                                        Ki<span className='text-greenGora'>tty</span>
+                                                                        {card.title}<span className='text-greenGora'>{card.old}</span>
                                                                     </h1>
                                                                     <p className='flex ml-2 justify-center mt-2 text-md w-36'>
                                                                         {card.shortDescription}

@@ -38,6 +38,14 @@ export default function Donations() {
                                                 <p className="text-lg leading-relaxed text-gray-900">“Este valor cubre todos los gastos mensuales de un peludo: <br/> COMIDA, SNACKS, DESPARASITANTES, VACUNAS E HIGIENE”</p>
                                             </blockquote>
                                         </div>
+
+                                        <div className="flex items-center mt-8">
+                                            <Image className="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-male-1.png" alt="" />
+                                            <div className="ml-4">
+                                                <p className="text-base font-bold text-gray-900 font-pj">Leslie Alexander</p>
+                                                <p className="mt-0.5 text-sm font-pj text-gray-600">Freelance React Developer</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -51,6 +59,14 @@ export default function Donations() {
                                             <blockquote className="flex-1 mt-8">
                                                 <p className="text-lg leading-relaxed text-gray-900 font-pj">“Gracias a tu donación, un peludo rescatado de las calles nunca más sentirá hambre ¡Todos los días tendrá su plato lleno!”</p>
                                             </blockquote>
+                                        </div>
+
+                                        <div className="flex items-center mt-8">
+                                            <Image className="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-male-2.png" alt="" />
+                                            <div className="ml-4">
+                                                <p className="text-base font-bold text-gray-900 font-pj">Jacob Jones</p>
+                                                <p className="mt-0.5 text-sm font-pj text-gray-600">Digital Marketer</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -67,7 +83,13 @@ export default function Donations() {
                                             </blockquote>
                                         </div>
 
-                                        
+                                        <div className="flex items-center mt-8">
+                                            <Image className="flex-shrink-0 object-cover rounded-full w-11 h-11" src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-female.png" alt="" />
+                                            <div className="ml-4">
+                                                <p className="text-base font-bold text-gray-900 font-pj">Jenny Wilson</p>
+                                                <p className="mt-0.5 text-sm font-pj text-gray-600">Graphic Designer</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

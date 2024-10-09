@@ -12,7 +12,7 @@ export async function GetPets(enable? : boolean, type? : string ) {
 
         try {
 
-            const params = { type, enable}
+            const params = {Type: type, Enable:enable}
 
             const result = await axios.get(`${process.env.HOST_API}/Api/Gora/CMS/Pets`,
             {   

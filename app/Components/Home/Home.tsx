@@ -9,7 +9,8 @@ import MotionTransition from '../MotionTransition/MotionTransition';
 import 'primeicons/primeicons.css';
 
 //{Dogs, Cats}: any
-export default function Home() {
+export default function Home({cardsDogs , cardsCats}: any) {
+
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     //const [expand, setExpand] = useState(false);
     const [isDog, setIsDog] = useState(true);
@@ -19,72 +20,6 @@ export default function Home() {
     const toggleExpand = (id: number) => {
         setExpandedCard(expandedCard === id ? null : id);
     };
-
-    const cardsHistorys = [
-        {
-            id: 1,
-            image: 'Adop1.png',
-            title: 'Doggi',
-            description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento. ',
-        },
-        {
-            id: 2,
-            image: 'Adop2.png',
-            title: 'Doggi',
-            description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento. ',
-        },
-        {
-            id: 3,
-            image: 'Adop3.png',
-            title: 'Doggi',
-            description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento. ',
-        },
-        {
-            id: 4,
-            image: 'Adop4.png',
-            title: 'Doggi',
-            description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento. ',
-        },
-        {
-            id: 5,
-            image: 'Adop4.png',
-            title: 'Doggi',
-            description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento. ',
-        },
-        {
-            id: 6,
-            image: 'Adop3.png',
-            title: 'Doggi',
-            description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento. ',
-        },
-        {
-            id: 7,
-            image: 'Adop2.png',
-            title: 'Doggi',
-            description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento. ',
-        },
-        {
-            id: 8,
-            image: 'Adop1.png',
-            title: 'Doggi',
-            description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento. ',
-        },
-    ];
-
-    const itemsPage = 4; // Cantidad de tarjetas por página
-    const { activePage, range, setPage, onNext, onPrevious } = usePagination({
-        total: Math.ceil(cardsHistorys.length / itemsPage), // Total de páginas basado en el número de tarjetas
-        showControls: true,
-        siblings: 1,
-        boundaries: 1,
-    });
-
-    // Calcula las tarjetas que se deben mostrar en la página actual
-    const paginatedCards = cardsHistorys.slice(
-        (activePage - 1) * itemsPage,
-        activePage * itemsPage
-    );
-
 
     const cardsDogs = [
         {
@@ -431,7 +366,7 @@ export default function Home() {
                                                         <CardBody className={`${expandedCard === card.id ? 'w-full h-[200px]' : 'w-[170px] h-[200px] justify-around'}`}>
                                                             <div className={`${expandedCard === card.id ? 'flex items-center justify-around' : 'flex flex-wrap'}`}>
                                                                 <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start text-2xl' : 'justify-end mn:text-xl md:text-2xl'}`}>
-                                                                    Do<span className='text-greenGora'>ggi</span>
+                                                                        {card.title}: <span className='text-greenGora'>{card.old}</span>
                                                                 </h1>
                                                                 {expandedCard === card.id && (
                                                                     <div className='flex flex-wrap'>
@@ -510,7 +445,7 @@ export default function Home() {
                                                     <CardBody className={`${expandedCard === card.id ? 'w-full h-[200px]' : 'w-[170px] h-[200px] justify-around'}`}>
                                                         <div className={`${expandedCard === card.id ? 'flex items-center justify-around' : 'flex flex-wrap'}`}>
                                                             <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start text-2xl' : 'justify-end mn:text-xl md:text-2xl'}`}>
-                                                                Ki<span className='text-greenGora'>tty</span>
+                                                                {card.title}<span className='text-greenGora'>{card.old}</span>
                                                             </h1>
                                                             {expandedCard === card.id && (
                                                             <div className='flex flex-wrap'>
