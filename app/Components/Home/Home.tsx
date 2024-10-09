@@ -21,19 +21,84 @@ export default function Home({cardsDogs , cardsCats}: any) {
         setExpandedCard(expandedCard === id ? null : id);
     };
 
-    const itemsPerPage = 9; // Cantidad de tarjetas que deseas mostrar por página
+    const itemsAdoptions = 9; // Cantidad de tarjetas que deseas mostrar por página
     const cards = isDog ? cardsDogs : cardsCats;
-    const totalPages = Math.ceil(cards.length / itemsPerPage);
+    const totalPagesAdoptions = Math.ceil(cards.length / itemsAdoptions);
+    
+    const card = [
+        {
+            id: 1,
+            image: 'Adop1.png',
+            title: 'Max',
+            Description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+        },
+        {
+            id: 2,
+            image: 'Adop2.png',
+            title: 'Lucas',
+            Description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+        },
+        {
+            id: 3,
+            image: 'Adop3.png',
+            title: 'Dante',
+            Description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+        },
+        {
+            id: 4,
+            image: 'Adop4.png',
+            title: 'Kitty',
+            Description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+        },
+        {
+            id: 5,
+            image: 'Adop4.png',
+            title: 'Kitty',
+            Description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+        },
+        {
+            id: 6,
+            image: 'Adop3.png',
+            title: 'Kitty',
+            Description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+        },
+        {
+            id: 7,
+            image: 'Adop2.png',
+            title: 'Kitty',
+            Description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+        },
+        {
+            id: 8,
+            image: 'Adop1.png',
+            title: 'Kitty',
+            Description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+        },
+    ];
 
     // Obtener las tarjetas correspondientes a la página actual
     const currentCards = cards.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
+        (currentPage - 1) * itemsAdoptions,
+        currentPage * itemsAdoptions
     );
 
     const handlePageChange = (page: number) => {
         setCurrentPage(page); // Actualiza la página actual cuando cambia
     };
+
+    const itemsHistorys = 4; // Cantidad de tarjetas por página
+    const { activePage, range, setPage, onNext, onPrevious } = usePagination({
+      total: Math.ceil(card.length / itemsHistorys), // Total de páginas basado en el número de tarjetas
+      showControls: true,
+      siblings: 1,
+      boundaries: 1,
+    });
+  
+    // Calcula las tarjetas que se deben mostrar en la página actual
+    const paginatedCards = card.slice(
+      (activePage - 1) * itemsHistorys,
+      activePage * itemsHistorys
+    );
 
     return(
         <div>
@@ -139,10 +204,10 @@ export default function Home({cardsDogs , cardsCats}: any) {
                                     />
                                     </div>
                                     <Button
-                                    onClick={(e) => setIsDog(true)}
-                                    className={`bg-transparent border ${isDog ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`}
-                                    radius="full"
-                                    size="lg"
+                                        onClick={(e) => setIsDog(true)}
+                                        className={`bg-transparent border ${isDog ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`}
+                                        radius="full"
+                                        size="lg"
                                     >
                                     Guaus
                                     </Button>
@@ -157,10 +222,10 @@ export default function Home({cardsDogs , cardsCats}: any) {
                                     />
                                     </div>
                                     <Button
-                                    onClick={(e) => setIsDog(false)}
-                                    className={`bg-transparent border ${!isDog ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`}
-                                    radius="full"
-                                    size="lg"
+                                        onClick={(e) => setIsDog(false)}
+                                        className={`bg-transparent border ${!isDog ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`}
+                                        radius="full"
+                                        size="lg"
                                     >
                                     Miaus
                                     </Button>
@@ -241,7 +306,7 @@ export default function Home({cardsDogs , cardsCats}: any) {
                                         <Pagination
                                             showControls
                                             color={"secondary"}
-                                            total={totalPages} // Total de páginas basado en el número de cartas
+                                            total={totalPagesAdoptions} // Total de páginas basado en el número de cartas
                                             page={currentPage} // Página actual
                                             onChange={handlePageChange} // Función para manejar el cambio de página
                                         />
@@ -321,7 +386,7 @@ export default function Home({cardsDogs , cardsCats}: any) {
                                         <Pagination
                                             showControls
                                             color={"secondary"}
-                                            total={totalPages} // Total de páginas basado en el número de cartas
+                                            total={totalPagesAdoptions} // Total de páginas basado en el número de cartas
                                             page={currentPage} // Página actual
                                             onChange={handlePageChange} // Función para manejar el cambio de página
                                         />
@@ -343,7 +408,7 @@ export default function Home({cardsDogs , cardsCats}: any) {
             </div>
             <div className='px-4 py-6 mb-8'>
                 <div className='flex gap-4 max-w-7xl mx-auto'>
-                    {/*paginatedCards.map((card: any) => (
+                    {paginatedCards.map((card: any) => (
                         <Card
                             isBlurred
                             className="border-none w-full"
@@ -355,7 +420,7 @@ export default function Home({cardsDogs , cardsCats}: any) {
                                     <div className="flex flex-col justify-center gap-6 md:gap-2">
                                         <CardBody>
                                             <div className='flex flex-col m-4'>
-                                                <h1 className="flex mn:flex-col xl:flex-row justify-start font-bold text-purpleGora text-2xl gap-2">
+                                                <h1 className="flex mn:flex-col xl:flex-row justify-center font-bold text-purpleGora text-2xl gap-2">
                                                     {card.title} <span className="flex justify-start font-semibold text-blackGora text-xl">y su familia</span>
                                                 </h1>
                                                 <p className='flex justify-center mt-4 text-md'>
@@ -376,20 +441,20 @@ export default function Home({cardsDogs , cardsCats}: any) {
                                 </Card>
                             </div>
                         </Card>
-                    ))*/}
+                    ))}
                 </div>
                 <div className="flex justify-center m-4">
                     <ul className="flex gap-2 items-center">
-                    {/*range.map((page) => {
+                    {range.map((page) => {
                         if (page === PaginationItemType.NEXT) {
                         return (
                             <li key={page} aria-label="next page" className="w-4 h-4">
-                            <button
-                                className="w-full h-full bg-default-200 rounded-full"
-                                onClick={onNext}
-                            >
-                                <ChevronIcon className="rotate-180" />
-                            </button>
+                                <button
+                                    className="w-full h-full bg-default-200 rounded-full"
+                                    onClick={onNext}
+                                >
+                                    <ChevronIcon className="rotate-180" />
+                                </button>
                             </li>
                         );
                         }
@@ -397,35 +462,35 @@ export default function Home({cardsDogs , cardsCats}: any) {
                         if (page === PaginationItemType.PREV) {
                         return (
                             <li key={page} aria-label="previous page" className="w-4 h-4">
-                            <button
-                                className="w-full h-full bg-default-200 rounded-full"
-                                onClick={onPrevious}
-                            >
-                                <ChevronIcon />
-                            </button>
+                                <button
+                                    className="w-full h-full bg-default-200 rounded-full"
+                                    onClick={onPrevious}
+                                >
+                                    <ChevronIcon />
+                                </button>
                             </li>
                         );
                         }
 
                         if (page === PaginationItemType.DOTS) {
-                        return (
-                            <li key={page} className="w-4 h-4">
-                            ...
-                            </li>
-                        );
+                            return (
+                                <li key={page} className="w-4 h-4">
+                                ...
+                                </li>
+                            );
                         }
 
                         return (
                             <li key={page} aria-label={`page ${page}`} className="w-4 h-4">
-                            <button
-                              className={`w-full h-full rounded-full ${
-                                activePage === page ? 'bg-greenGora' : 'bg-default-300'
-                              }`}
-                              onClick={() => setPage(page)}
-                            />
-                          </li>
+                                <button
+                                className={`w-full h-full rounded-full ${
+                                    activePage === page ? 'bg-greenGora' : 'bg-default-300'
+                                }`}
+                                onClick={() => setPage(page)}
+                                />
+                            </li>
                         );
-                    })*/}
+                    })}
                     </ul>
                 </div>
             </div>
