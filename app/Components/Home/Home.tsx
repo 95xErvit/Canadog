@@ -341,7 +341,7 @@ export default function Home({cardsDogs , cardsCats}: any) {
             </div>
             <div className='px-4 py-6 mb-8'>
                 <div className='flex gap-4 max-w-7xl mx-auto'>
-                    {/* {paginatedCards.map((card: any) => (
+                    {/*paginatedCards.map((card: any) => (
                         <Card
                             isBlurred
                             className="border-none w-full"
@@ -374,11 +374,11 @@ export default function Home({cardsDogs , cardsCats}: any) {
                                 </Card>
                             </div>
                         </Card>
-                    ))} */}
+                    ))*/}
                 </div>
                 <div className="flex justify-center m-4">
                     <ul className="flex gap-2 items-center">
-                    {/* {range.map((page) => {
+                    {/*range.map((page) => {
                         if (page === PaginationItemType.NEXT) {
                         return (
                             <li key={page} aria-label="next page" className="w-4 h-4">
@@ -423,7 +423,7 @@ export default function Home({cardsDogs , cardsCats}: any) {
                             />
                           </li>
                         );
-                    })} */}
+                    })*/}
                     </ul>
                 </div>
             </div>

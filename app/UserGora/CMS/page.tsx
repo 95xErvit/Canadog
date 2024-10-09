@@ -13,6 +13,7 @@ export default async function Home()
 
 	const result : any = await GetPets(true, "Dog");
 	const result2  : any = await GetPets(true, "Cat");
+
 	console.log(result.data.result.recordset)
 	return (
 		<>
