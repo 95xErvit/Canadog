@@ -165,7 +165,7 @@ export default function CMS({Dogs, Cats}: any)
                                         <Input onChange={((e)=> setYearosld(e.target.value))} type="edad" variant={'faded'} label="Edad"/>
                                     </div>
                                     <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
-                                        <Textarea  onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
+                                        <Textarea max={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
                                     </div>
                                 </div> 
                                 <h1 className='text-center py-4 text-blackGora font-semibold'>
@@ -302,10 +302,10 @@ export default function CMS({Dogs, Cats}: any)
                                                             <CardBody>
                                                                 <div className='flex flex-col'>
                                                                     <h1 className="flex justify-end font-semibold text-purpleGora text-2xl">
-                                                                        {card.title}<span className='text-greenGora'>{card.old}</span>
+                                                                        {card.title.substring(0, 3)}<span className='text-greenGora'>{card.title.substring(3, card.title.charCodeAt(card.title))}</span>
                                                                     </h1>
                                                                     <p className='flex ml-2 justify-center mt-2 text-md w-36'>
-                                                                        {card.shortDescription}
+                                                                     {card.shortDescription.substring(0,50)}
                                                                     </p>
                                                                     <div className="flex mn:my-2 justify-center">
                                                                         <Button  onClick={(e)=> setIsEdit(true)} className='bg-transparent border border-greenGora text-greenGora' radius="full" size="sm" endContent={<i className="pi pi-pencil" style={{ color: '#489E84' }}/>}>
@@ -350,10 +350,10 @@ export default function CMS({Dogs, Cats}: any)
                                                         <CardBody>
                                                             <div className='flex flex-col'>
                                                                 <h1 className="flex justify-end font-semibold text-purpleGora text-2xl">
-                                                                    Ki<span className='text-greenGora'>tty</span>
+                                                                    {card.title.substring(0, 3)}<span className='text-greenGora'>{card.title.substring(3, card.title.charCodeAt(card.title))}</span>
                                                                 </h1>
-                                                                <p className='flex ml-2 justify-center mt-2 text-md w-36'>
-                                                                    {card.shortDescription}
+                                                                <p className='flex ml-2 justify-center mt-2 text-[12px] text-right w-full'>
+                                                                    {card.shortDescription.substring(0,50)}
                                                                 </p>
                                                                 <div className="flex mn:my-2 justify-center">
                                                                     <Button  onClick={(e)=> setIsEdit(true)} className='bg-transparent border border-greenGora text-greenGora' radius="full" size="sm" endContent={<i className="pi pi-pencil" style={{ color: '#489E84' }}/>}>

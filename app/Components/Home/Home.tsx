@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import { Button, Card, Input,CardBody, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, usePagination, PaginationItemType, Checkbox } from "@nextui-org/react";
+import { Button, Card, Input,CardBody, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, usePagination, PaginationItemType, Checkbox, Textarea } from "@nextui-org/react";
 import {ScrollShadow} from "@nextui-org/react";
 import {Divider} from "@nextui-org/divider";
 import {Pagination} from "@nextui-org/react";
@@ -186,12 +186,13 @@ export default function Home({cardsDogs , cardsCats}: any) {
                                                         <Image
                                                             alt="Album cover"
                                                             className={`object-cover shadow-md transition-all duration-300 rounded-none ${expandedCard === card.id ? 'w-full h-[200px]' : 'w-[170px] h-[200px]'}`}
+                                                            
                                                             src={card.image}
                                                         />
                                                         <CardBody className={`${expandedCard === card.id ? 'w-full h-[200px]' : 'w-[170px] h-[200px] justify-around'}`}>
-                                                            <div className={`${expandedCard === card.id ? 'flex items-center justify-around' : 'flex flex-wrap'}`}>
-                                                                <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start text-2xl' : 'justify-end mn:text-xl md:text-2xl'}`}>
-                                                                        {card.title}: <span className='text-greenGora'>{card.old}</span>
+                                                            <div className={`${expandedCard === card.id ? 'flex items-center justify-around' : 'flex w-full flex-wrap'}`}>
+                                                                <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start text-2xl' : 'px-2 justify-end w-full mn:text-xl md:text-2xl'}`}>
+                                                                    {card.title.substring(0, 3)}<span className='text-greenGora'>{card.title.substring(3, card.title.charCodeAt(card.title))}</span>
                                                                 </h1>
                                                                 {expandedCard === card.id && (
                                                                     <div className='flex flex-wrap'>
@@ -212,12 +213,12 @@ export default function Home({cardsDogs , cardsCats}: any) {
                                                                 )}
                                                             </div>
                 
-                                                            <p className={`flex font-normal text-gray ${expandedCard === card.id ? 'w-[308px] h-[120px] text-sm px-2.5 mt-1' : 'w-[135px] h-[58px] text-xs'}`}>
-                                                                {expandedCard === card.id ? card.longDescription : card.shortDescription}
+                                                            <p className={`flex font-normal text-gray ${expandedCard === card.id ? 'w-[308px] h-[120px] text-[14px] px-2.5 mt-1' : 'w-full h-[58px] text-right text-[12px]'}`}>
+                                                                {expandedCard === card.id ? card.longDescription : card.shortDescription.substring(0,50) + "..."}
                                                             </p>
                 
                                                             {expandedCard !== card.id && (
-                                                                <div className="">
+                                                                <div className="flex justify-center">
                                                                     <Button
                                                                         onClick={() => toggleExpand(card.id)}
                                                                         className='bg-transparent border border-greenGora text-greenGora'
@@ -265,46 +266,47 @@ export default function Home({cardsDogs , cardsCats}: any) {
                                                     <Image
                                                         alt="Album cover"
                                                         className={`object-cover shadow-md transition-all duration-300 rounded-none ${expandedCard === card.id ? 'w-full h-[200px]' : 'w-[170px] h-[200px]'}`}
+                                                        
                                                         src={card.image}
                                                     />
                                                     <CardBody className={`${expandedCard === card.id ? 'w-full h-[200px]' : 'w-[170px] h-[200px] justify-around'}`}>
-                                                        <div className={`${expandedCard === card.id ? 'flex items-center justify-around' : 'flex flex-wrap'}`}>
-                                                            <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start text-2xl' : 'justify-end mn:text-xl md:text-2xl'}`}>
-                                                                {card.title}<span className='text-greenGora'>{card.old}</span>
+                                                        <div className={`${expandedCard === card.id ? 'flex items-center justify-around' : 'flex w-full flex-wrap'}`}>
+                                                            <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start text-2xl' : 'px-2 justify-end w-full mn:text-xl md:text-2xl'}`}>
+                                                                {card.title.substring(0, 3)}<span className='text-greenGora'>{card.title.substring(3, card.title.charCodeAt(card.title))}</span>
                                                             </h1>
                                                             {expandedCard === card.id && (
-                                                            <div className='flex flex-wrap'>
-                                                                <div className='flex items-center'>
-                                                                    <Button className='bg-greenGora border border-greenGora text-white text-sm h-7' radius="full">
-                                                                        Adoptame
-                                                                    </Button>
+                                                                <div className='flex flex-wrap'>
+                                                                    <div className='flex items-center'>
+                                                                        <Button className='bg-greenGora border border-greenGora text-white text-sm h-7' radius="full">
+                                                                            Adoptame
+                                                                        </Button>
+                                                                    </div>
+                                                                    <div className='flex items-center'>
+                                                                        <Button
+                                                                            onClick={() => toggleExpand(card.id)}
+                                                                            className='bg-transparent text-greenGora text-end'
+                                                                            radius="full"
+                                                                            endContent={<i className="pi pi-arrow-circle-up" style={{ color: '#489E84', fontSize: '1.5rem' }} />}
+                                                                        />
+                                                                    </div>
                                                                 </div>
-                                                                <div className='flex items-center'>
-                                                                    <Button
-                                                                        onClick={() => toggleExpand(card.id)}
-                                                                        className='bg-transparent text-greenGora text-end'
-                                                                        radius="full"
-                                                                        endContent={<i className="pi pi-arrow-circle-up" style={{ color: '#489E84', fontSize: '1.5rem' }} />}
-                                                                    />
-                                                                </div>
-                                                            </div>
                                                             )}
                                                         </div>
-
-                                                        <p className={`flex font-normal text-gray ${expandedCard === card.id ? 'w-[308px] h-[120px] text-sm px-2.5 mt-1' : 'w-[135px] h-[58px] text-xs'}`}>
-                                                            {expandedCard === card.id ? card.longDescription : card.shortDescription}
+            
+                                                        <p className={`flex font-normal text-gray ${expandedCard === card.id ? 'w-[308px] h-[120px] text-[14px] px-2.5 mt-1' : ' text-right w-full h-[58px] text-[12px]'}`}>
+                                                            {expandedCard === card.id ? card.longDescription : card.shortDescription.substring(0,40) + "..."}
                                                         </p>
-
+            
                                                         {expandedCard !== card.id && (
-                                                            <div className="">
-                                                            <Button
-                                                                onClick={() => toggleExpand(card.id)}
-                                                                className='bg-transparent border border-greenGora text-greenGora'
-                                                                radius="full"
-                                                                endContent={<i className="pi pi-arrow-circle-down" style={{ color: '#489E84' }} />}
-                                                            >
-                                                                Más sobre mi
-                                                            </Button>
+                                                            <div className="flex justify-center">
+                                                                <Button
+                                                                    onClick={() => toggleExpand(card.id)}
+                                                                    className='bg-transparent border border-greenGora text-greenGora'
+                                                                    radius="full"
+                                                                    endContent={<i className="pi pi-arrow-circle-down" style={{ color: '#489E84' }} />}
+                                                                >
+                                                                    Más sobre mi
+                                                                </Button>
                                                             </div>
                                                         )}
                                                     </CardBody>
