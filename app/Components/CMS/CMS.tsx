@@ -153,7 +153,7 @@ export default function CMS({Dogs, Cats}: any)
                                 ¡Bienvenido {<p className='text-blackGora ml-1'> a tu próxima gran aventura</p>}!
                             </ModalHeader>
                             <ModalBody>
-                                <p className='text-blackGora px-4 text-xl'> 
+                                <p className='text-purpleGora px-4 text-xl text-center font-semibold'> 
                                     { isDog ? "Crea un nuevo Guau" : "Crea un nuevo Miau"}
                                 </p>
                                 <h1 className='text-center py-4 text-blackGora font-semibold'>
@@ -269,13 +269,13 @@ export default function CMS({Dogs, Cats}: any)
                             Agrega una nueva {<span className='text-greenGora'>Mascota</span>}
                         </h2>
                         <div className="flex gap-4 mn:my-4 md:my-8 mn:justify-center md:justify-start">
-                            <Button  onClick={(e)=> [setIsDog(true)]} className={`bg-transparent border  ${isDog ? "bg-greenGora text-OrangeLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-OrangeLightGora`} radius="full" size="lg">
+                            <Button  onClick={(e)=> [setIsDog(true)]} className={`bg-transparent border  ${isDog ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`} radius="full" size="lg">
                                 Guaus
                             </Button>
-                            <Button onClick={(e)=> setIsDog(false)} className={`bg-transparent border ${!isDog ? "bg-greenGora text-OrangeLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-OrangeLightGora`} radius="full" size="lg">
+                            <Button onClick={(e)=> setIsDog(false)} className={`bg-transparent border ${!isDog ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`} radius="full" size="lg">
                                 Miaus
                             </Button>
-                            <Button onPress={onOpen} className='bg-transparent border border-greenGor pi pi-plus' radius="full" size="lg" />
+                            <Button onPress={onOpen} className='bg-transparent border text-greenGoraborder-greenGora pi pi-plus' radius="full" size="lg" />
                         </div>
                     </div>
                 </div>
