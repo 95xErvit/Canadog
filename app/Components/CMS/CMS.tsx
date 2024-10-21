@@ -9,7 +9,7 @@ import { Tooltip } from 'primereact/tooltip';
 import 'primeicons/primeicons.css';
 import axios from 'axios';
 
-export default function CMS({Dogs, Cats}: any) 
+export default function CMS({Dogs, Cats, History}: any) 
 {   
     const toast = useRef<Toast>(null);
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
@@ -21,6 +21,11 @@ export default function CMS({Dogs, Cats}: any)
     const [isDog, setIsDog] = useState(true);
     const [totalSize, setTotalSize] = useState(0);
     const fileUploadRef = useRef<FileUpload>(null);
+    
+    const [isHistory, setIsHistory] = useState(false);
+    const [history, setHistory] = useState<any[]>([]); 
+
+    const [isCat, setIsCat] = useState(false)
 
     const onTemplateSelect = (e: FileUploadSelectEvent) => {
         console.log("Hola subiendo")
@@ -45,6 +50,16 @@ export default function CMS({Dogs, Cats}: any)
                 const base64Text = event.target.result;
                 console.log(base64Text);
                 setFile(base64Text);
+
+                setHistory(prev => [
+                    ...prev, 
+                    {
+                        id: Date.now(), 
+                        image: base64Text, 
+                        title: "Nuevo Elemento", 
+                        shortDescription: "Descripción corta"
+                    }
+                ]);
             }
 
             reader.readAsDataURL(e.files[0]);
@@ -129,7 +144,7 @@ export default function CMS({Dogs, Cats}: any)
     
         try
         {
-            const emailReponse = await axios.post("/UserGora/CMS/api/pets",{data:{User:"Adminitrador",Enable: 1, Name: name, OldDate:yearOlds, Description:description, Type:isDog ? "DOG" : "CAT", Images: file}})
+            const emailReponse = await axios.post("/UserGora/CMS/api/pets",{data:{User:"Adminitrador",Enable: 1, Name: name, OldDate:yearOlds, Description:description, Type:isDog ? "DOG" : isCat? "CAT": "HISTORY", Images: file}})
             console.log('Contesto:', emailReponse);
         }
         catch(err){
@@ -169,7 +184,7 @@ export default function CMS({Dogs, Cats}: any)
                                 ¡Bienvenido {<p className='text-blackGora ml-1'> a tu próxima gran aventura</p>}!
                             </ModalHeader>
                             <ModalBody>
-                                <p className='text-blackGora px-4 text-xl'> 
+                                <p className='text-purpleGora px-4 text-xl text-center font-semibold'> 
                                     { isDog ? "Crea un nuevo Guau" : "Crea un nuevo Miau"}
                                 </p>
                                 <h1 className='text-center py-4 text-blackGora font-semibold'>
@@ -292,11 +307,14 @@ export default function CMS({Dogs, Cats}: any)
                             Agrega una nueva {<span className='text-greenGora'>Mascota</span>}
                         </h2>
                         <div className="flex gap-4 mn:my-4 md:my-8 mn:justify-center md:justify-start">
-                            <Button  onClick={(e)=> [setIsDog(true)]} className={`bg-transparent border  ${isDog ? "bg-greenGora text-OrangeLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-OrangeLightGora`} radius="full" size="lg">
+                            <Button  onClick={(e)=> [setIsDog(true),setIsHistory(false), setIsCat(false)]} className={`bg-transparent border  ${isDog ? "bg-greenGora text-OrangeLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-OrangeLightGora`} radius="full" size="lg">
                                 Guaus
                             </Button>
-                            <Button onClick={(e)=> setIsDog(false)} className={`bg-transparent border ${!isDog ? "bg-greenGora text-OrangeLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-OrangeLightGora`} radius="full" size="lg">
+                            <Button onClick={(e)=> [setIsDog(false),setIsHistory(false),setIsCat(true)]} className={`bg-transparent border ${isCat ? "bg-greenGora text-OrangeLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-OrangeLightGora`} radius="full" size="lg">
                                 Miaus
+                            </Button>
+                            <Button onClick={(e) => [ setIsHistory(true),setIsDog(false),setIsCat(false) ]} className={`bg-transparent border ${isHistory ? "bg-greenGora text-OrangeLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-OrangeLightGora`} radius="full" size="lg">
+                                History
                             </Button>
                             <Button onPress={onOpen} className='bg-transparent border border-greenGor pi pi-plus' radius="full" size="lg" />
                         </div>
@@ -358,8 +376,9 @@ export default function CMS({Dogs, Cats}: any)
                                 </Card>
                             </div>
                         </div>
-                    ) 
+                    ) // duplicar
                     :
+                    isCat?
                     (
                         <div className='px-4 py-6'>
                             <div className='flex max-w-7xl mx-auto'>
@@ -407,6 +426,55 @@ export default function CMS({Dogs, Cats}: any)
                             </div>
                         </div>
                     )
+                    :
+                    (
+                        <div className='px-4 py-6'>
+                            <div className='flex max-w-7xl mx-auto'>
+                                <Card
+                                    isBlurred
+                                    className="border-none w-full"
+                                    shadow="md"
+                                >
+                                    <ScrollShadow className="mn:w-[360px] mn:h-[600px] md:w-[1280px] md:h-[600px] mt-4 mb-4" size={0}>
+                                        <div className='flex flex-wrap justify-evenly'>
+                                        {
+                                            History.map((card: any) => (
+                                                <Card key={card.id} className='m-4 w-96'>
+                                                    <div className="flex gap-6 md:gap-2">
+                                                        <Image
+                                                            alt="Album cover"
+                                                            className="object-cover"
+                                                            shadow="md"
+                                                            src={card.image}
+                                                            height={250}
+                                                            width={500}
+                                                        />
+                                                        <CardBody>
+                                                            <div className='flex flex-col'>
+                                                                <h1 className="flex justify-end font-semibold text-purpleGora text-2xl">
+                                                                    {card.title.substring(0, 3)}<span className='text-greenGora'>{card.title.substring(3, card.title.charCodeAt(card.title))}</span>
+                                                                </h1>
+                                                                <p className='flex ml-2 justify-center mt-2 text-[12px] text-right w-full'>
+                                                                    {card.shortDescription.substring(0,50)}
+                                                                </p>
+                                                                <div className="flex mn:my-2 justify-center">
+                                                                    <Button  onClick={(e)=> setIsEdit(true)} className='bg-transparent border border-greenGora text-greenGora' radius="full" size="sm" endContent={<i className="pi pi-pencil" style={{ color: '#489E84' }}/>}>
+                                                                        Editar
+                                                                    </Button>
+                                                                </div>  
+                                                            </div>
+                                                        </CardBody>
+                                                    </div>
+                                                </Card>
+                                            ))
+                                        }
+                                        </div>
+                                    </ScrollShadow> 
+                                </Card>
+                            </div>
+                        </div>
+                    )
+                    
                 }
         </div>
     )

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import axios from "axios"
+import { headers } from "next/headers"
 
 export async function POST(request: NextRequest) {
 
