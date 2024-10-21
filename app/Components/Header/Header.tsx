@@ -38,23 +38,23 @@ export default function Header() {
             {/* menu web */}
             <NavbarContent className="hidden sm:flex gap-8" justify="start">
                 <NavbarItem>
-                    <Link className="text-lg text-OrangeLightGora hover:text-orangeGora hover:underline hover:underline-offset-8" href="#adopciones">
+                    <Link className="text-lg text-pinkLightGora hover:text-orangeGora hover:underline hover:underline-offset-8" href="#adopciones">
                         Adopciones
                     </Link>
                 </NavbarItem>
                 <NavbarItem >
-                    <Link className="text-lg text-OrangeLightGora hover:text-orangeGora hover:underline hover:underline-offset-8" href="https://gorafundacion.org">
+                    <Link className="text-lg text-pinkLightGora hover:text-orangeGora hover:underline hover:underline-offset-8" href="https://gorafundacion.org">
                         Tienda Gora
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link className="text-lg text-OrangeLightGora hover:text-orangeGora hover:underline hover:underline-offset-8" href="#">
+                    <Link className="text-lg text-pinkLightGora hover:text-orangeGora hover:underline hover:underline-offset-8" href="#">
                         Contáctanos
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
                     {/* Redirección a Donations usando onClick y router */}
-                    <Link className="text-lg text-OrangeLightGora hover:text-orangeGora hover:underline hover:underline-offset-8" onClick={() => router.push('/Home/Donations')} style={{ cursor: 'pointer' }}>
+                    <Link className="text-lg text-pinkLightGora hover:text-orangeGora hover:underline hover:underline-offset-8" onClick={() => router.push('/Home/Donations')} style={{ cursor: 'pointer' }}>
                         Ayudanos
                     </Link>
                 </NavbarItem>

@@ -1,42 +1,104 @@
 "use client";
 import React, { useState } from 'react';
-import { Button, Card, Input,CardBody, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Checkbox, cn } from "@nextui-org/react";
+import { Button, Card, Input,CardBody, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, usePagination, PaginationItemType, Checkbox, Textarea } from "@nextui-org/react";
 import {ScrollShadow} from "@nextui-org/react";
 import {Divider} from "@nextui-org/divider";
+import {Pagination} from "@nextui-org/react";
+import {ChevronIcon} from "../../../public/ChevronIcon";
 import MotionTransition from '../MotionTransition/MotionTransition';
 import 'primeicons/primeicons.css';
-import { classNames } from 'primereact/utils';
+
 //{Dogs, Cats}: any
 export default function Home({cardsDogs , cardsCats}: any) {
 
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     //const [expand, setExpand] = useState(false);
     const [isDog, setIsDog] = useState(true);
+    const [currentPage, setCurrentPage] = useState(1);
     const [expandedCard, setExpandedCard] = useState<number | null>(null);
 
     const toggleExpand = (id: number) => {
         setExpandedCard(expandedCard === id ? null : id);
     };
 
-     // Estado para la página actual y cuántas cartas mostrar por página
-    const [currentPage, setCurrentPage] = useState(1);
-    const cardsPerPage = 9;
+    const itemsAdoptions = 9; // Cantidad de tarjetas que deseas mostrar por página
+    const cards = isDog ? cardsDogs : cardsCats;
+    const totalPagesAdoptions = Math.ceil(cards.length / itemsAdoptions);
+    
+    const card = [
+        {
+            id: 1,
+            image: 'Adop1.png',
+            title: 'Max',
+            Description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+        },
+        {
+            id: 2,
+            image: 'Adop2.png',
+            title: 'Lucas',
+            Description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+        },
+        {
+            id: 3,
+            image: 'Adop3.png',
+            title: 'Dante',
+            Description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+        },
+        {
+            id: 4,
+            image: 'Adop4.png',
+            title: 'Kitty',
+            Description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+        },
+        {
+            id: 5,
+            image: 'Adop4.png',
+            title: 'Kitty',
+            Description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+        },
+        {
+            id: 6,
+            image: 'Adop3.png',
+            title: 'Kitty',
+            Description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+        },
+        {
+            id: 7,
+            image: 'Adop2.png',
+            title: 'Kitty',
+            Description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+        },
+        {
+            id: 8,
+            image: 'Adop1.png',
+            title: 'Kitty',
+            Description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
+        },
+    ];
 
-    // Divide las cartas en páginas
-    const indexOfLastCard = currentPage * cardsPerPage;
-    const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-    const currentDogsCards = cardsDogs.slice(indexOfFirstCard, indexOfLastCard);
-    const currentCatsCards = cardsCats.slice(indexOfFirstCard, indexOfLastCard);
-    // Calcular el número total de páginas
-    const totalPages = Math.ceil(cardsDogs.length / cardsPerPage);
+    // Obtener las tarjetas correspondientes a la página actual
+    const currentCards = cards.slice(
+        (currentPage - 1) * itemsAdoptions,
+        currentPage * itemsAdoptions
+    );
 
-    const handleNextPage = () => {
-        if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page); // Actualiza la página actual cuando cambia
     };
 
-    const handlePrevPage = () => {
-        if (currentPage > 1) setCurrentPage(currentPage - 1);
-    };
+    const itemsHistorys = 4; // Cantidad de tarjetas por página
+    const { activePage, range, setPage, onNext, onPrevious } = usePagination({
+      total: Math.ceil(card.length / itemsHistorys), // Total de páginas basado en el número de tarjetas
+      showControls: true,
+      siblings: 1,
+      boundaries: 1,
+    });
+  
+    // Calcula las tarjetas que se deben mostrar en la página actual
+    const paginatedCards = card.slice(
+      (activePage - 1) * itemsHistorys,
+      activePage * itemsHistorys
+    );
 
     return(
         <div>
@@ -45,17 +107,17 @@ export default function Home({cardsDogs , cardsCats}: any) {
                 <div className='relative p-6 md:py-24'>
                     <div className='grid md:max-w-7xl mx-auto md:grid-cols-2'>
                         <div className='mn:order-last mn:mt-8 md:ml-8 md:px-6 md:order-first '>
-                            <h1 className='mn:ml-2 md:ml-0 mn:text-3xl md:text-4xl font-semibold text-purpleGora'>
+                            <h2 className='mn:ml-2 md:ml-0 mn:text-3xl md:text-4xl font-semibold text-purpleGora'>
                                 ¡Encuentra {<span className='text-greenGora'>a tu compañero </span>}
                                 <span className=' text-greenGora'>perfecto</span>!
-                            </h1>
+                            </h2>
                             <p className='mn:ml-4 md:ml-0 mn:max-w-md md:max-w-lg mn:mt-4 md:mt-10'>
                                 Bienvenido a GORA, tu destino para encontrar tu compañero peludo perfecto. En nuestra plataforma, 
                                 conectamos a mascotas necesitadas con familias amorosas.<br/> 
                                 ¡Descubre cómo puedes hacer una diferencia en la vida de un animal y en la tuya propia adoptando hoy!
                             </p>
                             <div className="flex mn:my-8 mn:justify-center md:justify-start">
-                                <Button  className='bg-greenGora text-OrangeLightGora' radius="full" size="lg" onPress={onOpen}>
+                                <Button  className='bg-greenGora text-pinkLightGora' radius="full" size="lg" onPress={onOpen}>
                                     Adopta Hoy
                                 </Button>
                                 <Modal isOpen={isOpen} onOpenChange={onOpenChange} size='3xl' backdrop='blur'>
@@ -69,14 +131,18 @@ export default function Home({cardsDogs , cardsCats}: any) {
                                                 <p className='text-blackGora px-4 text-md'> 
                                                     Nos emociona que estés considerando darle un hogar a uno de nuestros adorables peluditos! Por favor, completa este sencillo formulario para comenzar el proceso de adopción.
                                                 </p>
-                                                <h1 className='text-center py-4 text-blackGora text-xl font-semibold'>
+                                                <h3 className='text-center py-4 text-blackGora text-xl font-semibold'>
                                                     Queremos conocerte un poco mejor.
-                                                </h1>
+                                                </h3>
+                                                <p className='text-blackGora px-4 text-md text-center'> 
+                                                    Déjanos tus datos y te contactamos
+                                                </p>
+
                                                 <div className="flex w-full flex-col gap-4">
-                                                    <div className="flex mb-6 md:mb-0 gap-4">
+                                                    <div className="flex mb-6 md:mb-0 gap-4 h-[48px]">
                                                         <Input type="name" variant={'faded'} label="Nombre y Apellidos"/>
                                                     </div>
-                                                    <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
+                                                    <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4 h-[48px]">
                                                         <Input type="email" variant={'faded'} label="Correo electrónico"/>
                                                         <Input type="Phone" variant={'faded'} label="Celular" />
                                                     </div>
@@ -85,13 +151,19 @@ export default function Home({cardsDogs , cardsCats}: any) {
                                             <ModalFooter className='flex justify-center'>
                                                 <div className='flex flex-col w-full'>
                                                     <div className='flex justify-evenly'>
-                                                        <Button  className='bg-greenGora text-OrangeLightGora px-6' radius="full" size="md" onPress={onClose}>
+                                                        <Button  className='bg-greenGora text-pinkLightGora px-6' radius="full" size="md" onPress={onClose}>
                                                             Enviar
-                                                        </Button>
-                                                        <Button className='bg-greenGora text-OrangeLightGora px-6' radius="full" size="md" onPress={onClose}>
-                                                            Completar Formulario
-                                                        </Button>                               
+                                                        </Button>                          
                                                     </div>
+                                                    <Divider className="my-4"/>
+                                                    <div className='flex flex-col'>
+                                                        <p className='text-blackGora px-4 text-md text-center'> 
+                                                            Inicia el proceso de adopción diligenciado el siguiente formulario
+                                                        </p>
+                                                        <a href="" className='text-center'> Formulario adopción</a>
+                                                    </div>
+                                                    
+
                                                     <Divider className="my-4"/>
                                                     <div className='text-greenGora text-sm text-center font-semibold my-4 px-4'> 
                                                         <p>¡Gracias por tomarte el tiempo para completar este formulario! <br/> Nos emociona poder ayudarte a encontrar a tu nuevo mejor amigo peludo. <br/>¡Pronto nos pondremos en contacto contigo para continuar con el proceso de adopción!</p>
@@ -132,10 +204,10 @@ export default function Home({cardsDogs , cardsCats}: any) {
                                     />
                                     </div>
                                     <Button
-                                    onClick={(e) => setIsDog(true)}
-                                    className={`bg-transparent border ${isDog ? "bg-greenGora text-OrangeLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-OrangeLightGora`}
-                                    radius="full"
-                                    size="lg"
+                                        onClick={(e) => setIsDog(true)}
+                                        className={`bg-transparent border ${isDog ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`}
+                                        radius="full"
+                                        size="lg"
                                     >
                                     Guaus
                                     </Button>
@@ -150,10 +222,10 @@ export default function Home({cardsDogs , cardsCats}: any) {
                                     />
                                     </div>
                                     <Button
-                                    onClick={(e) => setIsDog(false)}
-                                    className={`bg-transparent border ${!isDog ? "bg-greenGora text-OrangeLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-OrangeLightGora`}
-                                    radius="full"
-                                    size="lg"
+                                        onClick={(e) => setIsDog(false)}
+                                        className={`bg-transparent border ${!isDog ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`}
+                                        radius="full"
+                                        size="lg"
                                     >
                                     Miaus
                                     </Button>
@@ -168,84 +240,77 @@ export default function Home({cardsDogs , cardsCats}: any) {
                         <div className='px-4 py-4'>
                             <div className='flex flex-wrap max-w-7xl mx-auto'>
                                 <Card isBlurred className="border-none w-full" shadow="md">
-                                <ScrollShadow className="mn:w-full mn:h-[600px] md:w-full md:h-[600px] mt-6 mb-6" size={0}>
-                                    <div className='flex flex-wrap justify-evenly'>
-                                        {currentDogsCards.map((card: any) => (
-                                            <Card
-                                            key={card.id}
-                                            className={`m-4 transition-all duration-300 ${expandedCard === card.id ? 'w-full md:w-[30%] h-[424px]' : 'w-full md:w-[30%] h-[200px]'}`}
-                                            >
-                                            <div className={`flex items-center ${expandedCard === card.id ? 'flex flex-col gap-2' : ''}`}>
-                                                <Image
-                                                alt="Album cover"
-                                                className={`object-cover shadow-md transition-all duration-300 rounded-none ${expandedCard === card.id ? 'w-full h-[200px]' : 'w-[170px] h-[200px]'}`}
-                                                src={card.image}
-                                                />
-                                                <CardBody className={`${expandedCard === card.id ? 'w-full h-[200px]' : 'w-[170px] h-[200px] justify-around'}`}>
-                                                <div className={`${expandedCard === card.id ? 'flex items-center justify-around' : 'flex flex-wrap'}`}>
-                                                    <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start text-2xl' : 'justify-end mn:text-xl md:text-2xl'}`}>
-                                                        {card.title}: <span className='text-greenGora'>{card.old}</span>
-                                                    </h1>
-                                                    {expandedCard === card.id && (
-                                                    <div className='flex flex-wrap'>
-                                                        <div className='flex items-center'>
-                                                        <Button className='bg-greenGora border border-greenGora text-white text-sm h-7' radius="full">
-                                                            Adoptame
-                                                        </Button>
-                                                        </div>
-                                                        <div className='flex items-center'>
-                                                        <Button
-                                                            onClick={() => toggleExpand(card.id)}
-                                                            className='bg-transparent text-greenGora text-end'
-                                                            radius="full"
-                                                            endContent={<i className="pi pi-arrow-circle-up" style={{ color: '#489E84', fontSize: '1.5rem' }} />}
+                                    <ScrollShadow className="mn:w-full mn:h-[300px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
+                                        <div className='flex flex-wrap justify-evenly'>
+                                            {currentCards.map((card: any) => (
+                                                <Card
+                                                    key={card.id}
+                                                    className={`m-4 transition-all duration-300 ${expandedCard === card.id ? 'w-full md:w-[30%] h-[424px]' : 'w-full md:w-[30%] h-[200px]'}`}
+                                                >
+                                                    <div className={`flex items-center ${expandedCard === card.id ? 'flex flex-col gap-2' : ''}`}>
+                                                        <Image
+                                                            alt="Album cover"
+                                                            className={`object-cover shadow-md transition-all duration-300 rounded-none ${expandedCard === card.id ? 'w-full h-[200px]' : 'w-[170px] h-[200px]'}`}
+                                                            
+                                                            src={card.image}
                                                         />
-                                                        </div>
+                                                        <CardBody className={`${expandedCard === card.id ? 'w-full h-[200px]' : 'w-[170px] h-[200px] justify-around'}`}>
+                                                            <div className={`${expandedCard === card.id ? 'flex items-center justify-around' : 'flex w-full flex-wrap'}`}>
+                                                                <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start text-2xl' : 'px-2 justify-end w-full mn:text-xl md:text-2xl'}`}>
+                                                                    {card.title.substring(0, 3)}<span className='text-greenGora'>{card.title.substring(3, card.title.charCodeAt(card.title))}</span>
+                                                                </h1>
+                                                                {expandedCard === card.id && (
+                                                                    <div className='flex flex-wrap'>
+                                                                        <div className='flex items-center'>
+                                                                            <Button className='bg-greenGora border border-greenGora text-white text-sm h-7' radius="full">
+                                                                                Adoptame
+                                                                            </Button>
+                                                                        </div>
+                                                                        <div className='flex items-center'>
+                                                                            <Button
+                                                                                onClick={() => toggleExpand(card.id)}
+                                                                                className='bg-transparent text-greenGora text-end'
+                                                                                radius="full"
+                                                                                endContent={<i className="pi pi-arrow-circle-up" style={{ color: '#489E84', fontSize: '1.5rem' }} />}
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                
+                                                            <p className={`flex font-normal text-gray ${expandedCard === card.id ? 'w-[308px] h-[120px] text-[14px] px-2.5 mt-1' : 'w-full h-[58px] text-right text-[12px]'}`}>
+                                                                {expandedCard === card.id ? card.longDescription : card.shortDescription.substring(0,50) + "..."}
+                                                            </p>
+                
+                                                            {expandedCard !== card.id && (
+                                                                <div className="flex justify-center">
+                                                                    <Button
+                                                                        onClick={() => toggleExpand(card.id)}
+                                                                        className='bg-transparent border border-greenGora text-greenGora'
+                                                                        radius="full"
+                                                                        endContent={<i className="pi pi-arrow-circle-down" style={{ color: '#489E84' }} />}
+                                                                    >
+                                                                        Más sobre mi
+                                                                    </Button>
+                                                                </div>
+                                                            )}
+                                                        </CardBody>
                                                     </div>
-                                                    )}
-                                                </div>
-
-                                                <p className={`flex font-normal text-gray ${expandedCard === card.id ? 'w-[308px] h-[120px] text-sm px-2.5 mt-1' : 'w-[135px] h-[58px] text-xs'}`}>
-                                                    {expandedCard === card.id ? card.longDescription : card.shortDescription}
-                                                </p>
-
-                                                {expandedCard !== card.id && (
-                                                    <div className="">
-                                                    <Button
-                                                        onClick={() => toggleExpand(card.id)}
-                                                        className='bg-transparent border border-greenGora text-greenGora'
-                                                        radius="full"
-                                                        endContent={<i className="pi pi-arrow-circle-down" style={{ color: '#489E84' }} />}
-                                                    >
-                                                        Más sobre mi
-                                                    </Button>
-                                                    </div>
-                                                )}
-                                                </CardBody>
-                                            </div>
-                                            </Card>
-                                        ))}
+                                                </Card>
+                                            ))}
+                                        </div>
+                                    </ScrollShadow>
+                
+                                    {/* Paginador */}
+                                    <div className="flex justify-center mb-4">
+                                        <Pagination
+                                            showControls
+                                            color={"secondary"}
+                                            total={totalPagesAdoptions} // Total de páginas basado en el número de cartas
+                                            page={currentPage} // Página actual
+                                            onChange={handlePageChange} // Función para manejar el cambio de página
+                                        />
                                     </div>
-                                </ScrollShadow>
-
-                                {/* Paginador */}
-                                <div className="flex justify-center mt-6">
-                                    <Button
-                                    onClick={handlePrevPage}
-                                    disabled={currentPage === 1}
-                                    className="mx-2"
-                                    >
-                                    Anterior
-                                    </Button>
-                                    <span className="mx-4">Página {currentPage} de {totalPages}</span>
-                                    <Button
-                                    onClick={handleNextPage}
-                                    disabled={currentPage === totalPages}
-                                    className="mx-2"
-                                    >
-                                    Siguiente
-                                    </Button>
-                                </div>
                                 </Card>
                             </div>
                         </div>
@@ -255,9 +320,9 @@ export default function Home({cardsDogs , cardsCats}: any) {
                         <div className='px-4 py-4'>
                             <div className='flex flex-wrap max-w-7xl mx-auto'>
                                 <Card isBlurred className="border-none w-full" shadow="md">
-                                    <ScrollShadow className="mn:w-full mn:h-[600px] md:w-full md:h-[600px] mt-6 mb-6" size={0}>
+                                    <ScrollShadow className="mn:w-full mn:h-[300px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
                                         <div className='flex flex-wrap justify-evenly'>
-                                            {currentCatsCards.map((card: any) => (
+                                            {currentCards.map((card: any) => (
                                             <Card
                                                 key={card.id}
                                                 className={`m-4 transition-all duration-300 ${expandedCard === card.id ? 'w-full md:w-[30%] h-[424px]' : 'w-full md:w-[30%] h-[200px]'}`}
@@ -266,46 +331,47 @@ export default function Home({cardsDogs , cardsCats}: any) {
                                                     <Image
                                                         alt="Album cover"
                                                         className={`object-cover shadow-md transition-all duration-300 rounded-none ${expandedCard === card.id ? 'w-full h-[200px]' : 'w-[170px] h-[200px]'}`}
+                                                        
                                                         src={card.image}
                                                     />
                                                     <CardBody className={`${expandedCard === card.id ? 'w-full h-[200px]' : 'w-[170px] h-[200px] justify-around'}`}>
-                                                        <div className={`${expandedCard === card.id ? 'flex items-center justify-around' : 'flex flex-wrap'}`}>
-                                                            <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start text-2xl' : 'justify-end mn:text-xl md:text-2xl'}`}>
-                                                                {card.title}<span className='text-greenGora'>{card.old}</span>
+                                                        <div className={`${expandedCard === card.id ? 'flex items-center justify-around' : 'flex w-full flex-wrap'}`}>
+                                                            <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start text-2xl' : 'px-2 justify-end w-full mn:text-xl md:text-2xl'}`}>
+                                                                {card.title.substring(0, 3)}<span className='text-greenGora'>{card.title.substring(3, card.title.charCodeAt(card.title))}</span>
                                                             </h1>
                                                             {expandedCard === card.id && (
-                                                            <div className='flex flex-wrap'>
-                                                                <div className='flex items-center'>
-                                                                    <Button className='bg-greenGora border border-greenGora text-white text-sm h-7' radius="full">
-                                                                        Adoptame
-                                                                    </Button>
+                                                                <div className='flex flex-wrap'>
+                                                                    <div className='flex items-center'>
+                                                                        <Button className='bg-greenGora border border-greenGora text-white text-sm h-7' radius="full">
+                                                                            Adoptame
+                                                                        </Button>
+                                                                    </div>
+                                                                    <div className='flex items-center'>
+                                                                        <Button
+                                                                            onClick={() => toggleExpand(card.id)}
+                                                                            className='bg-transparent text-greenGora text-end'
+                                                                            radius="full"
+                                                                            endContent={<i className="pi pi-arrow-circle-up" style={{ color: '#489E84', fontSize: '1.5rem' }} />}
+                                                                        />
+                                                                    </div>
                                                                 </div>
-                                                                <div className='flex items-center'>
-                                                                    <Button
-                                                                        onClick={() => toggleExpand(card.id)}
-                                                                        className='bg-transparent text-greenGora text-end'
-                                                                        radius="full"
-                                                                        endContent={<i className="pi pi-arrow-circle-up" style={{ color: '#489E84', fontSize: '1.5rem' }} />}
-                                                                    />
-                                                                </div>
-                                                            </div>
                                                             )}
                                                         </div>
-
-                                                        <p className={`flex font-normal text-gray ${expandedCard === card.id ? 'w-[308px] h-[120px] text-sm px-2.5 mt-1' : 'w-[135px] h-[58px] text-xs'}`}>
-                                                            {expandedCard === card.id ? card.longDescription : card.shortDescription}
+            
+                                                        <p className={`flex font-normal text-gray ${expandedCard === card.id ? 'w-[308px] h-[120px] text-[14px] px-2.5 mt-1' : ' text-right w-full h-[58px] text-[12px]'}`}>
+                                                            {expandedCard === card.id ? card.longDescription : card.shortDescription.substring(0,40) + "..."}
                                                         </p>
-
+            
                                                         {expandedCard !== card.id && (
-                                                            <div className="">
-                                                            <Button
-                                                                onClick={() => toggleExpand(card.id)}
-                                                                className='bg-transparent border border-greenGora text-greenGora'
-                                                                radius="full"
-                                                                endContent={<i className="pi pi-arrow-circle-down" style={{ color: '#489E84' }} />}
-                                                            >
-                                                                Más sobre mi
-                                                            </Button>
+                                                            <div className="flex justify-center">
+                                                                <Button
+                                                                    onClick={() => toggleExpand(card.id)}
+                                                                    className='bg-transparent border border-greenGora text-greenGora'
+                                                                    radius="full"
+                                                                    endContent={<i className="pi pi-arrow-circle-down" style={{ color: '#489E84' }} />}
+                                                                >
+                                                                    Más sobre mi
+                                                                </Button>
                                                             </div>
                                                         )}
                                                     </CardBody>
@@ -316,22 +382,14 @@ export default function Home({cardsDogs , cardsCats}: any) {
                                     </ScrollShadow>
 
                                     {/* Paginador */}
-                                    <div className="flex justify-center mt-6">
-                                        <Button
-                                            onClick={handlePrevPage}
-                                            disabled={currentPage === 1}
-                                            className="mx-2"
-                                        >
-                                            Anterior
-                                        </Button>
-                                        <span className="mx-4">Página {currentPage} de {totalPages}</span>
-                                        <Button
-                                            onClick={handleNextPage}
-                                            disabled={currentPage === totalPages}
-                                            className="mx-2"
-                                        >
-                                            Siguiente
-                                        </Button>
+                                    <div className="flex justify-center mb-4">
+                                        <Pagination
+                                            showControls
+                                            color={"secondary"}
+                                            total={totalPagesAdoptions} // Total de páginas basado en el número de cartas
+                                            page={currentPage} // Página actual
+                                            onChange={handlePageChange} // Función para manejar el cambio de página
+                                        />
                                     </div>
                                 </Card>
                             </div>
@@ -339,7 +397,6 @@ export default function Home({cardsDogs , cardsCats}: any) {
                     )
                 }
             </section>
-            
             <Divider className="my-4"/>
             {/* CARDS HISTORIAS */}
             <div className='relative mn:px-6 mn:py-2 mn:mt-2 md:px-6 md:py-6 md:mt-8'>
@@ -350,123 +407,94 @@ export default function Home({cardsDogs , cardsCats}: any) {
                 </div>
             </div>
             <div className='px-4 py-6 mb-8'>
-                <div className='flex max-w-7xl mx-auto'>
-                    <Card
-                        isBlurred
-                        className="border-none w-full"
-                        shadow="md"
-                    >
-                        <div className='md:flex md:flex-col-2 m-4'>
-                            <Card className='m-4 border border-greenGora'>
-                                <div className="flex justify-center gap-6 md:gap-2">
-                                    <CardBody>
-                                        <div className='flex flex-col m-4'>
-                                            <h1 className="flex justify-start font-bold text-purpleGora text-2xl">
-                                                Doggi
-                                            </h1>
-                                            <h2 className="flex justify-start font-semibold text-blackGora text-xl">
-                                                y su familia
-                                            </h2>
-                                            <p className='flex justify-center mt-4 text-md'>
-                                                Encantador cachorro de ojos brillantes y cola siempre en movimiento. 
-                                            </p>
-                                        </div>
-                                    </CardBody>
-                                    <Image
-                                        alt="Album cover"
-                                        className="object-cover"
-                                        height={150}
-                                        shadow="md"
-                                        src="Adop1.png"
-                                        width={400}
-                                        isZoomed
-                                    />
-                                </div>
-                            </Card>
-                            <Card className='m-4 border border-greenGora'>
-                                <div className="flex gap-6 md:gap-2">
-                                    <CardBody>
-                                        <div className='flex flex-col m-4'>
-                                            <h1 className="flex justify-start font-bold text-purpleGora text-2xl">
-                                                Doggi
-                                            </h1>
-                                            <h2 className="flex justify-start font-semibold text-blackGora text-xl">
-                                                y su familia
-                                            </h2>
-                                            <p className='flex justify-center mt-4 text-md'>
-                                                Encantador cachorro de ojos brillantes y cola siempre en movimiento. 
-                                            </p>
-                                        </div>
-                                    </CardBody>
-                                    <Image
-                                        alt="Album cover"
-                                        className="object-cover"
-                                        height={150}
-                                        shadow="md"
-                                        src="Adop2.png"
-                                        width={400}
-                                        isZoomed
-                                    />
-                                </div>
-                            </Card>
-                        </div>
-                        <div className='md:flex md:flex-col-2 m-4'>
-                            <Card className='m-4 border border-greenGora'>
-                                <div className="flex gap-6 md:gap-2">
-                                    <CardBody>
-                                        <div className='flex flex-col m-4'>
-                                            <h1 className="flex justify-start font-bold text-purpleGora text-2xl">
-                                                Doggi
-                                            </h1>
-                                            <h2 className="flex justify-start font-semibold text-blackGora text-xl">
-                                                y su familia
-                                            </h2>
-                                            <p className='flex justify-center mt-4 text-md'>
-                                                Encantador cachorro de ojos brillantes y cola siempre en movimiento. 
-                                            </p>
-                                        </div>
-                                    </CardBody>
-                                    <Image
-                                        alt="Album cover"
-                                        className="object-cover"
-                                        height={250}
-                                        shadow="md"
-                                        src="Adop3.png"
-                                        width={400}
-                                        isZoomed
-                                    />
-                                </div>
-                            </Card>
-                            <Card className='m-4 border border-greenGora'>
-                                <div className="flex gap-6 md:gap-2">
-                                    <CardBody>
-                                        <div className='flex flex-col m-4'>
-                                            <h1 className="flex justify-start font-bold text-purpleGora text-2xl">
-                                                Doggi
-                                            </h1>
-                                            <h2 className="flex justify-start font-semibold text-blackGora text-xl">
-                                                y su familia
-                                            </h2>
-                                            <p className='flex justify-center mt-4 text-md'>
-                                                Encantador cachorro de ojos brillantes y cola siempre en movimiento. 
-                                            </p>
-                                        </div>
-                                    </CardBody>
-                                    <Image
-                                        alt="Album cover"
-                                        className="object-cover"
-                                        height={250}
-                                        shadow="md"
-                                        src="Adop4.png"
-                                        width={400}
-                                        isZoomed
-                                    />
-                                </div>
-                            </Card>
-                        </div>
-                    </Card>
+                <div className='flex gap-4 max-w-7xl mx-auto'>
+                    {paginatedCards.map((card: any) => (
+                        <Card
+                            isBlurred
+                            className="border-none w-full"
+                            shadow="md"
+                            key={card.id}
+                        >
+                            <div className='flex'>
+                                <Card className='m-4 border border-greenGora'>
+                                    <div className="flex flex-col justify-center gap-6 md:gap-2">
+                                        <CardBody>
+                                            <div className='flex flex-col m-4'>
+                                                <h1 className="flex mn:flex-col xl:flex-row justify-center font-bold text-purpleGora text-2xl gap-2">
+                                                    {card.title} <span className="flex justify-start font-semibold text-blackGora text-xl">y su familia</span>
+                                                </h1>
+                                                <p className='flex justify-center mt-4 text-md'>
+                                                    {card.description}
+                                                </p>
+                                            </div>
+                                        </CardBody>
+                                        <Image
+                                            alt="cover"
+                                            className="object-cover"
+                                            height={150}
+                                            shadow="lg"
+                                            src={card.image}
+                                            width={300}
+                                            isZoomed
+                                        />
+                                    </div>
+                                </Card>
+                            </div>
+                        </Card>
+                    ))}
+                </div>
+                <div className="flex justify-center m-4">
+                    <ul className="flex gap-2 items-center">
+                    {range.map((page) => {
+                        if (page === PaginationItemType.NEXT) {
+                        return (
+                            <li key={page} aria-label="next page" className="w-4 h-4">
+                                <button
+                                    className="w-full h-full bg-default-200 rounded-full"
+                                    onClick={onNext}
+                                >
+                                    <ChevronIcon className="rotate-180" />
+                                </button>
+                            </li>
+                        );
+                        }
+
+                        if (page === PaginationItemType.PREV) {
+                        return (
+                            <li key={page} aria-label="previous page" className="w-4 h-4">
+                                <button
+                                    className="w-full h-full bg-default-200 rounded-full"
+                                    onClick={onPrevious}
+                                >
+                                    <ChevronIcon />
+                                </button>
+                            </li>
+                        );
+                        }
+
+                        if (page === PaginationItemType.DOTS) {
+                            return (
+                                <li key={page} className="w-4 h-4">
+                                ...
+                                </li>
+                            );
+                        }
+
+                        return (
+                            <li key={page} aria-label={`page ${page}`} className="w-4 h-4">
+                                <button
+                                className={`w-full h-full rounded-full ${
+                                    activePage === page ? 'bg-greenGora' : 'bg-default-300'
+                                }`}
+                                onClick={() => setPage(page)}
+                                />
+                            </li>
+                        );
+                    })}
+                    </ul>
                 </div>
             </div>
+            
             <Divider className="my-4"/>
             {/* PUBLICIDAD */}
             <div className='flex justify-center mt-6 mb-6 py-6'>
@@ -486,7 +514,7 @@ export default function Home({cardsDogs , cardsCats}: any) {
             <div className='relative mn:px-6 mn:py-2 mn:mt-2 md:px-6 md:py-6 md:mt-8'>
                 <div className='grid max-w-7xl mx-auto md:grid-cols-2'>
                     <h2 className='mn:text-xl md:text-4xl font-semibold'>
-                        Adoptar es {<span className='text-greenGora'>Facil</span>}
+                        Adoptar es {<span className='text-greenGora'>Fácil</span>}
                     </h2>
                 </div>
             </div>
