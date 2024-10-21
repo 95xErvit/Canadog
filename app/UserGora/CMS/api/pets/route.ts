@@ -9,13 +9,13 @@ export async function POST(request: NextRequest) {
     try 
     {
 
-        const { data: { token } } = await axios.get(`${process.env.HOST_API_LOCAL}/Api/Gora/TokenGora`, {
+        const { data: { token } } = await axios.get(`${process.env.HOST_API}/Api/Gora/TokenGora`, {
             headers: {
                 "x-api-key":<string>process.env.API_KEY
             }
         })
 
-        const result = await axios.post(`${process.env.HOST_API_LOCAL}/Api/Gora/CMS/Pets`,data,
+        const result = await axios.post(`${process.env.HOST_API}/Api/Gora/CMS/Pets`,data,
         {   
             headers: {
                 Authorization: `Bearer ${token}`
@@ -39,13 +39,13 @@ export async function PATCH(request: NextRequest) {
     try 
     {
 
-        const { data: { token } } = await axios.get(`${process.env.HOST_API_LOCAL}/Api/Gora/TokenGora`, {
+        const { data: { token } } = await axios.get(`${process.env.HOST_API}/Api/Gora/TokenGora`, {
             headers: {
                 "x-api-key":<string>process.env.API_KEY
             }
         })
 
-        const result = await axios.patch(`${process.env.HOST_API_LOCAL}/Api/Gora/CMS/Pets`,data,
+        const result = await axios.patch(`${process.env.HOST_API}/Api/Gora/CMS/Pets`,data,
         {   
             headers: {
                 Authorization: `Bearer ${token}`
