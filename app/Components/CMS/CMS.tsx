@@ -168,7 +168,6 @@ export default function CMS({Dogs, Cats, History}: any)
         setYearosld("")
     };
 
-
     const chooseOptions = { icon: 'pi pi-fw pi-images', iconOnly: true, className: 'custom-choose-btn p-button-rounded p-button-outlined' };
     const uploadOptions = { icon: 'pi pi-fw pi-cloud-upload', iconOnly: true, className: 'custom-upload-btn p-button-success p-button-rounded p-button-outlined' };
     const cancelOptions = { icon: 'pi pi-fw pi-times', iconOnly: true, className: 'custom-cancel-btn p-button-danger p-button-rounded p-button-outlined' };
@@ -229,7 +228,7 @@ export default function CMS({Dogs, Cats, History}: any)
                             <ModalFooter className='flex justify-center'>
                                 <div className='flex flex-col w-full'>
                                     <div className='flex justify-center'>
-                                        <Button onClick={sendPets} className='bg-greenGora text-OrangeLightGora px-6' radius="full" size="md" onPress={onClose}>
+                                        <Button onClick={sendPets} className='bg-greenGora text-pinkLightGora px-6' radius="full" size="md" onPress={onClose}>
                                             Guardar
                                         </Button>                              
                                     </div>
@@ -307,16 +306,16 @@ export default function CMS({Dogs, Cats, History}: any)
                             Agrega una nueva {<span className='text-greenGora'>Mascota</span>}
                         </h2>
                         <div className="flex gap-4 mn:my-4 md:my-8 mn:justify-center md:justify-start">
-                            <Button  onClick={(e)=> [setIsDog(true),setIsHistory(false), setIsCat(false)]} className={`bg-transparent border  ${isDog ? "bg-greenGora text-OrangeLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-OrangeLightGora`} radius="full" size="lg">
+                            <Button  onClick={(e)=> [setIsDog(true),setIsHistory(false), setIsCat(false)]} className={`bg-transparent border  ${isDog ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`} radius="full" size="lg">
                                 Guaus
                             </Button>
-                            <Button onClick={(e)=> [setIsDog(false),setIsHistory(false),setIsCat(true)]} className={`bg-transparent border ${isCat ? "bg-greenGora text-OrangeLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-OrangeLightGora`} radius="full" size="lg">
+                            <Button onClick={(e)=> [setIsDog(false),setIsHistory(false),setIsCat(true)]} className={`bg-transparent border ${isCat ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`} radius="full" size="lg">
                                 Miaus
                             </Button>
-                            <Button onClick={(e) => [ setIsHistory(true),setIsDog(false),setIsCat(false) ]} className={`bg-transparent border ${isHistory ? "bg-greenGora text-OrangeLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-OrangeLightGora`} radius="full" size="lg">
+                            <Button onClick={(e) => [ setIsHistory(true),setIsDog(false),setIsCat(false) ]} className={`bg-transparent border ${isHistory ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`} radius="full" size="lg">
                                 History
                             </Button>
-                            <Button onPress={onOpen} className='bg-transparent border border-greenGor pi pi-plus' radius="full" size="lg" />
+                            <Button onPress={onOpen} className='bg-transparent border border-redGora text-redGora pi pi-plus' radius="full" size="lg" />
                         </div>
                     </div>
                 </div>
