@@ -14,6 +14,7 @@ export default async function HomeGora()
 
 	const result : any = await GetPets(true, "Dog");
 	const result2  : any = await GetPets(true, "Cat");
+	const result3 : any = await GetPets(true, "History")
 	
 	return (
 		<>
@@ -22,6 +23,7 @@ export default async function HomeGora()
 					<Home 
 						cardsDogs={result.data.result.recordset} /*{[]}*/
 						cardsCats={result2.data.result.recordset} /*{[]}*/
+						cardsHistory={result3.data.result.recordset}
 					/>
 				</main>
 			<Footer/>

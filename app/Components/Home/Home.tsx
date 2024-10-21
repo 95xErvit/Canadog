@@ -9,7 +9,7 @@ import MotionTransition from '../MotionTransition/MotionTransition';
 import 'primeicons/primeicons.css';
 
 //{Dogs, Cats}: any
-export default function Home({cardsDogs , cardsCats}: any) {
+export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
 
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     //const [expand, setExpand] = useState(false);
@@ -88,7 +88,7 @@ export default function Home({cardsDogs , cardsCats}: any) {
 
     const itemsHistorys = 4; // Cantidad de tarjetas por página
     const { activePage, range, setPage, onNext, onPrevious } = usePagination({
-      total: Math.ceil(card.length / itemsHistorys), // Total de páginas basado en el número de tarjetas
+      total: Math.ceil(cardsHistory.length / itemsHistorys), // Total de páginas basado en el número de tarjetas
       showControls: true,
       siblings: 1,
       boundaries: 1,
@@ -408,7 +408,7 @@ export default function Home({cardsDogs , cardsCats}: any) {
             </div>
             <div className='px-4 py-6 mb-8'>
                 <div className='flex gap-4 max-w-7xl mx-auto'>
-                    {paginatedCards.map((card: any) => (
+                    {cardsHistory.map((card: any) => (
                         <Card
                             isBlurred
                             className="border-none w-full"
