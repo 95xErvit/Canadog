@@ -1,5 +1,6 @@
 'use client'
-import React, { useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { Toast } from 'primereact/toast'
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
@@ -11,7 +12,15 @@ import { Image } from "@nextui-org/react"
 export default function Login() {
     const toast = useRef(null)
     const [isVisible, setIsVisible] = React.useState(false);
+    const [isLoading, setIsLoading] = React.useState(false);
     const toggleVisibility = () => setIsVisible(!isVisible);
+    const router = useRouter()
+   
+    const handleClick = (e: any) => {
+        setIsLoading(true)
+        e.preventDefault()
+        router.push('/UserGora/CMS')
+    }
 
     return (
         <section className="bg-white">
@@ -94,13 +103,14 @@ export default function Login() {
                                                 <div className="mt-2 mb-2 justify-center">
                                                     <div className="flex w-[300px] lg:w-[400px]">
                                                         <Input
-                                                            type="email"
-                                                            label="Email"
+                                                            //type="email"
+                                                            label="Usuario"
                                                             size="lg" 
                                                             labelPlacement={'outside'}
                                                             description={'Ingrese su correo'}
                                                             className=''
                                                             required
+                                                            isDisabled={isLoading}
                                                         />
                                                     </div>  
                                                 </div> 
@@ -123,6 +133,7 @@ export default function Login() {
                                                                     )}
                                                                 </button>
                                                             }
+                                                            isDisabled={isLoading}
                                                             required
                                                         />
                                                     </div>  
@@ -135,6 +146,8 @@ export default function Login() {
                                                     radius='md' 
                                                     variant="shadow" 
                                                     startContent={<UserIcon/>}
+                                                    isDisabled={isLoading}
+                                                    onClick={handleClick}
                                                 >
                                                     Ingresar
                                                 </Button>  			
