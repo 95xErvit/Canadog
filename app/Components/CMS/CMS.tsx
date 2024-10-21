@@ -152,6 +152,23 @@ export default function CMS({Dogs, Cats, History}: any)
         }
     };
 
+    const UpdatePets = async (e: React.FormEvent) => {
+        e.preventDefault();
+    
+        try
+        {
+            const emailReponse = await axios.patch("/UserGora/CMS/api/pets",{data:{User:"Adminitrador",Enable: 1, Name: name, OldDate:yearOlds, Description:description, Type:isDog ? "DOG" : "CAT", Images: file}})
+            console.log('Contesto:', emailReponse);
+        }
+        catch(err){
+            console.log(err)
+        }
+        setName("")
+        setDescription("")
+        setYearosld("")
+    };
+
+
     const chooseOptions = { icon: 'pi pi-fw pi-images', iconOnly: true, className: 'custom-choose-btn p-button-rounded p-button-outlined' };
     const uploadOptions = { icon: 'pi pi-fw pi-cloud-upload', iconOnly: true, className: 'custom-upload-btn p-button-success p-button-rounded p-button-outlined' };
     const cancelOptions = { icon: 'pi pi-fw pi-times', iconOnly: true, className: 'custom-cancel-btn p-button-danger p-button-rounded p-button-outlined' };
@@ -159,8 +176,7 @@ export default function CMS({Dogs, Cats, History}: any)
     return(
         <div> 
             <div className="flex mn:my-8 mn:justify-center md:justify-start">
-            
-                <Modal isOpen={isOpen} onOpenChange={onOpenChange} size='5xl'>
+                <Modal isOpen={isOpen} onOpenChange={onOpenChange} size='xl'>
                     <ModalContent>
                     {(onClose) => (
                         <>
@@ -225,7 +241,7 @@ export default function CMS({Dogs, Cats, History}: any)
                 </Modal>
             </div>
             <div className="flex mn:my-8 mn:justify-center md:justify-start">
-                <Modal isOpen={isEdit} size='5xl'>
+                <Modal isOpen={isEdit}  onOpenChange={setIsEdit} size='xl'>
                     <ModalContent>
                     {(onClose) => (
                         <>
@@ -241,11 +257,11 @@ export default function CMS({Dogs, Cats, History}: any)
                                 </h1>
                                 <div className="flex w-full flex-col gap-4">
                                     <div className="flex mb-6 md:mb-0 gap-4">
-                                        <Input type="name" variant={'faded'} label="Nombre"/>
-                                        <Input type="edad" variant={'faded'} label="Edad"/>
+                                        <Input value={name} onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Nombre"/>
+                                        <Input value={yearOlds} onChange={((e)=> setYearosld(e.target.value))} type="edad" variant={'faded'} label="Edad"/>
                                     </div>
                                     <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
-                                        <Textarea  type="descripcion" variant={'faded'} label="Descripcion"/>
+                                        <Textarea value={description} max={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
                                     </div>
                                 </div> 
                                 <h1 className='text-center py-4 text-blackGora font-semibold'>
@@ -267,7 +283,14 @@ export default function CMS({Dogs, Cats, History}: any)
                             <ModalFooter className='flex justify-center'>
                                 <div className='flex flex-col w-full'>
                                     <div className='flex justify-center'>
-                                        <Button  className='bg-greenGora text-OrangeLightGora px-6' radius="full" size="md" onClick={(e)=> setIsEdit(false)}>
+                                        <Button  
+                                            className='bg-greenGora text-OrangeLightGora px-6' 
+                                            radius="full" 
+                                            size="md" 
+                                            onClick={(e)=>{
+                                                UpdatePets(e)
+                                                setIsEdit(false)
+                                            }}>
                                             Guardar
                                         </Button>                              
                                     </div>
@@ -319,14 +342,26 @@ export default function CMS({Dogs, Cats, History}: any)
                                                             />
                                                             <CardBody>
                                                                 <div className='flex flex-col'>
-                                                                    <h1 className="flex justify-end font-semibold text-purpleGora text-2xl">
+                                                                    <h1 className={'flex font-semibold text-purpleGora px-2 justify-end w-full mn:text-xl md:text-2xl'}>
                                                                         {card.title.substring(0, 3)}<span className='text-greenGora'>{card.title.substring(3, card.title.charCodeAt(card.title))}</span>
                                                                     </h1>
-                                                                    <p className='flex ml-2 justify-center mt-2 text-md w-36'>
-                                                                     {card.shortDescription.substring(0,50)}
+                                                                    <h1 className={'flex font-semibold text-purpleGora px-2 justify-end w-full mn:text-xl md:text-sm'}>
+                                                                        Edad: {card.old}
+                                                                    </h1>
+                                                                    <p className={'flex font-normal text-gray w-full h-[58px] text-right text-[12px]'}>
+                                                                        {card.shortDescription.substring(0,75) + "..."}
                                                                     </p>
                                                                     <div className="flex mn:my-2 justify-center">
-                                                                        <Button  onClick={(e)=> setIsEdit(true)} className='bg-transparent border border-greenGora text-greenGora' radius="full" size="sm" endContent={<i className="pi pi-pencil" style={{ color: '#489E84' }}/>}>
+                                                                        <Button  
+                                                                            onClick={(e)=> 
+                                                                                {
+                                                                                    setName(card.title)
+                                                                                    setDescription(card.longDescription)
+                                                                                    setYearosld(card.old)
+                                                                                    setIsEdit(true)
+                                                                                }
+                                                                            } 
+                                                                            className='bg-transparent border border-greenGora text-greenGora' radius="full" size="sm" endContent={<i className="pi pi-pencil" style={{ color: '#489E84' }}/>}>
                                                                             Editar
                                                                         </Button>
                                                                     </div>  
@@ -360,19 +395,19 @@ export default function CMS({Dogs, Cats, History}: any)
                                                     <div className="flex gap-6 md:gap-2">
                                                         <Image
                                                             alt="Album cover"
-                                                            className="object-cover"
-                                                            shadow="md"
+                                                            className={`object-cover shadow-md transition-all duration-300 rounded-none w-full h-[200px]`}
                                                             src={card.image}
-                                                            height={250}
-                                                            width={500}
                                                         />
                                                         <CardBody>
                                                             <div className='flex flex-col'>
-                                                                <h1 className="flex justify-end font-semibold text-purpleGora text-2xl">
+                                                                <h1 className={'flex font-semibold text-purpleGora px-2 justify-end w-full mn:text-xl md:text-2xl'}>
                                                                     {card.title.substring(0, 3)}<span className='text-greenGora'>{card.title.substring(3, card.title.charCodeAt(card.title))}</span>
                                                                 </h1>
-                                                                <p className='flex ml-2 justify-center mt-2 text-[12px] text-right w-full'>
-                                                                    {card.shortDescription.substring(0,50)}
+                                                                <h1 className={'flex font-semibold text-purpleGora px-2 justify-end w-full mn:text-xl md:text-sm'}>
+                                                                    Edad: {card.old}
+                                                                </h1>
+                                                                <p className={'flex font-normal text-gray w-full h-[58px] text-right text-[12px]'}>
+                                                                    {card.shortDescription.substring(0,75) + "..."}
                                                                 </p>
                                                                 <div className="flex mn:my-2 justify-center">
                                                                     <Button  onClick={(e)=> setIsEdit(true)} className='bg-transparent border border-greenGora text-greenGora' radius="full" size="sm" endContent={<i className="pi pi-pencil" style={{ color: '#489E84' }}/>}>

@@ -259,6 +259,9 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                                 <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start text-2xl' : 'px-2 justify-end w-full mn:text-xl md:text-2xl'}`}>
                                                                     {card.title.substring(0, 3)}<span className='text-greenGora'>{card.title.substring(3, card.title.charCodeAt(card.title))}</span>
                                                                 </h1>
+                                                                <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start text-2xl hidden' : 'px-2 justify-end w-full mn:text-xl md:text-sm'}`}>
+                                                                    Edad: {card.old}
+                                                                </h1>
                                                                 {expandedCard === card.id && (
                                                                     <div className='flex flex-wrap'>
                                                                         <div className='flex items-center'>
@@ -279,7 +282,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                             </div>
                 
                                                             <p className={`flex font-normal text-gray ${expandedCard === card.id ? 'w-[308px] h-[120px] text-[14px] px-2.5 mt-1' : 'w-full h-[58px] text-right text-[12px]'}`}>
-                                                                {expandedCard === card.id ? card.longDescription : card.shortDescription.substring(0,50) + "..."}
+                                                                {expandedCard === card.id ? card.longDescription : card.shortDescription.substring(0,75) + "..."}
                                                             </p>
                 
                                                             {expandedCard !== card.id && (
@@ -337,7 +340,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                     <CardBody className={`${expandedCard === card.id ? 'w-full h-[200px]' : 'w-[170px] h-[200px] justify-around'}`}>
                                                         <div className={`${expandedCard === card.id ? 'flex items-center justify-around' : 'flex w-full flex-wrap'}`}>
                                                             <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start text-2xl' : 'px-2 justify-end w-full mn:text-xl md:text-2xl'}`}>
-                                                                {card.title.substring(0, 3)}<span className='text-greenGora'>{card.title.substring(3, card.title.charCodeAt(card.title))}</span>
+                                                                {card.title.substring(0, 3)}<span className='text-greenGora'>{card.title.substring(3, card.title.charCodeAt(card.title)) + '\n' + card.old}</span>
                                                             </h1>
                                                             {expandedCard === card.id && (
                                                                 <div className='flex flex-wrap'>
@@ -359,7 +362,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                         </div>
             
                                                         <p className={`flex font-normal text-gray ${expandedCard === card.id ? 'w-[308px] h-[120px] text-[14px] px-2.5 mt-1' : ' text-right w-full h-[58px] text-[12px]'}`}>
-                                                            {expandedCard === card.id ? card.longDescription : card.shortDescription.substring(0,40) + "..."}
+                                                            {expandedCard === card.id ? card.longDescription : card.shortDescription.substring(0,75) + "..."}
                                                         </p>
             
                                                         {expandedCard !== card.id && (
