@@ -4,7 +4,7 @@ export async function GetPets(enable? : boolean, type? : string ) {
 
     try {
 
-        const { data: { token } } = await axios.get(`${process.env.HOST_API}/Api/Gora/TokenGora`, {
+        const { data: { token } } = await axios.get(`${process.env.HOST_API_LOCAL}/Api/Gora/TokenGora`, {
             headers: {
                 "x-api-key":<string>process.env.API_KEY
             }
@@ -14,7 +14,7 @@ export async function GetPets(enable? : boolean, type? : string ) {
 
             const params = {Type: type, Enable:enable}
 
-            const result = await axios.get(`${process.env.HOST_API}/Api/Gora/CMS/Pets`,
+            const result = await axios.get(`${process.env.HOST_API_LOCAL}/Api/Gora/CMS/Pets`,
             {   
                 params: params,
                 headers: {
