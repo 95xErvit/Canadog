@@ -17,6 +17,7 @@ export default function CMS({Dogs, Cats, History}: any)
     const [name, setName] = useState<string>('');
     const [yearOlds, setYearosld] = useState<string>('');
     const [description, setDescription] = useState<string>('');
+    const [id, setId] = useState<string>('');
     const [file, setFile] = useState<any>();
     const [isDog, setIsDog] = useState(true);
     const [totalSize, setTotalSize] = useState(0);
@@ -144,8 +145,8 @@ export default function CMS({Dogs, Cats, History}: any)
     
         try
         {
-            const emailReponse = await axios.post("/UserGora/CMS/api/pets",{data:{User:"Adminitrador",Enable: 1, Name: name, OldDate:yearOlds, Description:description, Type:isDog ? "DOG" : isCat? "CAT": "HISTORY", Images: file}})
-            console.log('Contesto:', emailReponse);
+            const response = await axios.post("/UserGora/CMS/api/pets",{data:{User:"Adminitrador",Enable: 1, Name: name, OldDate:yearOlds, Description:description, Type:isDog ? "DOG" : isCat? "CAT": "HISTORY", Images: file}})
+            console.log('Contesto:', response);
         }
         catch(err){
             console.log(err)
@@ -157,8 +158,8 @@ export default function CMS({Dogs, Cats, History}: any)
     
         try
         {
-            const emailReponse = await axios.patch("/UserGora/CMS/api/pets",{data:{User:"Adminitrador",Enable: 1, Name: name, OldDate:yearOlds, Description:description, Type:isDog ? "DOG" : "CAT", Images: file}})
-            console.log('Contesto:', emailReponse);
+            const response = await axios.patch("/UserGora/CMS/api/pets",{data:{AnimaldId:id, User:"Adminitrador",Enable: 1, Name: name, OldDate:yearOlds, Description:description, Type:isDog ? "DOG" : "CAT", Images: file}})
+            console.log('Contesto:', response);
         }
         catch(err){
             console.log(err)
@@ -313,7 +314,7 @@ export default function CMS({Dogs, Cats, History}: any)
                                 Miaus
                             </Button>
                             <Button onClick={(e) => [ setIsHistory(true),setIsDog(false),setIsCat(false) ]} className={`bg-transparent border ${isHistory ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`} radius="full" size="lg">
-                                History
+                                Historias
                             </Button>
                             <Button onPress={onOpen} className='bg-transparent border border-redGora text-redGora pi pi-plus' radius="full" size="lg" />
                         </div>
@@ -353,7 +354,8 @@ export default function CMS({Dogs, Cats, History}: any)
                                                                     <div className="flex mn:my-2 justify-center">
                                                                         <Button  
                                                                             onClick={(e)=> 
-                                                                                {
+                                                                                {   
+                                                                                    setId(card.id)
                                                                                     setName(card.title)
                                                                                     setDescription(card.longDescription)
                                                                                     setYearosld(card.old)
@@ -409,7 +411,19 @@ export default function CMS({Dogs, Cats, History}: any)
                                                                     {card.shortDescription.substring(0,75) + "..."}
                                                                 </p>
                                                                 <div className="flex mn:my-2 justify-center">
-                                                                    <Button  onClick={(e)=> setIsEdit(true)} className='bg-transparent border border-greenGora text-greenGora' radius="full" size="sm" endContent={<i className="pi pi-pencil" style={{ color: '#489E84' }}/>}>
+                                                                    <Button  
+                                                                        onClick={(e)=>{ 
+                                                                            setId(card.id)
+                                                                            setName(card.title)
+                                                                            setDescription(card.longDescription)
+                                                                            setYearosld(card.old)
+                                                                            setIsEdit(true)} 
+                                                                        }
+                                                                        className='bg-transparent border border-greenGora text-greenGora' 
+                                                                        radius="full" 
+                                                                        size="sm" 
+                                                                        endContent={<i className="pi pi-pencil" style={{ color: '#489E84' }}/>}
+                                                                    >
                                                                         Editar
                                                                     </Button>
                                                                 </div>  

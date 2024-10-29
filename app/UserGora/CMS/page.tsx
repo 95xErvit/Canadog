@@ -15,7 +15,8 @@ export default async function Home()
 	const result2  : any = await GetPets(true, "Cat");
 	const result3 : any = await GetPets(true,'HISTORY')
 
-	console.log("HOLA",result3.data.result.recordset)
+	console.log("HOLA",result.data.result.recordset)
+	
 	return (
 		<>
 			<Header/>
