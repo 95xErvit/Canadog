@@ -27,7 +27,7 @@ export default function Header() {
             <NavbarContent>
                 <NavbarBrand>
                     <Link href="/" className="flex items-center">
-                        <Image src="LogoGora.png" width="140" height="40" alt="Logo Gora"/>
+                        <Image src="/LogoGora.png" width="140" height="40" alt="Logo Gora"/>
                     </Link>
                 </NavbarBrand>
                 <NavbarMenuToggle

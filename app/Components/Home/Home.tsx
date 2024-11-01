@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import { Button, Card, Input,CardBody, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, usePagination, PaginationItemType, Checkbox, Textarea } from "@nextui-org/react";
+import { Button, Card, Input,CardBody, Modal, Image,ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, usePagination, PaginationItemType, Checkbox, Textarea } from "@nextui-org/react";
 import {ScrollShadow} from "@nextui-org/react";
 import {Divider} from "@nextui-org/divider";
 import {Pagination} from "@nextui-org/react";
@@ -184,7 +184,9 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                     </div>
                 </div>
             </section>
+
             <Divider className="my-4"/>
+
             {/* CARDS ADOPCION */}
             <section className='adopciones' id='adopciones'>
                 <div className='md:px-4 md:mx-4'>
@@ -400,18 +402,25 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                     )
                 }
             </section>
+
             <Divider className="my-4"/>
+
             {/* CARDS HISTORIAS */}
             <div className='relative mn:px-6 mn:py-2 mn:mt-2 md:px-6 md:py-6 md:mt-8'>
                 <div className='grid max-w-7xl mx-auto md:grid-cols-2'>
-                    <h2 className='mn:text-xl md:text-4xl font-semibold'>
+                    <h2 className='mn:text-2xl md:text-4xl font-semibold'>
                         Historias {<span className='text-greenGora'>Emotivas</span>}
                     </h2>
+                </div>
+                <div className='max-w-7xl mx-auto'>
+                    <p className='mt-4 text-xl font-normal text-blackGora sm:text-lg xl:text-xl"'>
+                        Nuestro objetivo es hacer que muchos animales conozcan el {<span className='text-greenGora font-semibold'>amor</span>}, rescatándolos de las calles, rehabilitándolos y encontrando una familia adoptante para ser su compañía por el resto de sus vidas.
+                    </p>
                 </div>
             </div>
             <div className='px-4 py-6 mb-8'>
                 <div className='flex gap-4 max-w-7xl mx-auto'>
-                    {cardsHistory.map((card: any) => (
+                    {paginatedCards.map((card: any) => (
                         <Card
                             isBlurred
                             className="border-none w-full"
@@ -497,8 +506,9 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                     </ul>
                 </div>
             </div>
-            
+
             <Divider className="my-4"/>
+
             {/* PUBLICIDAD */}
             <div className='flex justify-center mt-6 mb-6 py-6'>
                 <div className='relative mn:px-2 mn:py-2 md:px-6 md:py-6'>
@@ -512,7 +522,110 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                     />
                 </div>
             </div>
+
             <Divider className="my-4"/>
+
+            {/*AGRADECIMIENTOS */}
+            <div>
+                <section className="py-8 mb-10">
+                    <div className="text-center py-8 max-w-6xl mx-auto">
+                        <h2 className="mb-6 text-3xl font-bold text-blackGora sm:text-4xl xl:text-5xl">Gracias padrinos</h2>
+                        <p className="mt-4 text-xl font-normal text-blackGora sm:text-lg xl:text-xl">
+                            ¡Su ayuda es {<span className='text-greenGora font-semibold'>TODO</span>} para nosotros y para ellos!
+                        </p>
+                    </div>
+                    <div className="max-w-6xl mx-auto grid grid-cols-1 gap-6 lg:grid-cols-4 lg:gap-8">
+                        {/* Card 1 */}
+                        <div className="bg-white text-blackGora p-2 rounded-full flex justify-center items-center space-x-4 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora">
+                        <Image
+                            className="w-20 h-20 rounded-full"
+                            src="perros_criollos.jpg"
+                            alt="Jennifer"
+                        />
+                        <div className='flex flex-col'>
+                            <p className="text-base font-bold">Perros Criollos</p>
+                            <p className="text-xs font-semibold">@perros.criollos</p>
+                        </div>
+                        </div>
+
+                        {/* Card 2 */}
+                        <div className="bg-white text-blackGora p-2 rounded-full flex justify-center items-center space-x-4 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora">
+                        <Image
+                            className="w-20 h-20 rounded-full"
+                            src="kanu.jpg"
+                            alt="James"
+                        />
+                        <div className='flex flex-col'>
+                            <p className="text-base font-bold">Kanu</p>
+                            <p className="text-xs font-semibold">@kanumascotas</p>
+                        </div>
+                        </div>
+
+                        {/* Card 3 */}
+                        <div className="bg-white text-blackGora p-6 rounded-full flex items-center space-x-4 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora">
+                        <Image
+                            className="w-12 h-12 rounded-full"
+                            src="https://cdn.rareblocks.xyz/collection/bakerstreet/images/testimonials/5/member-1.png"
+                            alt="Alexa"
+                        />
+                        <p className="text-sm font-bold">@alexaborn</p>
+                        </div>
+
+                        {/* Card 4 */}
+                        <div className="bg-white text-blackGora p-6 rounded-full flex items-center space-x-2 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora">
+                        <Image
+                            className="w-12 h-12 rounded-full"
+                            src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-male-2.png"
+                            alt="Cameron"
+                        />
+                        <p className="text-sm font-bold">@camerondi</p>
+                        </div>
+
+                        {/* Card 5 */}
+                        <div className="bg-white text-blackGora p-6 rounded-full flex items-center space-x-4 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora lg:translate-x-8">
+                        <Image
+                            className="w-12 h-12 rounded-full"
+                            src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-female.png"
+                            alt="Martina"
+                        />
+                        <p className="text-sm font-bold">@martina</p>
+                        </div>
+
+                        {/* Card 6 */}
+                        <div className="bg-white text-blackGora p-6 rounded-full flex items-center space-x-4 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora lg:translate-x-8">
+                        <Image
+                            className="w-12 h-12 rounded-full"
+                            src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-male-1.png"
+                            alt="Christina"
+                        />
+                        <p className="text-sm font-bold">@christin.jamescron</p>
+                        </div>
+
+                        {/* Card 7 */}
+                        <div className="bg-white text-blackGora p-6 rounded-full flex items-center space-x-4 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora lg:translate-x-8">
+                        <Image
+                            className="w-12 h-12 rounded-full"
+                            src="https://cdn.rareblocks.xyz/collection/bakerstreet/images/testimonials/5/member-3.png"
+                            alt="James"
+                        />
+                        <p className="text-sm font-bold">@jamescron</p>
+                        </div>
+
+                        {/* Card 8 */}
+                        <div className="bg-white text-blackGora p-6 rounded-full flex items-center space-x-4 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora lg:translate-x-8">
+                        <Image
+                            className="w-12 h-12 rounded-full"
+                            src="https://cdn.rareblocks.xyz/collection/bakerstreet/images/testimonials/5/member-1.png"
+                            alt="Alexa"
+                        />
+                        <p className="text-sm font-bold">@alexaborn</p>
+                        </div>
+                    </div>
+                </section>
+            </div> 
+
+            <Divider className="my-4"/>
+
             {/* BANNER FINAL */}
             <div className='relative mn:px-6 mn:py-2 mn:mt-2 md:px-6 md:py-6 md:mt-8'>
                 <div className='grid max-w-7xl mx-auto md:grid-cols-2'>

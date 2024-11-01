@@ -9,7 +9,7 @@ export default function Footer(){
             <div className="flex mn:flex-col md:flex-row justify-evenly bg-greenGora">
                 <div className=" flex flex-col text-center items-center border-none bg-greenGora mn:p-0 md:p-2 xl:p-4">
                     <Link href="/" className="flex justify-center items-center pt-4">
-                        <Image src="LogoGora.png" width="150" height="60" alt="Logo Gora"/>
+                        <Image src="/LogoGora.png" width="150" height="60" alt="Logo Gora"/>
                     </Link>
                     <div className="flex justify-center items-center py-3">
                         <a href="#" className="text-pinkLightGora hover:text-pinkGora hover:scale-125 px-2">
@@ -78,13 +78,13 @@ export default function Footer(){
                         Creado con 
                     </p>
                     <span className="filter drop-shadow-[0_0_0.5rem_#f82e03] animate-pulse inline-block">
-                        <Image alt="lovePets" src="mascotas.png" height="28" width="28"/>
+                        <Image alt="lovePets" src="/mascotas.png" height="28" width="28"/>
                     </span> 
                     <p className="flex mn:mt-2 md:mt-0 leading-4 text-sm text-pinkLightGora">
                         por
                     </p>
                     <Link href="/" className="flex items-center mn:mt-2 md:mt-0">
-                        <Image src="Innminds.png" width="120" height="120" alt="Logo-InnMinds" className="rounded-none"/>
+                        <Image src="/Innminds.png" width="120" height="120" alt="Logo-InnMinds" className="rounded-none"/>
                     </Link>
                 </div>       
             </div>
