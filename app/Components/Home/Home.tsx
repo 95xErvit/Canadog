@@ -529,7 +529,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
             <div>
                 <section className="py-8 mb-10">
                     <div className="text-center py-8 max-w-6xl mx-auto">
-                        <h2 className="mb-6 text-3xl font-bold text-blackGora sm:text-4xl xl:text-5xl">Gracias padrinos</h2>
+                        <h2 className="mb-6 text-3xl font-bold text-blackGora sm:text-4xl xl:text-5xl">Gracias aliados</h2>
                         <p className="mt-4 text-xl font-normal text-blackGora sm:text-lg xl:text-xl">
                             ¡Su ayuda es {<span className='text-greenGora font-semibold'>TODO</span>} para nosotros y para ellos!
                         </p>

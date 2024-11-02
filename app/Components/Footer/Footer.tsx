@@ -49,20 +49,20 @@ export default function Footer(){
                     <p className="text-pinkLightGora py-2">
                         Estamos ubicados <br/>en Medellín-Antioquia
                     </p>
-                    <p className="text-pinkLightGora py-2">
+                    {/* <p className="text-pinkLightGora py-2">
                         Calle 54 #94 - 35.
-                    </p>          
+                    </p>           */}
                 </div>
 
                 <div className="flex mn:flex-col md:flex-cols justify-evenly text-center mn:text-md md:text-lg p-2">
                     <p className="text-pinkLightGora">
                         Contactanos:
                     </p>
-                    <p className="text-pinkLightGora">
+                    {/* <p className="text-pinkLightGora">
                         E-mail: <br/> fundacion@gorafundacion.com
-                    </p>
+                    </p> */}
                     <p className="text-pinkLightGora">
-                        Whatsapp: 300000000
+                        Whatsapp: +57 3218207017
                     </p>            
                 </div>
             </div>
