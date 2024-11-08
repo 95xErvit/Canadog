@@ -134,11 +134,13 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                 <h3 className='text-center py-4 text-blackGora text-xl font-semibold'>
                                                     Queremos conocerte un poco mejor.
                                                 </h3>
-                                                <p className='text-blackGora px-4 text-md text-center'> 
-                                                    Déjanos tus datos y te contactamos
-                                                </p>
+                                                <div className='flex flex-col'>
+                                                    <p className='text-blackGora px-4 text-md text-center'> 
+                                                        Inicia el proceso de adopción diligenciado el siguiente formulario
+                                                    </p>
+                                                </div>
 
-                                                <div className="flex w-full flex-col gap-4">
+                                                {/* <div className="flex w-full flex-col gap-4">
                                                     <div className="flex mb-6 md:mb-0 gap-4 h-[48px]">
                                                         <Input type="name" variant={'faded'} label="Nombre y Apellidos"/>
                                                     </div>
@@ -146,27 +148,24 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                         <Input type="email" variant={'faded'} label="Correo electrónico"/>
                                                         <Input type="Phone" variant={'faded'} label="Celular" />
                                                     </div>
-                                                </div> 
+                                                </div>  */}
                                             </ModalBody>
                                             <ModalFooter className='flex justify-center'>
                                                 <div className='flex flex-col w-full'>
                                                     <div className='flex justify-evenly'>
-                                                        <Button  className='bg-greenGora text-pinkLightGora px-6' radius="full" size="md" onPress={onClose}>
-                                                            Enviar
+                                                        <Button href='https://forms.gle/m9oTCTt8n1qibjFU8' className='bg-greenGora text-pinkLightGora my-4' radius="full" size="lg" onClick={() => window.open('https://forms.gle/m9oTCTt8n1qibjFU8', '_blank')}>
+                                                            Formulario adopción
                                                         </Button>                          
                                                     </div>
-                                                    <Divider className="my-4"/>
-                                                    <div className='flex flex-col'>
-                                                        <p className='text-blackGora px-4 text-md text-center'> 
-                                                            Inicia el proceso de adopción diligenciado el siguiente formulario
-                                                        </p>
-                                                        <a href="" className='text-center'> Formulario adopción</a>
-                                                    </div>
-                                                    
 
                                                     <Divider className="my-4"/>
-                                                    <div className='text-greenGora text-sm text-center font-semibold my-4 px-4'> 
-                                                        <p>¡Gracias por tomarte el tiempo para completar este formulario! <br/> Nos emociona poder ayudarte a encontrar a tu nuevo mejor amigo peludo. <br/>¡Pronto nos pondremos en contacto contigo para continuar con el proceso de adopción!</p>
+                                                    <div className='flex flex-wrap flex-col gap-2 text-greenGora text-sm font-semibold my-4 px-4'> 
+                                                        <p>
+                                                            ¡Gracias por tomarte el tiempo para completar este formulario! Nos emociona poder ayudarte a encontrar a tu nuevo mejor amigo peludo.
+                                                        </p>
+                                                        <p>
+                                                            ¡Pronto nos pondremos en contacto contigo para continuar con el proceso de adopción!
+                                                        </p>
                                                     </div> 
                                                 </div>
                                             </ModalFooter>
@@ -529,19 +528,19 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
             <div>
                 <section className="py-8 mb-10">
                     <div className="text-center py-8 max-w-6xl mx-auto">
-                        <h2 className="mb-6 text-3xl font-bold text-blackGora sm:text-4xl xl:text-5xl">Gracias aliados</h2>
-                        <p className="mt-4 text-xl font-normal text-blackGora sm:text-lg xl:text-xl">
+                        <h2 className="mb-6 text-3xl font-bold text-blackGora mn:text-2xl sm:text-4xl xl:text-5xl">Gracias aliados</h2>
+                        <p className="mt-4 text-xl font-normal text-blackGora mn:text-base sm:text-lg xl:text-xl">
                             ¡Su ayuda es {<span className='text-greenGora font-semibold'>TODO</span>} para nosotros y para ellos!
                         </p>
                     </div>
-                    <div className="max-w-6xl mx-auto grid grid-cols-1 gap-6 lg:grid-cols-4 lg:gap-8">
+                    <div className="max-w-6xl mn:mx-10 lg:mx-auto align-items-center grid grid-cols-1 gap-6 lg:grid-cols-4 lg:gap-8">
                         {/* Card 1 */}
                         <div className="bg-white text-blackGora p-2 rounded-full flex justify-center items-center space-x-4 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora">
-                        <Image
-                            className="w-20 h-20 rounded-full"
-                            src="perros_criollos.jpg"
-                            alt="Jennifer"
-                        />
+                            <Image
+                                className="w-24 h-24 rounded-full"
+                                src="perros_criollos.jpg"
+                                alt="PC"
+                            />
                         <div className='flex flex-col'>
                             <p className="text-base font-bold">Perros Criollos</p>
                             <p className="text-xs font-semibold">@perros.criollos</p>
@@ -551,7 +550,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         {/* Card 2 */}
                         <div className="bg-white text-blackGora p-2 rounded-full flex justify-center items-center space-x-4 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora">
                         <Image
-                            className="w-20 h-20 rounded-full"
+                            className="w-24 h-24 rounded-full"
                             src="kanu.jpg"
                             alt="James"
                         />

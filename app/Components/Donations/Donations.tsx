@@ -32,15 +32,15 @@ export default function Donations() {
                                     <div className="flex flex-col justify-between flex-1 p-6 bg-white lg:py-8 lg:px-7">
                                         <div className="flex-1">
                                             <blockquote className="flex-1 mt-8">
-                                                <p className="text-xl leading-relaxed text-center text-purpleGora font-semibold"><span className="text-greenGora">Dona</span> Bancolombia</p>
+                                                <p className="text-2xl leading-relaxed text-center text-purpleGora font-semibold"><span className="text-greenGora">Dona</span> Bancolombia</p>
                                             </blockquote>
 
                                             <div className="flex justify-center items-center mt-8">
-                                                <Image className="flex-shrink-0 object-cover" src="/QrBancolombiaGora.png" alt=""/>
+                                                <Image className="flex-shrink-0 object-cover mn:w-[250px] mn:h-[250px] xl:w-[300px] xl:h-[300px]" src="/QrBancolombiaGora.jpeg" alt="QrBancolombia"/>
                                             </div>
 
                                             <blockquote className="flex-1 mt-8">
-                                                <p className="text-base leading-relaxed text-blackGora">¡Lo que puedas! Todo es de gran ayuda</p>
+                                                <p className="mn:text-sm xl:text-base leading-relaxed text-blackGora">¡Lo que puedas! Todo es de gran ayuda</p>
                                             </blockquote>
                                         </div>
                                     </div>
@@ -50,15 +50,15 @@ export default function Donations() {
                                     <div className="flex flex-col justify-between flex-1 p-6 bg-white lg:py-8 lg:px-7">
                                         <div className="flex-1">
                                             <blockquote className="flex-1 mt-8">
-                                                <p className="text-xl leading-relaxed text-center text-purpleGora font-semibold"><span className="text-greenGora">Dona</span> Nequi</p>
+                                                <p className="text-2xl leading-relaxed text-center text-purpleGora font-semibold"><span className="text-greenGora">Dona</span> Nequi</p>
                                             </blockquote>
 
-                                            <div className="flex items-center mt-8">
-                                                <Image className="flex-shrink-0 object-cover rounded-full w-11 h-11" src="" alt=""/>
+                                            <div className="flex justify-center items-center mt-8">
+                                                <Image className="flex-shrink-0 object-cover mn:w-[250px] mn:h-[250px] xl:w-[300px] xl:h-[300px]" src="/QrNequiGora.jpg" alt="QrNequi"/>
                                             </div>
 
                                             <blockquote className="flex-1 mt-8">
-                                                <p className="text-base leading-relaxed text-blackGora">¡Lo que puedas! Todo es de gran ayuda</p>
+                                                <p className="mn:text-sm xl:text-base leading-relaxed text-blackGora">¡Lo que puedas! Todo es de gran ayuda</p>
                                             </blockquote>
                                         </div>
                                     </div>
@@ -68,7 +68,7 @@ export default function Donations() {
                                     <div className="flex flex-col justify-between flex-1 p-6 bg-white lg:py-8 lg:px-7">
                                         <div className="flex-1">
                                             <blockquote className="flex-1 mt-8">
-                                                <p className="text-xl leading-relaxed text-center text-purpleGora font-semibold"><span className="text-greenGora">Dona</span> PayPal</p>
+                                                <p className="text-2xl leading-relaxed text-center text-purpleGora font-semibold"><span className="text-greenGora">Dona</span> PayPal</p>
                                             </blockquote>
 
                                             <div className="flex items-center mt-8">
@@ -76,7 +76,7 @@ export default function Donations() {
                                             </div>
 
                                             <blockquote className="flex-1 mt-8">
-                                                <p className="text-base leading-relaxed text-blackGora">¡Lo que puedas! Todo es de gran ayuda</p>
+                                                <p className="mn:text-sm xl:text-base leading-relaxed text-blackGora">¡Lo que puedas! Todo es de gran ayuda</p>
                                             </blockquote>
                                         </div>
                                     </div>
