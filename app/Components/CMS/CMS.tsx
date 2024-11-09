@@ -6,6 +6,7 @@ import { Toast } from 'primereact/toast';
 import { FileUpload, FileUploadHeaderTemplateOptions, FileUploadSelectEvent, FileUploadUploadEvent, ItemTemplateOptions,} from 'primereact/fileupload';
 import { ProgressBar } from 'primereact/progressbar';
 import { Tooltip } from 'primereact/tooltip';
+import { useRouter } from 'next/navigation'
 import 'primeicons/primeicons.css';
 import axios from 'axios';
 
@@ -20,12 +21,13 @@ export default function CMS({Dogs, Cats, History}: any)
     const [id, setId] = useState<string>('');
     const [file, setFile] = useState<any>();
     const [isDog, setIsDog] = useState(true);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [totalSize, setTotalSize] = useState(0);
     const fileUploadRef = useRef<FileUpload>(null);
     
     const [isHistory, setIsHistory] = useState(false);
     const [history, setHistory] = useState<any[]>([]); 
-
+    const router = useRouter()
     const [isCat, setIsCat] = useState(false)
 
     const onTemplateSelect = (e: FileUploadSelectEvent) => {
@@ -83,7 +85,13 @@ export default function CMS({Dogs, Cats, History}: any)
         setTotalSize(_totalSize);
 
         
-      };
+    };
+
+    const handleClick = (e: any) => {
+        setIsLoading(true)
+        e.preventDefault()
+        router.push('/UserGora/Login')
+    }
 
 
     const onTemplateRemove = (file: File, callback: Function) => {
@@ -142,7 +150,7 @@ export default function CMS({Dogs, Cats, History}: any)
 
     const sendPets = async (e: React.FormEvent) => {
         e.preventDefault();
-    
+        setIsLoading(true)
         try
         {
             const response = await axios.post("/UserGora/CMS/api/pets",{data:{User:"Adminitrador",Enable: 1, Name: name, OldDate:yearOlds, Description:description, Type:isDog ? "DOG" : isCat? "CAT": "HISTORY", Images: file}})
@@ -151,9 +159,11 @@ export default function CMS({Dogs, Cats, History}: any)
         catch(err){
             console.log(err)
         }
+        setTimeout(()=>location.reload(), 4000)
     };
 
     const UpdatePets = async (e: React.FormEvent) => {
+        setIsLoading(true)
         e.preventDefault();
     
         try
@@ -164,9 +174,7 @@ export default function CMS({Dogs, Cats, History}: any)
         catch(err){
             console.log(err)
         }
-        setName("")
-        setDescription("")
-        setYearosld("")
+        setTimeout(()=>location.reload(), 4000)
     };
 
     const chooseOptions = { icon: 'pi pi-fw pi-images', iconOnly: true, className: 'custom-choose-btn p-button-rounded p-button-outlined' };
@@ -174,7 +182,7 @@ export default function CMS({Dogs, Cats, History}: any)
     const cancelOptions = { icon: 'pi pi-fw pi-times', iconOnly: true, className: 'custom-cancel-btn p-button-danger p-button-rounded p-button-outlined' };
 
     return(
-        <div> 
+        <div>
             <div className="flex mn:my-8 mn:justify-center md:justify-start">
                 <Modal isOpen={isOpen} onOpenChange={onOpenChange} size='xl'>
                     <ModalContent>
@@ -192,11 +200,11 @@ export default function CMS({Dogs, Cats, History}: any)
                                 </h1>
                                 <div className="flex w-full flex-col gap-4">
                                     <div className="flex mb-6 md:mb-0 gap-4">
-                                        <Input onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Nombre"/>
-                                        <Input onChange={((e)=> setYearosld(e.target.value))} type="edad" variant={'faded'} label="Edad"/>
+                                        <Input required disabled={isLoading} onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Nombre"/>
+                                        <Input required onChange={((e)=> setYearosld(e.target.value))} type="edad" variant={'faded'} label="Edad"/>
                                     </div>
                                     <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
-                                        <Textarea max={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
+                                        <Textarea required disabled={isLoading} maxLength={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
                                     </div>
                                 </div> 
                                 <h1 className='text-center py-4 text-blackGora font-semibold'>
@@ -209,27 +217,28 @@ export default function CMS({Dogs, Cats, History}: any)
                                     <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
                                     <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
 
-                                    <FileUpload 
-                                         ref={fileUploadRef} 
-                                         name="demo[]" 
-                                         multiple accept="image/*"
-                                         maxFileSize={1000000}
-                                         onUpload={onTemplateUpload} 
-                                         onSelect={onTemplateSelect} 
-                                         onError={onTemplateClear} 
-                                         onClear={onTemplateClear}
-                                         headerTemplate={headerTemplate} 
-                                         itemTemplate={itemTemplate} 
-                                         emptyTemplate={emptyTemplate}
-                                         uploadHandler={(event) => [onTemplateUpload(event)]}
-                                         chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} 
-                                         customUpload/>
+                                    <FileUpload
+                                        ref={fileUploadRef} 
+                                        name="demo[]"
+                                        disabled={isLoading}
+                                        multiple accept="image/*"
+                                        maxFileSize={1000000}
+                                        onUpload={onTemplateUpload} 
+                                        onSelect={onTemplateSelect} 
+                                        onError={onTemplateClear} 
+                                        onClear={onTemplateClear}
+                                        headerTemplate={headerTemplate} 
+                                        itemTemplate={itemTemplate} 
+                                        emptyTemplate={emptyTemplate}
+                                        uploadHandler={(event) => [onTemplateUpload(event)]}
+                                        chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} 
+                                        customUpload/>
                                 </div>
                             </ModalBody>
                             <ModalFooter className='flex justify-center'>
                                 <div className='flex flex-col w-full'>
                                     <div className='flex justify-center'>
-                                        <Button onClick={sendPets} className='bg-greenGora text-pinkLightGora px-6' radius="full" size="md" onPress={onClose}>
+                                        <Button onClick={sendPets}  isLoading={isLoading} className='bg-greenGora text-pinkLightGora px-6' radius="full" size="md">
                                             Guardar
                                         </Button>                              
                                     </div>
@@ -257,11 +266,11 @@ export default function CMS({Dogs, Cats, History}: any)
                                 </h1>
                                 <div className="flex w-full flex-col gap-4">
                                     <div className="flex mb-6 md:mb-0 gap-4">
-                                        <Input value={name} onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Nombre"/>
-                                        <Input value={yearOlds} onChange={((e)=> setYearosld(e.target.value))} type="edad" variant={'faded'} label="Edad"/>
+                                        <Input required disabled={isLoading} value={name} onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Nombre"/>
+                                        <Input required disabled={isLoading} value={yearOlds} onChange={((e)=> setYearosld(e.target.value))} type="edad" variant={'faded'} label="Edad"/>
                                     </div>
                                     <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
-                                        <Textarea value={description} max={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
+                                        <Textarea required disabled={isLoading} value={description} maxLength={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
                                     </div>
                                 </div> 
                                 <h1 className='text-center py-4 text-blackGora font-semibold'>
@@ -274,7 +283,7 @@ export default function CMS({Dogs, Cats, History}: any)
                                     <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
                                     <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
 
-                                    <FileUpload ref={fileUploadRef} name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000}
+                                    <FileUpload disabled={isLoading} ref={fileUploadRef} name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000}
                                         onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
                                         headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate}
                                         chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
@@ -286,10 +295,10 @@ export default function CMS({Dogs, Cats, History}: any)
                                         <Button  
                                             className='bg-greenGora text-OrangeLightGora px-6' 
                                             radius="full" 
-                                            size="md" 
+                                            size="md"
+                                            isLoading={isLoading}
                                             onClick={(e)=>{
                                                 UpdatePets(e)
-                                                setIsEdit(false)
                                             }}>
                                             Guardar
                                         </Button>                              
@@ -307,14 +316,17 @@ export default function CMS({Dogs, Cats, History}: any)
                             Agrega una nueva {<span className='text-greenGora'>Mascota</span>}
                         </h2>
                         <div className="flex gap-4 mn:my-4 md:my-8 mn:justify-center md:justify-start">
-                            <Button  onClick={(e)=> [setIsDog(true),setIsHistory(false), setIsCat(false)]} className={`bg-transparent border  ${isDog ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`} radius="full" size="lg">
+                            <Button isLoading={isLoading} onClick={(e)=> [setIsDog(true),setIsHistory(false), setIsCat(false)]} className={`bg-transparent border  ${isDog ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`} radius="full" size="lg">
                                 Guaus
                             </Button>
-                            <Button onClick={(e)=> [setIsDog(false),setIsHistory(false),setIsCat(true)]} className={`bg-transparent border ${isCat ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`} radius="full" size="lg">
+                            <Button isLoading={isLoading} onClick={(e)=> [setIsDog(false),setIsHistory(false),setIsCat(true)]} className={`bg-transparent border ${isCat ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`} radius="full" size="lg">
                                 Miaus
                             </Button>
-                            <Button onClick={(e) => [ setIsHistory(true),setIsDog(false),setIsCat(false) ]} className={`bg-transparent border ${isHistory ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`} radius="full" size="lg">
+                            <Button isLoading={isLoading} onClick={(e) => [ setIsHistory(true),setIsDog(false),setIsCat(false) ]} className={`bg-transparent border ${isHistory ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`} radius="full" size="lg">
                                 Historias
+                            </Button>
+                            <Button isLoading={isLoading} onClick={handleClick} className={`bg-transparent border ${isCat ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`} radius="full" size="lg">
+                                Cerrar sesion
                             </Button>
                             <Button onPress={onOpen} className='bg-transparent border border-redGora text-redGora pi pi-plus' radius="full" size="lg" />
                         </div>

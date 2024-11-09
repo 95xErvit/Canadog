@@ -77,7 +77,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
     ];
 
     // Obtener las tarjetas correspondientes a la página actual
-    const currentCards = cards.slice(
+    const currentCards = cardsHistory.slice(
         (currentPage - 1) * itemsAdoptions,
         currentPage * itemsAdoptions
     );
@@ -95,7 +95,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
     });
   
     // Calcula las tarjetas que se deben mostrar en la página actual
-    const paginatedCards = card.slice(
+    const paginatedCards = cardsHistory.slice(
       (activePage - 1) * itemsHistorys,
       activePage * itemsHistorys
     );
