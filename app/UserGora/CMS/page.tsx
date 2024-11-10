@@ -22,7 +22,6 @@ export default async function Home()
 			<Header/>
 				<main className="bg-cover bg-center" style={{backgroundImage:'url("")'}}>
 					<CMS Dogs={result.data.result.recordset} Cats={result2.data.result.recordset} History={result3.data.result.recordset}/>
-
 				</main>
 			<Footer/>
 		</>

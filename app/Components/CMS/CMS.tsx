@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useRef } from 'react';
-import { Button, Textarea, Card, Input,CardBody, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@nextui-org/react";
-import {ScrollShadow} from "@nextui-org/react";
+import { Button, Textarea, Card, Input,CardBody, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Pagination } from "@nextui-org/react";
+import { ScrollShadow } from "@nextui-org/react";
 import { Toast } from 'primereact/toast';
 import { FileUpload, FileUploadHeaderTemplateOptions, FileUploadSelectEvent, FileUploadUploadEvent, ItemTemplateOptions,} from 'primereact/fileupload';
 import { ProgressBar } from 'primereact/progressbar';
@@ -21,17 +21,18 @@ export default function CMS({Dogs, Cats, History}: any)
     const [id, setId] = useState<string>('');
     const [file, setFile] = useState<any>();
     const [isDog, setIsDog] = useState(true);
+    const [isCat, setIsCat] = useState(false)
+    const [isHistory, setIsHistory] = useState(false);
+    const [history, setHistory] = useState<any[]>([]); 
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [totalSize, setTotalSize] = useState(0);
     const fileUploadRef = useRef<FileUpload>(null);
-    
-    const [isHistory, setIsHistory] = useState(false);
-    const [history, setHistory] = useState<any[]>([]); 
+    const [currentPage, setCurrentPage] = useState(1);
     const router = useRouter()
-    const [isCat, setIsCat] = useState(false)
+    
 
     const onTemplateSelect = (e: FileUploadSelectEvent) => {
-        console.log(e.files)
+        console.log("Hola subiendo")
         let _totalSize = totalSize;
         let files = e.files;
 
@@ -92,7 +93,6 @@ export default function CMS({Dogs, Cats, History}: any)
         e.preventDefault()
         router.push('/UserGora/Login')
     }
-
 
     const onTemplateRemove = (file: File, callback: Function) => {
         setTotalSize(totalSize - file.size);
@@ -181,9 +181,21 @@ export default function CMS({Dogs, Cats, History}: any)
     const uploadOptions = { icon: 'pi pi-fw pi-cloud-upload', iconOnly: true, className: 'custom-upload-btn p-button-success p-button-rounded p-button-outlined' };
     const cancelOptions = { icon: 'pi pi-fw pi-times', iconOnly: true, className: 'custom-cancel-btn p-button-danger p-button-rounded p-button-outlined' };
 
+    //Paginador
+    const itemsPerPage = 6;
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItemsDogs = Dogs.slice(indexOfFirstItem, indexOfLastItem);
+    const currentItemsCats = Cats.slice(indexOfFirstItem, indexOfLastItem);
+    const currentItemsHistory = History.slice(indexOfFirstItem, indexOfLastItem);
+
+    const handlePageChange = (page: any) => {
+        setCurrentPage(page);
+    };
+
     return(
         <div>
-            <div className="flex mn:my-8 mn:justify-center md:justify-start">
+            <div className="flex mn:justify-center md:justify-start">
                 <Modal isOpen={isOpen} onOpenChange={onOpenChange} size='xl'>
                     <ModalContent>
                     {(onClose) => (
@@ -222,7 +234,6 @@ export default function CMS({Dogs, Cats, History}: any)
                                         ref={fileUploadRef} 
                                         name="demo[]"
                                         disabled={isLoading}
-                                        multiple
                                         accept="image/*"
                                         maxFileSize={1000000}
                                         onUpload={onTemplateUpload} 
@@ -251,7 +262,7 @@ export default function CMS({Dogs, Cats, History}: any)
                     </ModalContent>
                 </Modal>
             </div>
-            <div className="flex mn:my-8 mn:justify-center md:justify-start">
+            <div className="flex mn:justify-center md:justify-start">
                 <Modal isOpen={isEdit}  onOpenChange={setIsEdit} size='xl'>
                     <ModalContent>
                     {(onClose) => (
@@ -313,25 +324,52 @@ export default function CMS({Dogs, Cats, History}: any)
                     </ModalContent>
                 </Modal>
             </div>
-             <div className='relative mn:px-6 mn:py-2 mn:mt-2 md:px-6 md:py-6 md:mt-4'>
-                    <div className='grid max-w-7xl mx-auto md:gris-cols-2'>
-                        <h2 className='mn:text-xl md:text-4xl font-semibold'>
-                            Agrega una nueva {<span className='text-greenGora'>Mascota</span>}
-                        </h2>
-                        <div className="flex gap-4 mn:my-4 md:my-8 mn:justify-center md:justify-start">
-                            <Button isLoading={isLoading} onClick={(e)=> [setIsDog(true),setIsHistory(false), setIsCat(false)]} className={`bg-transparent border  ${isDog ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`} radius="full" size="lg">
+            <div className='mn:px-6 mn:py-6 mn:pb-0 md:px-6 xl:py-8'>
+                <div className='grid max-w-7xl mx-auto md:gris-cols-2'>
+                    <h2 className='mn:text-2xl md:text-4xl font-semibold'>
+                        Agrega una nueva {<span className='text-greenGora'>Mascota</span>}
+                    </h2>
+                    <div className="flex flex-wrap gap-4 mn:my-6 md:my-8 mn:justify-center xl:justify-between">
+                        <div className='flex flex-wrap mn:justify-center xl:justify-start gap-4 mn:gap-2'>
+                            <Button 
+                                isLoading={isLoading} 
+                                onClick={(e)=> [setIsDog(true),setIsHistory(false), setIsCat(false)]} 
+                                className={`bg-transparent border  ${isDog ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora mn:text-sm xl:text-xl`} 
+                                radius="full" 
+                            >
                                 Guaus
                             </Button>
-                            <Button isLoading={isLoading} onClick={(e)=> [setIsDog(false),setIsHistory(false),setIsCat(true)]} className={`bg-transparent border ${isCat ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`} radius="full" size="lg">
+                            <Button 
+                                isLoading={isLoading} 
+                                onClick={(e)=> [setIsDog(false),setIsHistory(false),setIsCat(true)]} 
+                                className={`bg-transparent border ${isCat ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora mn:text-sm xl:text-xl`} 
+                                radius="full" 
+                            >
                                 Miaus
                             </Button>
-                            <Button isLoading={isLoading} onClick={(e) => [ setIsHistory(true),setIsDog(false),setIsCat(false) ]} className={`bg-transparent border ${isHistory ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`} radius="full" size="lg">
+                            <Button 
+                                isLoading={isLoading} 
+                                onClick={(e) => [ setIsHistory(true),setIsDog(false),setIsCat(false) ]} 
+                                className={`bg-transparent border ${isHistory ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora mn:text-sm xl:text-xl`} 
+                                radius="full" 
+                            >
                                 Historias
                             </Button>
-                            <Button isLoading={isLoading} onClick={handleClick} className={`bg-transparent border border-greenGora text-greenGora hover:bg-greenGora hover:text-pinkLightGora`} radius="full" size="lg">
-                                Cerrar sesion
+                            <Button 
+                                onPress={onOpen} 
+                                className='bg-transparent border border-redGora text-redGora mn:text-sm xl:text-xl pi pi-plus' 
+                                radius="full" 
+                            />
+                        </div>
+                        <div>
+                            <Button 
+                                isLoading={isLoading} 
+                                onClick={handleClick} 
+                                className={`bg-transparent border border-greenGora text-greenGora hover:bg-greenGora hover:text-pinkLightGora mn:text-sm xl:text-xl`} 
+                                radius="full" 
+                            >
+                                Cerrar sesion <i className="pi pi-sign-out mr-2" />
                             </Button>
-                            <Button onPress={onOpen} className='bg-transparent border border-redGora text-redGora pi pi-plus' radius="full" size="lg" />
                         </div>
                     </div>
                 </div>
@@ -512,6 +550,7 @@ export default function CMS({Dogs, Cats, History}: any)
                     )
                     
                 }
+            </div>
         </div>
     )
 }
