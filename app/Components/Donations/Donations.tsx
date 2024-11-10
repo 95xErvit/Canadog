@@ -3,6 +3,7 @@ import React from "react"
 import { Image } from "@nextui-org/react"
 
 export default function Donations() {
+      
     return(
         <div>
             <section className="py-12 bg-gray-50 sm:py-16 lg:py-20">
@@ -32,15 +33,29 @@ export default function Donations() {
                                     <div className="flex flex-col justify-between flex-1 p-6 bg-white lg:py-8 lg:px-7">
                                         <div className="flex-1">
                                             <blockquote className="flex-1 mt-8">
-                                                <p className="text-2xl leading-relaxed text-center text-purpleGora font-semibold"><span className="text-greenGora">Dona</span> Bancolombia</p>
+                                                <p className="text-2xl leading-relaxed text-center text-purpleGora font-semibold">
+                                                <span className="text-greenGora">Dona</span> Bancolombia
+                                                </p>
                                             </blockquote>
 
-                                            <div className="flex justify-center items-center mt-8">
-                                                <Image className="flex-shrink-0 object-cover mn:w-[250px] mn:h-[250px] xl:w-[300px] xl:h-[300px]" src="/QrBancolombiaGora.jpeg" alt="QrBancolombia"/>
+                                            <div className="flex justify-center items-center mt-8 relative group">
+                                                <a href="/QrBancolombiaGora.jpeg" download="QrBancolombiaGora.jpeg" className="flex-shrink-0">
+                                                    <Image
+                                                        className="object-cover mn:w-[250px] mn:h-[250px] xl:w-[300px] xl:h-[300px] transition-all duration-300 ease-in-out group-hover:opacity-50"
+                                                        src="/QrBancolombiaGora.jpeg"
+                                                        alt="QrBancolombia"
+                                                    />
+                                                </a>
+
+                                                <div className="absolute inset-0 rounded-xl bg-black bg-opacity-90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"></div>
+
+                                                <i className="pi pi-download text-4xl text-white font-bold absolute z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out" />
                                             </div>
 
                                             <blockquote className="flex-1 mt-8">
-                                                <p className="mn:text-sm xl:text-base leading-relaxed text-blackGora">¡Lo que puedas! Todo es de gran ayuda</p>
+                                                <p className="mn:text-sm xl:text-base leading-relaxed text-blackGora">
+                                                ¡Lo que puedas! Todo es de gran ayuda
+                                                </p>
                                             </blockquote>
                                         </div>
                                     </div>
@@ -50,20 +65,37 @@ export default function Donations() {
                                     <div className="flex flex-col justify-between flex-1 p-6 bg-white lg:py-8 lg:px-7">
                                         <div className="flex-1">
                                             <blockquote className="flex-1 mt-8">
-                                                <p className="text-2xl leading-relaxed text-center text-purpleGora font-semibold"><span className="text-greenGora">Dona</span> Nequi</p>
+                                                <p className="text-2xl leading-relaxed text-center text-purpleGora font-semibold">
+                                                    <span className="text-greenGora">Dona</span> Nequi
+                                                </p>
                                             </blockquote>
 
-                                            <div className="flex justify-center items-center mt-8">
-                                                <Image className="flex-shrink-0 object-cover mn:w-[250px] mn:h-[250px] xl:w-[300px] xl:h-[300px]" src="/QrNequiGora.jpg" alt="QrNequi"/>
+                                            <div className="flex justify-center items-center mt-8 relative group">
+                                                <a
+                                                    href="/QrNequiGora.jpg"
+                                                    download="QrNequiGora.jpg"
+                                                    className="flex-shrink-0"
+                                                >
+                                                    <Image
+                                                        className="object-cover mn:w-[250px] mn:h-[250px] xl:w-[300px] xl:h-[300px] transition-all duration-300 ease-in-out group-hover:opacity-50"
+                                                        src="/QrNequiGora.jpg"
+                                                        alt="QrNequi"
+                                                    />
+                                                </a>
+
+                                                <div className="absolute inset-0 rounded-xl bg-black bg-opacity-90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"></div>
+
+                                                <i className="pi pi-download text-4xl text-white font-bold absolute z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out" />
                                             </div>
 
                                             <blockquote className="flex-1 mt-8">
-                                                <p className="mn:text-sm xl:text-base leading-relaxed text-blackGora">¡Lo que puedas! Todo es de gran ayuda</p>
+                                                <p className="mn:text-sm xl:text-base leading-relaxed text-blackGora">
+                                                    ¡Lo que puedas! Todo es de gran ayuda
+                                                </p>
                                             </blockquote>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div className="flex flex-col overflow-hidden shadow-xl rounded-2xl">
                                     <div className="flex flex-col justify-between flex-1 p-6 bg-white lg:py-8 lg:px-7">
                                         <div className="flex-1">

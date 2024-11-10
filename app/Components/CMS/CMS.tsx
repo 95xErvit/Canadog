@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useRef } from 'react';
-import { Button, Textarea, Card, Input,CardBody, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@nextui-org/react";
-import {ScrollShadow} from "@nextui-org/react";
+import { Button, Textarea, Card, Input,CardBody, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Pagination } from "@nextui-org/react";
+import { ScrollShadow } from "@nextui-org/react";
 import { Toast } from 'primereact/toast';
 import { FileUpload, FileUploadHeaderTemplateOptions, FileUploadSelectEvent, FileUploadUploadEvent, ItemTemplateOptions,} from 'primereact/fileupload';
 import { ProgressBar } from 'primereact/progressbar';
@@ -21,14 +21,15 @@ export default function CMS({Dogs, Cats, History}: any)
     const [id, setId] = useState<string>('');
     const [file, setFile] = useState<any>();
     const [isDog, setIsDog] = useState(true);
+    const [isCat, setIsCat] = useState(false)
+    const [isHistory, setIsHistory] = useState(false);
+    const [history, setHistory] = useState<any[]>([]); 
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [totalSize, setTotalSize] = useState(0);
     const fileUploadRef = useRef<FileUpload>(null);
-    
-    const [isHistory, setIsHistory] = useState(false);
-    const [history, setHistory] = useState<any[]>([]); 
+    const [currentPage, setCurrentPage] = useState(1);
     const router = useRouter()
-    const [isCat, setIsCat] = useState(false)
+    
 
     const onTemplateSelect = (e: FileUploadSelectEvent) => {
         console.log("Hola subiendo")
@@ -92,7 +93,6 @@ export default function CMS({Dogs, Cats, History}: any)
         e.preventDefault()
         router.push('/UserGora/Login')
     }
-
 
     const onTemplateRemove = (file: File, callback: Function) => {
         setTotalSize(totalSize - file.size);
@@ -181,9 +181,21 @@ export default function CMS({Dogs, Cats, History}: any)
     const uploadOptions = { icon: 'pi pi-fw pi-cloud-upload', iconOnly: true, className: 'custom-upload-btn p-button-success p-button-rounded p-button-outlined' };
     const cancelOptions = { icon: 'pi pi-fw pi-times', iconOnly: true, className: 'custom-cancel-btn p-button-danger p-button-rounded p-button-outlined' };
 
+    //Paginador
+    const itemsPerPage = 6;
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItemsDogs = Dogs.slice(indexOfFirstItem, indexOfLastItem);
+    const currentItemsCats = Cats.slice(indexOfFirstItem, indexOfLastItem);
+    const currentItemsHistory = History.slice(indexOfFirstItem, indexOfLastItem);
+
+    const handlePageChange = (page: any) => {
+        setCurrentPage(page);
+    };
+
     return(
         <div>
-            <div className="flex mn:my-8 mn:justify-center md:justify-start">
+            <div className="flex mn:justify-center md:justify-start">
                 <Modal isOpen={isOpen} onOpenChange={onOpenChange} size='xl'>
                     <ModalContent>
                     {(onClose) => (
@@ -249,7 +261,7 @@ export default function CMS({Dogs, Cats, History}: any)
                     </ModalContent>
                 </Modal>
             </div>
-            <div className="flex mn:my-8 mn:justify-center md:justify-start">
+            <div className="flex mn:justify-center md:justify-start">
                 <Modal isOpen={isEdit}  onOpenChange={setIsEdit} size='xl'>
                     <ModalContent>
                     {(onClose) => (
@@ -310,127 +322,96 @@ export default function CMS({Dogs, Cats, History}: any)
                     </ModalContent>
                 </Modal>
             </div>
-             <div className='relative mn:px-6 mn:py-2 mn:mt-2 md:px-6 md:py-6 md:mt-4'>
-                    <div className='grid max-w-7xl mx-auto md:gris-cols-2'>
-                        <h2 className='mn:text-xl md:text-4xl font-semibold'>
-                            Agrega una nueva {<span className='text-greenGora'>Mascota</span>}
-                        </h2>
-                        <div className="flex gap-4 mn:my-4 md:my-8 mn:justify-center md:justify-start">
-                            <Button isLoading={isLoading} onClick={(e)=> [setIsDog(true),setIsHistory(false), setIsCat(false)]} className={`bg-transparent border  ${isDog ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`} radius="full" size="lg">
+            <div className='mn:px-6 mn:py-6 mn:pb-0 md:px-6 xl:py-8'>
+                <div className='grid max-w-7xl mx-auto md:gris-cols-2'>
+                    <h2 className='mn:text-2xl md:text-4xl font-semibold'>
+                        Agrega una nueva {<span className='text-greenGora'>Mascota</span>}
+                    </h2>
+                    <div className="flex flex-wrap gap-4 mn:my-6 md:my-8 mn:justify-center xl:justify-between">
+                        <div className='flex flex-wrap mn:justify-center xl:justify-start gap-4 mn:gap-2'>
+                            <Button 
+                                isLoading={isLoading} 
+                                onClick={(e)=> [setIsDog(true),setIsHistory(false), setIsCat(false)]} 
+                                className={`bg-transparent border  ${isDog ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora mn:text-sm xl:text-xl`} 
+                                radius="full" 
+                            >
                                 Guaus
                             </Button>
-                            <Button isLoading={isLoading} onClick={(e)=> [setIsDog(false),setIsHistory(false),setIsCat(true)]} className={`bg-transparent border ${isCat ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`} radius="full" size="lg">
+                            <Button 
+                                isLoading={isLoading} 
+                                onClick={(e)=> [setIsDog(false),setIsHistory(false),setIsCat(true)]} 
+                                className={`bg-transparent border ${isCat ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora mn:text-sm xl:text-xl`} 
+                                radius="full" 
+                            >
                                 Miaus
                             </Button>
-                            <Button isLoading={isLoading} onClick={(e) => [ setIsHistory(true),setIsDog(false),setIsCat(false) ]} className={`bg-transparent border ${isHistory ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`} radius="full" size="lg">
+                            <Button 
+                                isLoading={isLoading} 
+                                onClick={(e) => [ setIsHistory(true),setIsDog(false),setIsCat(false) ]} 
+                                className={`bg-transparent border ${isHistory ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora mn:text-sm xl:text-xl`} 
+                                radius="full" 
+                            >
                                 Historias
                             </Button>
-                            <Button isLoading={isLoading} onClick={handleClick} className={`bg-transparent border ${isCat ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`} radius="full" size="lg">
-                                Cerrar sesion
+                            <Button 
+                                onPress={onOpen} 
+                                className='bg-transparent border border-redGora text-redGora mn:text-sm xl:text-xl pi pi-plus' 
+                                radius="full" 
+                            />
+                        </div>
+                        <div>
+                            <Button 
+                                isLoading={isLoading} 
+                                onClick={handleClick} 
+                                className={`bg-transparent border ${isCat ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora mn:text-sm xl:text-xl`} 
+                                radius="full" 
+                            >
+                                Cerrar sesion <i className="pi pi-sign-out mr-2" />
                             </Button>
-                            <Button onPress={onOpen} className='bg-transparent border border-redGora text-redGora pi pi-plus' radius="full" size="lg" />
                         </div>
                     </div>
+                    
                 </div>
-                {   
-                    isDog ?(
-                        <div className='px-4 py-6'>
-                            <div className='flex max-w-7xl mx-auto'>
-                                <Card
-                                    isBlurred
-                                    className="border-none w-full"
-                                    shadow="md"
-                                >
-                                    <ScrollShadow className="mn:w-[360px] mn:h-[600px] md:w-[1280px] md:h-[600px] mt-4 mb-4" size={0}>
-                                        <div className='flex flex-wrap justify-evenly'>
-                                            {
-                                                Dogs.map((card: any) => (
-                                                    <Card key={card.id} className='m-4 w-96'>
-                                                        <div className="flex gap-6 md:gap-2">
-                                                            <Image
-                                                                alt="Album cover"
-                                                                className={`object-cover shadow-md transition-all duration-300 rounded-none w-full h-[200px]`}
-                                                                src={card.image}
-                                                            />
-                                                            <CardBody>
-                                                                <div className='flex flex-col'>
-                                                                    <h1 className={'flex font-semibold text-purpleGora px-2 justify-end w-full mn:text-xl md:text-2xl'}>
-                                                                        {card.title.substring(0, 3)}<span className='text-greenGora'>{card.title.substring(3, card.title.charCodeAt(card.title))}</span>
-                                                                    </h1>
-                                                                    <h1 className={'flex font-semibold text-purpleGora px-2 justify-end w-full mn:text-xl md:text-sm'}>
-                                                                        Edad: {card.old}
-                                                                    </h1>
-                                                                    <p className={'flex font-normal text-gray w-full h-[58px] text-right text-[12px]'}>
-                                                                        {card.shortDescription.substring(0,75) + "..."}
-                                                                    </p>
-                                                                    <div className="flex mn:my-2 justify-center">
-                                                                        <Button  
-                                                                            onClick={(e)=> 
-                                                                                {   
-                                                                                    setId(card.id)
-                                                                                    setName(card.title)
-                                                                                    setDescription(card.longDescription)
-                                                                                    setYearosld(card.old)
-                                                                                    setIsEdit(true)
-                                                                                }
-                                                                            } 
-                                                                            className='bg-transparent border border-greenGora text-greenGora' radius="full" size="sm" endContent={<i className="pi pi-pencil" style={{ color: '#489E84' }}/>}>
-                                                                            Editar
-                                                                        </Button>
-                                                                    </div>  
-                                                                </div>
-                                                            </CardBody>
-                                                        </div>
-                                                    </Card>
-                                                ))
-                                            }
-                                        </div>
-                                    </ScrollShadow> 
-                                </Card>
-                            </div>
-                        </div>
-                    ) // duplicar
-                    :
-                    isCat?
-                    (
-                        <div className='px-4 py-6'>
-                            <div className='flex max-w-7xl mx-auto'>
-                                <Card
-                                    isBlurred
-                                    className="border-none w-full"
-                                    shadow="md"
-                                >
-                                    <ScrollShadow className="mn:w-[360px] mn:h-[600px] md:w-[1280px] md:h-[600px] mt-4 mb-4" size={0}>
-                                        <div className='flex flex-wrap justify-evenly'>
+            </div>
+            {   
+                isDog ?(
+                    <div className='px-4 py-6'>
+                        <div className='flex flex-wrap max-w-7xl mx-auto'>
+                            <Card isBlurred className="border-none w-full" shadow="md">
+                                <ScrollShadow className="mn:w-full mn:h-[420px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
+                                    <div className='flex flex-wrap justify-evenly'>
                                         {
-                                            Cats.map((card: any) => (
+                                            currentItemsDogs.map((card: any) => (
                                                 <Card key={card.id} className='m-4 w-96'>
                                                     <div className="flex gap-6 md:gap-2">
                                                         <Image
                                                             alt="Album cover"
-                                                            className={`object-cover shadow-md transition-all duration-300 rounded-none w-full h-[200px]`}
+                                                            className="object-cover shadow-md transition-all duration-300 rounded-none w-full h-[200px]"
                                                             src={card.image}
                                                         />
                                                         <CardBody>
                                                             <div className='flex flex-col'>
-                                                                <h1 className={'flex font-semibold text-purpleGora px-2 justify-end w-full mn:text-xl md:text-2xl'}>
-                                                                    {card.title.substring(0, 3)}<span className='text-greenGora'>{card.title.substring(3, card.title.charCodeAt(card.title))}</span>
+                                                                <h1 className='flex font-semibold text-purpleGora px-2 justify-end w-full mn:text-xl md:text-2xl'>
+                                                                    {card.title.substring(0, 3)}
+                                                                    <span className='text-greenGora'>
+                                                                        {card.title.substring(3, card.title.length)}
+                                                                    </span>
                                                                 </h1>
-                                                                <h1 className={'flex font-semibold text-purpleGora px-2 justify-end w-full mn:text-xl md:text-sm'}>
+                                                                <h1 className='flex font-semibold text-purpleGora px-2 justify-end w-full mn:text-xl md:text-sm'>
                                                                     Edad: {card.old}
                                                                 </h1>
-                                                                <p className={'flex font-normal text-gray w-full h-[58px] text-right text-[12px]'}>
+                                                                <p className='flex font-normal text-gray w-full h-[58px] text-right text-[12px]'>
                                                                     {card.shortDescription.substring(0,75) + "..."}
                                                                 </p>
                                                                 <div className="flex mn:my-2 justify-center">
                                                                     <Button  
-                                                                        onClick={(e)=>{ 
-                                                                            setId(card.id)
-                                                                            setName(card.title)
-                                                                            setDescription(card.longDescription)
-                                                                            setYearosld(card.old)
-                                                                            setIsEdit(true)} 
-                                                                        }
+                                                                        onClick={() => {   
+                                                                            setId(card.id);
+                                                                            setName(card.title);
+                                                                            setDescription(card.longDescription);
+                                                                            setYearosld(card.old);
+                                                                            setIsEdit(true);
+                                                                        }} 
                                                                         className='bg-transparent border border-greenGora text-greenGora' 
                                                                         radius="full" 
                                                                         size="sm" 
@@ -445,62 +426,162 @@ export default function CMS({Dogs, Cats, History}: any)
                                                 </Card>
                                             ))
                                         }
-                                        </div>
-                                    </ScrollShadow> 
-                                </Card>
-                            </div>
+                                    </div>
+                                </ScrollShadow>
+                            </Card>
                         </div>
-                    )
-                    :
-                    (
-                        <div className='px-4 py-6'>
-                            <div className='flex max-w-7xl mx-auto'>
-                                <Card
-                                    isBlurred
-                                    className="border-none w-full"
-                                    shadow="md"
-                                >
-                                    <ScrollShadow className="mn:w-[360px] mn:h-[600px] md:w-[1280px] md:h-[600px] mt-4 mb-4" size={0}>
-                                        <div className='flex flex-wrap justify-evenly'>
-                                        {
-                                            History.map((card: any) => (
-                                                <Card key={card.id} className='m-4 w-96'>
-                                                    <div className="flex gap-6 md:gap-2">
-                                                        <Image
-                                                            alt="Album cover"
-                                                            className="object-cover"
-                                                            shadow="md"
-                                                            src={card.image}
-                                                            height={250}
-                                                            width={500}
-                                                        />
-                                                        <CardBody>
-                                                            <div className='flex flex-col'>
-                                                                <h1 className="flex justify-end font-semibold text-purpleGora text-2xl">
-                                                                    {card.title.substring(0, 3)}<span className='text-greenGora'>{card.title.substring(3, card.title.charCodeAt(card.title))}</span>
-                                                                </h1>
-                                                                <p className='flex ml-2 justify-center mt-2 text-[12px] text-right w-full'>
-                                                                    {card.shortDescription.substring(0,50)}
-                                                                </p>
-                                                                <div className="flex mn:my-2 justify-center">
-                                                                    <Button  onClick={(e)=> setIsEdit(true)} className='bg-transparent border border-greenGora text-greenGora' radius="full" size="sm" endContent={<i className="pi pi-pencil" style={{ color: '#489E84' }}/>}>
-                                                                        Editar
-                                                                    </Button>
-                                                                </div>  
-                                                            </div>
-                                                        </CardBody>
-                                                    </div>
-                                                </Card>
-                                            ))
-                                        }
-                                        </div>
-                                    </ScrollShadow> 
-                                </Card>
-                            </div>
+
+                        {/* Paginador */}
+                        <div className="flex justify-center mt-6">
+                            <Pagination 
+                                total={Math.ceil(Dogs.length / itemsPerPage)}
+                                initialPage={1}
+                                page={currentPage}
+                                onChange={(page) => handlePageChange(page)}
+                                color='secondary'
+                                size="lg"
+                                showControls
+                                showShadow
+                            />
                         </div>
-                    )
-                    
-                }
+                    </div>
+                ) // duplicar
+                :
+                isCat?
+                (
+                    <div className='px-4 py-6'>
+                        <div className='flex max-w-7xl mx-auto'>
+                            <Card
+                                isBlurred
+                                className="border-none w-full"
+                                shadow="md"
+                            >
+                                <ScrollShadow className="mn:w-[360px] mn:h-[420px] md:w-[1280px] md:h-[600px] mt-4 mb-4" size={0}>
+                                    <div className='flex flex-wrap justify-evenly'>
+                                    {
+                                        currentItemsCats.map((card: any) => (
+                                            <Card key={card.id} className='m-4 w-96'>
+                                                <div className="flex gap-6 md:gap-2">
+                                                    <Image
+                                                        alt="Album cover"
+                                                        className={`object-cover shadow-md transition-all duration-300 rounded-none w-full h-[200px]`}
+                                                        src={card.image}
+                                                    />
+                                                    <CardBody>
+                                                        <div className='flex flex-col'>
+                                                            <h1 className={'flex font-semibold text-purpleGora px-2 justify-end w-full mn:text-xl md:text-2xl'}>
+                                                                {card.title.substring(0, 3)}<span className='text-greenGora'>{card.title.substring(3, card.title.charCodeAt(card.title))}</span>
+                                                            </h1>
+                                                            <h1 className={'flex font-semibold text-purpleGora px-2 justify-end w-full mn:text-xl md:text-sm'}>
+                                                                Edad: {card.old}
+                                                            </h1>
+                                                            <p className={'flex font-normal text-gray w-full h-[58px] text-right text-[12px]'}>
+                                                                {card.shortDescription.substring(0,75) + "..."}
+                                                            </p>
+                                                            <div className="flex mn:my-2 justify-center">
+                                                                <Button  
+                                                                    onClick={(e)=>{ 
+                                                                        setId(card.id)
+                                                                        setName(card.title)
+                                                                        setDescription(card.longDescription)
+                                                                        setYearosld(card.old)
+                                                                        setIsEdit(true)} 
+                                                                    }
+                                                                    className='bg-transparent border border-greenGora text-greenGora' 
+                                                                    radius="full" 
+                                                                    size="sm" 
+                                                                    endContent={<i className="pi pi-pencil" style={{ color: '#489E84' }}/>}
+                                                                >
+                                                                    Editar
+                                                                </Button>
+                                                            </div>  
+                                                        </div>
+                                                    </CardBody>
+                                                </div>
+                                            </Card>
+                                        ))
+                                    }
+                                    </div>
+                                </ScrollShadow> 
+                            </Card>
+                        </div>
+                        {/* Paginador */}
+                        <div className="flex justify-center mt-6">
+                            <Pagination 
+                                total={Math.ceil(Cats.length / itemsPerPage)}
+                                initialPage={1}
+                                page={currentPage}
+                                onChange={(page) => handlePageChange(page)}
+                                color='secondary'
+                                size="lg"
+                                showControls
+                                showShadow
+                            />
+                        </div>
+                    </div>
+                )
+                :
+                (
+                    <div className='px-4 py-6'>
+                        <div className='flex max-w-7xl mx-auto'>
+                            <Card
+                                isBlurred
+                                className="border-none w-full"
+                                shadow="md"
+                            >
+                                <ScrollShadow className="mn:w-[360px] mn:h-[420px] md:w-[1280px] md:h-[600px] mt-4 mb-4" size={0}>
+                                    <div className='flex flex-wrap justify-evenly'>
+                                    {
+                                        currentItemsHistory.map((card: any) => (
+                                            <Card key={card.id} className='m-4 w-96'>
+                                                <div className="flex gap-6 md:gap-2">
+                                                    <Image
+                                                        alt="Album cover"
+                                                        className="object-cover"
+                                                        shadow="md"
+                                                        src={card.image}
+                                                        height={250}
+                                                        width={500}
+                                                    />
+                                                    <CardBody>
+                                                        <div className='flex flex-col'>
+                                                            <h1 className="flex justify-end font-semibold text-purpleGora text-2xl">
+                                                                {card.title.substring(0, 3)}<span className='text-greenGora'>{card.title.substring(3, card.title.charCodeAt(card.title))}</span>
+                                                            </h1>
+                                                            <p className='flex ml-2 justify-center mt-2 text-[12px] text-right w-full'>
+                                                                {card.shortDescription.substring(0,50)}
+                                                            </p>
+                                                            <div className="flex mn:my-2 justify-center">
+                                                                <Button  onClick={(e)=> setIsEdit(true)} className='bg-transparent border border-greenGora text-greenGora' radius="full" size="sm" endContent={<i className="pi pi-pencil" style={{ color: '#489E84' }}/>}>
+                                                                    Editar
+                                                                </Button>
+                                                            </div>  
+                                                        </div>
+                                                    </CardBody>
+                                                </div>
+                                            </Card>
+                                        ))
+                                    }
+                                    </div>
+                                </ScrollShadow> 
+                            </Card>
+                        </div>
+                        {/* Paginador */}
+                        <div className="flex justify-center mt-6">
+                            <Pagination 
+                                total={Math.ceil(History.length / itemsPerPage)}
+                                initialPage={1}
+                                page={currentPage}
+                                onChange={(page) => handlePageChange(page)}
+                                color='secondary'
+                                size="lg"
+                                showControls
+                                showShadow
+                            />
+                        </div>
+                    </div>
+                ) 
+            }
         </div>
     )
 }
