@@ -32,12 +32,32 @@ export default function CMS({Dogs, Cats, History}: any)
     
 
     const onTemplateSelect = (e: FileUploadSelectEvent) => {
-        console.log("Hola subiendo")
+        console.log(e.files)
         let _totalSize = totalSize;
         let files = e.files;
+        let exit = false
 
-        for (let i = 0; i < files.length; i++) {
+        for (let i = 0; i < files.length; i++) 
+        {
             _totalSize += files[i].size || 0;
+            const ext = files[i].name.split('.')[1]
+
+            if((ext === "jpg") || (ext === "jpeg")||  (ext === "png") || (ext === "webp"))
+            {
+                exit = false
+            }
+            else
+            {
+                exit = true
+            }
+
+            console.log(exit)
+        }
+
+        if(exit)
+        {   
+            toast.current?.show({ severity: 'error', summary: 'Error en la imagen', className:"m-2", detail: 'No se permite la extencion que se subio'});
+            return
         }
 
         if (e.files.length > 0) {
@@ -117,33 +137,6 @@ export default function CMS({Dogs, Cats, History}: any)
                     <span>{formatedValue} / 1 MB</span>
                     <ProgressBar value={value} showValue={false} style={{ width: '10rem', height: '12px' }}></ProgressBar>
                 </div>
-            </div>
-        );
-    };
-
-    const itemTemplate = (inFile: object, props: ItemTemplateOptions) => {
-        const file = inFile as File;
-        return (
-            <div className="flex align-items-center flex-wrap">
-                <div className="flex align-items-center" style={{ width: '40%' }}>
-                    <Image alt={file.name} role="presentation" width={100} />
-                    <span className="flex flex-column text-left ml-3">
-                        {file.name}
-                        <small>{new Date().toLocaleDateString()}</small>
-                    </span>
-                </div>
-                <Button type="button" className="pi pi-times p-button-outlined p-button-rounded p-button-danger ml-auto" onClick={() => onTemplateRemove(file, props.onRemove)} />
-            </div>
-        );
-    };
-
-    const emptyTemplate = () => {
-        return (
-            <div className="flex align-items-center flex-column">
-                <i className="pi pi-image mt-3 p-5" style={{ fontSize: '5em', borderRadius: '50%', backgroundColor: 'var(--surface-b)', color: 'var(--surface-d)' }}></i>
-                <span style={{ fontSize: '1.2em', color: 'var(--text-color-secondary)' }} className="my-5">
-                    Arrastre y suelte la imagen aqui!.
-                </span>
             </div>
         );
     };
@@ -241,8 +234,6 @@ export default function CMS({Dogs, Cats, History}: any)
                                         onError={onTemplateClear} 
                                         onClear={onTemplateClear}
                                         headerTemplate={headerTemplate} 
-                                        itemTemplate={itemTemplate} 
-                                        emptyTemplate={emptyTemplate}
                                         uploadHandler={(event) => [onTemplateUpload(event)]}
                                         chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} 
                                         customUpload/>
@@ -299,7 +290,7 @@ export default function CMS({Dogs, Cats, History}: any)
 
                                     <FileUpload disabled={isLoading} ref={fileUploadRef} name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000}
                                         onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
-                                        headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate}
+                                        headerTemplate={headerTemplate}
                                         chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
                                 </div>
                             </ModalBody>
