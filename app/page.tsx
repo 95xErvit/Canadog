@@ -15,7 +15,9 @@ export default async function HomeGora()
 	const result : any = await GetPets(true, "Dog");
 	const result2  : any = await GetPets(true, "Cat");
 	const result3 : any = await GetPets(true, "History")
-	
+	console.log(result.data.result.recordset.length)
+	console.log(result2.data.result.recordset.length)
+	console.log(result3.data.result.recordset.length)
 	return (
 		<>
 			<Header/>

@@ -31,7 +31,7 @@ export default function CMS({Dogs, Cats, History}: any)
     const [isCat, setIsCat] = useState(false)
 
     const onTemplateSelect = (e: FileUploadSelectEvent) => {
-        console.log("Hola subiendo")
+        console.log(e.files)
         let _totalSize = totalSize;
         let files = e.files;
 
@@ -69,7 +69,7 @@ export default function CMS({Dogs, Cats, History}: any)
             
         }
       
-        toast.current?.show({ severity: 'info', summary: 'CARGA EXITOSA', detail: 'Imagen cargada exitosamente'});
+        toast.current?.show({ severity: 'info', summary: 'CARGA EXITOSA', className:"m-2", detail: 'Imagen cargada exitosamente'});
         setTotalSize(_totalSize);
     };
 
@@ -168,7 +168,7 @@ export default function CMS({Dogs, Cats, History}: any)
     
         try
         {
-            const response = await axios.patch("/UserGora/CMS/api/pets",{data:{AnimaldId:id, User:"Adminitrador",Enable: 1, Name: name, OldDate:yearOlds, Description:description, Type:isDog ? "DOG" : "CAT", Images: file}})
+            const response = await axios.patch("/UserGora/CMS/api/pets",{data:{AnimaldId:id, User:"Adminitrador",Enable: 1, Name: name, OldDate:yearOlds, Description:description, Type:isDog ? "DOG" : isCat? "CAT": "HISTORY", Images: file}})
             console.log('Contesto:', response);
         }
         catch(err){
@@ -188,12 +188,13 @@ export default function CMS({Dogs, Cats, History}: any)
                     <ModalContent>
                     {(onClose) => (
                         <>
+                            <Toast ref={toast}></Toast>
                             <ModalHeader className="flex justify-center text-greenGora">
                                 ¡Bienvenido {<p className='text-blackGora ml-1'> a tu próxima gran aventura</p>}!
                             </ModalHeader>
                             <ModalBody>
                                 <p className='text-purpleGora px-4 text-xl text-center font-semibold'> 
-                                    { isDog ? "Crea un nuevo Guau" : "Crea un nuevo Miau"}
+                                    { isDog ? "Crea un nuevo Guau" : isCat ? "Crea un nuevo Miau" : isHistory ? "Crea una historia Emotiva" : ""}
                                 </p>
                                 <h1 className='text-center py-4 text-blackGora font-semibold'>
                                     Ingrese la informacion de la mascota.
@@ -201,7 +202,7 @@ export default function CMS({Dogs, Cats, History}: any)
                                 <div className="flex w-full flex-col gap-4">
                                     <div className="flex mb-6 md:mb-0 gap-4">
                                         <Input required disabled={isLoading} onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Nombre"/>
-                                        <Input required onChange={((e)=> setYearosld(e.target.value))} type="edad" variant={'faded'} label="Edad"/>
+                                        { !isHistory && <Input required onChange={((e)=> setYearosld(e.target.value))} type="edad" variant={'faded'} label="Edad"/>}
                                     </div>
                                     <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
                                         <Textarea required disabled={isLoading} maxLength={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
@@ -211,7 +212,7 @@ export default function CMS({Dogs, Cats, History}: any)
                                     Fotos de la Mascota
                                 </h1>
                                 <div className='flex flex-row justify-center my-2 gap-2 space-x-2'>
-                                    <Toast ref={toast}></Toast>
+                                    
 
                                     <Tooltip target=".custom-choose-btn" content="Choose" position="bottom" />
                                     <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
@@ -221,7 +222,8 @@ export default function CMS({Dogs, Cats, History}: any)
                                         ref={fileUploadRef} 
                                         name="demo[]"
                                         disabled={isLoading}
-                                        multiple accept="image/*"
+                                        multiple
+                                        accept="image/*"
                                         maxFileSize={1000000}
                                         onUpload={onTemplateUpload} 
                                         onSelect={onTemplateSelect} 
@@ -253,13 +255,14 @@ export default function CMS({Dogs, Cats, History}: any)
                 <Modal isOpen={isEdit}  onOpenChange={setIsEdit} size='xl'>
                     <ModalContent>
                     {(onClose) => (
-                        <>
+                        <>  
+                            <Toast ref={toast}></Toast>
                             <ModalHeader className="flex justify-center text-greenGora">
                                 ¡Bienvenido {<p className='text-blackGora ml-1'> a tu próxima gran aventura</p>}!
                             </ModalHeader>
                             <ModalBody>
                                 <p className='text-blackGora px-4 text-xl'> 
-                                    { isDog ? "Edita un Guau" : "Edita un Miau"}
+                                    { isDog ? "Edita un Guau" : isCat ? "Edita un Miau" : isHistory ? "Edita la historia emotiva" : ""}
                                 </p>
                                 <h1 className='text-center py-4 text-blackGora font-semibold'>
                                     Edita la informacion de la mascota.
@@ -267,7 +270,7 @@ export default function CMS({Dogs, Cats, History}: any)
                                 <div className="flex w-full flex-col gap-4">
                                     <div className="flex mb-6 md:mb-0 gap-4">
                                         <Input required disabled={isLoading} value={name} onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Nombre"/>
-                                        <Input required disabled={isLoading} value={yearOlds} onChange={((e)=> setYearosld(e.target.value))} type="edad" variant={'faded'} label="Edad"/>
+                                        { !isHistory && <Input required disabled={isLoading} value={yearOlds} onChange={((e)=> setYearosld(e.target.value))} type="edad" variant={'faded'} label="Edad"/> }
                                     </div>
                                     <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
                                         <Textarea required disabled={isLoading} value={description} maxLength={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
@@ -277,7 +280,7 @@ export default function CMS({Dogs, Cats, History}: any)
                                     Fotos de la Mascota
                                 </h1>
                                 <div className='flex flex-row justify-center my-2 gap-2 space-x-2'>
-                                    <Toast ref={toast}></Toast>
+                                    
 
                                     <Tooltip target=".custom-choose-btn" content="Choose" position="bottom" />
                                     <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
@@ -325,7 +328,7 @@ export default function CMS({Dogs, Cats, History}: any)
                             <Button isLoading={isLoading} onClick={(e) => [ setIsHistory(true),setIsDog(false),setIsCat(false) ]} className={`bg-transparent border ${isHistory ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`} radius="full" size="lg">
                                 Historias
                             </Button>
-                            <Button isLoading={isLoading} onClick={handleClick} className={`bg-transparent border ${isCat ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`} radius="full" size="lg">
+                            <Button isLoading={isLoading} onClick={handleClick} className={`bg-transparent border border-greenGora text-greenGora hover:bg-greenGora hover:text-pinkLightGora`} radius="full" size="lg">
                                 Cerrar sesion
                             </Button>
                             <Button onPress={onOpen} className='bg-transparent border border-redGora text-redGora pi pi-plus' radius="full" size="lg" />
@@ -483,7 +486,15 @@ export default function CMS({Dogs, Cats, History}: any)
                                                                     {card.shortDescription.substring(0,50)}
                                                                 </p>
                                                                 <div className="flex mn:my-2 justify-center">
-                                                                    <Button  onClick={(e)=> setIsEdit(true)} className='bg-transparent border border-greenGora text-greenGora' radius="full" size="sm" endContent={<i className="pi pi-pencil" style={{ color: '#489E84' }}/>}>
+                                                                    <Button  
+                                                                        onClick={(e)=> {
+                                                                            setId(card.id)
+                                                                            setName(card.title)
+                                                                            setDescription(card.longDescription)
+                                                                            setYearosld(card.old)
+                                                                            setIsEdit(true)
+                                                                        }} 
+                                                                        className='bg-transparent border border-greenGora text-greenGora' radius="full" size="sm" endContent={<i className="pi pi-pencil" style={{ color: '#489E84' }}/>}>
                                                                         Editar
                                                                     </Button>
                                                                 </div>  

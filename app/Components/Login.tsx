@@ -7,23 +7,39 @@ import { Input } from "@nextui-org/input";
 import { EyeFilledIcon } from "../../public/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "../../public/EyeSlashFilledIcon";
 import { UserIcon } from "../../public/UserIcon";
+import  axios from 'axios';
 import { Image } from "@nextui-org/react"
 
 export default function Login() {
-    const toast = useRef(null)
+    const toast = useRef<Toast>(null)
     const [isVisible, setIsVisible] = React.useState(false);
     const [isLoading, setIsLoading] = React.useState(false);
     const toggleVisibility = () => setIsVisible(!isVisible);
+    const [user, setUser] = React.useState("");
+    const [pass, setPass] = React.useState("");
     const router = useRouter()
    
-    const handleClick = (e: any) => {
+    const handleClick = async (e: any) => {
         setIsLoading(true)
         e.preventDefault()
-        router.push('/UserGora/CMS')
+        const response = await axios.post("/UserGora/CMS/api/users",{data:{Id:user, Pass:pass}})
+        console.log(response.data)
+        if(response.data.data)
+        {
+            router.push('/UserGora/CMS')
+        }
+        else
+        {
+            toast.current?.show({severity:'error', summary: 'Fallo en el inicio de sesión', className:"p-2", detail:'Tienes un error en el usuario o contraseña', life: 3000});
+            setIsLoading(false)
+        }
+        
     }
 
     return (
+        
         <section className="bg-white">
+            <Toast ref={toast}/>
             <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
                 <div className="relative flex items-end px-4 pb-10 pt-60 sm:pb-16 md:justify-center lg:pb-24 bg-gray-50 sm:px-6 lg:px-8">
                     <div className="absolute inset-0">
@@ -95,7 +111,6 @@ export default function Login() {
 
                         <form action="#" method="POST" className="mt-4">
                             <div className="flex justify-center">
-                                <Toast ref={toast}/>
                                 <div className="w-80">
                                     <div className="flex justify-center md:flex md:items-center">
                                         <div className="m-4 ">
@@ -109,7 +124,10 @@ export default function Login() {
                                                             labelPlacement={'outside'}
                                                             description={'Ingrese su correo'}
                                                             className=''
+                                                            onChange={((e)=> setUser(e.target.value))}
                                                             required
+                                                            minLength={5}
+                                                            maxLength={12}
                                                             isDisabled={isLoading}
                                                         />
                                                     </div>  
@@ -133,7 +151,10 @@ export default function Login() {
                                                                     )}
                                                                 </button>
                                                             }
+                                                            onChange={((e)=> setPass(e.target.value))}
                                                             isDisabled={isLoading}
+                                                            maxLength={20}
+                                                            minLength={5}
                                                             required
                                                         />
                                                     </div>  

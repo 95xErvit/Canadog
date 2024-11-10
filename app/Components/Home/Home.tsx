@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Card, Input,CardBody, Modal, Image,ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, usePagination, PaginationItemType, Checkbox, Textarea } from "@nextui-org/react";
 import {ScrollShadow} from "@nextui-org/react";
 import {Divider} from "@nextui-org/divider";
 import {Pagination} from "@nextui-org/react";
+import { Carousel, CarouselResponsiveOption } from 'primereact/carousel';
 import {ChevronIcon} from "../../../public/ChevronIcon";
 import MotionTransition from '../MotionTransition/MotionTransition';
 import 'primeicons/primeicons.css';
@@ -76,22 +77,17 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
         },
     ];
 
-    // Obtener las tarjetas correspondientes a la página actual
-    const currentCards = cardsHistory.slice(
-        (currentPage - 1) * itemsAdoptions,
-        currentPage * itemsAdoptions
-    );
-
     const handlePageChange = (page: number) => {
         setCurrentPage(page); // Actualiza la página actual cuando cambia
     };
 
     const itemsHistorys = 4; // Cantidad de tarjetas por página
-    const { activePage, range, setPage, onNext, onPrevious } = usePagination({
+    const { activePage, range, setPage, onNext, onPrevious, loop } = usePagination({
       total: Math.ceil(cardsHistory.length / itemsHistorys), // Total de páginas basado en el número de tarjetas
       showControls: true,
       siblings: 1,
       boundaries: 1,
+      
     });
   
     // Calcula las tarjetas que se deben mostrar en la página actual
@@ -99,6 +95,49 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
       (activePage - 1) * itemsHistorys,
       activePage * itemsHistorys
     );
+
+
+    const historyTemplate = (card: any) => {
+        return (
+            <Card
+                isBlurred
+                className="border-none"
+                shadow="md"
+                key={card.id}
+            >
+                <div className='flex w-1/2'>
+                    <Card className='m-4 border border-greenGora'>
+                        <div className="flex flex-col justify-center gap-6 md:gap-2">
+                            <CardBody>
+                                <div className='flex flex-col m-4'>
+                                    <h1 className="flex mn:flex-col xl:flex-row justify-center font-bold text-purpleGora text-2xl gap-2">
+                                        {card.title} <span className="flex justify-start font-semibold text-blackGora text-xl">y su familia</span>
+                                    </h1>
+                                    <p className='flex justify-center mt-4 text-md'>
+                                        {card.description}
+                                    </p>
+                                </div>
+                            </CardBody>
+                            <Image
+                                alt="cover"
+                                className="object-cover"
+                                height={150}
+                                shadow="lg"
+                                src={card.image}
+                                width={300}
+                                isZoomed
+                            />
+                        </div>
+                    </Card>
+                </div>
+            </Card>
+        );
+    };
+
+    useEffect(() => {
+        setTimeout(onNext, 1000)
+    }, []);
+    
 
     return(
         <div>
@@ -243,7 +282,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                 <Card isBlurred className="border-none w-full" shadow="md">
                                     <ScrollShadow className="mn:w-full mn:h-[300px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
                                         <div className='flex flex-wrap justify-evenly'>
-                                            {currentCards.map((card: any) => (
+                                            {cardsDogs.map((card: any) => (
                                                 <Card
                                                     key={card.id}
                                                     className={`m-4 transition-all duration-300 ${expandedCard === card.id ? 'w-full md:w-[30%] h-[424px]' : 'w-full md:w-[30%] h-[200px]'}`}
@@ -326,7 +365,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                 <Card isBlurred className="border-none w-full" shadow="md">
                                     <ScrollShadow className="mn:w-full mn:h-[300px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
                                         <div className='flex flex-wrap justify-evenly'>
-                                            {currentCards.map((card: any) => (
+                                            {cardsCats.map((card: any) => (
                                             <Card
                                                 key={card.id}
                                                 className={`m-4 transition-all duration-300 ${expandedCard === card.id ? 'w-full md:w-[30%] h-[424px]' : 'w-full md:w-[30%] h-[200px]'}`}
@@ -418,7 +457,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                 </div>
             </div>
             <div className='px-4 py-6 mb-8'>
-                <div className='flex gap-4 max-w-7xl mx-auto'>
+                <div className='flex gap-4 mx-auto'>
                     {paginatedCards.map((card: any) => (
                         <Card
                             isBlurred
@@ -453,8 +492,9 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                             </div>
                         </Card>
                     ))}
+                    {/*<Carousel value={cardsHistory} numVisible={4} circular itemTemplate={historyTemplate} />*/}
                 </div>
-                <div className="flex justify-center m-4">
+                 <div className="flex justify-center m-4">
                     <ul className="flex gap-2 items-center">
                     {range.map((page) => {
                         if (page === PaginationItemType.NEXT) {
@@ -504,6 +544,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                     })}
                     </ul>
                 </div>
+                
             </div>
 
             <Divider className="my-4"/>

@@ -4,36 +4,23 @@ import axios from "axios"
 export async function POST(request: NextRequest) {
     
     const data = await request.json()
-  
-    try 
-    {
+    console.log(data)
+    try {
 
-        const { data: { token } } = await axios.get(`${process.env.HOST_API}/Api/TokenGora`, {
-            headers: {
-                "x-api-key":<string>process.env.API_KEY
-            }
-        })
-
-        try {
-
-            const result = await axios.post(`${process.env.HOST_API}/Api/Gora/CMS/Users`,data,
-            {   
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-
-            return NextResponse.json({mensaje: "Procesado correctamente", data: result}, { status: 200 })
+        if(data.data.Pass === "123456789")
+        {
+            return NextResponse.json({mensaje: "Procesado correctamente", data: true}, { status: 200 })
         }
-        catch (err) {
-            console.log(err)
-            return NextResponse.json({mensaje: "Error en el procesamiento", data: err}, { status: 400 })
+        else{
+            return NextResponse.json({mensaje: "Procesado correctamente", data: false}, { status: 200 })
         }
+        
     }
     catch (err) {
         console.log(err)
-        return NextResponse.json({mensaje: "Error interno", data: err}, { status: 500 })
+        return NextResponse.json({mensaje: "Error en el procesamiento", data: err}, { status: 400 })
     }
+    
 
 }
 
