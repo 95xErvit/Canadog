@@ -12,12 +12,12 @@ export default function Footer(){
                         <Image src="/LogoGora.png" width="150" height="60" alt="Logo Gora"/>
                     </Link>
                     <div className="flex justify-center items-center py-3">
-                        <a href="#" className="text-pinkLightGora hover:text-pinkGora hover:scale-125 px-2">
+                        {/* <a href="#" className="text-pinkLightGora hover:text-pinkGora hover:scale-125 px-2">
                             <span className="sr-only">Facebook</span>
                             <svg x="0px" y="0px" width="40" height="40" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24" className="mn:p-1 md:p-0">
                                 <path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd"></path>
                             </svg>
-                        </a>
+                        </a> */}
                         <a href="https://www.instagram.com/gorafundacion/" className="text-pinkLightGora hover:text-pinkGora hover:scale-125 px-2">
                             <span className="sr-only">Instagram</span>
                             <svg x="0px" y="0px" width="40" height="40" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24" className="mn:p-1 md:p-0">
@@ -61,9 +61,13 @@ export default function Footer(){
                     {/* <p className="text-pinkLightGora">
                         E-mail: <br/> fundacion@gorafundacion.com
                     </p> */}
-                    <p className="text-pinkLightGora">
-                        Whatsapp: +57 3218207017
-                    </p>            
+                    <div className='flex justify-center items-center space-x-2'>
+                        <Image alt="lovePets" src="/LogoWhatsapp.png" height={40} width={40} className="mn:h-8 mn:w-8 xl:h-10 xl:w-10"/>
+                        <p className="text-pinkLightGora">
+                            +57 3218207017
+                        </p>
+                    </div>
+                                
                 </div>
             </div>
 
@@ -77,13 +81,13 @@ export default function Footer(){
                     <p className="flex mn:mt-2 md:mt-0 leading-4 text-sm text-pinkLightGora">
                         Creado con 
                     </p>
-                    <span className="filter drop-shadow-[0_0_0.5rem_#f82e03] animate-pulse inline-block">
+                    <span className="filter drop-shadow-[0_0_0.5rem_#f82e03] animate-pulse inline-block mn:m-2 md:m-0">
                         <Image alt="lovePets" src="/mascotas.png" height="28" width="28"/>
                     </span> 
                     <p className="flex mn:mt-2 md:mt-0 leading-4 text-sm text-pinkLightGora">
                         por
                     </p>
-                    <Link href="/" className="flex items-center mn:mt-2 md:mt-0">
+                    <Link href="/" className="flex items-center mn:m-4 md:m-0">
                         <Image src="/Innminds.png" width="120" height="120" alt="Logo-InnMinds" className="rounded-none"/>
                     </Link>
                 </div>       

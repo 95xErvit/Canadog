@@ -1,12 +1,11 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { Button, Card, Input,CardBody, Modal, Image,ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, usePagination, PaginationItemType, Checkbox, Textarea } from "@nextui-org/react";
+import { Button, Card, Input,CardBody, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, usePagination, PaginationItemType, Checkbox, Textarea } from "@nextui-org/react";
 import {ScrollShadow} from "@nextui-org/react";
 import {Divider} from "@nextui-org/divider";
 import {Pagination} from "@nextui-org/react";
-import { Carousel } from 'primereact/carousel';
-import {ChevronIcon} from "../../../public/ChevronIcon";
 import MotionTransition from '../MotionTransition/MotionTransition';
+import Image from 'next/image';
 import 'primeicons/primeicons.css';
 
 //{Dogs, Cats}: any
@@ -22,120 +21,44 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
         setExpandedCard(expandedCard === id ? null : id);
     };
 
-    const itemsAdoptions = 9; // Cantidad de tarjetas que deseas mostrar por página
+    const itemsAdoptions = 9; // Cantidad de tarjetas para mostrar por página
     const cards = isDog ? cardsDogs : cardsCats;
     const totalPagesAdoptions = Math.ceil(cards.length / itemsAdoptions);
-    
-    // const card = [
-    //     {
-    //         id: 1,
-    //         image: 'Adop1.png',
-    //         title: 'Max',
-    //         Description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //     },
-    //     {
-    //         id: 2,
-    //         image: 'Adop2.png',
-    //         title: 'Lucas',
-    //         Description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //     },
-    //     {
-    //         id: 3,
-    //         image: 'Adop3.png',
-    //         title: 'Dante',
-    //         Description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //     },
-    //     {
-    //         id: 4,
-    //         image: 'Adop4.png',
-    //         title: 'Kitty',
-    //         Description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //     },
-    //     {
-    //         id: 5,
-    //         image: 'Adop4.png',
-    //         title: 'Kitty',
-    //         Description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //     },
-    //     {
-    //         id: 6,
-    //         image: 'Adop3.png',
-    //         title: 'Kitty',
-    //         Description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //     },
-    //     {
-    //         id: 7,
-    //         image: 'Adop2.png',
-    //         title: 'Kitty',
-    //         Description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //     },
-    //     {
-    //         id: 8,
-    //         image: 'Adop1.png',
-    //         title: 'Kitty',
-    //         Description: 'Encantador cachorro de ojos brillantes y cola siempre en movimiento.',
-    //     },
-    // ];
 
     const handlePageChange = (page: number) => {
         setCurrentPage(page); // Actualiza la página actual cuando cambia
     };
-
-    const itemsHistorys = 4; // Cantidad de tarjetas por página
-    const { activePage, range, setPage, onNext, onPrevious, loop } = usePagination({
-      total: Math.ceil(cardsHistory.length / itemsHistorys), // Total de páginas basado en el número de tarjetas
-      showControls: true,
-      siblings: 1,
-      boundaries: 1,
-    });
-  
-    // Calcula las tarjetas que se deben mostrar en la página actual
-    const paginatedCards = cardsHistory.slice(
-      (activePage - 1) * itemsHistorys,
-      activePage * itemsHistorys
-    );
-
-    // const historyTemplate = (card: any) => {
-    //     return (
-    //         <Card
-    //             isBlurred
-    //             className="border-none"
-    //             shadow="md"
-    //             key={card.id}
-    //         >
-    //             <div className='flex w-1/2'>
-    //                 <Card className='m-4 border border-greenGora'>
-    //                     <div className="flex flex-col justify-center gap-6 md:gap-2">
-    //                         <CardBody>
-    //                             <div className='flex flex-col m-4'>
-    //                                 <h1 className="flex mn:flex-col xl:flex-row justify-center font-bold text-purpleGora text-2xl gap-2">
-    //                                     {card.title} <span className="flex justify-start font-semibold text-blackGora text-xl">y su familia</span>
-    //                                 </h1>
-    //                                 <p className='flex justify-center mt-4 text-md'>
-    //                                     {card.description}
-    //                                 </p>
-    //                             </div>
-    //                         </CardBody>
-    //                         <Image
-    //                             alt="cover"
-    //                             className="object-cover"
-    //                             height={150}
-    //                             shadow="lg"
-    //                             src={card.image}
-    //                             width={300}
-    //                             isZoomed
-    //                         />
-    //                     </div>
-    //                 </Card>
-    //             </div>
-    //         </Card>
-    //     );
-    // };
-
-    // useEffect(() => {
-    //     setTimeout(onNext, 1000)
-    // }, []);
     
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [cardsToShow, setCardsToShow] = useState(4); 
+
+    useEffect(() => {
+        const updateCardsToShow = () => {
+          if (window.innerWidth < 640) {
+            setCardsToShow(1); 
+          } else if (window.innerWidth < 1024) {
+            setCardsToShow(2); 
+          } else {
+            setCardsToShow(4); 
+          }
+        };
+    
+        updateCardsToShow();
+        window.addEventListener("resize", updateCardsToShow);
+    
+        return () => window.removeEventListener("resize", updateCardsToShow);
+    }, []);
+
+    const handleNext = () => {
+        setCurrentIndex((prevIndex) =>
+          prevIndex + cardsToShow < cardsHistory.length ? prevIndex + 1 : prevIndex
+        );
+    };
+
+    const handlePrevious = () => {
+        setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : prevIndex));
+    };
+
     return(
         <div>
             {/* BANNER */}
@@ -156,22 +79,21 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                 <Button  className='bg-greenGora text-pinkLightGora' radius="full" size="lg" onPress={onOpen}>
                                     Adopta Hoy
                                 </Button>
-                                <Modal isOpen={isOpen} onOpenChange={onOpenChange} size='3xl' backdrop='blur'>
+                                <Modal isOpen={isOpen} onOpenChange={onOpenChange} size='3xl' backdrop='blur' placement='center'>
                                     <ModalContent>
-                                    {(onClose) => (
                                         <>
-                                            <ModalHeader className="flex justify-center text-greenGora mn: md:text-3xl">
+                                            <ModalHeader className="flex justify-center text-greenGora mn:text-sm md:text-3xl">
                                                 ¡Bienvenido {<p className='text-blackGora ml-1'> a tu próxima gran aventura</p>}!
                                             </ModalHeader>
                                             <ModalBody>
-                                                <p className='text-blackGora px-4 text-md'> 
+                                                <p className='text-blackGora px-4 mn:text-xs xl:text-md'> 
                                                     Nos emociona que estés considerando darle un hogar a uno de nuestros adorables peluditos! Por favor, completa este sencillo formulario para comenzar el proceso de adopción.
                                                 </p>
-                                                <h3 className='text-center py-4 text-blackGora text-xl font-semibold'>
+                                                <h3 className='text-center mn:py-2 xl:py-4 text-blackGora mn:text-xs xl:text-xl font-semibold'>
                                                     Queremos conocerte un poco mejor.
                                                 </h3>
                                                 <div className='flex flex-col'>
-                                                    <p className='text-blackGora px-4 text-md text-center'> 
+                                                    <p className='text-blackGora px-4 mn:text-xs xl:text-md text-center'> 
                                                         Inicia el proceso de adopción diligenciado el siguiente formulario
                                                     </p>
                                                 </div>
@@ -189,13 +111,13 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                             <ModalFooter className='flex justify-center'>
                                                 <div className='flex flex-col w-full'>
                                                     <div className='flex justify-evenly'>
-                                                        <Button href='https://forms.gle/m9oTCTt8n1qibjFU8' className='bg-greenGora text-pinkLightGora my-4' radius="full" size="lg" onClick={() => window.open('https://forms.gle/m9oTCTt8n1qibjFU8', '_blank')}>
+                                                        <Button href='https://forms.gle/m9oTCTt8n1qibjFU8' className='bg-greenGora text-pinkLightGora my-4 text-sm' radius="full" size="lg" onClick={() => window.open('https://forms.gle/m9oTCTt8n1qibjFU8', '_blank')}>
                                                             Formulario adopción
                                                         </Button>                          
                                                     </div>
 
                                                     <Divider className="my-4"/>
-                                                    <div className='flex flex-wrap flex-col gap-2 text-greenGora text-sm font-semibold my-4 px-4'> 
+                                                    <div className='flex flex-wrap flex-col gap-2 text-greenGora mn:text-xs xl:text-sm font-semibold my-4 px-4'> 
                                                         <p>
                                                             ¡Gracias por tomarte el tiempo para completar este formulario! Nos emociona poder ayudarte a encontrar a tu nuevo mejor amigo peludo.
                                                         </p>
@@ -206,14 +128,13 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                 </div>
                                             </ModalFooter>
                                         </>
-                                    )}
                                     </ModalContent>
                                 </Modal>
                             </div>
                         </div>
                         <MotionTransition className='mn:order-first mn:mt-6 md:order-last'>
                             <div className='flex justify-center'>
-                                <Image src='BannerGora.png' alt='card' className='h-auto w-80 md:w-full'/>
+                                <Image src='/BannerGora.png' alt='card' width={550} height={550} className='h-auto w-80 md:w-full'/>
                             </div>
                         </MotionTransition>
                     </div>
@@ -233,12 +154,12 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                             <div className="flex gap-4 mn:my-4 md:my-8 mn:justify-center md:justify-start">
                                 <div className="group relative flex flex-col items-center mt-10">
                                     <div className="absolute bottom-12 left-0 flex justify-center items-center w-full h-full transform translate-y-full opacity-0 group-hover:-translate-y-2 group-hover:opacity-100 transition-all duration-300">
-                                    <Image
-                                        alt="guauButton"
-                                        src="guauButton.gif"
-                                        height="100"
-                                        width="100"
-                                    />
+                                        <Image
+                                            alt="guauButton"
+                                            src="/guauButton.gif"
+                                            height="100"
+                                            width="100"
+                                        />
                                     </div>
                                     <Button
                                         onClick={(e) => setIsDog(true)}
@@ -252,8 +173,8 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                 <div className="group relative flex flex-col items-center mt-10">
                                     <div className="absolute bottom-12 left-0 flex justify-center items-center w-full h-full transform translate-y-full opacity-0 group-hover:-translate-y-1.5 group-hover:opacity-100 transition-all duration-300">
                                     <Image
-                                        alt="guauButton"
-                                        src="CatIcon.gif"
+                                        alt="catButton"
+                                        src="/CatIcon.gif"
                                         height="100"
                                         width="100"
                                     />
@@ -294,6 +215,8 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                       alt="Album cover"
                                                       className={`object-cover shadow-md transition-all duration-300 
                                                       ${expandedCard === card.id ? 'w-full h-[200px]' : 'w-[170px] h-[200px]'}`}
+                                                      width={170}
+                                                      height={200} 
                                                       src={card.image}
                                                     />
                                                     <CardBody className={`${expandedCard === card.id ? 'w-full h-auto' : 'w-[170px] h-[200px] justify-around'}`}>
@@ -302,37 +225,37 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                           {card.title.substring(0, 3)}
                                                           <span className='text-greenGora'>{card.title.substring(3)}</span>
                                                         </h1>
-                                                        <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start text-2xl hidden' : 'px-2 justify-end w-full mn:text-xl md:text-sm'}`}>
+                                                        <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start mn:text-xl xl:text-2xl mn: hidden' : 'px-2 justify-end w-full mn:text-sm xl:text-sm'}`}>
                                                           Edad: {card.old}
                                                         </h1>
                                                         {expandedCard === card.id && (
-                                                          <div className='flex flex-wrap'>
-                                                            <div className='flex items-center'>
-                                                              <Button className='bg-greenGora border border-greenGora text-white text-sm h-7' radius="full">
-                                                                Adoptame
-                                                              </Button>
+                                                            <div className='flex flex-wrap'>
+                                                                <div className='flex items-center'>
+                                                                    <Button className='bg-greenGora border border-greenGora text-white text-sm h-7' radius="full">
+                                                                        Adoptame
+                                                                    </Button>
+                                                                </div>
+                                                                <div className='flex items-center'>
+                                                                    <Button
+                                                                        onClick={() => toggleExpand(card.id)}
+                                                                        className='bg-transparent text-greenGora text-end mn:min-w-10 xl:min-w-20'
+                                                                        endContent={<i className="pi pi-arrow-circle-up" style={{ color: '#489E84', fontSize: '1.5rem' }} />}
+                                                                        radius="full"
+                                                                    />
+                                                                </div>
                                                             </div>
-                                                            <div className='flex items-center'>
-                                                              <Button
-                                                                onClick={() => toggleExpand(card.id)}
-                                                                className='bg-transparent text-greenGora text-end'
-                                                                radius="full"
-                                                                endContent={<i className="pi pi-arrow-circle-up" style={{ color: '#489E84', fontSize: '1.5rem' }} />}
-                                                              />
-                                                            </div>
-                                                          </div>
                                                         )}
                                                       </div>
                                           
-                                                      <p className={`font-normal text-gray ${expandedCard === card.id ? 'w-full h-auto text-[14px] px-2.5 mt-1' : 'w-full h-[58px] text-right text-[12px]'}`}>
-                                                        {expandedCard === card.id ? card.longDescription : `${card.shortDescription.substring(0, 75)}...`}
+                                                      <p className={`font-normal text-gray ${expandedCard === card.id ? 'w-full h-auto text-[14px] px-2.5 my-2' : 'w-full h-[58px] text-[12px]'}`}>
+                                                        {expandedCard === card.id ? card.longDescription : `${card.shortDescription.substring(0, 50)}...`}
                                                       </p>
                                           
                                                       {expandedCard !== card.id && (
                                                         <div className="flex justify-center">
                                                           <Button
                                                             onClick={() => toggleExpand(card.id)}
-                                                            className='bg-transparent border border-greenGora text-greenGora'
+                                                            className='bg-transparent border border-greenGora text-greenGora text-xs'
                                                             radius="full"
                                                             endContent={<i className="pi pi-arrow-circle-down" style={{ color: '#489E84' }} />}
                                                           >
@@ -378,7 +301,8 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                     <Image
                                                         alt="Album cover"
                                                         className={`object-cover shadow-md transition-all duration-300 rounded-none ${expandedCard === card.id ? 'w-full h-[200px]' : 'w-[170px] h-[200px]'}`}
-                                                        
+                                                        width={170}
+                                                        height={200} 
                                                         src={card.image}
                                                     />
                                                     <CardBody className={`${expandedCard === card.id ? 'w-full h-[200px]' : 'w-[170px] h-[200px] justify-around'}`}>
@@ -455,95 +379,71 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                     </h2>
                 </div>
                 <div className='max-w-7xl mx-auto'>
-                    <p className='mt-4 text-xl font-normal text-blackGora sm:text-lg xl:text-xl"'>
-                        Nuestro objetivo es hacer que muchos animales conozcan el 
-                        {<span className='text-greenGora font-semibold'>amor</span>}, 
+                    <p className='mt-4 font-normal text-blackGora'>
+                        Nuestro objetivo es hacer que muchos animales conozcan el  
+                        {<span className='text-greenGora font-semibold'> amor</span>}, 
                         rescatándolos de las calles, rehabilitándolos y encontrando una familia adoptante para ser su compañía por el resto de sus vidas.
                     </p>
                 </div>
             </div>
-            <div className='px-4 py-6 mb-8'>
+
+            <div className="relative px-4">
                 <div className="flex justify-center gap-4 p-4 md:p-8 overflow-x-auto">
-                    {paginatedCards.map((card : any) => (
+                    {cardsHistory.map((card: any, index: any) => {
+                        const isVisible =
+                        index >= currentIndex &&
+                        index < currentIndex + cardsToShow;
+
+                    return (
                         <Card
-                            isBlurred
-                            className="border-none w-[48%] sm:w-[48%] md:w-[30%] lg:w-[22%] transition-transform duration-300 hover:scale-105 flex-shrink-0"
-                            shadow="md"
                             key={card.id}
+                            className={`duration-300 w-[70%] sm:w-[38%] md:w-[40%] lg:w-[22%] transition-transform hover:scale-105 ${
+                                isVisible ? "block" : "hidden"
+                            }`}
                         >
                             <div className="flex flex-col items-center">
-                                <Card className="m-4 border border-greenGora">
+                                <div className="m-2 border-2 border-orangeGora rounded-xl">
                                     <div className="flex flex-col justify-center gap-6 md:gap-2">
-                                        <CardBody>
-                                            <div className="flex flex-col m-4">
-                                                <h1 className="flex flex-col md:flex-row justify-center font-bold text-purpleGora text-2xl gap-2">
-                                                    {card.title}
-                                                    <span className="flex justify-start font-semibold text-blackGora text-xl">
-                                                        y su familia
-                                                    </span>
-                                                </h1>
-                                                {/* <p className="flex justify-center mt-4 text-md">{card.description}</p> */}
-                                            </div>
-                                        </CardBody>
+                                        <div className="m-4">
+                                            <h1 className="flex flex-col justify-center font-bold text-purpleGora text-2xl gap-2">
+                                                {card.title}
+                                                <span className="flex justify-start font-semibold text-blackGora text-base lg:text-xl">
+                                                    y su familia
+                                                </span>
+                                            </h1>
+                                        </div>
                                         <Image
                                             alt="cover"
-                                            className="object-cover"
+                                            className="object-cover rounded-b-xl"
                                             height={150}
-                                            shadow="lg"
                                             src={card.image}
                                             width={300}
                                         />
                                     </div>
-                                </Card>
+                                </div>
                             </div>
                         </Card>
-                    ))}
-                </div>
-                 
-                 <div className="flex justify-center m-4">
-                    <ul className="flex gap-2 items-center">
-                    {range.map((page) => {
-                        if (page === PaginationItemType.NEXT) {
-                            return (
-                                <li key={page} aria-label="next page" className="w-4 h-4">
-                                    <button className="w-full h-full bg-default-200 rounded-full" onClick={onNext} >
-                                        <ChevronIcon className="rotate-180" />
-                                    </button>
-                                </li>
-                            );
-                        }
-
-                        if (page === PaginationItemType.PREV) {
-                            return (
-                                <li key={page} aria-label="previous page" className="w-4 h-4">
-                                    <button className="w-full h-full bg-default-200 rounded-full" onClick={onPrevious}>
-                                        <ChevronIcon />
-                                    </button>
-                                </li>
-                            );
-                        }
-
-                        if (page === PaginationItemType.DOTS) {
-                            return (
-                                <li key={page} className="w-4 h-4">
-                                ...
-                                </li>
-                            );
-                        }
-
-                        return (
-                            <li key={page} aria-label={`page ${page}`} className="w-4 h-4">
-                                <button
-                                    className={`w-full h-full rounded-full 
-                                    ${
-                                        activePage === page ? 'bg-greenGora' : 'bg-default-300'
-                                    }`}
-                                    onClick={() => setPage(page)}
-                                />
-                            </li>
-                        );
+                    );
                     })}
-                    </ul>
+                </div>
+
+                {/* Controles */}
+                <div className="absolute top-1/2 left-0 mn:left-5 lg:left-10 transform -translate-y-1/2">
+                    <button
+                        onClick={handlePrevious}
+                        disabled={currentIndex === 0}
+                        className="p-4 py-2 bg-orangeGora/80 rounded-xl shadow hover:bg-orangeGora text-white"
+                    >
+                        ❮
+                    </button>
+                </div>
+                <div className="absolute top-1/2 right-0 mn:right-5 lg:right-10 transform -translate-y-1/2">
+                    <button
+                        onClick={handleNext}
+                        className="p-4 py-2 bg-orangeGora/80 rounded-xl shadow hover:bg-orangeGora text-white"
+                    >
+                        ❯
+                    </button>
                 </div>
             </div>
 
@@ -556,8 +456,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         alt="Album cover"
                         className="object-cover"
                         height={250}
-                        shadow="md"
-                        src="BannerAdds.png"
+                        src="/BannerAdds.png"
                         width={1280}
                     />
                 </div>
@@ -579,7 +478,9 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         <div className="bg-white text-blackGora p-2 rounded-full flex justify-center items-center space-x-4 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora">
                             <Image
                                 className="w-24 h-24 rounded-full"
-                                src="perros_criollos.jpg"
+                                src="/perros_criollos.jpg"
+                                width={96}
+                                height={96}
                                 alt="PC"
                             />
                         <div className='flex flex-col'>
@@ -592,7 +493,9 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         <div className="bg-white text-blackGora p-2 rounded-full flex justify-center items-center space-x-4 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora">
                         <Image
                             className="w-24 h-24 rounded-full"
-                            src="kanu.jpg"
+                            src="/kanu.jpg"
+                            width={96}
+                            height={96}
                             alt="James"
                         />
                         <div className='flex flex-col'>
@@ -605,7 +508,9 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         <div className="bg-white text-blackGora p-6 rounded-full flex items-center space-x-4 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora">
                         <Image
                             className="w-12 h-12 rounded-full"
-                            src="https://cdn.rareblocks.xyz/collection/bakerstreet/images/testimonials/5/member-1.png"
+                            src=""
+                            width={24}
+                            height={24}
                             alt="Alexa"
                         />
                         <p className="text-sm font-bold">@alexaborn</p>
@@ -615,7 +520,9 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         <div className="bg-white text-blackGora p-6 rounded-full flex items-center space-x-2 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora">
                         <Image
                             className="w-12 h-12 rounded-full"
-                            src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-male-2.png"
+                            src=""
+                            width={24}
+                            height={24}
                             alt="Cameron"
                         />
                         <p className="text-sm font-bold">@camerondi</p>
@@ -625,7 +532,9 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         <div className="bg-white text-blackGora p-6 rounded-full flex items-center space-x-4 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora lg:translate-x-8">
                         <Image
                             className="w-12 h-12 rounded-full"
-                            src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-female.png"
+                            src=""
+                            width={24}
+                            height={24}
                             alt="Martina"
                         />
                         <p className="text-sm font-bold">@martina</p>
@@ -635,7 +544,9 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         <div className="bg-white text-blackGora p-6 rounded-full flex items-center space-x-4 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora lg:translate-x-8">
                         <Image
                             className="w-12 h-12 rounded-full"
-                            src="https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-male-1.png"
+                            src=""
+                            width={24}
+                            height={24}
                             alt="Christina"
                         />
                         <p className="text-sm font-bold">@christin.jamescron</p>
@@ -645,7 +556,9 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         <div className="bg-white text-blackGora p-6 rounded-full flex items-center space-x-4 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora lg:translate-x-8">
                         <Image
                             className="w-12 h-12 rounded-full"
-                            src="https://cdn.rareblocks.xyz/collection/bakerstreet/images/testimonials/5/member-3.png"
+                            src=""
+                            width={24}
+                            height={24}
                             alt="James"
                         />
                         <p className="text-sm font-bold">@jamescron</p>
@@ -653,12 +566,14 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
 
                         {/* Card 8 */}
                         <div className="bg-white text-blackGora p-6 rounded-full flex items-center space-x-4 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora lg:translate-x-8">
-                        <Image
-                            className="w-12 h-12 rounded-full"
-                            src="https://cdn.rareblocks.xyz/collection/bakerstreet/images/testimonials/5/member-1.png"
-                            alt="Alexa"
-                        />
-                        <p className="text-sm font-bold">@alexaborn</p>
+                            <Image
+                                className="w-12 h-12 rounded-full"
+                                src=""
+                                width={24}
+                                height={24}
+                                alt="Alexa"
+                            />
+                            <p className="text-sm font-bold">@alexaborn</p>
                         </div>
                     </div>
                 </section>
@@ -680,8 +595,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         alt="Album cover"
                         className="object-cover"
                         height={250}
-                        shadow="md"
-                        src="Adoptar.png"
+                        src="/Adoptar.png"
                         width={1280}
                     />
                 </div>

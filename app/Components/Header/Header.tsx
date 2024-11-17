@@ -18,7 +18,6 @@ export default function Header() {
     { name: "Tienda Gora", url: "https://gorafundacion.org" },
     { name: "Contáctanos", url: "#contactanos" },
     { name: "Ayudanos", action: () => donationNavigation('/Home/Donations') }, 
-    //{ name: "Ayudanos", url: "https://nibi.com.co/fundaciones/id/GORA_FUNDACI%C3%93N" },
   ];
 
     
@@ -31,13 +30,14 @@ export default function Header() {
                         <Image src="/LogoGora.png" width="140" height="40" alt="Logo Gora"/>
                     </Link>
                 </NavbarBrand>
+                
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-                    className="sm:hidden text-OrangeLightGora"
+                    className="lg:hidden text-OrangeLightGora"
                 />
             </NavbarContent>
             {/* menu web */}
-            <NavbarContent className="hidden sm:flex gap-8" justify="start">
+            <NavbarContent className="hidden lg:flex gap-8" justify="start">
                 <NavbarItem>
                     <Link 
                         className="text-lg text-pinkLightGora hover:text-orangeGora hover:underline hover:underline-offset-8" 

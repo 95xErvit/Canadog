@@ -19,3 +19,8 @@
   section[id] {
     scroll-margin-top: 20px;
   }
+
+  .button-icon {
+    width: 10;
+    height: 10;
+  }
