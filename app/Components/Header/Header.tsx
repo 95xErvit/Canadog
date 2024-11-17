@@ -14,7 +14,7 @@ export default function Header() {
   };
     
   const menuItems = [
-    { name: "Adopciones", url: "#adopciones" },
+    { name: "Adopciones", action: () => donationNavigation('/#adopciones') },
     { name: "Tienda Gora", url: "https://gorafundacion.org" },
     { name: "Contáctanos", url: "#contactanos" },
     { name: "Ayudanos", action: () => donationNavigation('/Home/Donations') }, 

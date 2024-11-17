@@ -20,7 +20,14 @@
     scroll-margin-top: 20px;
   }
 
-  .button-icon {
-    width: 10;
-    height: 10;
+  .p-toast-image{
+    margin: 4px;
+  }
+
+  .p-toast-detail{
+    margin: 6px;
+  }
+
+  .p-toast-summary{
+    margin: 6px;
   }
