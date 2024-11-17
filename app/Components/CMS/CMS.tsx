@@ -12,6 +12,7 @@ import axios from 'axios';
 
 export default function CMS({Dogs, Cats, History}: any) 
 {   
+    console.log(Dogs)
     const toast = useRef<Toast>(null);
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     const [isEdit, setIsEdit] = useState(false);
@@ -23,6 +24,7 @@ export default function CMS({Dogs, Cats, History}: any)
     const [isDog, setIsDog] = useState(true);
     const [isCat, setIsCat] = useState(false)
     const [isHistory, setIsHistory] = useState(false);
+    const [enable, setEnable] = useState(true);
     const [history, setHistory] = useState<any[]>([]); 
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [totalSize, setTotalSize] = useState(0);
@@ -155,13 +157,13 @@ export default function CMS({Dogs, Cats, History}: any)
         setTimeout(()=>location.reload(), 4000)
     };
 
-    const UpdatePets = async (e: React.FormEvent) => {
+    const UpdatePets = async (e: React.FormEvent, EnablePet = 1) => {
         setIsLoading(true)
         e.preventDefault();
     
         try
         {
-            const response = await axios.patch("/UserGora/CMS/api/pets",{data:{AnimaldId:id, User:"Adminitrador",Enable: 1, Name: name, OldDate:yearOlds, Description:description, Type:isDog ? "DOG" : isCat? "CAT": "HISTORY", Images: file}})
+            const response = await axios.patch("/UserGora/CMS/api/pets",{data:{AnimaldId:id, User:"Adminitrador",Enable: EnablePet, Name: name, OldDate:yearOlds, Description:description, Type:isDog ? "DOG" : isCat? "CAT": "HISTORY", Images: file }})
             console.log('Contesto:', response);
         }
         catch(err){
@@ -298,7 +300,7 @@ export default function CMS({Dogs, Cats, History}: any)
                                 <div className='flex flex-col w-full'>
                                     <div className='flex justify-center'>
                                         <Button  
-                                            className='bg-greenGora text-OrangeLightGora px-6' 
+                                            className='m-2 bg-greenGora text-OrangeLightGora px-6' 
                                             radius="full" 
                                             size="md"
                                             isLoading={isLoading}
@@ -306,6 +308,16 @@ export default function CMS({Dogs, Cats, History}: any)
                                                 UpdatePets(e)
                                             }}>
                                             Guardar
+                                        </Button>
+                                        <Button  
+                                            className={`m-2 ${enable ? "bg-redGora" : "bg-orangeGora"} text-OrangeLightGora px-6`}
+                                            radius="full" 
+                                            size="md"
+                                            isLoading={isLoading}
+                                            onClick={(e)=>{
+                                                UpdatePets(e, (enable ? 0 : 1))
+                                            }}>
+                                            {enable? "Eliminar " : "Habilitar"}
                                         </Button>                              
                                     </div>
                                 </div>
@@ -403,6 +415,7 @@ export default function CMS({Dogs, Cats, History}: any)
                                                                                     setName(card.title)
                                                                                     setDescription(card.longDescription)
                                                                                     setYearosld(card.old)
+                                                                                    setEnable(card.ANIMALS_ENABLE)
                                                                                     setIsEdit(true)
                                                                                 }
                                                                             } 
