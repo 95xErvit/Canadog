@@ -30,7 +30,7 @@ export default function Login() {
         }
         else
         {
-            toast.current?.show({severity:'error', summary: 'Fallo en el inicio de sesión', className:"p-2", detail:'Tienes un error en el usuario o contraseña', life: 3000});
+            toast.current?.show({severity:'error', summary: 'Fallo en el inicio de sesión', detail:'Tienes un error en el usuario o contraseña', life: 7000});
             setIsLoading(false)
         }
         

@@ -2,6 +2,7 @@ import './globals.css'
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.css';
 import 'primeicons/primeicons.css';
+import 'primeflex/themes/primeone-light.css'  
 import { Poppins } from 'next/font/google'
 import { Metadata } from 'next';
 
