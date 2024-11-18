@@ -474,6 +474,7 @@ export default function CMS({Dogs, Cats, History}: any)
                                                                             setName(card.title)
                                                                             setDescription(card.longDescription)
                                                                             setYearosld(card.old)
+                                                                            setEnable(card.ANIMALS_ENABLE)
                                                                             setIsEdit(true)} 
                                                                         }
                                                                         className='bg-transparent border border-greenGora text-greenGora' 
@@ -534,6 +535,7 @@ export default function CMS({Dogs, Cats, History}: any)
                                                                             setName(card.title)
                                                                             setDescription(card.longDescription)
                                                                             setYearosld(card.old)
+                                                                            setEnable(card.ANIMALS_ENABLE)
                                                                             setIsEdit(true)
                                                                         }} 
                                                                         className='bg-transparent border border-greenGora text-greenGora' radius="full" size="sm" endContent={<i className="pi pi-pencil" style={{ color: '#489E84' }}/>}>
