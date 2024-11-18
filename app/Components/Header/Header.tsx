@@ -50,7 +50,7 @@ export default function Header() {
                     </Link>
                 </NavbarItem>
                 <NavbarItem >
-                    <Link className="text-lg text-pinkLightGora hover:text-orangeGora hover:underline hover:underline-offset-8" href="https://gorafundacion.org">
+                    <Link className="text-lg text-pinkLightGora hover:text-orangeGora hover:underline hover:underline-offset-8" href="https://gorafundacion.org" target="_blank">
                         Tienda Gora
                     </Link>
                 </NavbarItem>

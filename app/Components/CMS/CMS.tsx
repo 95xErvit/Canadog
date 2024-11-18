@@ -201,7 +201,7 @@ export default function CMS({Dogs, Cats, History}: any)
                             </ModalHeader>
                             <ModalBody>
                                 <p className='text-purpleGora px-4 text-xl text-center font-semibold'> 
-                                    { isDog ? "Crea un nuevo Guau" : isCat ? "Crea un nuevo Miau" : isHistory ? "Crea una historia Emotiva" : ""}
+                                    { isDog ? "Crea un nuevo Guau" : isCat ? "Crea un nuevo Miau" : isHistory ? "Crea una historia emotiva" : ""}
                                 </p>
                                 <h1 className='text-center py-4 text-blackGora font-semibold'>
                                     Ingrese la informacion de la mascota.
@@ -265,7 +265,7 @@ export default function CMS({Dogs, Cats, History}: any)
                                 ¡Bienvenido {<p className='text-blackGora ml-1'> a tu próxima gran aventura</p>}!
                             </ModalHeader>
                             <ModalBody>
-                                <p className='text-purpleGora px-4 text-xl text-center'> 
+                                <p className='text-purpleGora px-4 text-xl text-center font-semibold'> 
                                     { isDog ? "Edita un Guau" : isCat ? "Edita un Miau" : isHistory ? "Edita la historia emotiva" : ""}
                                 </p>
                                 <h1 className='text-center py-4 text-blackGora font-semibold'>

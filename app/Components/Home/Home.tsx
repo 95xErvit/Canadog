@@ -227,7 +227,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                           {card.title.substring(0, 3)}
                                                           <span className='text-greenGora'>{card.title.substring(3)}</span>
                                                         </h1>
-                                                        <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start mn:text-xl xl:text-2xl mn: hidden' : 'px-2 justify-end w-full mn:text-sm xl:text-sm'}`}>
+                                                        <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start mn:text-xl xl:text-2xl mn: hidden' : 'px-2 justify-end w-full mn:text-xs xl:text-sm'}`}>
                                                           Edad: {card.old}
                                                         </h1>
                                                         {expandedCard === card.id && (
