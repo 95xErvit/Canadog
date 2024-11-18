@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
     console.log(data)
     try {
 
-        if(data.data.Pass === "123456789")
+        if(data.data.Pass === "Gora2024#*")
         {
             return NextResponse.json({mensaje: "Procesado correctamente", data: true}, { status: 200 })
         }
