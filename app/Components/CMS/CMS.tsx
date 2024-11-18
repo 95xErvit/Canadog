@@ -265,7 +265,7 @@ export default function CMS({Dogs, Cats, History}: any)
                                 ¡Bienvenido {<p className='text-blackGora ml-1'> a tu próxima gran aventura</p>}!
                             </ModalHeader>
                             <ModalBody>
-                                <p className='text-blackGora px-4 text-xl'> 
+                                <p className='text-purpleGora px-4 text-xl text-center'> 
                                     { isDog ? "Edita un Guau" : isCat ? "Edita un Miau" : isHistory ? "Edita la historia emotiva" : ""}
                                 </p>
                                 <h1 className='text-center py-4 text-blackGora font-semibold'>
@@ -300,7 +300,7 @@ export default function CMS({Dogs, Cats, History}: any)
                                 <div className='flex flex-col w-full'>
                                     <div className='flex justify-center'>
                                         <Button  
-                                            className='m-2 bg-greenGora text-OrangeLightGora px-6' 
+                                            className='m-2 bg-greenGora text-pinkLightGora px-6' 
                                             radius="full" 
                                             size="md"
                                             isLoading={isLoading}
@@ -310,7 +310,7 @@ export default function CMS({Dogs, Cats, History}: any)
                                             Guardar
                                         </Button>
                                         <Button  
-                                            className={`m-2 ${enable ? "bg-redGora" : "bg-orangeGora"} text-OrangeLightGora px-6`}
+                                            className={`m-2 ${enable ? "bg-redGora" : "bg-orangeGora"} text-pinkLightGora px-6`}
                                             radius="full" 
                                             size="md"
                                             isLoading={isLoading}
