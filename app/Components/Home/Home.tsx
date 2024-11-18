@@ -6,6 +6,8 @@ import {Divider} from "@nextui-org/divider";
 import {Pagination} from "@nextui-org/react";
 import MotionTransition from '../MotionTransition/MotionTransition';
 import Image from 'next/image';
+import PerrosCriollos from "@/public/Perros_criollos.jpg"
+import Kanu from "@/public/Kanu.jpg"
 import 'primeicons/primeicons.css';
 
 //{Dogs, Cats}: any
@@ -478,7 +480,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         <div className="bg-white text-blackGora p-2 rounded-full flex justify-center items-center space-x-4 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora">
                             <Image
                                 className="w-24 h-24 rounded-full"
-                                src="/perros_criollos.jpg"
+                                src={PerrosCriollos.src}
                                 width={96}
                                 height={96}
                                 alt="PC"
@@ -493,7 +495,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         <div className="bg-white text-blackGora p-2 rounded-full flex justify-center items-center space-x-4 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora">
                         <Image
                             className="w-24 h-24 rounded-full"
-                            src="/kanu.jpg"
+                            src={Kanu.src}
                             width={96}
                             height={96}
                             alt="James"
