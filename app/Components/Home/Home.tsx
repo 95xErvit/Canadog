@@ -310,7 +310,11 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                     <CardBody className={`${expandedCard === card.id ? 'w-full h-[200px]' : 'w-[170px] h-[200px] justify-around'}`}>
                                                         <div className={`${expandedCard === card.id ? 'flex items-center justify-around' : 'flex w-full flex-wrap'}`}>
                                                             <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start text-2xl' : 'px-2 justify-end w-full mn:text-xl md:text-2xl'}`}>
-                                                                {card.title.substring(0, 3)}<span className='text-greenGora'>{card.title.substring(3, card.title.charCodeAt(card.title)) + '\n' + card.old}</span>
+                                                                {card.title.substring(0, 3)}
+                                                                <span className='text-greenGora'>{card.title.substring(3)}</span>
+                                                            </h1>
+                                                            <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start mn:text-xl xl:text-2xl mn: hidden' : 'px-2 justify-end w-full mn:text-xs xl:text-sm'}`}>
+                                                                Edad: {card.old}
                                                             </h1>
                                                             {expandedCard === card.id && (
                                                                 <div className='flex flex-wrap'>
