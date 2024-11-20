@@ -1,6 +1,8 @@
 "use client"
 import React from "react"
 import { Image } from "@nextui-org/react"
+import QrBancolombia from "@/public/QRBancolombiaGora.jpeg"
+import QrNequi from "@/public/QrNequiGora.jpg"
 
 export default function Donations() {
       
@@ -42,7 +44,7 @@ export default function Donations() {
                                                 <a href="/QrBancolombiaGora.jpeg" download="QrBancolombiaGora.jpeg" className="flex-shrink-0">
                                                     <Image
                                                         className="object-cover mn:w-[250px] mn:h-[250px] xl:w-[300px] xl:h-[300px] transition-all duration-300 ease-in-out group-hover:opacity-50"
-                                                        src="/QrBancolombiaGora.jpeg"
+                                                        src={QrBancolombia.src}
                                                         alt="QrBancolombia"
                                                     />
                                                 </a>
@@ -72,7 +74,7 @@ export default function Donations() {
 
                                             <div className="flex justify-center items-center mt-8 relative group">
                                                 <a
-                                                    href="/QrNequiGora.jpg"
+                                                    href={QrNequi.src}
                                                     download="QrNequiGora.jpg"
                                                     className="flex-shrink-0"
                                                 >
@@ -115,7 +117,7 @@ export default function Donations() {
                                 </div>
                             </div>
 
-                            <div className="relative mt-10 grid max-w-lg grid-cols-1 gap-6 mx-auto md:max-w-none lg:gap-10 md:grid-cols-3">
+                            {/* <div className="relative mt-10 grid max-w-lg grid-cols-1 gap-6 mx-auto md:max-w-none lg:gap-10 md:grid-cols-3">
                                 <div className="flex flex-col overflow-hidden shadow-xl rounded-2xl">
                                     <div className="flex flex-col justify-between flex-1 p-6 bg-white lg:py-8 lg:px-7">
                                         <div className="flex-1">
@@ -169,7 +171,7 @@ export default function Donations() {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

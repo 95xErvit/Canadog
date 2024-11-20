@@ -66,8 +66,7 @@ export default function Footer(){
                         <p className="text-pinkLightGora">
                             +57 3218207017
                         </p>
-                    </div>
-                                
+                    </div>        
                 </div>
             </div>
 
@@ -77,7 +76,7 @@ export default function Footer(){
                         © {new Date().getFullYear()} Gora Todos los derechos reservados
                     </p>
                 </div>
-                <div className="flex mn:flex-col md:flex-row justify-center items-center space-x-2">
+                <div className="flex justify-center items-center space-x-2">
                     <p className="flex mn:mt-2 md:mt-0 leading-4 text-sm text-pinkLightGora">
                         Creado con 
                     </p>
@@ -88,7 +87,7 @@ export default function Footer(){
                         por
                     </p>
                     <Link href="/" className="flex items-center mn:m-4 md:m-0">
-                        <Image src="/Innminds.png" width="120" height="120" alt="Logo-InnMinds" className="rounded-none"/>
+                        <Image src="/Innminds.png" width="110" height="110" alt="Logo-InnMinds" className="rounded-none"/>
                     </Link>
                 </div>       
             </div>

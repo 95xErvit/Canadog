@@ -148,13 +148,13 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
             {/* CARDS ADOPCION */}
             <section className='adopciones' id='adopciones'>
                 <div className='md:px-4 md:mx-4'>
-                    <div className='relative px-6 mx-6 mn:py-2 mn:mt-2 md:py-6 md:mt-4'>
+                    <div className='relative px-6 md:mx-6 mn:py-2 mn:mt-2 md:py-6 md:mt-4'>
                         <div className='grid max-w-7xl mx-auto md:gris-cols-2'>
-                            <h2 className='mn:text-xl md:text-4xl font-semibold'>
+                            <h2 className='mn:text-2xl md:text-4xl font-semibold'>
                                 Encuentra a tu {<span className='text-greenGora'>Mejor amigo</span>}
                             </h2>
                             <div className="flex gap-4 mn:my-4 md:my-8 mn:justify-center md:justify-start">
-                                <div className="group relative flex flex-col items-center mt-10">
+                                <div className="group relative flex flex-col items-center mn:mt-14 lg:mt-10">
                                     <div className="absolute bottom-12 left-0 flex justify-center items-center w-full h-full transform translate-y-full opacity-0 group-hover:-translate-y-2 group-hover:opacity-100 transition-all duration-300">
                                         <Image
                                             alt="guauButton"
@@ -172,7 +172,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                         Guaus
                                     </Button>
                                 </div>
-                                <div className="group relative flex flex-col items-center mt-10">
+                                <div className="group relative flex flex-col items-center mn:mt-14 lg:mt-10">
                                     <div className="absolute bottom-12 left-0 flex justify-center items-center w-full h-full transform translate-y-full opacity-0 group-hover:-translate-y-1.5 group-hover:opacity-100 transition-all duration-300">
                                     <Image
                                         alt="catButton"
@@ -200,7 +200,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         <div className='px-4 py-4'>
                             <div className='flex flex-wrap max-w-7xl mx-auto'>
                                 <Card isBlurred className="border-none w-full" shadow="md">
-                                    <ScrollShadow className="mn:w-full mn:h-[300px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
+                                    <ScrollShadow className="mn:w-full mn:h-[450px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
                                         <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
                                             {cardsDogs.map((card: any) => (
                                             <div
