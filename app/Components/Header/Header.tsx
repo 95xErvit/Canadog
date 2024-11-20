@@ -1,6 +1,9 @@
 "use client"
 import React from "react";
 import { useRouter } from 'next/navigation';
+import dogGora from "@/public/DogGora.png"
+import catGora from "@/public/catGora.png"
+import dog2Gora from "@/public/dog2Gora.png"
 import {Navbar, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Image} from "@nextui-org/react";
 
 export default function Header() {
@@ -99,13 +102,13 @@ export default function Header() {
                     {/* Iconos Gora solo visible en pantallas moviles */}
                     <div className="flex justify-center mt-8">
                         <div className="flex justify-center items-center m-4">
-                            <Image src="/dogGora.png" width="60" height="40" alt="Logo Gora"/>
+                            <Image src={dogGora.src} width="60" height="40" alt="Logo Gora"/>
                         </div>
                         <div className="flex justify-center items-center m-4">
-                            <Image src="/catGora.png" width="60" height="40" alt="Logo Gora"/>
+                            <Image src={catGora.src} width="60" height="40" alt="Logo Gora"/>
                         </div>
                         <div className="flex justify-center items-center m-4">
-                            <Image src="/dog2Gora.png" width="70" height="40" alt="Logo Gora"/>
+                            <Image src={dog2Gora.src} width="70" height="40" alt="Logo Gora"/>
                         </div>
                     </div>
                 </NavbarMenu>
