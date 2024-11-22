@@ -117,7 +117,7 @@ export default function Header() {
 
         {/* Logo dogGora solo visible en pantallas pantallas mayores a xl */}
         <div className="hidden xl:flex xl:justify-end items-center">
-            <Image src="/dogGora.png" width="60" height="40" alt="Logo Gora"/>
+            <Image src={dogGora.src} width="60" height="40" alt="Logo Gora"/>
         </div>
     </div>
   );
