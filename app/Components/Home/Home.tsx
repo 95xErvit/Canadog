@@ -1,13 +1,15 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { Button, Card, Input,CardBody, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, usePagination, PaginationItemType, Checkbox, Textarea } from "@nextui-org/react";
+import { Button, Card, Input,CardBody, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, usePagination, PaginationItemType, Checkbox, Textarea, Link } from "@nextui-org/react";
 import {ScrollShadow} from "@nextui-org/react";
 import {Divider} from "@nextui-org/divider";
 import {Pagination} from "@nextui-org/react";
 import MotionTransition from '../MotionTransition/MotionTransition';
 import Image from 'next/image';
-import PerrosCriollos from "@/public/Perros_criollos.jpg"
-import Kanu from "@/public/Kanu.jpg"
+import MakroPet from "@/public/Makropet.jpg"
+import FormaDogs from "@/public/Formadogs.jpg"
+import AnimalClinic from "@/public/AnimalClinic.jpeg"
+import DaniColibri from "@/public/DaniColibri.jpeg"
 import 'primeicons/primeicons.css';
 
 //{Dogs, Cats}: any
@@ -65,26 +67,24 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
         <div>
             {/* BANNER */}
             <section>
-                <div className='relative p-6 md:py-24'>
+                <div className='relative p-6 md:py-16'>
                     <div className='grid md:max-w-7xl mx-auto md:grid-cols-2'>
-                        <div className='mn:order-last mn:mt-8 md:ml-8 md:px-6 md:order-first '>
-                            <h2 className='mn:ml-2 md:ml-0 mn:text-3xl md:text-4xl font-semibold text-purpleGora'>
-                                ¡Encuentra {<span className='text-greenGora'>a tu compañero </span>}
-                                <span className=' text-greenGora'>perfecto</span>!
+                        <div className='flex flex-col justify-center mn:order-last mn:mt-8 md:ml-8 md:px-6 md:order-first '>
+                            <h2 className='mn:ml-2 md:ml-0 mn:text-3xl md:text-4xl font-semibold text-mentaCanadog'>
+                                !Encuentra{<span className='text-greenCanadog'> a tu compañero perfecto!</span>}
                             </h2>
-                            <p className='mn:ml-4 md:ml-0 mn:max-w-md md:max-w-lg mn:mt-4 md:mt-10'>
-                                Bienvenido a GORA, tu destino para encontrar tu compañero peludo perfecto. En nuestra plataforma, 
-                                conectamos a mascotas necesitadas con familias amorosas.<br/> 
+                            <p className='mn:max-w-md md:max-w-lg mn:ml-3 mn:m-4 md:ml-0 md:my-8'>
+                                Bienvenido a CANADOG, tu destino para encontrar tu compañero peludo perfecto. En nuestra plataforma, conectamos a mascotas necesitadas con familias amorosas. 
                                 ¡Descubre cómo puedes hacer una diferencia en la vida de un animal y en la tuya propia adoptando hoy!
                             </p>
-                            <div className="flex mn:my-8 mn:justify-center md:justify-start">
-                                <Button  className='bg-greenGora text-pinkLightGora' radius="full" size="lg" onPress={onOpen}>
-                                    Adopta Hoy
+                            <div className="flex mn:my-4 mn:justify-center md:justify-start">
+                                <Button  className='bg-greenCanadog text-pinkLightGora font-semibold' radius="full" size="lg" onPress={onOpen}>
+                                    Adopta un fiel amigo
                                 </Button>
                                 <Modal isOpen={isOpen} onOpenChange={onOpenChange} size='3xl' backdrop='blur' placement='center'>
                                     <ModalContent>
                                         <>
-                                            <ModalHeader className="flex justify-center text-greenGora mn:text-sm md:text-3xl">
+                                            <ModalHeader className="flex justify-center text-greenCanadog mn:text-sm md:text-3xl">
                                                 ¡Bienvenido {<p className='text-blackGora ml-1'> a tu próxima gran aventura</p>}!
                                             </ModalHeader>
                                             <ModalBody>
@@ -113,13 +113,13 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                             <ModalFooter className='flex justify-center'>
                                                 <div className='flex flex-col w-full'>
                                                     <div className='flex justify-evenly'>
-                                                        <Button href='https://forms.gle/m9oTCTt8n1qibjFU8' className='bg-greenGora text-pinkLightGora my-4 text-sm' radius="full" size="lg" onClick={() => window.open('https://forms.gle/m9oTCTt8n1qibjFU8', '_blank')}>
+                                                        <Button href='https://forms.gle/m9oTCTt8n1qibjFU8' className='bg-greenCanadog text-pinkLightGora my-4 text-sm' radius="full" size="lg" onClick={() => window.open('https://forms.gle/m9oTCTt8n1qibjFU8', '_blank')}>
                                                             Formulario adopción
                                                         </Button>                          
                                                     </div>
 
                                                     <Divider className="my-4"/>
-                                                    <div className='flex flex-wrap flex-col gap-2 text-greenGora mn:text-xs xl:text-sm font-semibold my-4 px-4'> 
+                                                    <div className='flex flex-wrap flex-col gap-2 text-greenCanadog mn:text-xs xl:text-sm font-semibold my-4 px-4'> 
                                                         <p>
                                                             ¡Gracias por tomarte el tiempo para completar este formulario! Nos emociona poder ayudarte a encontrar a tu nuevo mejor amigo peludo.
                                                         </p>
@@ -151,7 +151,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                     <div className='relative px-6 md:mx-6 mn:py-2 mn:mt-2 md:py-6 md:mt-4'>
                         <div className='grid max-w-7xl mx-auto md:gris-cols-2'>
                             <h2 className='mn:text-2xl md:text-4xl font-semibold'>
-                                Encuentra a tu {<span className='text-greenGora'>Mejor amigo</span>}
+                                Encuentra a tu {<span className='text-greenCanadog'>mejor amigo</span>}
                             </h2>
                             <div className="flex gap-4 mn:my-4 md:my-8 mn:justify-center md:justify-start">
                                 <div className="group relative flex flex-col items-center mn:mt-14 lg:mt-10">
@@ -165,7 +165,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                     </div>
                                     <Button
                                         onClick={(e) => setIsDog(true)}
-                                        className={`bg-transparent border ${isDog ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`}
+                                        className={`bg-transparent border ${isDog ? "bg-greenCanadog text-pinkLightGora font-semibold" : "border-greenCanadog text-greenCanadog font-semibold"} hover:bg-greenCanadog hover:text-pinkLightGora font-semibold`}
                                         radius="full"
                                         size="lg"
                                     >
@@ -183,7 +183,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                     </div>
                                     <Button
                                         onClick={(e) => setIsDog(false)}
-                                        className={`bg-transparent border ${!isDog ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora`}
+                                        className={`bg-transparent border ${!isDog ? "bg-greenCanadog text-pinkLightGora font-medium" : "border-greenCanadog text-greenCanadog font-semibold"} hover:bg-greenCanadog hover:text-pinkLightGora font-semibold`}
                                         radius="full"
                                         size="lg"
                                     >
@@ -225,7 +225,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                       <div className={`${expandedCard === card.id ? 'flex items-center justify-around' : 'flex w-full flex-wrap'}`}>
                                                         <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start text-2xl' : 'px-2 justify-end w-full mn:text-xl md:text-2xl'}`}>
                                                           {card.title.substring(0, 3)}
-                                                          <span className='text-greenGora'>{card.title.substring(3)}</span>
+                                                          <span className='text-greenCanadog'>{card.title.substring(3)}</span>
                                                         </h1>
                                                         <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start mn:text-xl xl:text-2xl mn: hidden' : 'px-2 justify-end w-full mn:text-xs xl:text-sm'}`}>
                                                           Edad: {card.old}
@@ -233,14 +233,14 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                         {expandedCard === card.id && (
                                                             <div className='flex flex-wrap'>
                                                                 <div className='flex items-center'>
-                                                                    <Button className='bg-greenGora border border-greenGora text-white text-sm h-7' radius="full">
+                                                                    <Button className='bg-greenCanadog border border-greenCanadog text-white text-sm h-7' radius="full">
                                                                         Adoptame
                                                                     </Button>
                                                                 </div>
                                                                 <div className='flex items-center'>
                                                                     <Button
                                                                         onClick={() => toggleExpand(card.id)}
-                                                                        className='bg-transparent text-greenGora text-end mn:min-w-10 xl:min-w-20'
+                                                                        className='bg-transparent text-greenCanadog text-end mn:min-w-10 xl:min-w-20'
                                                                         endContent={<i className="pi pi-arrow-circle-up" style={{ color: '#489E84', fontSize: '1.5rem' }} />}
                                                                         radius="full"
                                                                     />
@@ -257,7 +257,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                         <div className="flex justify-center">
                                                           <Button
                                                             onClick={() => toggleExpand(card.id)}
-                                                            className='bg-transparent border border-greenGora text-greenGora text-xs'
+                                                            className='bg-transparent border border-greenCanadog text-greenCanadog text-xs'
                                                             radius="full"
                                                             endContent={<i className="pi pi-arrow-circle-down" style={{ color: '#489E84' }} />}
                                                           >
@@ -311,7 +311,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                         <div className={`${expandedCard === card.id ? 'flex items-center justify-around' : 'flex w-full flex-wrap'}`}>
                                                             <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start text-2xl' : 'px-2 justify-end w-full mn:text-xl md:text-2xl'}`}>
                                                                 {card.title.substring(0, 3)}
-                                                                <span className='text-greenGora'>{card.title.substring(3)}</span>
+                                                                <span className='text-greenCanadog'>{card.title.substring(3)}</span>
                                                             </h1>
                                                             <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start mn:text-xl xl:text-2xl mn: hidden' : 'px-2 justify-end w-full mn:text-xs xl:text-sm'}`}>
                                                                 Edad: {card.old}
@@ -319,14 +319,14 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                             {expandedCard === card.id && (
                                                                 <div className='flex flex-wrap'>
                                                                     <div className='flex items-center'>
-                                                                        <Button className='bg-greenGora border border-greenGora text-white text-sm h-7' radius="full">
+                                                                        <Button className='bg-greenCanadog border border-greenCanadog text-white text-sm h-7' radius="full">
                                                                             Adoptame
                                                                         </Button>
                                                                     </div>
                                                                     <div className='flex items-center'>
                                                                         <Button
                                                                             onClick={() => toggleExpand(card.id)}
-                                                                            className='bg-transparent text-greenGora text-end'
+                                                                            className='bg-transparent text-greenCanadog text-end'
                                                                             radius="full"
                                                                             endContent={<i className="pi pi-arrow-circle-up" style={{ color: '#489E84', fontSize: '1.5rem' }} />}
                                                                         />
@@ -343,7 +343,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                             <div className="flex justify-center">
                                                                 <Button
                                                                     onClick={() => toggleExpand(card.id)}
-                                                                    className='bg-transparent border border-greenGora text-greenGora'
+                                                                    className='bg-transparent border border-greenCanadog text-greenCanadog'
                                                                     radius="full"
                                                                     endContent={<i className="pi pi-arrow-circle-down" style={{ color: '#489E84' }} />}
                                                                 >
@@ -381,13 +381,13 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
             <div className='relative mn:px-6 mn:py-2 mn:mt-2 md:px-6 md:py-6 md:mt-8'>
                 <div className='grid max-w-7xl mx-auto md:grid-cols-2'>
                     <h2 className='mn:text-2xl md:text-4xl font-semibold'>
-                        Historias {<span className='text-greenGora'>Emotivas</span>}
+                        Historias {<span className='text-greenCanadog'>Emotivas</span>}
                     </h2>
                 </div>
                 <div className='max-w-7xl mx-auto'>
                     <p className='mt-4 font-normal text-blackGora'>
                         Nuestro objetivo es hacer que muchos animales conozcan el  
-                        {<span className='text-greenGora font-semibold'> amor</span>}, 
+                        {<span className='text-greenCanadog font-semibold'> amor</span>}, 
                         rescatándolos de las calles, rehabilitándolos y encontrando una familia adoptante para ser su compañía por el resto de sus vidas.
                     </p>
                 </div>
@@ -476,111 +476,95 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                     <div className="text-center py-8 max-w-6xl mx-auto">
                         <h2 className="mb-6 text-3xl font-bold text-blackGora mn:text-2xl sm:text-4xl xl:text-5xl">Gracias aliados</h2>
                         <p className="mt-4 text-xl font-normal text-blackGora mn:text-base sm:text-lg xl:text-xl">
-                            ¡Su ayuda es {<span className='text-greenGora font-semibold'>TODO</span>} para nosotros y para ellos!
+                            ¡Su ayuda es {<span className='text-greenCanadog font-semibold'>TODO</span>} para nosotros y para ellos!
                         </p>
                     </div>
-                    <div className="max-w-6xl mn:mx-10 lg:mx-auto align-items-center grid grid-cols-1 gap-6 lg:grid-cols-4 lg:gap-8">
+
+                    <div className="max-w-7xl mn:mx-10 lg:mx-auto align-items-center grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5 justify-center lg:gap-4 py-4">
                         {/* Card 1 */}
-                        <div className="bg-white text-blackGora p-2 rounded-full flex justify-center items-center space-x-4 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora">
-                            <Image
-                                className="w-24 h-24 rounded-full"
-                                src={PerrosCriollos.src}
-                                width={96}
-                                height={96}
-                                alt="PC"
-                            />
-                        <div className='flex flex-col'>
-                            <p className="text-base font-bold">Perros Criollos</p>
-                            <p className="text-xs font-semibold">@perros.criollos</p>
-                        </div>
-                        </div>
-
+                        
+                        <Link href='https://www.instagram.com/makropetveterinaria/' target="_blank">
+                            <div className="bg-white text-blackGora py-2 px-4 flex flex-col items-center gap-2 w-full border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
+                                <Image
+                                    className="w-28 h-28 rounded-full"
+                                    src={MakroPet.src}
+                                    width={100}
+                                    height={100}
+                                    alt="Makro Pet"
+                                />
+                                <div className='flex flex-col justify-center items-center'>
+                                    <p className="lg:text-2xl font-bold">Makro Pet</p>
+                                    <p className="lg:text-base font-semibold">@makropetveterinaria</p>
+                                </div>
+                            </div>
+                        </Link>
+                        
                         {/* Card 2 */}
-                        <div className="bg-white text-blackGora p-2 rounded-full flex justify-center items-center space-x-4 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora">
-                        <Image
-                            className="w-24 h-24 rounded-full"
-                            src={Kanu.src}
-                            width={96}
-                            height={96}
-                            alt="James"
-                        />
-                        <div className='flex flex-col'>
-                            <p className="text-base font-bold">Kanu</p>
-                            <p className="text-xs font-semibold">@kanumascotas</p>
-                        </div>
-                        </div>
-
+                        <Link href='https://www.instagram.com/formadogs.escuelacanina/' target="_blank">
+                            <div className="bg-white text-blackGora py-2 px-4 flex flex-col items-center gap-2 w-full border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
+                                <Image
+                                    className="w-28 h-28 rounded-full"
+                                    src={FormaDogs.src}
+                                    width={100}
+                                    height={100}
+                                    alt="Forma Dogs"
+                                />
+                                <div className='flex flex-col justify-center items-center'>
+                                    <p className="text-2xl font-bold">Formadogs</p>
+                                    <p className="text-base font-semibold">@formadogs.escuelacanina</p>
+                                </div>
+                            </div>
+                        </Link>
+                        
                         {/* Card 3 */}
-                        <div className="bg-white text-blackGora p-6 rounded-full flex items-center space-x-4 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora">
-                        <Image
-                            className="w-12 h-12 rounded-full"
-                            src=""
-                            width={24}
-                            height={24}
-                            alt="Alexa"
-                        />
-                        <p className="text-sm font-bold">@alexaborn</p>
-                        </div>
-
+                        <Link href='https://www.instagram.com/animalcliniccolina/' target="_blank">
+                            <div className="bg-white text-blackGora py-2 px-4 flex flex-col items-center gap-2 w-full border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
+                                <Image
+                                    className="w-28 h-28 rounded-full"
+                                    src={AnimalClinic.src}
+                                    width={100}
+                                    height={100}
+                                    alt="James"
+                                />
+                                <div className='flex flex-col justify-center items-center'>
+                                    <p className="text-2xl font-bold">Animal Clinic</p>
+                                    <p className="text-base font-semibold">@animalcliniccolina</p>
+                                </div>
+                            </div>
+                        </Link>
                         {/* Card 4 */}
-                        <div className="bg-white text-blackGora p-6 rounded-full flex items-center space-x-2 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora">
-                        <Image
-                            className="w-12 h-12 rounded-full"
-                            src=""
-                            width={24}
-                            height={24}
-                            alt="Cameron"
-                        />
-                        <p className="text-sm font-bold">@camerondi</p>
-                        </div>
-
+                        <Link href='https://www.instagram.com/danii.colibri/' target="_blank">
+                            <div className="bg-white text-blackGora py-2 px-4 flex flex-col items-center gap-2 w-full border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
+                                <Image
+                                    className="w-28 h-28 rounded-full"
+                                    src={DaniColibri.src}
+                                    width={100}
+                                    height={100}
+                                    alt="James"
+                                />
+                                <div className='flex flex-col justify-center items-center'>
+                                    <p className="text-2xl font-bold">Dani Colibri</p>
+                                    <p className="text-base font-semibold">@danii.colibri</p>
+                                </div>
+                            </div>
+                        </Link>
+                        
                         {/* Card 5 */}
-                        <div className="bg-white text-blackGora p-6 rounded-full flex items-center space-x-4 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora lg:translate-x-8">
-                        <Image
-                            className="w-12 h-12 rounded-full"
-                            src=""
-                            width={24}
-                            height={24}
-                            alt="Martina"
-                        />
-                        <p className="text-sm font-bold">@martina</p>
-                        </div>
-
-                        {/* Card 6 */}
-                        <div className="bg-white text-blackGora p-6 rounded-full flex items-center space-x-4 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora lg:translate-x-8">
-                        <Image
-                            className="w-12 h-12 rounded-full"
-                            src=""
-                            width={24}
-                            height={24}
-                            alt="Christina"
-                        />
-                        <p className="text-sm font-bold">@christin.jamescron</p>
-                        </div>
-
-                        {/* Card 7 */}
-                        <div className="bg-white text-blackGora p-6 rounded-full flex items-center space-x-4 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora lg:translate-x-8">
-                        <Image
-                            className="w-12 h-12 rounded-full"
-                            src=""
-                            width={24}
-                            height={24}
-                            alt="James"
-                        />
-                        <p className="text-sm font-bold">@jamescron</p>
-                        </div>
-
-                        {/* Card 8 */}
-                        <div className="bg-white text-blackGora p-6 rounded-full flex items-center space-x-4 shadow-lg border-2 border-redGora hover:border-2 hover:border-pinkGora lg:translate-x-8">
-                            <Image
-                                className="w-12 h-12 rounded-full"
-                                src=""
-                                width={24}
-                                height={24}
-                                alt="Alexa"
-                            />
-                            <p className="text-sm font-bold">@alexaborn</p>
-                        </div>
+                        <Link href='https://www.instagram.com/makropetveterinaria/' target="_blank">
+                            <div className="bg-white text-blackGora py-2 px-4 flex flex-col items-center gap-2 w-full border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
+                                <Image
+                                    className="w-28 h-28 rounded-full"
+                                    src={FormaDogs.src}
+                                    width={100}
+                                    height={100}
+                                    alt="James"
+                                />
+                                <div className='flex flex-col justify-center items-center'>
+                                    <p className="text-2xl font-bold">Formadogs</p>
+                                    <p className="text-base font-semibold">@kanumascotas</p>
+                                </div>
+                            </div>
+                        </Link>
                     </div>
                 </section>
             </div> 
@@ -589,9 +573,9 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
 
             {/* BANNER FINAL */}
             <div className='relative mn:px-6 mn:py-2 mn:mt-2 md:px-6 md:py-6 md:mt-8'>
-                <div className='grid max-w-7xl mx-auto md:grid-cols-2'>
+                <div className='grid max-w-7xl mx-auto'>
                     <h2 className='mn:text-xl md:text-4xl font-semibold'>
-                        Adoptar es {<span className='text-greenGora'>Fácil</span>}
+                        Pasos para {<span className='text-greenCanadog'>adoptar</span>} a tu nuevo compañero
                     </h2>
                 </div>
             </div>
@@ -732,6 +716,6 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
         ¿En caso de ser arrendador, el dueño del inmueble tiene conocimiento de la posible adopción 
         y dio autorización para llevarla a cabo?
     </p>
-    <Checkbox className='text-blackGora text-sm p-2 border-2 border-greenGora rounded-xl'>Si</Checkbox>
-    <Checkbox className='text-blackGora text-sm p-2 border-2 border-greenGora rounded-xl'>No</Checkbox>
+    <Checkbox className='text-blackGora text-sm p-2 border-2 border-greenCanadog rounded-xl'>Si</Checkbox>
+    <Checkbox className='text-blackGora text-sm p-2 border-2 border-greenCanadog rounded-xl'>No</Checkbox>
 </div> */}

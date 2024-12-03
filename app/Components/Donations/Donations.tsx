@@ -12,9 +12,9 @@ export default function Donations() {
                 <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="flex flex-col items-center">
                         <div className="text-center">
-                            <span className="filter drop-shadow-[0_0_0.2rem_#f82e03] inline-block">
+                            {/* <span className="filter drop-shadow-[0_0_0.2rem_#f82e03] inline-block">
                                 <Image alt="lovePets" src="/avatarGora.png" height="70" width="70"/>
-                            </span> 
+                            </span>  */}
                             <h2 className="mt-4 text-3xl font-bold text-blackGora sm:text-4xl xl:text-5xl">Escoge tu forma de ayudar</h2>
                             <p className="mt-4 text-xl font-normal text-blackGora sm:text-lg xl:text-xl">Tenemos debito automático mensual con el valor que selecciones, para que seas parte de este sueño </p>
                             <p className="mt-4 text-xl font-normal text-blackGora sm:text-lg xl:text-xl">Gracias padrinos y madrinas de rescate, ellos tendrán lo necesario para empezar una vida feliz.</p>

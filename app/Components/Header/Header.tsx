@@ -22,57 +22,59 @@ export default function Header() {
     
   const menuItems = [
     { name: "Adopciones", action: () => donationNavigation('/#adopciones') },
-    { name: "Tienda Gora", action: () => window.open("https://gorafundacion.org", "_blank") },
+    { name: "Tienda Canadog", action: () => window.open("https://gorafundacion.org", "_blank") },
     { name: "Contáctanos", action: () => donationNavigation('#contactanos') },
     { name: "Ayudanos", action: () => donationNavigation('/Home/Donations') }, 
   ];
 
   return (
-    <div className="flex justify-around bg-greenGora md:py-4 items-center">
-        {/* Logo Gora al inicio */}
-        <div>
-            <Link href="/" className="flex items-center">
-                <Image src="/LogoGora.png" width="150" height="50" alt="Logo Gora"/>
-            </Link>
-        </div>
-
-        <div>
+    <div className="flex justify-center bg-white md:p-4 items-center">
+            <div className="flex lg:hidden justify-center items-center py-2">
+                <Link href="/" className="flex items-center relative">
+                    <Image src="/LogoCanadog.jpg" width={120} height={100} alt="Canadog" />
+                </Link>
+            </div>
             <Navbar 
                 onMenuOpenChange={setIsMenuOpen} 
                 isMenuOpen={isMenuOpen} 
-                className="bg-greenGora md:py-4"
+                className="bg-white md:py-10"
             >
-                <NavbarContent className="flex justify-center items-center" justify="center">
+                <NavbarContent className="flex justify-center items-center w-full">
                     {/* Menú web */}
-                    <NavbarContent className="hidden lg:flex gap-8" justify="center">
-                        <NavbarItem>
+                    <NavbarContent className="hidden lg:flex gap-10 w-full" justify="center">
+                        <NavbarItem className="w-full text-center transition ease-in-out delay-180 hover:scale-110 duration-180">
                             <Link 
-                                className="text-lg text-pinkLightGora hover:text-orangeGora hover:underline hover:underline-offset-8 cursor-pointer"
+                                className="text-xl font-semibold text-greenCanadog hover:text-mentaCanadog relative before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-greenCanadog before:transition-all before:duration-300 hover:before:w-full cursor-pointer"
                                 onClick={() => router.push('/#adopciones')}
                             >
                                 Adopciones
                             </Link>
                         </NavbarItem>
-                        <NavbarItem>
+                        <NavbarItem className="w-full text-center transition ease-in-out delay-180 hover:scale-110 duration-180">
                             <Link 
-                                className="text-lg text-pinkLightGora hover:text-orangeGora hover:underline hover:underline-offset-8 cursor-pointer" 
+                                className="text-xl font-semibold text-greenCanadog hover:text-mentaCanadog relative before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-greenCanadog before:transition-all before:duration-300 hover:before:w-full cursor-pointer" 
                                 href="https://gorafundacion.org" 
                                 target="_blank"
                             >
-                                Tienda Gora
+                                Tienda Canadog
                             </Link>
                         </NavbarItem>
-                        <NavbarItem>
+                        <NavbarItem className="w-full text-center">
+                            <Link href="/">
+                                <Image src="/LogoCanadog.jpg" width="180" height="100" alt="Canadog"/>
+                            </Link>
+                        </NavbarItem>
+                        <NavbarItem className="w-full text-center transition ease-in-out delay-180 hover:scale-110 duration-180">
                             <Link 
-                                className="text-lg text-pinkLightGora hover:text-orangeGora hover:underline hover:underline-offset-8 cursor-pointer" 
+                                className="text-xl font-semibold text-greenCanadog hover:text-mentaCanadog relative before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-greenCanadog before:transition-all before:duration-300 hover:before:w-full cursor-pointer" 
                                 href="#"
                             >
                                 Contáctanos
                             </Link>
                         </NavbarItem>
-                        <NavbarItem>
+                        <NavbarItem className="w-full text-center transition ease-in-out delay-180 hover:scale-110 duration-180">
                             <Link 
-                                className="text-lg text-pinkLightGora hover:text-orangeGora hover:underline hover:underline-offset-8 cursor-pointer" 
+                                className="text-xl font-semibold text-greenCanadog hover:text-mentaCanadog relative before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-greenCanadog before:transition-all before:duration-300 hover:before:w-full cursor-pointer" 
                                 onClick={() => router.push('/Home/Donations')}
                             >
                                 Ayúdanos
@@ -83,7 +85,7 @@ export default function Header() {
                     {/* Botón hamburguesa */}
                     <NavbarMenuToggle
                         aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-                        className="lg:hidden text-pinkLightGora font-bold"
+                        className="lg:hidden text-greenCanadog hover:text-mentaCanadog font-bold"
                     />
                 </NavbarContent>
                 
@@ -92,7 +94,7 @@ export default function Header() {
                     {menuItems.map((item, index) => (
                         <NavbarMenuItem key={`${item.name}-${index}`} className="mt-4">
                             <Link
-                                className="flex justify-center py-2 w-full text-4xl text-greenGora hover:text-orangeGora cursor-pointer"
+                                className="flex justify-center py-2 w-full text-4xl text-greenCanadog hover:text-mentaCanadog cursor-pointer"
                                 onClick={() => handleMenuItemClick(item.action)}
                             >
                                 {item.name}
@@ -114,11 +116,5 @@ export default function Header() {
                 </NavbarMenu>
             </Navbar>
         </div>
-
-        {/* Logo dogGora solo visible en pantallas pantallas mayores a xl */}
-        <div className="hidden xl:flex xl:justify-end items-center">
-            <Image src={dogGora.src} width="60" height="40" alt="Logo Gora"/>
-        </div>
-    </div>
   );
 }
