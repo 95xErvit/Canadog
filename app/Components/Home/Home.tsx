@@ -10,6 +10,10 @@ import MakroPet from "@/public/Makropet.jpg"
 import FormaDogs from "@/public/Formadogs.jpg"
 import AnimalClinic from "@/public/AnimalClinic.jpeg"
 import DaniColibri from "@/public/DaniColibri.jpeg"
+import Explora from "@/public/Explora.png"
+import Aplica from "@/public/Aplica.png"
+import Entrevista from "@/public/Entrevista.png"
+import Adopcion from "@/public/Adopcion.png"
 import 'primeicons/primeicons.css';
 
 //{Dogs, Cats}: any
@@ -572,21 +576,55 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
             <Divider className="my-4"/>
 
             {/* BANNER FINAL */}
+            {/* BANNER FINAL */}
             <div className='relative mn:px-6 mn:py-2 mn:mt-2 md:px-6 md:py-6 md:mt-8'>
                 <div className='grid max-w-7xl mx-auto'>
-                    <h2 className='mn:text-xl md:text-4xl font-semibold'>
-                        Pasos para {<span className='text-greenCanadog'>adoptar</span>} a tu nuevo compañero
+                    <h2 className='mn:text-2xl md:text-4xl font-semibold text-blackGora'>
+                        Pasos para {<span className='text-Canadog'>adoptar</span>} a tu nuevo compañero
                     </h2>
                 </div>
             </div>
-            <div className='flex justify-center mt-2 mb-6 py-4'>
-                <div className='relative mn:px-2 mn:py-2 md:px-6 md:py-6'>
+            <div className="mn:max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-7xl mx-auto mt-10 mb-20 lg:gap-4 py-4 align-items-center gap-6 grid mn:grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 justify-center border-2 border-greenGora rounded-lg">
+                {/* Card 1 */}
+                <div className="bg-white text-blackGora flex flex-col items-center gap-2">
                     <Image
-                        alt="Album cover"
-                        className="object-cover"
-                        height={250}
-                        src="/Adoptar.png"
-                        width={1280}
+                        className="mn:w-36 mn:h-48 lg:w-40 lg:h-52 xl:w-44 xl:h-60"
+                        src={Explora.src}
+                        width={100}
+                        height={100}
+                        alt="Explora"
+                    />
+                </div>
+                
+                {/* Card 2 */}
+                <div className="bg-white text-blackGora flex flex-col items-center gap-2">
+                    <Image
+                        className="mn:w-36 mn:h-48 lg:w-40 lg:h-52 xl:w-44 xl:h-60"
+                        src={Aplica.src}
+                        width={100}
+                        height={100}
+                        alt="Aplica"
+                    />
+                </div>
+                
+                {/* Card 3 */}
+                <div className="bg-white text-blackGora flex flex-col items-center gap-2">
+                    <Image
+                        className="mn:w-36 mn:h-48 lg:w-40 lg:h-52 xl:w-44 xl:h-60"
+                        src={Entrevista.src}
+                        width={100}
+                        height={100}
+                        alt="Entrevista"
+                    />
+                </div>
+                {/* Card 4 */}
+                <div className="bg-white text-blackGora flex flex-col items-center gap-2">
+                    <Image
+                        className="mn:w-36 mn:h-48 lg:w-40 lg:h-52 xl:w-44 xl:h-60"
+                        src={Adopcion.src}
+                        width={100}
+                        height={100}
+                        alt="Adopción"
                     />
                 </div>
             </div>
