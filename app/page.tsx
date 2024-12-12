@@ -12,17 +12,17 @@ export default async function HomeGora()
 		},
 	};
 
-	// const result : any = await GetPets(true, "Dog");
-	// const result2  : any = await GetPets(true, "Cat");
-	// const result3 : any = await GetPets(true, "History")
+	const result : any = await GetPets(true, "Dog", "CANADOG");
+	const result2  : any = await GetPets(true, "Cat", "CANADOG");
+	const result3 : any = await GetPets(true, "History", "CANADOG")
 	return (
 		<>
 			<Header/>
 				<main className="bg-cover bg-center" style={{backgroundImage:'url("")'}}>
 					<Home 
-						cardsDogs=/*{result.data.result.recordset}*/ {[]}
-						cardsCats=/*{result2.data.result.recordset}*/ {[]}
-						cardsHistory=/*{result3.data.result.recordset}*/ {[]}
+						cardsDogs={result.data.result.recordset} /*{[]}*/
+						cardsCats={result2.data.result.recordset} /*{{[]}*/
+						cardsHistory={result3.data.result.recordset} /*{[]}*/ 
 					/>
 				</main>
 			<Footer/>

@@ -148,7 +148,7 @@ export default function CMS({Dogs, Cats, History}: any)
         setIsLoading(true)
         try
         {
-            const response = await axios.post("/UserGora/CMS/api/pets",{data:{User:"Adminitrador",Enable: 1, Name: name, OldDate:yearOlds, Description:description, Type:isDog ? "DOG" : isCat? "CAT": "HISTORY", Images: file}})
+            const response = await axios.post("/UserGora/CMS/api/pets",{data:{User:"Administrador_CanaDog",Enable: 1, Name: name, OldDate:yearOlds, Description:description, Type:isDog ? "DOG" : isCat? "CAT": "HISTORY", Images: file, Web: "CANADOG"}})
             console.log('Contesto:', response);
         }
         catch(err){
@@ -163,7 +163,7 @@ export default function CMS({Dogs, Cats, History}: any)
     
         try
         {
-            const response = await axios.patch("/UserGora/CMS/api/pets",{data:{AnimaldId:id, User:"Adminitrador",Enable: EnablePet, Name: name, OldDate:yearOlds, Description:description, Type:isDog ? "DOG" : isCat? "CAT": "HISTORY", Images: file }})
+            const response = await axios.patch("/UserGora/CMS/api/pets",{data:{AnimaldId:id, User:"Administrador_CanaDog",Enable: EnablePet, Name: name, OldDate:yearOlds, Description:description, Type:isDog ? "DOG" : isCat? "CAT": "HISTORY", Images: file, Web: "CANADOG" }})
             console.log('Contesto:', response);
         }
         catch(err){

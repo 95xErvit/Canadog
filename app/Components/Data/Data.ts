@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function GetPets(enable? : boolean, type? : string ) {
+export async function GetPets(enable? : boolean, type? : string, web? : string ) {
 
     try {
 
@@ -12,7 +12,7 @@ export async function GetPets(enable? : boolean, type? : string ) {
 
         try {
 
-            const params = {Type: type, Enable:enable}
+            const params = {Type: type, Enable:enable, Web: web}
 
             const result = await axios.get(`${process.env.HOST_API}/Api/Gora/CMS/Pets`,
             {   

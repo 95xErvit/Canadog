@@ -11,9 +11,9 @@ export default async function Home()
 		},
 	};
 
-	const result : any = await GetPets(undefined,"Dog");
-	const result2  : any = await GetPets(undefined, "Cat");
-	const result3 : any = await GetPets(undefined,'HISTORY')
+	const result : any = await GetPets(undefined,"Dog", "CANADOG");
+	const result2  : any = await GetPets(undefined, "Cat", "CANADOG");
+	const result3 : any = await GetPets(undefined, 'HISTORY', "CANADOG")
 
 	console.log("HOLA",result.data.result.recordset)
 	
