@@ -42,7 +42,7 @@ export default function Footer(){
                     <Link className="text-white hover:text-mentaCanadog mn:text-md md:text-xl py-2" href="#adopciones">
                         Adopciones
                     </Link>
-                    <Link className="text-white hover:text-mentaCanadog mn:text-md md:text-xl py-2" href="https://gorafundacion.org/">
+                    <Link className="text-white hover:text-mentaCanadog mn:text-md md:text-xl py-2" href="/">
                         Tienda Canadog
                     </Link>
                     <Link className="text-white hover:text-mentaCanadog mn:text-md md:text-xl py-2" href="https://nibi.com.co/fundaciones/id/GORA_FUNDACI%C3%93N">
