@@ -337,7 +337,7 @@ export default function CMS({Dogs, Cats, History}: any)
                             <Button 
                                 isLoading={isLoading} 
                                 onClick={(e)=> [setIsDog(true),setIsHistory(false), setIsCat(false)]} 
-                                className={`bg-transparent border  ${isDog ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora mn:text-sm xl:text-xl`} 
+                                className={`bg-transparent border  ${isDog ? "bg-greenGora text-greenCanadog" : "border-greenGora text-greenGora"} hover:bg-mentaCanadog hover:text-white mn:text-sm xl:text-xl`} 
                                 radius="full" 
                             >
                                 Guaus
@@ -345,7 +345,7 @@ export default function CMS({Dogs, Cats, History}: any)
                             <Button 
                                 isLoading={isLoading} 
                                 onClick={(e)=> [setIsDog(false),setIsHistory(false),setIsCat(true)]} 
-                                className={`bg-transparent border ${isCat ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora mn:text-sm xl:text-xl`} 
+                                className={`bg-transparent border  ${isCat ? "bg-greenGora text-greenCanadog" : "border-greenGora text-greenGora"} hover:bg-mentaCanadog hover:text-white mn:text-sm xl:text-xl`} 
                                 radius="full" 
                             >
                                 Miaus
@@ -353,14 +353,14 @@ export default function CMS({Dogs, Cats, History}: any)
                             <Button 
                                 isLoading={isLoading} 
                                 onClick={(e) => [ setIsHistory(true),setIsDog(false),setIsCat(false) ]} 
-                                className={`bg-transparent border ${isHistory ? "bg-greenGora text-pinkLightGora" : "border-greenGora text-greenGora"} hover:bg-greenGora hover:text-pinkLightGora mn:text-sm xl:text-xl`} 
+                                className={`bg-transparent border  ${isHistory ? "bg-greenGora text-greenCanadog" : "border-greenGora text-greenGora"} hover:bg-mentaCanadog hover:text-white mn:text-sm xl:text-xl`}
                                 radius="full" 
                             >
                                 Historias
                             </Button>
                             <Button 
                                 onPress={onOpen} 
-                                className='bg-transparent border border-redGora text-redGora mn:text-sm xl:text-xl pi pi-plus' 
+                                className='bg-transparent border border-greenCanadog text-mentaCanadog mn:text-sm xl:text-xl pi pi-plus' 
                                 radius="full" 
                             />
                         </div>

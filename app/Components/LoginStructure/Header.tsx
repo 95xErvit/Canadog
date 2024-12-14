@@ -7,11 +7,11 @@ export default function Header()
     <header>  
         <div className="border-none bg-greenGora py-6">
           <div className="flex justify-center items-center gap-4">
-            <span className="filter drop-shadow-[0_0_0.1rem_#DF6536] inline-block">
-                <Image alt="avatarGora" src="/avatarGora.png" height="48" width="48"/>
+            <span className="filter inline-block">
+                <Image alt="avatarGora" src="/LogoCanadog.jpg" height="60" width="60"/>
             </span> 
             <p className="mn:text-2xl lg:text-4xl font-semibold leading-6">
-              <a className=" text-pinkLightGora">Gora Admin</a>
+              <a className=" text-greenCanadog">Canadog admin</a>
             </p>
           </div>
         </div> 

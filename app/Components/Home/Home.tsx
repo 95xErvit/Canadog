@@ -71,7 +71,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
         <div>
             {/* BANNER */}
             <section>
-                <div className='relative p-6 md:py-16'>
+                <div className='relative p-6 md:pb-16'>
                     <div className='grid md:max-w-7xl mx-auto md:grid-cols-2'>
                         <div className='flex flex-col justify-center mn:order-last mn:mt-8 md:ml-8 md:px-6 md:order-first '>
                             <h2 className='mn:ml-2 md:ml-0 mn:text-3xl md:text-4xl font-semibold text-mentaCanadog'>
@@ -138,11 +138,11 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                 </Modal>
                             </div>
                         </div>
-                        {/* <MotionTransition className='mn:order-first mn:mt-6 md:order-last'>
+                        <MotionTransition className='mn:order-first mn:mt-6 md:order-last'>
                             <div className='flex justify-center'>
-                                <Image src='' alt='card' width={550} height={550} className='h-auto w-80 md:w-full'/>
+                                <Image src='/PerritoBlanco.jpeg' alt='card' width={550} height={550} className='h-auto w-80 md:w-full rounded-lg'/>
                             </div>
-                        </MotionTransition> */}
+                        </MotionTransition>
                     </div>
                 </div>
             </section>
