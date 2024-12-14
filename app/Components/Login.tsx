@@ -44,11 +44,11 @@ export default function Login() {
                     <div className="absolute inset-0">
                         <img className="w-full h-full object-cover" src="/CuranElAlma.jpg" alt="Login-Canadog"/>
                     </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-transparent to-black/20"/>
+                    <div className="absolute inset-0 bg-gradient-to-t from-transparent to-black/30"/>
 
                     <div className="absolute top-2 right-5 flex flex-col items-center">
                         <div className="flex justify-center gap-4 m-4 mt-6">
-                            <img className="mn:w-16 md:w-24 h-full" src="/LogoGora.png" alt="TeamGora"/>
+                            <img className="mn:w-16 md:w-24 h-full" src="/Logo.png" alt="TeamGora"/>
                             <img className="mn:w-4 md:w-8 h-full" src="/featuring.png" alt="featuring"/>
                             <img className="mn:w-24 md:w-28 h-full" src="/InnMinds.png" alt="Innminds"/>
                         </div>
@@ -127,7 +127,7 @@ export default function Login() {
                                             </div>
                                             <div className='flex justify-center mt-6'>
                                                 <Button 
-                                                    className='bg-greenGora text-white font-semibold hover:bg-pinkLightGora hover:text-greenGora flex w-[300px] lg:w-[400px]' 
+                                                    className='bg-greenCanadog text-white font-semibold hover:bg-mentaCanadog flex w-[300px] lg:w-[400px]' 
                                                     size="lg" 
                                                     radius='md' 
                                                     variant="shadow" 

@@ -82,7 +82,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                 ¡Descubre cómo puedes hacer una diferencia en la vida de un animal y en la tuya propia adoptando hoy!
                             </p>
                             <div className="flex mn:my-4 mn:justify-center md:justify-start">
-                                <Button  className='bg-greenCanadog text-pinkLightGora font-semibold' radius="full" size="lg" onPress={onOpen}>
+                                <Button  className='bg-greenCanadog text-white font-semibold rounded-lg' size="lg" onPress={onOpen}>
                                     Adopta un fiel amigo
                                 </Button>
                                 <Modal isOpen={isOpen} onOpenChange={onOpenChange} size='3xl' backdrop='blur' placement='center'>
@@ -138,11 +138,11 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                 </Modal>
                             </div>
                         </div>
-                        <MotionTransition className='mn:order-first mn:mt-6 md:order-last'>
+                        {/* <MotionTransition className='mn:order-first mn:mt-6 md:order-last'>
                             <div className='flex justify-center'>
-                                <Image src='/BannerGora.png' alt='card' width={550} height={550} className='h-auto w-80 md:w-full'/>
+                                <Image src='' alt='card' width={550} height={550} className='h-auto w-80 md:w-full'/>
                             </div>
-                        </MotionTransition>
+                        </MotionTransition> */}
                     </div>
                 </div>
             </section>
@@ -169,8 +169,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                     </div>
                                     <Button
                                         onClick={(e) => setIsDog(true)}
-                                        className={`bg-transparent border ${isDog ? "bg-greenCanadog text-pinkLightGora font-semibold" : "border-greenCanadog text-greenCanadog font-semibold"} hover:bg-greenCanadog hover:text-pinkLightGora font-semibold`}
-                                        radius="full"
+                                        className={`bg-transparent border ${isDog ? "bg-greenCanadog text-pinkLightGora font-semibold" : "border-greenCanadog text-greenCanadog font-semibold"} hover:bg-greenCanadog hover:text-pinkLightGora font-semibold rounded-lg`}
                                         size="lg"
                                     >
                                         Guaus
@@ -187,8 +186,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                     </div>
                                     <Button
                                         onClick={(e) => setIsDog(false)}
-                                        className={`bg-transparent border ${!isDog ? "bg-greenCanadog text-pinkLightGora font-medium" : "border-greenCanadog text-greenCanadog font-semibold"} hover:bg-greenCanadog hover:text-pinkLightGora font-semibold`}
-                                        radius="full"
+                                        className={`bg-transparent border ${!isDog ? "bg-greenCanadog text-pinkLightGora font-medium" : "border-greenCanadog text-greenCanadog font-semibold"} hover:bg-greenCanadog hover:text-pinkLightGora font-semibold rounded-lg`}
                                         size="lg"
                                     >
                                         Miaus
@@ -412,7 +410,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                             }`}
                         >
                             <div className="flex flex-col items-center">
-                                <div className="m-2 border-2 border-orangeGora rounded-xl">
+                                <div className="m-2 border-2 border-mentaCanadog rounded-xl">
                                     <div className="flex flex-col justify-center gap-6 md:gap-2">
                                         <div className="m-4">
                                             <h1 className="flex flex-col justify-center font-bold text-purpleGora text-2xl gap-2">
@@ -442,7 +440,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                     <button
                         onClick={handlePrevious}
                         disabled={currentIndex === 0}
-                        className="p-4 py-2 bg-orangeGora/80 rounded-xl shadow hover:bg-orangeGora text-white"
+                        className="p-4 py-2 bg-mentaCanadog rounded-xl shadow hover:bg-greenCanadog text-white"
                     >
                         ❮
                     </button>
@@ -450,7 +448,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                 <div className="absolute top-1/2 right-0 mn:right-5 lg:right-10 transform -translate-y-1/2">
                     <button
                         onClick={handleNext}
-                        className="p-4 py-2 bg-orangeGora/80 rounded-xl shadow hover:bg-orangeGora text-white"
+                        className="p-4 py-2 bg-mentaCanadog rounded-xl shadow hover:bg-greenCanadog text-white"
                     >
                         ❯
                     </button>

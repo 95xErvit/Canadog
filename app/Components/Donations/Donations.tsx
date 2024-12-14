@@ -35,8 +35,8 @@ export default function Donations() {
                                     <div className="flex flex-col justify-between flex-1 p-6 bg-white lg:py-8 lg:px-7">
                                         <div className="flex-1">
                                             <blockquote className="flex-1 mt-8">
-                                                <p className="text-2xl leading-relaxed text-center text-purpleGora font-semibold">
-                                                <span className="text-greenGora">Dona</span> Bancolombia
+                                                <p className="text-2xl leading-relaxed text-center text-mentaCanadog font-semibold">
+                                                <span className="text-mentaCanadog">Dona</span> Bancolombia
                                                 </p>
                                             </blockquote>
 
@@ -67,8 +67,8 @@ export default function Donations() {
                                     <div className="flex flex-col justify-between flex-1 p-6 bg-white lg:py-8 lg:px-7">
                                         <div className="flex-1">
                                             <blockquote className="flex-1 mt-8">
-                                                <p className="text-2xl leading-relaxed text-center text-purpleGora font-semibold">
-                                                    <span className="text-greenGora">Dona</span> Nequi
+                                                <p className="text-2xl leading-relaxed text-center text-greenCanadog font-semibold">
+                                                    <span className="text-mentaCanadog">Dona</span> Nequi
                                                 </p>
                                             </blockquote>
 
@@ -102,7 +102,8 @@ export default function Donations() {
                                     <div className="flex flex-col justify-between flex-1 p-6 bg-white lg:py-8 lg:px-7">
                                         <div className="flex-1">
                                             <blockquote className="flex-1 mt-8">
-                                                <p className="text-2xl leading-relaxed text-center text-purpleGora font-semibold"><span className="text-greenGora">Dona</span> PayPal</p>
+                                                <p className="text-2xl leading-relaxed text-center text-greenCanadog font-semibold">
+                                                    <span className="text-mentaCanadog">Dona</span> PayPal</p>
                                             </blockquote>
 
                                             <div className="flex items-center mt-8">

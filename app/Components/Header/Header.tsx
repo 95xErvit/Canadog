@@ -22,7 +22,7 @@ export default function Header() {
     
   const menuItems = [
     { name: "Adopciones", action: () => donationNavigation('/#adopciones') },
-    { name: "Tienda Canadog", action: () => window.open("https://gorafundacion.org", "_blank") },
+    { name: "Tienda Canadog", action: () => window.open("/") },
     { name: "Contáctanos", action: () => donationNavigation('#contactanos') },
     { name: "Ayudanos", action: () => donationNavigation('/Home/Donations') }, 
   ];
@@ -53,8 +53,8 @@ export default function Header() {
                         <NavbarItem className="w-full text-center transition ease-in-out delay-180 hover:scale-110 duration-180">
                             <Link 
                                 className="text-xl font-semibold text-greenCanadog hover:text-mentaCanadog relative before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-greenCanadog before:transition-all before:duration-300 hover:before:w-full cursor-pointer" 
-                                href="https://gorafundacion.org" 
-                                target="_blank"
+                                href="/" 
+                                // target="_blank"
                             >
                                 Tienda Canadog
                             </Link>
