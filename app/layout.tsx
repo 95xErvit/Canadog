@@ -9,7 +9,7 @@ import { Metadata } from 'next';
 const popinsFont = Poppins({ weight:['400', '600', '700'], subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Adopciones Gora ',
+  title: 'Adopciones Canadog',
   description: 'Adopciones'
 }
 
