@@ -14,6 +14,7 @@ import Explora from "@/public/Explora.png"
 import Aplica from "@/public/Aplica.png"
 import Entrevista from "@/public/Entrevista.png"
 import Adopcion from "@/public/Adopcion.png"
+import PerritoBlanco from "@/public/PerritoBlanco.jpeg"
 import 'primeicons/primeicons.css';
 
 //{Dogs, Cats}: any
@@ -140,7 +141,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         </div>
                         <MotionTransition className='mn:order-first mn:mt-6 md:order-last'>
                             <div className='flex justify-center'>
-                                <Image src='/PerritoBlanco.jpeg' alt='card' width={550} height={550} className='h-auto w-80 md:w-full rounded-lg'/>
+                                <Image src={PerritoBlanco.src} alt='card' width={550} height={550} className='h-auto w-80 md:w-full rounded-lg'/>
                             </div>
                         </MotionTransition>
                     </div>

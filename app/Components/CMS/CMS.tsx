@@ -200,7 +200,7 @@ export default function CMS({Dogs, Cats, History}: any)
                                 ¡Bienvenido {<p className='text-blackGora ml-1'> a tu próxima gran aventura</p>}!
                             </ModalHeader>
                             <ModalBody>
-                                <p className='text-purpleGora px-4 text-xl text-center font-semibold'> 
+                                <p className='text-greenCanadog px-4 text-xl text-center font-semibold'> 
                                     { isDog ? "Crea un nuevo Guau" : isCat ? "Crea un nuevo Miau" : isHistory ? "Crea una historia emotiva" : ""}
                                 </p>
                                 <h1 className='text-center py-4 text-blackGora font-semibold'>
@@ -244,7 +244,7 @@ export default function CMS({Dogs, Cats, History}: any)
                             <ModalFooter className='flex justify-center'>
                                 <div className='flex flex-col w-full'>
                                     <div className='flex justify-center'>
-                                        <Button onClick={sendPets}  isLoading={isLoading} className='bg-greenGora text-pinkLightGora px-6' radius="full" size="md">
+                                        <Button onClick={sendPets}  isLoading={isLoading} className='border-2 border-greenCanadog bg-mentaCanadog hover:bg-greenCanadog text-white text-lg px-6' radius="full" size="md">
                                             Guardar
                                         </Button>                              
                                     </div>
@@ -265,7 +265,7 @@ export default function CMS({Dogs, Cats, History}: any)
                                 ¡Bienvenido {<p className='text-blackGora ml-1'> a tu próxima gran aventura</p>}!
                             </ModalHeader>
                             <ModalBody>
-                                <p className='text-purpleGora px-4 text-xl text-center font-semibold'> 
+                                <p className='text-greenCanadog px-4 text-xl text-center font-semibold'> 
                                     { isDog ? "Edita un Guau" : isCat ? "Edita un Miau" : isHistory ? "Edita la historia emotiva" : ""}
                                 </p>
                                 <h1 className='text-center py-4 text-blackGora font-semibold'>
@@ -300,7 +300,7 @@ export default function CMS({Dogs, Cats, History}: any)
                                 <div className='flex flex-col w-full'>
                                     <div className='flex justify-center'>
                                         <Button  
-                                            className='m-2 bg-greenGora text-pinkLightGora px-6' 
+                                            className='m-2 border-2 border-greenCanadog bg-mentaCanadog hover:bg-greenCanadog text-white text-lg px-6' 
                                             radius="full" 
                                             size="md"
                                             isLoading={isLoading}
@@ -310,7 +310,7 @@ export default function CMS({Dogs, Cats, History}: any)
                                             Guardar
                                         </Button>
                                         <Button  
-                                            className={`m-2 ${enable ? "bg-redGora" : "bg-orangeGora"} text-pinkLightGora px-6`}
+                                            className={`m-2 ${enable ? "bg-redGora" : "bg-orangeGora"} text-white text-lg px-6`}
                                             radius="full" 
                                             size="md"
                                             isLoading={isLoading}
@@ -337,7 +337,7 @@ export default function CMS({Dogs, Cats, History}: any)
                             <Button 
                                 isLoading={isLoading} 
                                 onClick={(e)=> [setIsDog(true),setIsHistory(false), setIsCat(false)]} 
-                                className={`bg-transparent border  ${isDog ? "bg-greenGora text-greenCanadog" : "border-greenGora text-greenGora"} hover:bg-mentaCanadog hover:text-white mn:text-sm xl:text-xl`} 
+                                className={`bg-transparent border  ${isDog ? "bg-greenCanadog text-white" : "border-greenCanadog text-greenCanadog"} hover:bg-mentaCanadog hover:text-white mn:text-sm xl:text-xl`} 
                                 radius="full" 
                             >
                                 Guaus
@@ -345,7 +345,7 @@ export default function CMS({Dogs, Cats, History}: any)
                             <Button 
                                 isLoading={isLoading} 
                                 onClick={(e)=> [setIsDog(false),setIsHistory(false),setIsCat(true)]} 
-                                className={`bg-transparent border  ${isCat ? "bg-greenGora text-greenCanadog" : "border-greenGora text-greenGora"} hover:bg-mentaCanadog hover:text-white mn:text-sm xl:text-xl`} 
+                                className={`bg-transparent border  ${isCat ? "bg-greenCanadog text-white" : "border-greenCanadog text-greenCanadog"} hover:bg-mentaCanadog hover:text-white mn:text-sm xl:text-xl`} 
                                 radius="full" 
                             >
                                 Miaus
@@ -353,7 +353,7 @@ export default function CMS({Dogs, Cats, History}: any)
                             <Button 
                                 isLoading={isLoading} 
                                 onClick={(e) => [ setIsHistory(true),setIsDog(false),setIsCat(false) ]} 
-                                className={`bg-transparent border  ${isHistory ? "bg-greenGora text-greenCanadog" : "border-greenGora text-greenGora"} hover:bg-mentaCanadog hover:text-white mn:text-sm xl:text-xl`}
+                                className={`bg-transparent border  ${isHistory ? "bg-greenCanadog text-white" : "border-greenCanadog text-greenCanadog"} hover:bg-mentaCanadog hover:text-white mn:text-sm xl:text-xl`}
                                 radius="full" 
                             >
                                 Historias
@@ -368,7 +368,7 @@ export default function CMS({Dogs, Cats, History}: any)
                             <Button 
                                 isLoading={isLoading} 
                                 onClick={handleClick} 
-                                className={`bg-transparent border border-greenGora text-greenGora hover:bg-greenGora hover:text-pinkLightGora mn:text-sm xl:text-xl`} 
+                                className={`bg-transparent border border-greenCanadog text-greenCanadog hover:bg-greenCanadog hover:text-white mn:text-sm xl:text-xl`} 
                                 radius="full" 
                             >
                                 Cerrar sesion <i className="pi pi-sign-out mr-2" />
@@ -398,13 +398,13 @@ export default function CMS({Dogs, Cats, History}: any)
                                                             />
                                                             <CardBody>
                                                                 <div className='flex flex-col'>
-                                                                    <h1 className={'flex font-semibold text-purpleGora px-2 justify-end w-full mn:text-xl md:text-2xl'}>
+                                                                    <h1 className={'flex font-semibold text-greenCanadog px-2 justify-end w-full mn:text-xl md:text-2xl'}>
                                                                         {card.title.substring(0, 3)}<span className='text-greenGora'>{card.title.substring(3, card.title.charCodeAt(card.title))}</span>
                                                                     </h1>
-                                                                    <h1 className={'flex font-semibold text-purpleGora px-2 justify-end w-full mn:text-xl md:text-sm'}>
+                                                                    <h1 className={'flex font-semibold text-greenCanadog px-2 justify-end w-full mn:text-xl md:text-sm'}>
                                                                         Edad: {card.old}
                                                                     </h1>
-                                                                    <p className={'flex font-normal text-gray w-full h-[58px] text-right text-[12px]'}>
+                                                                    <p className={'flex font-normal text-gray w-full h-[58px] text-right text-[15px]'}>
                                                                         {card.shortDescription.substring(0,75) + "..."}
                                                                     </p>
                                                                     <div className="flex mn:my-2 justify-center">
@@ -419,7 +419,13 @@ export default function CMS({Dogs, Cats, History}: any)
                                                                                     setIsEdit(true)
                                                                                 }
                                                                             } 
-                                                                            className='bg-transparent border border-greenGora text-greenGora' radius="full" size="sm" endContent={<i className="pi pi-pencil" style={{ color: '#489E84' }}/>}>
+                                                                            className='bg-mentaCanadog border-2 border-greenCanadog text-white hover:bg-greenCanadog text-md' 
+                                                                            radius="lg" 
+                                                                            size="sm" 
+                                                                            endContent={
+                                                                                <i className="pi pi-pencil" style={{ color: '#FFFFFF' }}/>
+                                                                            }
+                                                                        >
                                                                             Editar
                                                                         </Button>
                                                                     </div>  
@@ -434,7 +440,7 @@ export default function CMS({Dogs, Cats, History}: any)
                                 </Card>
                             </div>
                         </div>
-                    ) // duplicar
+                    ) 
                     :
                     isCat?
                     (
@@ -458,13 +464,13 @@ export default function CMS({Dogs, Cats, History}: any)
                                                         />
                                                         <CardBody>
                                                             <div className='flex flex-col'>
-                                                                <h1 className={'flex font-semibold text-purpleGora px-2 justify-end w-full mn:text-xl md:text-2xl'}>
+                                                                <h1 className={'flex font-semibold text-greenCanadog px-2 justify-end w-full mn:text-xl md:text-2xl'}>
                                                                     {card.title.substring(0, 3)}<span className='text-greenGora'>{card.title.substring(3, card.title.charCodeAt(card.title))}</span>
                                                                 </h1>
-                                                                <h1 className={'flex font-semibold text-purpleGora px-2 justify-end w-full mn:text-xl md:text-sm'}>
+                                                                <h1 className={'flex font-semibold text-greenCanadog px-2 justify-end w-full mn:text-xl md:text-sm'}>
                                                                     Edad: {card.old}
                                                                 </h1>
-                                                                <p className={'flex font-normal text-gray w-full h-[58px] text-right text-[12px]'}>
+                                                                <p className={'flex font-normal text-gray w-full h-[58px] text-right text-[15px]'}>
                                                                     {card.shortDescription.substring(0,75) + "..."}
                                                                 </p>
                                                                 <div className="flex mn:my-2 justify-center">
@@ -477,10 +483,12 @@ export default function CMS({Dogs, Cats, History}: any)
                                                                             setEnable(card.ANIMALS_ENABLE)
                                                                             setIsEdit(true)} 
                                                                         }
-                                                                        className='bg-transparent border border-greenGora text-greenGora' 
-                                                                        radius="full" 
+                                                                        className='bg-mentaCanadog border-2 border-greenCanadog text-white hover:bg-greenCanadog text-md' 
+                                                                        radius="lg"
                                                                         size="sm" 
-                                                                        endContent={<i className="pi pi-pencil" style={{ color: '#489E84' }}/>}
+                                                                        endContent={
+                                                                            <i className="pi pi-pencil" style={{ color: '#FFFFFF' }}/>
+                                                                        }
                                                                     >
                                                                         Editar
                                                                     </Button>
@@ -522,8 +530,8 @@ export default function CMS({Dogs, Cats, History}: any)
                                                         />
                                                         <CardBody>
                                                             <div className='flex flex-col'>
-                                                                <h1 className="flex justify-end font-semibold text-purpleGora text-2xl">
-                                                                    {card.title.substring(0, 3)}<span className='text-greenGora'>{card.title.substring(3, card.title.charCodeAt(card.title))}</span>
+                                                                <h1 className="flex justify-end font-semibold text-greenCanadog text-2xl">
+                                                                    {card.title}
                                                                 </h1>
                                                                 <p className='flex ml-2 justify-center mt-2 text-[12px] text-right w-full'>
                                                                     {card.shortDescription.substring(0,50)}
@@ -538,7 +546,13 @@ export default function CMS({Dogs, Cats, History}: any)
                                                                             setEnable(card.ANIMALS_ENABLE)
                                                                             setIsEdit(true)
                                                                         }} 
-                                                                        className='bg-transparent border border-greenGora text-greenGora' radius="full" size="sm" endContent={<i className="pi pi-pencil" style={{ color: '#489E84' }}/>}>
+                                                                        className='bg-mentaCanadog border-2 border-greenCanadog text-white hover:bg-greenCanadog text-md' 
+                                                                        radius="lg" 
+                                                                        size="sm" 
+                                                                        endContent={
+                                                                            <i className="pi pi-pencil" style={{ color: '#FFFFFF' }}/>
+                                                                        }
+                                                                     >
                                                                         Editar
                                                                     </Button>
                                                                 </div>  
@@ -554,7 +568,6 @@ export default function CMS({Dogs, Cats, History}: any)
                             </div>
                         </div>
                     )
-                    
                 }
             </div>
         </div>
