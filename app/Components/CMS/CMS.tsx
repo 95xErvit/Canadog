@@ -15,7 +15,9 @@ export default function CMS({Dogs, Cats, History}: any)
     console.log(Dogs)
     const toast = useRef<Toast>(null);
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
-    const [isEdit, setIsEdit] = useState(false);
+    const [isEdit, setIsEdit] = useState<boolean>(false);
+    const [isOpenProduct, setIsOpenProduct] = useState(false);
+    const [isEditProduct, setIsEditProduct] = useState(false);
     const [name, setName] = useState<string>('');
     const [yearOlds, setYearosld] = useState<string>('');
     const [description, setDescription] = useState<string>('');
@@ -113,7 +115,7 @@ export default function CMS({Dogs, Cats, History}: any)
     const handleClick = (e: any) => {
         setIsLoading(true)
         e.preventDefault()
-        router.push('/UserGora/Login')
+        router.push('/UserCanaDog/Login')
     }
 
     const onTemplateRemove = (file: File, callback: Function) => {
@@ -148,7 +150,21 @@ export default function CMS({Dogs, Cats, History}: any)
         setIsLoading(true)
         try
         {
-            const response = await axios.post("/UserGora/CMS/api/pets",{data:{User:"Administrador_CanaDog",Enable: 1, Name: name, OldDate:yearOlds, Description:description, Type:isDog ? "DOG" : isCat? "CAT": "HISTORY", Images: file, Web: "CANADOG"}})
+            const response = await axios.post("/UserCanaDog/CMS/api/pets",{data:{User:"Administrador_CanaDog",Enable: 1, Name: name, OldDate:yearOlds, Description:description, Type:isDog ? "DOG" : isCat? "CAT": "HISTORY", Images: file, Web: "CANADOG"}})
+            console.log('Contesto:', response);
+        }
+        catch(err){
+            console.log(err)
+        }
+        setTimeout(()=>location.reload(), 4000)
+    };
+
+    const sendProduct = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsLoading(true)
+        try
+        {
+            const response = await axios.post("/UserCanaDog/CMS/api/products",{data:{User:"Administrador_CanaDog",Enable: 1, Name: name, OldDate:yearOlds, Description:description, Type:isDog ? "DOG" : isCat? "CAT": "HISTORY", Images: file, Web: "CANADOG"}})
             console.log('Contesto:', response);
         }
         catch(err){
@@ -163,7 +179,7 @@ export default function CMS({Dogs, Cats, History}: any)
     
         try
         {
-            const response = await axios.patch("/UserGora/CMS/api/pets",{data:{AnimaldId:id, User:"Administrador_CanaDog",Enable: EnablePet, Name: name, OldDate:yearOlds, Description:description, Type:isDog ? "DOG" : isCat? "CAT": "HISTORY", Images: file, Web: "CANADOG" }})
+            const response = await axios.patch("/UserCanaDog/CMS/api/pets",{data:{AnimaldId:id, User:"Administrador_CanaDog",Enable: EnablePet, Name: name, OldDate:yearOlds, Description:description, Type:isDog ? "DOG" : isCat? "CAT": "HISTORY", Images: file, Web: "CANADOG" }})
             console.log('Contesto:', response);
         }
         catch(err){
@@ -327,6 +343,146 @@ export default function CMS({Dogs, Cats, History}: any)
                     </ModalContent>
                 </Modal>
             </div>
+            <div className="flex mn:justify-center md:justify-start">
+                <Modal isOpen={isOpenProduct} onOpenChange={setIsOpenProduct} size='xl'>
+                    <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <Toast ref={toast}></Toast>
+                            <ModalHeader className="flex justify-center text-greenGora">
+                                ¡Bienvenido {<p className='text-blackGora ml-1'> aca podras crear los diferentes productos</p>}!
+                            </ModalHeader>
+                            <ModalBody>
+                                <p className='text-greenCanadog px-4 text-xl text-center font-semibold'> 
+                                   Crea un nuevo producto
+                                </p>
+                                <h1 className='text-center py-4 text-blackGora font-semibold'>
+                                    Ingrese la informacion del producto.
+                                </h1>
+                                <div className="flex w-full flex-col gap-4">
+                                    <div className="flex mb-6 md:mb-0 gap-4">
+                                        <Input required disabled={isLoading} onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Nombre"/>
+                                    </div>
+                                    <div className="flex mb-6 md:mb-0 gap-4">
+                                        <Input required disabled={isLoading} onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Unidades"/>
+                                        <Input required onChange={((e)=> setYearosld(e.target.value))} type="edad" variant={'faded'} label="Costo"/>
+                                    </div>
+                                    <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
+                                        <Textarea required disabled={isLoading} maxLength={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
+                                    </div>
+                                </div> 
+                                <h1 className='text-center py-4 text-blackGora font-semibold'>
+                                    Fotos del producto
+                                </h1>
+                                <div className='flex flex-row justify-center my-2 gap-2 space-x-2'>
+                                    
+
+                                    <Tooltip target=".custom-choose-btn" content="Choose" position="bottom" />
+                                    <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
+                                    <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
+
+                                    <FileUpload
+                                        ref={fileUploadRef} 
+                                        name="demo[]"
+                                        disabled={isLoading}
+                                        accept="image/*"
+                                        maxFileSize={1000000}
+                                        onUpload={onTemplateUpload} 
+                                        onSelect={onTemplateSelect} 
+                                        onError={onTemplateClear} 
+                                        onClear={onTemplateClear}
+                                        headerTemplate={headerTemplate} 
+                                        uploadHandler={(event) => [onTemplateUpload(event)]}
+                                        chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} 
+                                        customUpload/>
+                                </div>
+                            </ModalBody>
+                            <ModalFooter className='flex justify-center'>
+                                <div className='flex flex-col w-full'>
+                                    <div className='flex justify-center'>
+                                        <Button onClick={sendProduct}  isLoading={isLoading} className='border-2 border-greenCanadog bg-mentaCanadog hover:bg-greenCanadog text-white text-lg px-6' radius="full" size="md">
+                                            Guardar
+                                        </Button>                              
+                                    </div>
+                                </div>
+                            </ModalFooter>
+                        </>
+                    )}
+                    </ModalContent>
+                </Modal>
+            </div>
+            <div className="flex mn:justify-center md:justify-start">
+                <Modal isOpen={isEdit}  onOpenChange={setIsEdit} size='xl'>
+                    <ModalContent>
+                    {(onClose) => (
+                        <>  
+                            <Toast ref={toast}></Toast>
+                            <ModalHeader className="flex justify-center text-greenGora">
+                                ¡Bienvenido {<p className='text-blackGora ml-1'> aqui podras editar tus productos</p>}!
+                            </ModalHeader>
+                            <ModalBody>
+                                <h1 className='text-center py-4 text-blackGora font-semibold'>
+                                    Edita la informacion del producto.
+                                </h1>
+                                <div className="flex w-full flex-col gap-4">
+                                <div className="flex mb-6 md:mb-0 gap-4">
+                                        <Input required disabled={isLoading} onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Nombre"/>
+                                    </div>
+                                    <div className="flex mb-6 md:mb-0 gap-4">
+                                        <Input required disabled={isLoading} onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Unidades"/>
+                                        <Input required onChange={((e)=> setYearosld(e.target.value))} type="edad" variant={'faded'} label="Costo"/>
+                                    </div>
+                                    <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
+                                        <Textarea required disabled={isLoading} maxLength={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
+                                    </div>
+                                </div> 
+                                <h1 className='text-center py-4 text-blackGora font-semibold'>
+                                    Fotos del producto
+                                </h1>
+                                <div className='flex flex-row justify-center my-2 gap-2 space-x-2'>
+                                    
+
+                                    <Tooltip target=".custom-choose-btn" content="Choose" position="bottom" />
+                                    <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
+                                    <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
+
+                                    <FileUpload disabled={isLoading} ref={fileUploadRef} name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000}
+                                        onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
+                                        headerTemplate={headerTemplate}
+                                        chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
+                                </div>
+                            </ModalBody>
+                            <ModalFooter className='flex justify-center'>
+                                <div className='flex flex-col w-full'>
+                                    <div className='flex justify-center'>
+                                        <Button  
+                                            className='m-2 border-2 border-greenCanadog bg-mentaCanadog hover:bg-greenCanadog text-white text-lg px-6' 
+                                            radius="full" 
+                                            size="md"
+                                            isLoading={isLoading}
+                                            onClick={(e)=>{
+                                                UpdatePets(e)
+                                            }}>
+                                            Guardar
+                                        </Button>
+                                        <Button  
+                                            className={`m-2 ${enable ? "bg-redGora" : "bg-orangeGora"} text-white text-lg px-6`}
+                                            radius="full" 
+                                            size="md"
+                                            isLoading={isLoading}
+                                            onClick={(e)=>{
+                                                UpdatePets(e, (enable ? 0 : 1))
+                                            }}>
+                                            {enable? "Eliminar " : "Habilitar"}
+                                        </Button>                              
+                                    </div>
+                                </div>
+                            </ModalFooter>
+                        </>
+                    )}
+                    </ModalContent>
+                </Modal>
+            </div>
             <div className='mn:px-6 mn:py-6 mn:pb-0 md:px-6 xl:py-8'>
                 <div className='grid max-w-7xl mx-auto md:gris-cols-2'>
                     <h2 className='mn:text-2xl md:text-4xl font-semibold'>
@@ -363,6 +519,15 @@ export default function CMS({Dogs, Cats, History}: any)
                                 className='bg-transparent border border-greenCanadog text-mentaCanadog mn:text-sm xl:text-xl pi pi-plus' 
                                 radius="full" 
                             />
+                             <Button 
+                                type="button"
+                                isLoading={isLoading} 
+                                onClick={() =>[setIsOpenProduct(true)]} 
+                                className={`bg-transparent border border-greenCanadog text-greenCanadog hover:bg-greenCanadog hover:text-white mn:text-sm xl:text-xl`} 
+                                radius="full" 
+                            >
+                                Nuevo producto <i className="pi pi-plus mr-2" />
+                            </Button>
                         </div>
                         <div>
                             <Button 
