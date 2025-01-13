@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation'
 import 'primeicons/primeicons.css';
 import axios from 'axios';
 
-export default function CMS({Dogs, Cats, History}: any) 
+export default function CMS({Dogs, Cats, History, Products}: any) 
 {   
     console.log(Dogs)
     const toast = useRef<Toast>(null);
@@ -19,6 +19,8 @@ export default function CMS({Dogs, Cats, History}: any)
     const [isOpenProduct, setIsOpenProduct] = useState(false);
     const [isEditProduct, setIsEditProduct] = useState(false);
     const [name, setName] = useState<string>('');
+    const [cost, setCost] = useState<string>('');
+    const [unity, setUnity] = useState<string>('');
     const [yearOlds, setYearosld] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [id, setId] = useState<string>('');
@@ -26,6 +28,7 @@ export default function CMS({Dogs, Cats, History}: any)
     const [isDog, setIsDog] = useState(true);
     const [isCat, setIsCat] = useState(false)
     const [isHistory, setIsHistory] = useState(false);
+    const [isProduct, setIsProduct] = useState(false);
     const [enable, setEnable] = useState(true);
     const [history, setHistory] = useState<any[]>([]); 
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -34,6 +37,7 @@ export default function CMS({Dogs, Cats, History}: any)
     const [currentPage, setCurrentPage] = useState(1);
     const router = useRouter()
     
+    console.log(Products)
 
     const onTemplateSelect = (e: FileUploadSelectEvent) => {
         console.log(e.files)
@@ -364,8 +368,8 @@ export default function CMS({Dogs, Cats, History}: any)
                                         <Input required disabled={isLoading} onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Nombre"/>
                                     </div>
                                     <div className="flex mb-6 md:mb-0 gap-4">
-                                        <Input required disabled={isLoading} onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Unidades"/>
-                                        <Input required onChange={((e)=> setYearosld(e.target.value))} type="edad" variant={'faded'} label="Costo"/>
+                                        <Input value={unity} required disabled={isLoading} onChange={((e)=> setCost(e.target.value))} type="unity" variant={'faded'} label="Unidades"/>
+                                        <Input value={cost} required disabled={isLoading} onChange={((e)=> setUnity(e.target.value))} type="cost" variant={'faded'} label="Costo"/>
                                     </div>
                                     <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
                                         <Textarea required disabled={isLoading} maxLength={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
@@ -412,7 +416,7 @@ export default function CMS({Dogs, Cats, History}: any)
                 </Modal>
             </div>
             <div className="flex mn:justify-center md:justify-start">
-                <Modal isOpen={isEdit}  onOpenChange={setIsEdit} size='xl'>
+                <Modal isOpen={isEditProduct}  onOpenChange={setIsEdit} size='xl'>
                     <ModalContent>
                     {(onClose) => (
                         <>  
@@ -429,8 +433,8 @@ export default function CMS({Dogs, Cats, History}: any)
                                         <Input required disabled={isLoading} onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Nombre"/>
                                     </div>
                                     <div className="flex mb-6 md:mb-0 gap-4">
-                                        <Input required disabled={isLoading} onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Unidades"/>
-                                        <Input required onChange={((e)=> setYearosld(e.target.value))} type="edad" variant={'faded'} label="Costo"/>
+                                        <Input required disabled={isLoading} onChange={((e)=> setUnity(e.target.value))} type="unity" variant={'faded'} label="Unidades"/>
+                                        <Input required onChange={((e)=> setCost(e.target.value))} type="cost" variant={'faded'} label="Costo"/>
                                     </div>
                                     <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
                                         <Textarea required disabled={isLoading} maxLength={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
@@ -492,7 +496,7 @@ export default function CMS({Dogs, Cats, History}: any)
                         <div className='flex flex-wrap mn:justify-center xl:justify-start gap-4 mn:gap-2'>
                             <Button 
                                 isLoading={isLoading} 
-                                onClick={(e)=> [setIsDog(true),setIsHistory(false), setIsCat(false)]} 
+                                onClick={(e)=> [setIsProduct(false), setIsDog(true),setIsHistory(false), setIsCat(false)]} 
                                 className={`bg-transparent border  ${isDog ? "bg-greenCanadog text-white" : "border-greenCanadog text-greenCanadog"} hover:bg-mentaCanadog hover:text-white mn:text-sm xl:text-xl`} 
                                 radius="full" 
                             >
@@ -500,7 +504,7 @@ export default function CMS({Dogs, Cats, History}: any)
                             </Button>
                             <Button 
                                 isLoading={isLoading} 
-                                onClick={(e)=> [setIsDog(false),setIsHistory(false),setIsCat(true)]} 
+                                onClick={(e)=> [setIsProduct(false), setIsDog(false),setIsHistory(false),setIsCat(true)]} 
                                 className={`bg-transparent border  ${isCat ? "bg-greenCanadog text-white" : "border-greenCanadog text-greenCanadog"} hover:bg-mentaCanadog hover:text-white mn:text-sm xl:text-xl`} 
                                 radius="full" 
                             >
@@ -508,11 +512,19 @@ export default function CMS({Dogs, Cats, History}: any)
                             </Button>
                             <Button 
                                 isLoading={isLoading} 
-                                onClick={(e) => [ setIsHistory(true),setIsDog(false),setIsCat(false) ]} 
+                                onClick={(e) => [ setIsProduct(false), setIsHistory(true),setIsDog(false),setIsCat(false) ]} 
                                 className={`bg-transparent border  ${isHistory ? "bg-greenCanadog text-white" : "border-greenCanadog text-greenCanadog"} hover:bg-mentaCanadog hover:text-white mn:text-sm xl:text-xl`}
                                 radius="full" 
                             >
                                 Historias
+                            </Button>
+                            <Button 
+                                isLoading={isLoading} 
+                                onClick={(e) => [ setIsProduct(true), setIsHistory(false),setIsDog(false),setIsCat(false) ]} 
+                                className={`bg-transparent border  ${isHistory ? "bg-greenCanadog text-white" : "border-greenCanadog text-greenCanadog"} hover:bg-mentaCanadog hover:text-white mn:text-sm xl:text-xl`}
+                                radius="full" 
+                            >
+                                Productos
                             </Button>
                             <Button 
                                 onPress={onOpen} 
@@ -669,8 +681,8 @@ export default function CMS({Dogs, Cats, History}: any)
                                 </Card>
                             </div>
                         </div>
-                    )
-                    :
+                    ):
+                    isHistory ?
                     (
                         <div className='px-4 py-6'>
                             <div className='flex max-w-7xl mx-auto'>
@@ -708,6 +720,77 @@ export default function CMS({Dogs, Cats, History}: any)
                                                                             setName(card.title)
                                                                             setDescription(card.longDescription)
                                                                             setYearosld(card.old)
+                                                                            setEnable(card.ANIMALS_ENABLE)
+                                                                            setIsEdit(true)
+                                                                        }} 
+                                                                        className='bg-mentaCanadog border-2 border-greenCanadog text-white hover:bg-greenCanadog text-md' 
+                                                                        radius="lg" 
+                                                                        size="sm" 
+                                                                        endContent={
+                                                                            <i className="pi pi-pencil" style={{ color: '#FFFFFF' }}/>
+                                                                        }
+                                                                     >
+                                                                        Editar
+                                                                    </Button>
+                                                                </div>  
+                                                            </div>
+                                                        </CardBody>
+                                                    </div>
+                                                </Card>
+                                            ))
+                                        }
+                                        </div>
+                                    </ScrollShadow> 
+                                </Card>
+                            </div>
+                        </div>
+                    )
+                    :
+                    (
+                        <div className='px-4 py-6'>
+                            <div className='flex max-w-7xl mx-auto'>
+                                <Card
+                                    isBlurred
+                                    className="border-none w-full"
+                                    shadow="md"
+                                >
+                                    <ScrollShadow className="mn:w-[360px] mn:h-[600px] md:w-[1280px] md:h-[600px] mt-4 mb-4" size={0}>
+                                        <div className='flex flex-wrap justify-evenly'>
+                                        {
+                                            Products.map((card: any) => (
+                                                
+                                                <Card key={card.id} className='m-4 w-96'>
+                                                    <div className="flex gap-6 md:gap-2">
+                                                        <Image
+                                                            alt="Album cover"
+                                                            className="object-cover"
+                                                            shadow="md"
+                                                            src={card.image}
+                                                            height={250}
+                                                            width={500}
+                                                        />
+                                                        <CardBody>
+                                                            <div className='flex flex-col'>
+                                                                <h1 className="flex justify-end font-semibold text-greenCanadog text-2xl">
+                                                                    {card.title} 
+                                                                </h1>
+                                                                <h1 className="flex justify-end font-semibold text-greenCanadog text-2xl">
+                                                                    {card.cost} 
+                                                                </h1>
+                                                                <h1 className="flex justify-end font-semibold text-greenCanadog text-2xl">
+                                                                    {card.unity} 
+                                                                </h1>
+                                                                <p className='flex ml-2 justify-center mt-2 text-[12px] text-right w-full'>
+                                                                    {card.shortDescription.substring(0,50)}
+                                                                </p>
+                                                                <div className="flex mn:my-2 justify-center">
+                                                                    <Button  
+                                                                        onClick={(e)=> {
+                                                                            setId(card.id)
+                                                                            setName(card.title)
+                                                                            setDescription(card.longDescription)
+                                                                            setCost(card.cost)
+                                                                            setUnity(card.unity)
                                                                             setEnable(card.ANIMALS_ENABLE)
                                                                             setIsEdit(true)
                                                                         }} 

@@ -21,7 +21,18 @@ export default async function Home()
 		<>
 			<Header/>
 				<main className="bg-cover bg-center" style={{backgroundImage:'url("")'}}>
-					<CMS Dogs={result.data.result.recordset} Cats={result2.data.result.recordset} History={result3.data.result.recordset}/>
+					<CMS 
+						Dogs={result.data.result.recordset} 
+						Cats={result2.data.result.recordset} 
+						History={result3.data.result.recordset} 
+						Products={[{
+							id:"1",
+							title:"holas",
+							cost:"100",
+							unity:"5",
+							shortDescription:"50",
+						}]}
+					/>
 				</main>
 			<Footer/>
 		</>
