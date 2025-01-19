@@ -14,7 +14,8 @@ import Explora from "@/public/Explora.png"
 import Aplica from "@/public/Aplica.png"
 import Entrevista from "@/public/Entrevista.png"
 import Adopcion from "@/public/Adopcion.png"
-import PerritoBlanco from "@/public/PerritoBlanco.jpeg"
+import GoodBoy from "@/public/goodboy.jpg"
+import Canadog from "@/public/canadog.jpg"
 import 'primeicons/primeicons.css';
 
 //{Dogs, Cats}: any
@@ -72,81 +73,32 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
         <div>
             {/* BANNER */}
             <section>
-                <div className='relative p-6 md:pb-16'>
-                    <div className='grid md:max-w-7xl mx-auto md:grid-cols-2'>
-                        <div className='flex flex-col justify-center mn:order-last mn:mt-8 md:ml-8 md:px-6 md:order-first '>
-                            <h2 className='mn:ml-2 md:ml-0 mn:text-3xl md:text-4xl font-semibold text-mentaCanadog'>
-                                !Encuentra{<span className='text-greenCanadog'> a tu compañero perfecto!</span>}
-                            </h2>
-                            <p className='mn:max-w-md md:max-w-lg mn:ml-3 mn:m-4 md:ml-0 md:my-8'>
-                                Bienvenido a CANADOG, tu destino para encontrar tu compañero peludo perfecto. En nuestra plataforma, conectamos a mascotas necesitadas con familias amorosas. 
-                                ¡Descubre cómo puedes hacer una diferencia en la vida de un animal y en la tuya propia adoptando hoy!
-                            </p>
-                            <div className="flex mn:my-4 mn:justify-center md:justify-start">
-                                <Button  className='bg-greenCanadog text-white font-semibold rounded-lg' size="lg" onPress={onOpen}>
-                                    Adopta un fiel amigo
-                                </Button>
-                                <Modal isOpen={isOpen} onOpenChange={onOpenChange} size='3xl' backdrop='blur' placement='center'>
-                                    <ModalContent>
-                                        <>
-                                            <ModalHeader className="flex justify-center text-greenCanadog mn:text-sm md:text-3xl">
-                                                ¡Bienvenido {<p className='text-blackGora ml-1'> a tu próxima gran aventura</p>}!
-                                            </ModalHeader>
-                                            <ModalBody>
-                                                <p className='text-blackGora px-4 mn:text-xs xl:text-md'> 
-                                                    Nos emociona que estés considerando darle un hogar a uno de nuestros adorables peluditos! Por favor, completa este sencillo formulario para comenzar el proceso de adopción.
-                                                </p>
-                                                <h3 className='text-center mn:py-2 xl:py-4 text-blackGora mn:text-xs xl:text-xl font-semibold'>
-                                                    Queremos conocerte un poco mejor.
-                                                </h3>
-                                                <div className='flex flex-col'>
-                                                    <p className='text-blackGora px-4 mn:text-xs xl:text-md text-center'> 
-                                                        Inicia el proceso de adopción diligenciado el siguiente formulario
-                                                    </p>
-                                                </div>
+                <div className="relative">
+                    <div className="flex justify-center mn:mt-6">
+                        <Image
+                        src={Canadog.src}
+                        alt="card"
+                        width={1512}
+                        height={550}
+                        className="h-auto w-80 md:w-full rounded-lg"
+                        />
+                    </div>
 
-                                                {/* <div className="flex w-full flex-col gap-4">
-                                                    <div className="flex mb-6 md:mb-0 gap-4 h-[48px]">
-                                                        <Input type="name" variant={'faded'} label="Nombre y Apellidos"/>
-                                                    </div>
-                                                    <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4 h-[48px]">
-                                                        <Input type="email" variant={'faded'} label="Correo electrónico"/>
-                                                        <Input type="Phone" variant={'faded'} label="Celular" />
-                                                    </div>
-                                                </div>  */}
-                                            </ModalBody>
-                                            <ModalFooter className='flex justify-center'>
-                                                <div className='flex flex-col w-full'>
-                                                    <div className='flex justify-evenly'>
-                                                        <Button href='https://forms.gle/m9oTCTt8n1qibjFU8' className='bg-greenCanadog text-pinkLightGora my-4 text-sm' radius="full" size="lg" onClick={() => window.open('https://forms.gle/m9oTCTt8n1qibjFU8', '_blank')}>
-                                                            Formulario adopción
-                                                        </Button>                          
-                                                    </div>
-
-                                                    <Divider className="my-4"/>
-                                                    <div className='flex flex-wrap flex-col gap-2 text-greenCanadog mn:text-xs xl:text-sm font-semibold my-4 px-4'> 
-                                                        <p>
-                                                            ¡Gracias por tomarte el tiempo para completar este formulario! Nos emociona poder ayudarte a encontrar a tu nuevo mejor amigo peludo.
-                                                        </p>
-                                                        <p>
-                                                            ¡Pronto nos pondremos en contacto contigo para continuar con el proceso de adopción!
-                                                        </p>
-                                                    </div> 
-                                                </div>
-                                            </ModalFooter>
-                                        </>
-                                    </ModalContent>
-                                </Modal>
-                            </div>
-                        </div>
-                        <MotionTransition className='mn:order-first mn:mt-6 md:order-last'>
-                            <div className='flex justify-center'>
-                                <Image src={PerritoBlanco.src} alt='card' width={550} height={550} className='h-auto w-80 md:w-full rounded-lg'/>
-                            </div>
-                        </MotionTransition>
+                    <div className="absolute inset-0 flex flex-col justify-start text-center p-8 bg-black bg-opacity-40">
+                        <h2 className="text-white max-w-full mn:text-3xl md:text-5xl font-semibold">
+                            ¡Encuentra a tu<span className="text-mentaCanadog"> compañero perfecto!</span>
+                        </h2>
+                        
                     </div>
                 </div>
+
+                <div className='flex justify-center m-6'>
+                    <p className='text-black max-w-5xl text-xl'>
+                        Bienvenido a <span className="text-greenCanadog font-bold">CANADOG</span>, tu destino para encontrar tu compañero peludo perfecto. En nuestra plataforma, conectamos a mascotas necesitadas con familias amorosas. ¡Descubre cómo puedes hacer una diferencia en la vida de un animal y en la tuya propia adoptando hoy!
+                    </p>
+                </div>
             </section>
+
 
             <Divider className="my-4"/>
 
@@ -159,15 +111,15 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                 Encuentra a tu {<span className='text-greenCanadog'>mejor amigo</span>}
                             </h2>
                             <div className="flex gap-4 mn:my-4 md:my-8 mn:justify-center md:justify-start">
-                                <div className="group relative flex flex-col items-center mn:mt-14 lg:mt-10">
-                                    <div className="absolute bottom-12 left-0 flex justify-center items-center w-full h-full transform translate-y-full opacity-0 group-hover:-translate-y-2 group-hover:opacity-100 transition-all duration-300">
+                                <div className="group relative flex flex-col items-center mn:my-4 md:m-0">
+                                    {/* <div className="absolute bottom-12 left-0 flex justify-center items-center w-full h-full transform translate-y-full opacity-0 group-hover:-translate-y-2 group-hover:opacity-100 transition-all duration-300">
                                         <Image
                                             alt="guauButton"
                                             src="/guauButton.gif"
                                             height="100"
                                             width="100"
                                         />
-                                    </div>
+                                    </div> */}
                                     <Button
                                         onClick={(e) => setIsDog(true)}
                                         className={`bg-transparent border ${isDog ? "bg-greenCanadog text-pinkLightGora font-semibold" : "border-greenCanadog text-greenCanadog font-semibold"} hover:bg-greenCanadog hover:text-pinkLightGora font-semibold rounded-lg`}
@@ -176,15 +128,15 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                         Guaus
                                     </Button>
                                 </div>
-                                <div className="group relative flex flex-col items-center mn:mt-14 lg:mt-10">
-                                    <div className="absolute bottom-12 left-0 flex justify-center items-center w-full h-full transform translate-y-full opacity-0 group-hover:-translate-y-1.5 group-hover:opacity-100 transition-all duration-300">
+                                <div className="group relative flex flex-col items-center mn:my-4 md:m-0">
+                                    {/* <div className="absolute bottom-12 left-0 flex justify-center items-center w-full h-full transform translate-y-full opacity-0 group-hover:-translate-y-1.5 group-hover:opacity-100 transition-all duration-300">
                                     <Image
                                         alt="catButton"
                                         src="/CatIcon.gif"
                                         height="100"
                                         width="100"
                                     />
-                                    </div>
+                                    </div> */}
                                     <Button
                                         onClick={(e) => setIsDog(false)}
                                         className={`bg-transparent border ${!isDog ? "bg-greenCanadog text-pinkLightGora font-medium" : "border-greenCanadog text-greenCanadog font-semibold"} hover:bg-greenCanadog hover:text-pinkLightGora font-semibold rounded-lg`}
@@ -381,7 +333,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
             <Divider className="my-4"/>
 
             {/* CARDS PRODUCTOS */}
-            <div className='relative mn:px-6 mn:py-2 mn:mt-2 md:px-6 md:py-6 md:mt-8'>
+            {/* <div className='relative mn:px-6 mn:py-2 mn:mt-2 md:px-6 md:py-6 md:mt-8'>
                 <div className='grid max-w-7xl mx-auto md:grid-cols-2'>
                     <h2 className='mn:text-2xl md:text-4xl font-semibold'>
                         Compra nuestros {<span className='text-greenCanadog'>Productos</span>}
@@ -471,7 +423,6 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                             </div>
                         </ScrollShadow>
 
-                        {/* Paginador */}
                         <div className="flex justify-center mb-4">
                             <Pagination
                                 showControls
@@ -483,7 +434,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         </div>
                     </Card>
                 </div>
-            </div>
+            </div> */}
 
             <Divider className="my-4"/>
 
@@ -590,11 +541,11 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         </p>
                     </div>
 
-                    <div className="max-w-7xl mn:mx-10 lg:mx-auto align-items-center grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5 justify-center lg:gap-4 py-4">
+                    <div className="mx-10 align-items-center grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 justify-center py-4">
                         {/* Card 1 */}
                         
-                        <Link href='https://www.instagram.com/makropetveterinaria/' target="_blank">
-                            <div className="bg-white text-blackGora py-2 px-4 flex flex-col items-center gap-2 w-full border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
+                        <Link href='https://www.instagram.com/makropetveterinaria/' target="_blank" className='flex justify-center items-center'>
+                            <div className="bg-white text-blackGora py-2 flex flex-col justify-center items-center gap-2 w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
                                 <Image
                                     className="w-28 h-28 rounded-full"
                                     src={MakroPet.src}
@@ -610,8 +561,8 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         </Link>
                         
                         {/* Card 2 */}
-                        <Link href='https://www.instagram.com/formadogs.escuelacanina/' target="_blank">
-                            <div className="bg-white text-blackGora py-2 px-4 flex flex-col items-center gap-2 w-full border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
+                        <Link href='https://www.instagram.com/formadogs.escuelacanina/' target="_blank" className='flex justify-center items-center'>
+                            <div className="bg-white text-blackGora py-2 flex flex-col items-center gap-2 w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
                                 <Image
                                     className="w-28 h-28 rounded-full"
                                     src={FormaDogs.src}
@@ -627,8 +578,8 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         </Link>
                         
                         {/* Card 3 */}
-                        <Link href='https://www.instagram.com/animalcliniccolina/' target="_blank">
-                            <div className="bg-white text-blackGora py-2 px-4 flex flex-col items-center gap-2 w-full border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
+                        <Link href='https://www.instagram.com/animalcliniccolina/' target="_blank" className='flex justify-center items-center'>
+                            <div className="bg-white text-blackGora py-2 flex flex-col items-center gap-2 w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
                                 <Image
                                     className="w-28 h-28 rounded-full"
                                     src={AnimalClinic.src}
@@ -643,8 +594,8 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                             </div>
                         </Link>
                         {/* Card 4 */}
-                        <Link href='https://www.instagram.com/danii.colibri/' target="_blank">
-                            <div className="bg-white text-blackGora py-2 px-4 flex flex-col items-center gap-2 w-full border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
+                        <Link href='https://www.instagram.com/danii.colibri/' target="_blank" className='flex justify-center items-center'>
+                            <div className="bg-white text-blackGora py-2 flex flex-col items-center gap-2 w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
                                 <Image
                                     className="w-28 h-28 rounded-full"
                                     src={DaniColibri.src}
@@ -660,11 +611,27 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         </Link>
                         
                         {/* Card 5 */}
+                        <Link href='https://www.instagram.com/makropetveterinaria/' target="_blank" className='flex justify-center items-center'>
+                            <div className="bg-white text-blackGora py-2 flex flex-col items-center gap-2 w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
+                                <Image
+                                    className="w-28 h-28 rounded-full"
+                                    src={GoodBoy.src}
+                                    width={100}
+                                    height={100}
+                                    alt="James"
+                                />
+                                <div className='flex flex-col justify-center items-center'>
+                                    <p className="text-2xl font-bold">goodboy</p>
+                                    <p className="text-base font-semibold">@goodboy_petstudio</p>
+                                </div>
+                            </div>
+                        </Link>
+                        {/* Card 6 
                         <Link href='https://www.instagram.com/makropetveterinaria/' target="_blank">
                             <div className="bg-white text-blackGora py-2 px-4 flex flex-col items-center gap-2 w-full border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
                                 <Image
                                     className="w-28 h-28 rounded-full"
-                                    src={FormaDogs.src}
+                                    src={GoodBoy.src}
                                     width={100}
                                     height={100}
                                     alt="James"
@@ -674,14 +641,13 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                     <p className="text-base font-semibold">@kanumascotas</p>
                                 </div>
                             </div>
-                        </Link>
+                        </Link>*/}
                     </div>
                 </section>
             </div> 
 
             <Divider className="my-4"/>
 
-            {/* BANNER FINAL */}
             {/* BANNER FINAL */}
             <div className='relative mn:px-6 mn:py-2 mn:mt-2 md:px-6 md:py-6 md:mt-8'>
                 <div className='grid max-w-7xl mx-auto'>

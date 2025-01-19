@@ -1,9 +1,7 @@
 "use client"
 import React from "react";
 import { useRouter } from 'next/navigation';
-import dogGora from "@/public/DogGora.png"
-import catGora from "@/public/catGora.png"
-import dog2Gora from "@/public/dog2Gora.png"
+import PerritoBlanco from "@/public/PerritoBlanco.jpeg"
 import {Navbar, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Image} from "@nextui-org/react";
 
 export default function Header() {
@@ -28,93 +26,93 @@ export default function Header() {
   ];
 
   return (
-    <div className="flex justify-center bg-white md:p-4 items-center">
-            <div className="flex lg:hidden justify-center items-center py-2">
-                <Link href="/" className="flex items-center relative">
-                    <Image src="/LogoCanadog.jpg" width={120} height={100} alt="Canadog" />
-                </Link>
-            </div>
-            <Navbar 
-                onMenuOpenChange={setIsMenuOpen} 
-                isMenuOpen={isMenuOpen} 
-                className="bg-white md:py-10"
+    <div className="flex justify-between items-center bg-white m-4">
+    {/* Logo (visible en móviles) */}
+    <div className="flex lg:hidden items-center">
+      <Link href="/" className="flex items-center">
+        <Image src="/LogoCanadog.jpg" width={100} height={100} alt="Canadog" />
+      </Link>
+    </div>
+    {/* Navbar principal */}
+    <Navbar
+      onMenuOpenChange={setIsMenuOpen}
+      isMenuOpen={isMenuOpen}
+      className="bg-white md:py-10 w-full"
+    >
+      <NavbarContent className="flex items-center w-full">
+        {/* Menú web */}
+        <NavbarContent className="hidden lg:flex justify-center items-center w-full gap-10">
+          <NavbarItem>
+            <Link
+              className="text-xl font-semibold text-greenCanadog hover:text-mentaCanadog relative before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-greenCanadog before:transition-all before:duration-300 hover:before:w-full cursor-pointer"
+              onClick={() => router.push('/#adopciones')}
             >
-                <NavbarContent className="flex justify-center items-center w-full">
-                    {/* Menú web */}
-                    <NavbarContent className="hidden lg:flex gap-10 w-full" justify="center">
-                        <NavbarItem className="w-full text-center transition ease-in-out delay-180 hover:scale-110 duration-180">
-                            <Link 
-                                className="text-xl font-semibold text-greenCanadog hover:text-mentaCanadog relative before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-greenCanadog before:transition-all before:duration-300 hover:before:w-full cursor-pointer"
-                                onClick={() => router.push('/#adopciones')}
-                            >
-                                Adopciones
-                            </Link>
-                        </NavbarItem>
-                        <NavbarItem className="w-full text-center transition ease-in-out delay-180 hover:scale-110 duration-180">
-                            <Link 
-                                className="text-xl font-semibold text-greenCanadog hover:text-mentaCanadog relative before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-greenCanadog before:transition-all before:duration-300 hover:before:w-full cursor-pointer" 
-                                href="/" 
-                                // target="_blank"
-                            >
-                                Tienda Canadog
-                            </Link>
-                        </NavbarItem>
-                        <NavbarItem className="w-full text-center">
-                            <Link href="/">
-                                <Image src="/LogoCanadog.jpg" width="180" height="100" alt="Canadog"/>
-                            </Link>
-                        </NavbarItem>
-                        <NavbarItem className="w-full text-center transition ease-in-out delay-180 hover:scale-110 duration-180">
-                            <Link 
-                                className="text-xl font-semibold text-greenCanadog hover:text-mentaCanadog relative before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-greenCanadog before:transition-all before:duration-300 hover:before:w-full cursor-pointer" 
-                                href="#"
-                            >
-                                ¿Quiénes somos?
-                            </Link>
-                        </NavbarItem>
-                        <NavbarItem className="w-full text-center transition ease-in-out delay-180 hover:scale-110 duration-180">
-                            <Link 
-                                className="text-xl font-semibold text-greenCanadog hover:text-mentaCanadog relative before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-greenCanadog before:transition-all before:duration-300 hover:before:w-full cursor-pointer" 
-                                onClick={() => router.push('/Home/Donations')}
-                            >
-                                Ayúdanos
-                            </Link>
-                        </NavbarItem>
-                    </NavbarContent>
-
-                    {/* Botón hamburguesa */}
-                    <NavbarMenuToggle
-                        aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-                        className="lg:hidden text-greenCanadog hover:text-mentaCanadog font-bold"
-                    />
-                </NavbarContent>
-                
-                {/* Menú móvil */}
-                <NavbarMenu>
-                    {menuItems.map((item, index) => (
-                        <NavbarMenuItem key={`${item.name}-${index}`} className="mt-4">
-                            <Link
-                                className="flex justify-center py-2 w-full text-4xl text-greenCanadog hover:text-mentaCanadog cursor-pointer"
-                                onClick={() => handleMenuItemClick(item.action)}
-                            >
-                                {item.name}
-                            </Link>
-                        </NavbarMenuItem>
-                    ))}
-                    {/* Iconos Gora solo visible en pantallas moviles */}
-                    <div className="flex justify-center mt-8">
-                        <div className="flex justify-center items-center m-4">
-                            <Image src={dogGora.src} width="60" height="40" alt="Logo Gora"/>
-                        </div>
-                        <div className="flex justify-center items-center m-4">
-                            <Image src={catGora.src} width="60" height="40" alt="Logo Gora"/>
-                        </div>
-                        <div className="flex justify-center items-center m-4">
-                            <Image src={dog2Gora.src} width="70" height="40" alt="Logo Gora"/>
-                        </div>
-                    </div>
-                </NavbarMenu>
-            </Navbar>
+              Adopciones
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link
+              className="text-xl font-semibold text-greenCanadog hover:text-mentaCanadog relative before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-greenCanadog before:transition-all before:duration-300 hover:before:w-full cursor-pointer"
+              href="/"
+            >
+              Tienda Canadog
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link href="/">
+              <Image
+                src="/LogoCanadog.jpg"
+                width="180"
+                height="100"
+                alt="Canadog"
+              />
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link
+              className="text-xl font-semibold text-greenCanadog hover:text-mentaCanadog relative before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-greenCanadog before:transition-all before:duration-300 hover:before:w-full cursor-pointer"
+              href="#"
+            >
+              ¿Quiénes somos?
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link
+              className="text-xl font-semibold text-greenCanadog hover:text-mentaCanadog relative before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-greenCanadog before:transition-all before:duration-300 hover:before:w-full cursor-pointer"
+              onClick={() => router.push('/Home/Donations')}
+            >
+              Ayúdanos
+            </Link>
+          </NavbarItem>
+        </NavbarContent>
+  
+        {/* Botón hamburguesa al final */}
+        <div className="lg:hidden ml-auto">
+          <NavbarMenuToggle
+            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+            className="text-greenCanadog hover:text-mentaCanadog font-bold"
+          />
         </div>
-  );
+      </NavbarContent>
+  
+      {/* Menú móvil */}
+      <NavbarMenu className="top-24">
+        {menuItems.map((item, index) => (
+          <NavbarMenuItem key={`${item.name}-${index}`}>
+            <Link
+              className="flex justify-center py-2 w-full text-3xl text-greenCanadog hover:text-mentaCanadog cursor-pointer"
+              onClick={() => handleMenuItemClick(item.action)}
+            >
+              {item.name}
+            </Link>
+          </NavbarMenuItem>
+        ))}
+        {/* Iconos Gora solo visible en pantallas móviles */}
+          <div className="flex justify-center items-center m-4">
+            <Image src={PerritoBlanco.src} width="350" height="450" alt="Logo Gora" />
+          </div>
+      </NavbarMenu>
+    </Navbar>
+  </div>
+    );
 }

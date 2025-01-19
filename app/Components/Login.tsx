@@ -56,7 +56,9 @@ export default function Login() {
                     
                     <div className="absolute inset-0 flex flex-col items-center p-28 mn:mt-20 lg:mt-6">
                         <div className="w-full text-center max-w-xl xl:w-full xl:mx-auto xl:max-w-xl">
-                            <h3 className="text-xl md:text-2xl lg:text-4xl font-bold text-pinkLightGora">Gestión contenido<br className="hidden xl:block" />Web Canadog</h3>
+                            <h3 className="text-xl md:text-2xl lg:text-4xl font-bold text-pinkLightGora">
+                                Gestión contenido <br className="hidden xl:block"/> Web Canadog
+                            </h3>
                         </div>
                     </div>
                 </div>

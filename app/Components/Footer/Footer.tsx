@@ -92,7 +92,7 @@ export default function Footer(){
             <div className="flex mn:flex-col md:flex-row justify-evenly bg-greenCanadog text-center pt-4 pb-4">
                 <div className="flex mn:flex-col md:flex-row justify-center items-center">
                     <p className="mn:mt-2 md:mt-0 leading-4 text-white text-sm">
-                        © {new Date().getFullYear()} Gora Todos los derechos reservados
+                        © {new Date().getFullYear()} Canadog Todos los derechos reservados
                     </p>
                 </div>
                 <div className="flex justify-center items-center space-x-2">
