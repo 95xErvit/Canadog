@@ -20,7 +20,7 @@ export default function Header() {
     
   const menuItems = [
     { name: "Adopciones", action: () => donationNavigation('/#adopciones') },
-    { name: "Tienda Canadog", action: () => window.open("/") },
+    { name: "Tienda Canadog", action: () => donationNavigation('/Store')},
     { name: "¿Quiénes somos?", action: () => donationNavigation('#contactanos') },
     { name: "Ayudanos", action: () => donationNavigation('/Home/Donations') }, 
   ];
@@ -53,7 +53,7 @@ export default function Header() {
         <NavbarItem>
           <Link
             className="text-xl font-semibold text-greenCanadog hover:text-mentaCanadog relative before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-greenCanadog before:transition-all before:duration-300 hover:before:w-full cursor-pointer"
-            href="/"
+            onClick={() => router.push("/Store")}
           >
             Tienda Canadog
           </Link>
