@@ -2,6 +2,7 @@
 import React from "react";
 import { useRouter } from 'next/navigation';
 import PerritoBlanco from "@/public/PerritoBlanco.jpeg"
+import MotionTransition from '../MotionTransition/MotionTransition';
 import {Navbar, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Image} from "@nextui-org/react";
 
 export default function Header() {
@@ -90,11 +91,11 @@ export default function Header() {
       </div>
 
       {/* Menú móvil */}
-      <NavbarMenu className="top-[105px]">
+      <NavbarMenu className="top-[105px] pt-6">
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item.name}-${index}`}>
             <Link
-              className="flex justify-center w-full text-3xl text-greenCanadog hover:text-mentaCanadog cursor-pointer"
+              className="flex justify-center w-full text-3xl py-2 text-greenCanadog hover:text-mentaCanadog cursor-pointer"
               onClick={() => handleMenuItemClick(item.action)}
             >
               {item.name}
@@ -102,9 +103,11 @@ export default function Header() {
           </NavbarMenuItem>
         ))}
         {/* Imagen perrito solo visible en pantallas móviles */}
-        <div className="flex justify-center items-center m-4">
-          <Image src={PerritoBlanco.src} width="350" height="450" alt="Logo Gora" />
-        </div>
+        <MotionTransition>
+          <div className="flex justify-center items-center m-4">
+            <Image src={PerritoBlanco.src} width="350" height="450" alt="Logo Gora" />
+          </div>
+        </MotionTransition>
       </NavbarMenu>
     </Navbar>
   </div>
