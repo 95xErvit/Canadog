@@ -34,6 +34,12 @@ export default function Footer(){
                     </Link>
                     <Link 
                         className="text-white hover:text-mentaCanadog mn:text-lg lg:text-xl py-2" 
+                        href="/"
+                    >
+                        ¿Quiénes somos?
+                    </Link>
+                    <Link 
+                        className="text-white hover:text-mentaCanadog mn:text-lg lg:text-xl py-2" 
                         href=""
                     >
                         Ayúdanos

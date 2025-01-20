@@ -4,7 +4,6 @@ import { Button, Card, Input,CardBody, Modal, ModalContent, ModalHeader, ModalBo
 import {ScrollShadow} from "@nextui-org/react";
 import {Divider} from "@nextui-org/divider";
 import {Pagination} from "@nextui-org/react";
-import MotionTransition from '../MotionTransition/MotionTransition';
 import Image from 'next/image';
 import MakroPet from "@/public/Makropet.jpg"
 import FormaDogs from "@/public/Formadogs.jpg"
@@ -18,9 +17,7 @@ import GoodBoy from "@/public/goodboy.jpg"
 import Canadog from "@/public/canadog.jpg"
 import 'primeicons/primeicons.css';
 
-//{Dogs, Cats}: any
 export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
-
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     //const [expand, setExpand] = useState(false);
     const [isDog, setIsDog] = useState(true);
@@ -80,7 +77,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                             alt="card"
                             width={1512}
                             height={550}
-                            className="w-full h-full rounded-lg"
+                            className="w-full mn:h-[150px] md:h-full"
                         />
                     </div>
 
@@ -101,7 +98,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         </p>
                     </div>
                     
-                    <div className='flex flex-col gap-2 md:w-[400px] lg:w-[580px] xl:w-[680px] lg:text-xl'>
+                    <div className='flex flex-col gap-2 md:w-[400px] lg:w-[580px] xl:w-[680px] mn:text-sm md:text-[14px] lg:text-xl'>
                         <p>
                             Tu destino para encontrar tu compañero peludo perfecto. 
                             <br/>En nuestra hogar de paso, conectamos a mascotas necesitadas con familias amorosas.
@@ -165,18 +162,18 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                 <Modal isOpen={isOpen} onOpenChange={onOpenChange} size='3xl' backdrop='blur' placement='center'>
                     <ModalContent>
                         <>
-                            <ModalHeader className="flex justify-center text-greenGora mn:text-sm md:text-3xl">
-                                ¡Bienvenido {<p className='text-blackGora ml-1'> a tu próxima gran aventura</p>}!
+                            <ModalHeader className="flex justify-center text-greenCanadog mn:text-sm md:text-3xl">
+                                ¡Bienvenido {<p className='text-blackCanadog ml-1'> a tu próxima gran aventura</p>}!
                             </ModalHeader>
                             <ModalBody>
-                                <p className='text-blackGora px-4 mn:text-xs xl:text-md'> 
+                                <p className='text-blackCanadog px-4 mn:text-sm xl:text-md'> 
                                     Nos emociona que estés considerando darle un hogar a uno de nuestros adorables peluditos! Por favor, completa este sencillo formulario para comenzar el proceso de adopción.
                                 </p>
-                                <h3 className='text-center mn:py-2 xl:py-4 text-blackGora mn:text-xs xl:text-xl font-semibold'>
+                                <h3 className='text-center mn:py-2 xl:py-4 text-blackCanadog mn:text-xs xl:text-xl font-semibold'>
                                     Queremos conocerte un poco mejor.
                                 </h3>
                                 <div className='flex flex-col'>
-                                    <p className='text-blackGora px-4 mn:text-xs xl:text-md text-center'> 
+                                    <p className='text-blackCanadog px-4 mn:text-sm xl:text-md text-center'> 
                                         Inicia el proceso de adopción diligenciado el siguiente formulario
                                     </p>
                                 </div>
@@ -194,13 +191,13 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                             <ModalFooter className='flex justify-center'>
                                 <div className='flex flex-col w-full'>
                                     <div className='flex justify-evenly'>
-                                        <Button href='https://forms.gle/m9oTCTt8n1qibjFU8' className='bg-greenGora text-pinkLightGora my-4 text-sm' radius="full" size="lg" onClick={() => window.open('https://forms.gle/m9oTCTt8n1qibjFU8', '_blank')}>
+                                        <Button href='' className='bg-greenCanadog text-pinkLightGora my-4 text-sm' radius="full" size="lg" onClick={() => window.open('https://forms.gle/m9oTCTt8n1qibjFU8', '_blank')}>
                                             Formulario adopción
                                         </Button>                          
                                     </div>
 
                                     <Divider className="my-4"/>
-                                    <div className='flex flex-wrap flex-col gap-2 text-greenGora mn:text-xs xl:text-sm font-semibold my-4 px-4'> 
+                                    <div className='flex flex-wrap flex-col gap-2 text-greenCanadog mn:text-xs xl:text-sm font-semibold my-4 px-4'> 
                                         <p>
                                             ¡Gracias por tomarte el tiempo para completar este formulario! Nos emociona poder ayudarte a encontrar a tu nuevo mejor amigo peludo.
                                         </p>
@@ -220,7 +217,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                             <div className='flex flex-wrap max-w-7xl mx-auto'>
                                 <Card isBlurred className="border-none w-full" shadow="md">
                                     <ScrollShadow className="mn:w-full mn:h-[450px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
-                                        <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3  gap-4'>
+                                        <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'>
                                             {cardsDogs.map((card: any) => (
                                             <div
                                                 key={card.id}
@@ -252,7 +249,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                         {expandedCard === card.id && (
                                                             <div className='flex flex-wrap'>
                                                                 <div className='flex items-center'>
-                                                                    <Button className='bg-greenCanadog border border-greenCanadog text-white text-sm h-7' radius="full">
+                                                                    <Button className='bg-greenCanadog border border-greenCanadog text-white text-sm h-7' radius="full" onPress={onOpen}>
                                                                         Adoptame
                                                                     </Button>
                                                                 </div>
@@ -312,29 +309,33 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         <div className='px-4 py-4'>
                             <div className='flex flex-wrap max-w-7xl mx-auto'>
                                 <Card isBlurred className="border-none w-full" shadow="md">
-                                    <ScrollShadow className="mn:w-full mn:h-[300px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
-                                        <div className='flex flex-wrap justify-evenly'>
+                                    <ScrollShadow className="mn:w-full mn:h-[450px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
+                                        <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'>
                                             {cardsCats.map((card: any) => (
                                             <Card
                                                 key={card.id}
-                                                className={`m-4 transition-all duration-300 ${expandedCard === card.id ? 'w-full md:w-[30%] h-[424px]' : 'w-full md:w-[30%] h-[200px]'}`}
+                                                className={`relative m-4 transition-all duration-300 
+                                                    ${expandedCard === card.id ? 'row-span-2' : 'row-span-1'}
+                                                    ${expandedCard === card.id ? 'h-auto' : 'h-[200px]'}
+                                                `}
+                                            onClick={() => toggleExpand(card.id)}
                                             >
                                                 <div className={`flex items-center ${expandedCard === card.id ? 'flex flex-col gap-2' : ''}`}>
                                                     <Image
                                                         alt="Album cover"
-                                                        className={`object-cover shadow-md transition-all duration-300 rounded-none ${expandedCard === card.id ? 'w-full h-[200px]' : 'w-[170px] h-[200px]'}`}
+                                                        className={`object-cover shadow-md transition-all duration-300 rounded-none ${expandedCard === card.id ? 'w-full h-[200px]' : 'mn:[150px] md:w-[170px] h-[200px]'}`}
                                                         width={170}
                                                         height={200} 
                                                         src={card.image}
                                                     />
                                                     <CardBody className={`${expandedCard === card.id ? 'w-full h-[200px]' : 'w-[170px] h-[200px] justify-around'}`}>
                                                         <div className={`${expandedCard === card.id ? 'flex items-center justify-around' : 'flex w-full flex-wrap'}`}>
-                                                            <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start text-2xl' : 'px-2 justify-end w-full mn:text-xl md:text-2xl'}`}>
+                                                            <h1 className={`flex font-semibold text-blackCanadog ${expandedCard === card.id ? 'justify-start text-2xl' : 'px-2 justify-end w-full mn:text-xl md:text-2xl'}`}>
                                                                 {card.title.substring(0, 3)}
                                                                 <span className='text-greenCanadog'>{card.title.substring(3)}</span>
                                                             </h1>
-                                                            <h1 className={`flex font-semibold text-purpleGora ${expandedCard === card.id ? 'justify-start mn:text-xl xl:text-2xl mn: hidden' : 'px-2 justify-end w-full mn:text-xs xl:text-sm'}`}>
-                                                                Edad: {card.old}
+                                                            <h1 className={`flex font-semibold text-blackCanadog ${expandedCard === card.id ? 'justify-start mn:text-xl xl:text-2xl mn: hidden' : 'px-2 justify-end w-full mn:text-xs xl:text-sm'}`}>
+                                                                Edad: <span className='text-greenCanadog'>{card.old}</span>
                                                             </h1>
                                                             {expandedCard === card.id && (
                                                                 <div className='flex flex-wrap'>
@@ -607,9 +608,8 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
 
                 <div className="mx-10 align-items-center grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 justify-center py-4">
                     {/* Card 1 */}
-                    
                     <Link href='https://www.instagram.com/makropetveterinaria/' target="_blank" className='flex justify-center items-center'>
-                        <div className="bg-white text-blackCanadog py-2 flex flex-col justify-center items-center gap-2 w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
+                        <div className="bg-white text-blackCanadog py-2 flex flex-col justify-center items-center gap-2 mn:w-[230px] md:w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
                             <Image
                                 className="w-28 h-28 rounded-full"
                                 src={MakroPet.src}
@@ -618,15 +618,15 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                 alt="Makro Pet"
                             />
                             <div className='flex flex-col justify-center items-center'>
-                                <p className="lg:text-2xl font-bold">Makro Pet</p>
-                                <p className="lg:text-base font-semibold">@makropetveterinaria</p>
+                                <p className="text-xl md:text-2xl font-bold">Makro Pet</p>
+                                <p className="text-sm md:text-base font-semibold">@makropetveterinaria</p>
                             </div>
                         </div>
                     </Link>
                     
                     {/* Card 2 */}
                     <Link href='https://www.instagram.com/formadogs.escuelacanina/' target="_blank" className='flex justify-center items-center'>
-                        <div className="bg-white text-blackCanadog py-2 flex flex-col items-center gap-2 w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
+                        <div className="bg-white text-blackCanadog py-2 flex flex-col items-center gap-2 mn:w-[230px] md:w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
                             <Image
                                 className="w-28 h-28 rounded-full"
                                 src={FormaDogs.src}
@@ -635,15 +635,15 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                 alt="Forma Dogs"
                             />
                             <div className='flex flex-col justify-center items-center'>
-                                <p className="text-2xl font-bold">Formadogs</p>
-                                <p className="text-base font-semibold">@formadogs.escuelacanina</p>
+                                <p className="text-xl md:text-2xl font-bold">Formadogs</p>
+                                <p className="text-sm md:text-base font-semibold">@formadogs.escuelacanina</p>
                             </div>
                         </div>
                     </Link>
                     
                     {/* Card 3 */}
                     <Link href='https://www.instagram.com/animalcliniccolina/' target="_blank" className='flex justify-center items-center'>
-                        <div className="bg-white text-blackCanadog py-2 flex flex-col items-center gap-2 w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
+                        <div className="bg-white text-blackCanadog py-2 flex flex-col items-center gap-2 mn:w-[230px] md:w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
                             <Image
                                 className="w-28 h-28 rounded-full"
                                 src={AnimalClinic.src}
@@ -652,14 +652,14 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                 alt="James"
                             />
                             <div className='flex flex-col justify-center items-center'>
-                                <p className="text-2xl font-bold">Animal Clinic</p>
-                                <p className="text-base font-semibold">@animalcliniccolina</p>
+                                <p className="text-xl md:text-2xl font-bold">Animal Clinic</p>
+                                <p className="text-sm md:text-base font-semibold">@animalcliniccolina</p>
                             </div>
                         </div>
                     </Link>
                     {/* Card 4 */}
                     <Link href='https://www.instagram.com/danii.colibri/' target="_blank" className='flex justify-center items-center'>
-                        <div className="bg-white text-blackCanadog py-2 flex flex-col items-center gap-2 w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
+                        <div className="bg-white text-blackCanadog py-2 flex flex-col items-center gap-2 mn:w-[230px] md:w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
                             <Image
                                 className="w-28 h-28 rounded-full"
                                 src={DaniColibri.src}
@@ -668,15 +668,15 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                 alt="James"
                             />
                             <div className='flex flex-col justify-center items-center'>
-                                <p className="text-2xl font-bold">Dani Colibri</p>
-                                <p className="text-base font-semibold">@danii.colibri</p>
+                                <p className="text-xl md:text-2xl font-bold">Dani Colibri</p>
+                                <p className="text-sm md:text-base font-semibold">@danii.colibri</p>
                             </div>
                         </div>
                     </Link>
                     
                     {/* Card 5 */}
                     <Link href='https://www.instagram.com/makropetveterinaria/' target="_blank" className='flex justify-center items-center'>
-                        <div className="bg-white text-blackCanadog py-2 flex flex-col items-center gap-2 w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
+                        <div className="bg-white text-blackCanadog py-2 flex flex-col items-center gap-2 mn:w-[230px] md:w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
                             <Image
                                 className="w-28 h-28 rounded-full"
                                 src={GoodBoy.src}
@@ -685,8 +685,8 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                 alt="James"
                             />
                             <div className='flex flex-col justify-center items-center'>
-                                <p className="text-2xl font-bold">goodboy</p>
-                                <p className="text-base font-semibold">@goodboy_petstudio</p>
+                                <p className="text-xl md:text-2xl font-bold">goodboy</p>
+                                <p className="text-sm md:text-base font-semibold">@goodboy_petstudio</p>
                             </div>
                         </div>
                     </Link>
@@ -719,11 +719,12 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                     </h2>
                 </div>
             </div>
-            <div className="mn:max-w-xs md:max-w-[700px] lg:max-w-4xl xl:max-w-7xl mx-auto mt-10 mb-20 lg:gap-4 py-4 align-items-center gap-6 grid mn:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-center border-2 border-mentaCanadog rounded-lg">
+
+            <div className="mn:max-w-[230px] md:max-w-[700px] lg:max-w-4xl xl:max-w-7xl mx-auto mt-10 mb-20 lg:gap-4 py-4 align-items-center gap-6 grid mn:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-center border-2 border-mentaCanadog rounded-lg">
                 {/* Card 1 */}
                 <div className="bg-white text-blackCanadog flex flex-col items-center gap-2">
                     <Image
-                        className="mn:w-36 mn:h-48 lg:w-40 lg:h-52 xl:w-44 xl:h-60"
+                        className="mn:w-28 mn:h-40 md:w-36 md:h-48 lg:w-40 lg:h-52 xl:w-44 xl:h-60"
                         src={Explora.src}
                         width={100}
                         height={100}
@@ -734,7 +735,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                 {/* Card 2 */}
                 <div className="bg-white text-blackCanadog flex flex-col items-center gap-2">
                     <Image
-                        className="mn:w-36 mn:h-48 lg:w-40 lg:h-52 xl:w-44 xl:h-60"
+                        className="mn:w-28 mn:h-40 md:w-36 md:h-48 lg:w-40 lg:h-52 xl:w-44 xl:h-60"
                         src={Aplica.src}
                         width={100}
                         height={100}
@@ -745,7 +746,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                 {/* Card 3 */}
                 <div className="bg-white text-blackCanadog flex flex-col items-center gap-2">
                     <Image
-                        className="mn:w-36 mn:h-48 lg:w-40 lg:h-52 xl:w-44 xl:h-60"
+                        className="mn:w-28 mn:h-40 md:w-36 md:h-48 lg:w-40 lg:h-52 xl:w-44 xl:h-60"
                         src={Entrevista.src}
                         width={100}
                         height={100}
@@ -755,7 +756,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                 {/* Card 4 */}
                 <div className="bg-white text-blackCanadog flex flex-col items-center gap-2">
                     <Image
-                        className="mn:w-36 mn:h-48 lg:w-40 lg:h-52 xl:w-44 xl:h-60"
+                        className="mn:w-28 mn:h-40 md:w-36 md:h-48 lg:w-40 lg:h-52 xl:w-44 xl:h-60"
                         src={Adopcion.src}
                         width={100}
                         height={100}
