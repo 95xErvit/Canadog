@@ -1,11 +1,10 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { Button, Card, Input,CardBody, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, usePagination, PaginationItemType, Checkbox, Textarea, Link } from "@nextui-org/react";
+import { Button, Card,CardHeader, CardFooter,Image, Input, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, usePagination, PaginationItemType, Checkbox, Textarea, Link } from "@nextui-org/react";
 import {ScrollShadow} from "@nextui-org/react";
 import {Divider} from "@nextui-org/divider";
 import {Pagination} from "@nextui-org/react";
 import MotionTransition from '../MotionTransition/MotionTransition';
-import Image from 'next/image';
 import MakroPet from "@/public/Makropet.jpg"
 import FormaDogs from "@/public/Formadogs.jpg"
 import AnimalClinic from "@/public/AnimalClinic.jpeg"
@@ -135,70 +134,27 @@ export default function Store({ CardsProducts }: any) {
                                     {CardsProducts.map((card: any) => (
                                     <div
                                         key={card.id}
-                                        className={`relative m-4 transition-all duration-300 
-                                            ${expandedCard === card.id ? 'row-span-2' : 'row-span-1'}
-                                            ${expandedCard === card.id ? 'h-auto' : 'h-[200px]'}
-                                        `}
-                                        onClick={() => toggleExpand(card.id)}
+                                        className={`relative m-4 transition-all duration-300 row-span-1 h-[200px]`}
                                     >
                                         <Card isFooterBlurred className="w-full h-[300px] col-span-12 sm:col-span-5">
-                                            <div className={`flex items-center ${expandedCard === card.id ? 'flex-col gap-2' : ''}`}>
+                                            <div className={`flex items-center`}>
+                                            <CardHeader className="absolute z-10 top-1 flex-col items-start">
+                                                <h4 className="text-black font-medium text-2xl">{card.title}</h4>
+                                            </CardHeader>
                                             <Image
                                                 alt="Album cover"
-                                                className={`object-cover shadow-md transition-all duration-300 
-                                                ${expandedCard === card.id ? 'w-full h-[200px]' : 'w-[170px] h-[200px]'}`}
-                                                width={170}
-                                                height={200} 
+                                                className="z-0 w-full h-full scale-125 -translate-y-6 object-cover"
                                                 src={card.image}
                                             />
-                                            <CardBody className={`${expandedCard === card.id ? 'w-full h-auto' : 'w-[170px] h-[200px] justify-around'}`}>
-                                                <div className={`${expandedCard === card.id ? 'flex items-center justify-around' : 'flex w-full flex-wrap'}`}>
-                                                <p className={`flex font-semibold text-blackCanadog ${expandedCard === card.id ? 'justify-start text-2xl' : 'px-2 justify-end w-full mn:text-xl md:text-2xl'}`}>
-                                                    {card.title.substring(0, 3)}
-                                                    <span className='text-greenCanadog'>{card.title.substring(3)}</span>
-                                                </p>
-                                                <p className={`flex font-semibold text-blackCanadog ${expandedCard === card.id ? 'justify-start mn:text-xl xl:text-2xl mn: hidden' : 'px-2 justify-end w-full mn:text-xs xl:text-sm'}`}>
-                                                    Precio: <span className='text-greenCanadog'>{card.cost}</span>
-                                                </p>
-                                                <p className={`flex font-semibold text-blackCanadog ${expandedCard === card.id ? 'justify-start mn:text-xl xl:text-2xl mn: hidden' : 'px-2 justify-end w-full mn:text-xs xl:text-sm'}`}>
-                                                    Unidades: <span className='text-greenCanadog'>{card.unity}</span>
-                                                </p>
-                                                {expandedCard === card.id && (
-                                                    <div className='flex flex-wrap'>
-                                                        <div className='flex items-center'>
-                                                            <Button className='bg-greenCanadog border border-greenCanadog text-white text-sm h-7' radius="full">
-                                                                Comprame
-                                                            </Button>
-                                                        </div>
-                                                        <div className='flex items-center'>
-                                                            <Button
-                                                                onClick={() => toggleExpand(card.id)}
-                                                                className='bg-transparent text-greenCanadog text-end mn:min-w-10 xl:min-w-20'
-                                                                endContent={<i className="pi pi-arrow-circle-up" style={{ color: '#489E84', fontSize: '1.5rem' }} />}
-                                                                radius="full"
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                )}
+                                            <CardFooter className="absolute bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
+                                                <div>
+                                                <p className="text-black text-tiny">Unidades: {card.unity}</p>
+                                                <p className="text-black text-tiny">Precios: {card.cost}</p>
                                                 </div>
-                                    
-                                                <p className={`font-normal text-gray ${expandedCard === card.id ? 'w-full h-auto text-[14px] px-2.5 my-2' : 'w-full h-[58px] text-[12px]'}`}>
-                                                {expandedCard === card.id ? card.longDescription : `${card.shortDescription.substring(0, 50)}...`}
-                                                </p>
-                                    
-                                                {expandedCard !== card.id && (
-                                                <div className="flex justify-center">
-                                                    <Button
-                                                    onClick={() => toggleExpand(card.id)}
-                                                    className='bg-transparent border border-greenCanadog text-greenCanadog text-xs'
-                                                    radius="full"
-                                                    endContent={<i className="pi pi-arrow-circle-down" style={{ color: '#489E84' }} />}
-                                                    >
-                                                    Más sobre el producto
-                                                    </Button>
-                                                </div>
-                                                )}
-                                            </CardBody>
+                                                <Button onClick={()=> window.open('https://api.whatsapp.com/send?phone=+573104684683&text=Hola%20quiero%20saber%20mas%20sobre%20este%20producto%20' + card.title, '_blank')} className="text-tiny" color="primary" radius="full" size="sm">
+                                                 Comprar
+                                                </Button>
+                                            </CardFooter>
                                             </div>
                                         </Card>
                                     </div>
@@ -237,121 +193,6 @@ export default function Store({ CardsProducts }: any) {
                     />
                 </div>
             </div>
-
-            <Divider className="my-4"/>
-
-            {/*AGRADECIMIENTOS */}
-            <section className="py-8 mb-10">
-                <div className="text-center py-8 mn:max-w-xs md:max-w-[700px] lg:max-w-4xl xl:max-w-7xl mx-auto">
-                    <h2 className="mb-6 text-3xl font-bold text-blackCanadog mn:text-2xl sm:text-4xl xl:text-5xl">Gracias aliados</h2>
-                    <p className="mt-4 text-xl font-normal text-blackCanadog mn:text-base sm:text-lg xl:text-xl">
-                        ¡Su ayuda es {<span className='text-greenCanadog font-semibold'>TODO</span>} para nosotros y para ellos!
-                    </p>
-                </div>
-
-                <div className="mx-10 align-items-center grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 justify-center py-4">
-                    {/* Card 1 */}
-                    
-                    <Link href='https://www.instagram.com/makropetveterinaria/' target="_blank" className='flex justify-center items-center'>
-                        <div className="bg-white text-blackCanadog py-2 flex flex-col justify-center items-center gap-2 w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
-                            <Image
-                                className="w-28 h-28 rounded-full"
-                                src={MakroPet.src}
-                                width={100}
-                                height={100}
-                                alt="Makro Pet"
-                            />
-                            <div className='flex flex-col justify-center items-center'>
-                                <p className="lg:text-2xl font-bold">Makro Pet</p>
-                                <p className="lg:text-base font-semibold">@makropetveterinaria</p>
-                            </div>
-                        </div>
-                    </Link>
-                    
-                    {/* Card 2 */}
-                    <Link href='https://www.instagram.com/formadogs.escuelacanina/' target="_blank" className='flex justify-center items-center'>
-                        <div className="bg-white text-blackCanadog py-2 flex flex-col items-center gap-2 w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
-                            <Image
-                                className="w-28 h-28 rounded-full"
-                                src={FormaDogs.src}
-                                width={100}
-                                height={100}
-                                alt="Forma Dogs"
-                            />
-                            <div className='flex flex-col justify-center items-center'>
-                                <p className="text-2xl font-bold">Formadogs</p>
-                                <p className="text-base font-semibold">@formadogs.escuelacanina</p>
-                            </div>
-                        </div>
-                    </Link>
-                    
-                    {/* Card 3 */}
-                    <Link href='https://www.instagram.com/animalcliniccolina/' target="_blank" className='flex justify-center items-center'>
-                        <div className="bg-white text-blackCanadog py-2 flex flex-col items-center gap-2 w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
-                            <Image
-                                className="w-28 h-28 rounded-full"
-                                src={AnimalClinic.src}
-                                width={100}
-                                height={100}
-                                alt="James"
-                            />
-                            <div className='flex flex-col justify-center items-center'>
-                                <p className="text-2xl font-bold">Animal Clinic</p>
-                                <p className="text-base font-semibold">@animalcliniccolina</p>
-                            </div>
-                        </div>
-                    </Link>
-                    {/* Card 4 */}
-                    <Link href='https://www.instagram.com/danii.colibri/' target="_blank" className='flex justify-center items-center'>
-                        <div className="bg-white text-blackCanadog py-2 flex flex-col items-center gap-2 w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
-                            <Image
-                                className="w-28 h-28 rounded-full"
-                                src={DaniColibri.src}
-                                width={100}
-                                height={100}
-                                alt="James"
-                            />
-                            <div className='flex flex-col justify-center items-center'>
-                                <p className="text-2xl font-bold">Dani Colibri</p>
-                                <p className="text-base font-semibold">@danii.colibri</p>
-                            </div>
-                        </div>
-                    </Link>
-                    
-                    {/* Card 5 */}
-                    <Link href='https://www.instagram.com/makropetveterinaria/' target="_blank" className='flex justify-center items-center'>
-                        <div className="bg-white text-blackCanadog py-2 flex flex-col items-center gap-2 w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
-                            <Image
-                                className="w-28 h-28 rounded-full"
-                                src={GoodBoy.src}
-                                width={100}
-                                height={100}
-                                alt="James"
-                            />
-                            <div className='flex flex-col justify-center items-center'>
-                                <p className="text-2xl font-bold">goodboy</p>
-                                <p className="text-base font-semibold">@goodboy_petstudio</p>
-                            </div>
-                        </div>
-                    </Link>
-                    {/* Card 6 
-                    <Link href='https://www.instagram.com/makropetveterinaria/' target="_blank">
-                        <div className="bg-white text-blackCanadog py-2 px-4 flex flex-col items-center gap-2 w-full border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
-                            <Image
-                                className="w-28 h-28 rounded-full"
-                                src={GoodBoy.src}
-                                width={100}
-                                height={100}
-                                alt="James"
-                            />
-                            <div className='flex flex-col justify-center items-center'>
-                                <p className="text-2xl font-bold">Formadogs</p>
-                                <p className="text-base font-semibold">@kanumascotas</p>
-                            </div>
-                        </div>
-                    </Link>*/}
-                </div>
-            </section>
         </div>
     )
 }
