@@ -724,7 +724,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                 {/* Card 1 */}
                 <div className="bg-white text-blackCanadog flex flex-col items-center gap-2">
                     <Image
-                        className="mn:w-28 mn:h-40 md:w-36 md:h-48 lg:w-40 lg:h-52 xl:w-44 xl:h-60"
+                        className="mn:w-32 mn:h-40 md:w-36 md:h-48 lg:w-40 lg:h-52 xl:w-44 xl:h-60"
                         src={Explora.src}
                         width={100}
                         height={100}
@@ -735,7 +735,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                 {/* Card 2 */}
                 <div className="bg-white text-blackCanadog flex flex-col items-center gap-2">
                     <Image
-                        className="mn:w-28 mn:h-40 md:w-36 md:h-48 lg:w-40 lg:h-52 xl:w-44 xl:h-60"
+                        className="mn:w-32 mn:h-40 md:w-36 md:h-48 lg:w-40 lg:h-52 xl:w-44 xl:h-60"
                         src={Aplica.src}
                         width={100}
                         height={100}
@@ -746,7 +746,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                 {/* Card 3 */}
                 <div className="bg-white text-blackCanadog flex flex-col items-center gap-2">
                     <Image
-                        className="mn:w-28 mn:h-40 md:w-36 md:h-48 lg:w-40 lg:h-52 xl:w-44 xl:h-60"
+                        className="mn:w-32 mn:h-40 md:w-36 md:h-48 lg:w-40 lg:h-52 xl:w-44 xl:h-60"
                         src={Entrevista.src}
                         width={100}
                         height={100}
@@ -756,7 +756,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                 {/* Card 4 */}
                 <div className="bg-white text-blackCanadog flex flex-col items-center gap-2">
                     <Image
-                        className="mn:w-28 mn:h-40 md:w-36 md:h-48 lg:w-40 lg:h-52 xl:w-44 xl:h-60"
+                        className="mn:w-32 mn:h-40 md:w-36 md:h-48 lg:w-40 lg:h-52 xl:w-44 xl:h-60"
                         src={Adopcion.src}
                         width={100}
                         height={100}
