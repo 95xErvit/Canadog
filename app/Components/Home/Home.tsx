@@ -28,6 +28,8 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
         setExpandedCard(expandedCard === id ? null : id);
     };
 
+    console.log(cardsDogs)
+
     const itemsAdoptions = 9; // Cantidad de tarjetas para mostrar por página
     const cards = isDog ? cardsDogs : cardsCats;
     const totalPagesAdoptions = Math.ceil(cards.length / itemsAdoptions);

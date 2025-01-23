@@ -22,11 +22,11 @@ export default function Login() {
     const handleClick = async (e: any) => {
         setIsLoading(true)
         e.preventDefault()
-        const response = await axios.post("/UserGora/CMS/api/users",{data:{Id:user, Pass:pass}})
+        const response = await axios.post("/UserCanaDog/CMS/api/users",{data:{Id:user, Pass:pass}})
         console.log(response.data)
         if(response.data.data)
         {
-            router.push('/UserGora/CMS')
+            router.push('/UserCanaDog/CMS')
         }
         else
         {

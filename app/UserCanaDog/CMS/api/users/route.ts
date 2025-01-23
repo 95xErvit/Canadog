@@ -7,12 +7,12 @@ export async function POST(request: NextRequest) {
     console.log(data)
     try {
 
-        if(data.data.Pass === "Gora2024#*")
+        if(data.data.Id === "CanaDogAdmin" && data.data.Pass === "CanaDog2025#*")
         {
             return NextResponse.json({mensaje: "Procesado correctamente", data: true}, { status: 200 })
         }
         else{
-            return NextResponse.json({mensaje: "Procesado correctamente", data: false}, { status: 200 })
+            return NextResponse.json({mensaje: "Error", data: false}, { status: 200 })
         }
         
     }

@@ -25,6 +25,10 @@ export default function CMS({Dogs, Cats, History, Products}: any)
     const [description, setDescription] = useState<string>('');
     const [id, setId] = useState<string>('');
     const [file, setFile] = useState<any>();
+    const [file2, setFile2] = useState<any>();
+    const [file3, setFile3] = useState<any>();
+    const [file4, setFile4] = useState<any>();
+    const [file5, setFile5] = useState<any>();
     const [isDog, setIsDog] = useState(true);
     const [isCat, setIsCat] = useState(false)
     const [isHistory, setIsHistory] = useState(false);
@@ -44,22 +48,33 @@ export default function CMS({Dogs, Cats, History, Products}: any)
         let _totalSize = totalSize;
         let files = e.files;
         let exit = false
-
-        for (let i = 0; i < files.length; i++) 
+        if(e.files.length === 0)
         {
-            _totalSize += files[i].size || 0;
-            const ext = files[i].name.split('.')[1]
+            toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Tienes que subir maximo una imagen'});
+        }
 
-            if((ext === "jpg") || (ext === "jpeg")||  (ext === "png") || (ext === "webp"))
+        if(e.files.length <= 5)
+        {
+            for (let i = 0; i < files.length; i++) 
             {
-                exit = false
-            }
-            else
-            {
-                exit = true
-            }
+                _totalSize += files[i].size || 0;
+                const ext = files[i].name.split('.')[1]
 
-            console.log(exit)
+                if((ext === "jpg") || (ext === "jpeg")||  (ext === "png") || (ext === "webp"))
+                {
+                    exit = false
+                }
+                else
+                {
+                    exit = true
+                }
+
+                console.log(exit)
+            }
+        }else
+        {
+            toast.current?.show({ severity: 'error', summary: 'Error subiendo las imagenes', className:"m-2", detail: 'Solo se pueden subir maximo 5 imagenes'});
+            return
         }
 
         if(exit)
@@ -77,7 +92,11 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                 return;
             }*/
             const reader = new FileReader();
-            
+            const reader2 = new FileReader();
+            const reader3 = new FileReader();
+            const reader4 = new FileReader();
+            const reader5 = new FileReader();
+
             reader.onloadend = function (event:any) {
                 const base64Text = event.target.result;
                 console.log(base64Text);
@@ -94,8 +113,91 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                 ]);
             }
 
+            reader2.onloadend = function (event:any) {
+                const base64Text = event.target.result;
+                console.log(base64Text);
+                setFile2(base64Text);
+
+                setHistory(prev => [
+                    ...prev, 
+                    {
+                        id: Date.now(), 
+                        image: base64Text, 
+                        title: "Nuevo Elemento", 
+                        shortDescription: "Descripción corta"
+                    }
+                ]);
+            }
+
+            reader3.onloadend = function (event:any) {
+                const base64Text = event.target.result;
+                console.log(base64Text);
+                setFile3(base64Text);
+
+                setHistory(prev => [
+                    ...prev, 
+                    {
+                        id: Date.now(), 
+                        image: base64Text, 
+                        title: "Nuevo Elemento", 
+                        shortDescription: "Descripción corta"
+                    }
+                ]);
+            }
+
+            reader4.onloadend = function (event:any) {
+                const base64Text = event.target.result;
+                console.log(base64Text);
+                setFile4(base64Text);
+
+                setHistory(prev => [
+                    ...prev, 
+                    {
+                        id: Date.now(), 
+                        image: base64Text, 
+                        title: "Nuevo Elemento", 
+                        shortDescription: "Descripción corta"
+                    }
+                ]);
+            }
+
+            reader5.onloadend = function (event:any) {
+                const base64Text = event.target.result;
+                console.log(base64Text);
+                setFile5(base64Text);
+
+                setHistory(prev => [
+                    ...prev, 
+                    {
+                        id: Date.now(), 
+                        image: base64Text, 
+                        title: "Nuevo Elemento", 
+                        shortDescription: "Descripción corta"
+                    }
+                ]);
+            }
+
             reader.readAsDataURL(e.files[0]);
+
+            if(e.files.length === 2)
+            {
+                reader2.readAsDataURL(e.files[1]);
+            } 
             
+            if(e.files.length === 3)
+            {
+                reader3.readAsDataURL(e.files[2]);
+            }
+
+            if(e.files.length === 4)
+            {
+                reader3.readAsDataURL(e.files[3]);
+            }
+
+            if(e.files.length === 5)
+            {
+                reader4.readAsDataURL(e.files[4]);
+            }
         }
       
         toast.current?.show({ severity: 'info', summary: 'CARGA EXITOSA', className:"m-2", detail: 'Imagen cargada exitosamente'});
@@ -154,13 +256,28 @@ export default function CMS({Dogs, Cats, History, Products}: any)
         setIsLoading(true)
         try
         {
-            const response = await axios.post("/UserCanaDog/CMS/api/pets",{data:{User:"Administrador_CanaDog",Enable: 1, Name: name, OldDate:yearOlds, Description:description, Type:isDog ? "DOG" : isCat? "CAT": "HISTORY", Images: file, Web: "CANADOG"}})
+            const response = await axios.post("/UserCanaDog/CMS/api/pets",{
+                data:{
+                    User:"Administrador_CanaDog",
+                    Enable: 1, 
+                    Name: name, 
+                    OldDate:yearOlds, 
+                    Description:description, 
+                    Type:isDog ? "DOG" : isCat? "CAT": "HISTORY", 
+                    Images: file, 
+                    Images2: file2,
+                    Images3: file3,
+                    Images4: file4,
+                    Images5: file5, 
+                    Web: "CANADOG"
+                }
+            })
             console.log('Contesto:', response);
         }
         catch(err){
             console.log(err)
         }
-        setTimeout(()=>location.reload(), 4000)
+        //setTimeout(()=>location.reload(), 4000)
     };
 
     const sendProduct = async (e: React.FormEvent) => {
@@ -174,7 +291,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
         catch(err){
             console.log(err)
         }
-        setTimeout(()=>location.reload(), 4000)
+        //setTimeout(()=>location.reload(), 4000)
     };
 
     const UpdatePets = async (e: React.FormEvent, EnablePet = 1) => {
@@ -248,6 +365,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                     <FileUpload
                                         ref={fileUploadRef} 
                                         name="demo[]"
+                                        multiple
                                         disabled={isLoading}
                                         accept="image/*"
                                         maxFileSize={1000000}
@@ -521,7 +639,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                             <Button 
                                 isLoading={isLoading} 
                                 onClick={(e) => [ setIsProduct(true), setIsHistory(false),setIsDog(false),setIsCat(false) ]} 
-                                className={`bg-transparent border  ${isHistory ? "bg-greenCanadog text-white" : "border-greenCanadog text-greenCanadog"} hover:bg-mentaCanadog hover:text-white mn:text-sm xl:text-xl`}
+                                className={`bg-transparent border  ${isProduct ? "bg-greenCanadog text-white" : "border-greenCanadog text-greenCanadog"} hover:bg-mentaCanadog hover:text-white mn:text-sm xl:text-xl`}
                                 radius="full" 
                             >
                                 Productos
