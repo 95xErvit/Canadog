@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Card, Input,CardBody, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, usePagination, PaginationItemType, Checkbox, Textarea, Link } from "@nextui-org/react";
 import {ScrollShadow} from "@nextui-org/react";
 import {Divider} from "@nextui-org/divider";
+import { Carousel } from 'primereact/carousel';
 import {Pagination} from "@nextui-org/react";
 import Image from 'next/image';
 import MakroPet from "@/public/Makropet.jpg"
@@ -23,12 +24,12 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
     const [isDog, setIsDog] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [expandedCard, setExpandedCard] = useState<number | null>(null);
+    const [indiceActual, setIndiceActual] = useState<number>(0);
 
     const toggleExpand = (id: number) => {
         setExpandedCard(expandedCard === id ? null : id);
+        setIndiceActual(0)
     };
-
-    console.log(cardsDogs)
 
     const itemsAdoptions = 9; // Cantidad de tarjetas para mostrar por página
     const cards = isDog ? cardsDogs : cardsCats;
@@ -51,8 +52,29 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
             setCardsToShow(4); 
           }
         };
+
+        const intervalo = setInterval(() => {
+            if(expandedCard !== null)
+            {   console.log("hola")
+                if(cardsDogs.find((card : any) => card.id === expandedCard))
+                {
+                    const leng = cardsDogs.find((card : any) => card.id === expandedCard).Image.length
     
+                    let index = indiceActual
+    
+                    index++
+                    console.log(index)
+                    if(index >= leng){
+                        index = 0
+                    }
+    
+                    setIndiceActual(index)
+                }
+            }
+          }, 6000);
+
         updateCardsToShow();
+        intervalo
         window.addEventListener("resize", updateCardsToShow);
     
         return () => window.removeEventListener("resize", updateCardsToShow);
@@ -236,14 +258,30 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                             >
                                                 <Card className="transition-transform duration-100">
                                                   <div className={`flex items-center ${expandedCard === card.id ? 'flex-col gap-2' : ''}`}>
-                                                    <Image
-                                                      alt="Album cover"
-                                                      className={`object-cover shadow-md transition-all duration-100 
-                                                      ${expandedCard === card.id ? 'w-full h-[220px]' : 'w-[170px] h-[200px]'}`}
-                                                      width={170}
-                                                      height={200} 
-                                                      src={card.image}
-                                                    />
+                                                    
+                                                    { expandedCard === card.id ?
+                                                        (
+                                                            <Image 
+                                                                alt="Album cover"
+                                                                className={`object-cover shadow-md transition-all duration-100 
+                                                                ${expandedCard === card.id ? 'w-full h-[220px]' : 'w-[170px] h-[200px]'}`}
+                                                                width={170}
+                                                                height={200} 
+                                                                src={card.Image[indiceActual]?.image}
+                                                            />
+                                                        ):
+                                                        (
+                                                            <Image 
+                                                                alt="Album cover"
+                                                                className={`object-cover shadow-md transition-all duration-100 
+                                                                ${expandedCard === card.id ? 'w-full h-[220px]' : 'w-[170px] h-[200px]'}`}
+                                                                width={170}
+                                                                height={200} 
+                                                                src={card.Image[0].image}
+                                                            />
+                                                         )
+                                                        
+                                                    }
                                                     <CardBody className={`${expandedCard === card.id ? 'w-full h-auto' : 'w-[170px] h-[200px] justify-around'}`}>
                                                       <div className={`${expandedCard === card.id ? 'flex items-center justify-around' : 'flex w-full flex-wrap'}`}>
                                                         <p className={`flex font-semibold text-blackCanadog ${expandedCard === card.id ? 'justify-start text-2xl' : 'px-2 justify-end w-full mn:text-xl md:text-2xl'}`}>
