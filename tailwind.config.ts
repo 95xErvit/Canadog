@@ -30,6 +30,7 @@ module.exports = {
         gray: '#5C5C5C',
         blackCanadog: '#3F3F3F',
         greenCanadog: '#1C8C58',
+        greenLightCanadog: '#AFF1D5',
         mentaCanadog: '#69C699',
         orangeGora: '#FDB104',
         pinkLightGora: '#FCEBD7',
