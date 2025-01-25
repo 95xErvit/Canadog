@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useRef } from 'react';
-import { Button, Textarea, Card, Input,CardBody, Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Pagination } from "@nextui-org/react";
+import { Button, Textarea, Card, Input,CardBody, CardHeader,CardFooter ,Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Pagination } from "@nextui-org/react";
 import { ScrollShadow } from "@nextui-org/react";
 import { Toast } from 'primereact/toast';
 import { FileUpload, FileUploadHeaderTemplateOptions, FileUploadSelectEvent, FileUploadUploadEvent, ItemTemplateOptions,} from 'primereact/fileupload';
@@ -11,8 +11,7 @@ import 'primeicons/primeicons.css';
 import axios from 'axios';
 
 export default function CMS({Dogs, Cats, History, Products}: any) 
-{   
-    console.log(Dogs)
+{ 
     const toast = useRef<Toast>(null);
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -40,8 +39,6 @@ export default function CMS({Dogs, Cats, History, Products}: any)
     const fileUploadRef = useRef<FileUpload>(null);
     const [currentPage, setCurrentPage] = useState(1);
     const router = useRouter()
-    
-    console.log(Products)
 
     const onTemplateSelect = (e: FileUploadSelectEvent) => {
         console.log(e.files)
@@ -277,7 +274,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
         catch(err){
             console.log(err)
         }
-        //setTimeout(()=>location.reload(), 4000)
+        setTimeout(()=>location.reload(), 4000)
     };
 
     const sendProduct = async (e: React.FormEvent) => {
@@ -285,13 +282,13 @@ export default function CMS({Dogs, Cats, History, Products}: any)
         setIsLoading(true)
         try
         {
-            const response = await axios.post("/UserCanaDog/CMS/api/products",{data:{User:"Administrador_CanaDog",Enable: 1, Name: name, OldDate:yearOlds, Description:description, Type:isDog ? "DOG" : isCat? "CAT": "HISTORY", Images: file, Web: "CANADOG"}})
+            const response = await axios.post("/UserCanaDog/CMS/api/products",{data:{PRODUCTS_USER:"Administrador_CanaDog",PRODUCTS_ENABLE: 1,CATEGORY_ID:1, PRODUCTS_NAME: name, PRODUCTS_STOCK:unity, PRODUCTS_DESCRIPTION:description, PRODUCTS_WORTH:cost, PRODUCT_IMAGE: file, PRODUCTS_WEB: "CANADOG"}})
             console.log('Contesto:', response);
         }
         catch(err){
             console.log(err)
         }
-        //setTimeout(()=>location.reload(), 4000)
+        setTimeout(()=>location.reload(), 4000)
     };
 
     const UpdatePets = async (e: React.FormEvent, EnablePet = 1) => {
@@ -308,6 +305,21 @@ export default function CMS({Dogs, Cats, History, Products}: any)
         }
         setTimeout(()=>location.reload(), 4000)
     };
+
+    const UpdateProducts = async (e: React.FormEvent, EnableProducts = 1) => {
+        e.preventDefault();
+        setIsLoading(true)
+        try
+        {
+            const response = await axios.patch("/UserCanaDog/CMS/api/products",{data:{PRODUCTS_ID:id, PRODUCTS_USER:"Administrador_CanaDog",PRODUCTS_ENABLE: EnableProducts,CATEGORY_ID:1, PRODUCTS_NAME: name, PRODUCTS_STOCK:unity, PRODUCTS_DESCRIPTION:description, PRODUCTS_WORTH:cost.toString(), PRODUCT_IMAGE: file, PRODUCTS_WEB: "CANADOG"}})
+            console.log('Contesto:', response);
+        }
+        catch(err){
+            console.log(err)
+        }
+        setTimeout(()=>location.reload(), 4000)
+    };
+
 
     const chooseOptions = { icon: 'pi pi-fw pi-images', iconOnly: true, className: 'custom-choose-btn p-button-rounded p-button-outlined' };
     const uploadOptions = { icon: 'pi pi-fw pi-cloud-upload', iconOnly: true, className: 'custom-upload-btn p-button-success p-button-rounded p-button-outlined' };
@@ -332,62 +344,133 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                     <ModalContent>
                     {(onClose) => (
                         <>
-                            <Toast ref={toast}></Toast>
-                            <ModalHeader className="flex justify-center text-greenGora">
-                                ¡Bienvenido {<p className='text-blackGora ml-1'> a tu próxima gran aventura</p>}!
-                            </ModalHeader>
-                            <ModalBody>
-                                <p className='text-greenCanadog px-4 text-xl text-center font-semibold'> 
-                                    { isDog ? "Crea un nuevo Guau" : isCat ? "Crea un nuevo Miau" : isHistory ? "Crea una historia emotiva" : ""}
-                                </p>
-                                <h1 className='text-center py-4 text-blackGora font-semibold'>
-                                    Ingrese la informacion de la mascota.
-                                </h1>
-                                <div className="flex w-full flex-col gap-4">
-                                    <div className="flex mb-6 md:mb-0 gap-4">
-                                        <Input required disabled={isLoading} onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Nombre"/>
-                                        { !isHistory && <Input required onChange={((e)=> setYearosld(e.target.value))} type="edad" variant={'faded'} label="Edad"/>}
-                                    </div>
-                                    <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
-                                        <Textarea required disabled={isLoading} maxLength={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
-                                    </div>
-                                </div> 
-                                <h1 className='text-center py-4 text-blackGora font-semibold'>
-                                    Fotos de la Mascota
-                                </h1>
-                                <div className='flex flex-row justify-center my-2 gap-2 space-x-2'>
-                                    
+                            {   !isProduct ?
+                                <>
+                                    <Toast ref={toast}></Toast>
+                                    <ModalHeader className="flex justify-center text-greenGora">
+                                        ¡Bienvenido {<p className='text-blackGora ml-1'> a tu próxima gran aventura</p>}!
+                                    </ModalHeader>
+                                    <ModalBody>
+                                        <p className='text-greenCanadog px-4 text-xl text-center font-semibold'> 
+                                            { isDog ? "Crea un nuevo Guau" : isCat ? "Crea un nuevo Miau" : isHistory ? "Crea una historia emotiva" : ""}
+                                        </p>
+                                        <h1 className='text-center py-4 text-blackGora font-semibold'>
+                                            Ingrese la informacion de la mascota.
+                                        </h1>
+                                        <div className="flex w-full flex-col gap-4">
+                                            <div className="flex mb-6 md:mb-0 gap-4">
+                                                <Input required disabled={isLoading} onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Nombre"/>
+                                                { !isHistory && <Input required onChange={((e)=> setYearosld(e.target.value))} type="edad" variant={'faded'} label="Edad"/>}
+                                            </div>
+                                            <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
+                                                { 
+                                                    isHistory === true ? 
+                                                    
+                                                        <></>
+                                                    :
+                                                        <Textarea required disabled={isLoading} value={description} maxLength={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/> 
+                                                }
+                                            </div>
+                                        </div> 
+                                        <h1 className='text-center py-4 text-blackGora font-semibold'>
+                                            Fotos de la Mascota
+                                        </h1>
+                                        <div className='flex flex-row justify-center my-2 gap-2 space-x-2'>
+                                            
 
-                                    <Tooltip target=".custom-choose-btn" content="Choose" position="bottom" />
-                                    <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
-                                    <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
+                                            <Tooltip target=".custom-choose-btn" content="Choose" position="bottom" />
+                                            <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
+                                            <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
 
-                                    <FileUpload
-                                        ref={fileUploadRef} 
-                                        name="demo[]"
-                                        multiple
-                                        disabled={isLoading}
-                                        accept="image/*"
-                                        maxFileSize={1000000}
-                                        onUpload={onTemplateUpload} 
-                                        onSelect={onTemplateSelect} 
-                                        onError={onTemplateClear} 
-                                        onClear={onTemplateClear}
-                                        headerTemplate={headerTemplate} 
-                                        uploadHandler={(event) => [onTemplateUpload(event)]}
-                                        chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} 
-                                        customUpload/>
-                                </div>
-                            </ModalBody>
-                            <ModalFooter className='flex justify-center'>
-                                <div className='flex flex-col w-full'>
-                                    <div className='flex justify-center'>
-                                        <Button onClick={sendPets}  isLoading={isLoading} className='border-2 border-greenCanadog bg-mentaCanadog hover:bg-greenCanadog text-white text-lg px-6' radius="full" size="md">
-                                            Guardar
-                                        </Button>                              
-                                    </div>
-                                </div>
-                            </ModalFooter>
+                                            <FileUpload
+                                                ref={fileUploadRef} 
+                                                name="demo[]"
+                                                multiple
+                                                disabled={isLoading}
+                                                accept="image/*"
+                                                maxFileSize={1000000}
+                                                onUpload={onTemplateUpload} 
+                                                onSelect={onTemplateSelect} 
+                                                onError={onTemplateClear} 
+                                                onClear={onTemplateClear}
+                                                headerTemplate={headerTemplate} 
+                                                uploadHandler={(event) => [onTemplateUpload(event)]}
+                                                chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} 
+                                                customUpload/>
+                                        </div>
+                                    </ModalBody>
+                                    <ModalFooter className='flex justify-center'>
+                                        <div className='flex flex-col w-full'>
+                                            <div className='flex justify-center'>
+                                                <Button onClick={sendPets}  isLoading={isLoading} className='border-2 border-greenCanadog bg-mentaCanadog hover:bg-greenCanadog text-white text-lg px-6' radius="full" size="md">
+                                                    Guardar
+                                                </Button>                              
+                                            </div>
+                                        </div>
+                                    </ModalFooter>
+                                </>
+                                :
+                                    <>
+                                        <Toast ref={toast}></Toast>
+                                        <ModalHeader className="flex justify-center text-greenGora">
+                                            ¡Bienvenido {<p className='text-blackGora ml-1'> aca podras crear los diferentes productos</p>}!
+                                        </ModalHeader>
+                                        <ModalBody>
+                                            <p className='text-greenCanadog px-4 text-xl text-center font-semibold'> 
+                                            Crea un nuevo producto
+                                            </p>
+                                            <h1 className='text-center py-4 text-blackGora font-semibold'>
+                                                Ingrese la informacion del producto.
+                                            </h1>
+                                            <div className="flex w-full flex-col gap-4">
+                                                <div className="flex mb-6 md:mb-0 gap-4">
+                                                    <Input required disabled={isLoading} onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Nombre"/>
+                                                </div>
+                                                <div className="flex mb-6 md:mb-0 gap-4">
+                                                    <Input value={unity} required disabled={isLoading} onChange={((e)=> setUnity(e.target.value))} type="unity" variant={'faded'} label="Unidades"/>
+                                                    <Input value={cost} required disabled={isLoading} onChange={((e)=> setCost(e.target.value))} type="cost" variant={'faded'} label="Costo"/>
+                                                </div>
+                                                <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
+                                                    <Textarea required disabled={isLoading} maxLength={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
+                                                </div>
+                                            </div> 
+                                            <h1 className='text-center py-4 text-blackGora font-semibold'>
+                                                Fotos del producto
+                                            </h1>
+                                            <div className='flex flex-row justify-center my-2 gap-2 space-x-2'>
+                                                
+
+                                                <Tooltip target=".custom-choose-btn" content="Choose" position="bottom" />
+                                                <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
+                                                <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
+
+                                                <FileUpload
+                                                    ref={fileUploadRef} 
+                                                    name="demo[]"
+                                                    disabled={isLoading}
+                                                    accept="image/*"
+                                                    maxFileSize={1000000}
+                                                    onUpload={onTemplateUpload} 
+                                                    onSelect={onTemplateSelect} 
+                                                    onError={onTemplateClear} 
+                                                    onClear={onTemplateClear}
+                                                    headerTemplate={headerTemplate} 
+                                                    uploadHandler={(event) => [onTemplateUpload(event)]}
+                                                    chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} 
+                                                    customUpload/>
+                                            </div>
+                                        </ModalBody>
+                                        <ModalFooter className='flex justify-center'>
+                                            <div className='flex flex-col w-full'>
+                                                <div className='flex justify-center'>
+                                                    <Button onClick={sendProduct}  isLoading={isLoading} className='border-2 border-greenCanadog bg-mentaCanadog hover:bg-greenCanadog text-white text-lg px-6' radius="full" size="md">
+                                                        Guardar
+                                                    </Button>                              
+                                                </div>
+                                            </div>
+                                        </ModalFooter>
+                                    </>
+                            }
                         </>
                     )}
                     </ModalContent>
@@ -398,208 +481,145 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                     <ModalContent>
                     {(onClose) => (
                         <>  
-                            <Toast ref={toast}></Toast>
-                            <ModalHeader className="flex justify-center text-greenGora">
-                                ¡Bienvenido {<p className='text-blackGora ml-1'> a tu próxima gran aventura</p>}!
-                            </ModalHeader>
-                            <ModalBody>
-                                <p className='text-greenCanadog px-4 text-xl text-center font-semibold'> 
-                                    { isDog ? "Edita un Guau" : isCat ? "Edita un Miau" : isHistory ? "Edita la historia emotiva" : ""}
-                                </p>
-                                <h1 className='text-center py-4 text-blackGora font-semibold'>
-                                    Edita la informacion de la mascota.
-                                </h1>
-                                <div className="flex w-full flex-col gap-4">
+                        {   
+                            !isProduct ?
+                            <>
+                                <Toast ref={toast}></Toast>
+                                <ModalHeader className="flex justify-center text-greenGora">
+                                    ¡Bienvenido {<p className='text-blackGora ml-1'> a tu próxima gran aventura</p>}!
+                                </ModalHeader>
+                                <ModalBody>
+                                    <p className='text-greenCanadog px-4 text-xl text-center font-semibold'> 
+                                        { isDog ? "Edita un Guau" : isCat ? "Edita un Miau" : isHistory ? "Edita la historia emotiva" : ""}
+                                    </p>
+                                    <h1 className='text-center py-4 text-blackGora font-semibold'>
+                                        Edita la informacion de la mascota.
+                                    </h1>
+                                    <div className="flex w-full flex-col gap-4">
+                                        <div className="flex mb-6 md:mb-0 gap-4">
+                                            <Input required disabled={isLoading} value={name} onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Nombre"/>
+                                            { !isHistory && <Input required disabled={isLoading} value={yearOlds} onChange={((e)=> setYearosld(e.target.value))} type="edad" variant={'faded'} label="Edad"/> }
+                                        </div>
+                                        <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
+                                            { 
+                                                isHistory === false ? 
+                                                
+                                                    <></>
+                                                :
+                                                    <Textarea required disabled={isLoading} value={description} maxLength={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/> 
+                                            }
+                                        </div>
+                                    </div> 
+                                    <h1 className='text-center py-4 text-blackGora font-semibold'>
+                                        Fotos de la Mascota
+                                    </h1>
+                                    <div className='flex flex-row justify-center my-2 gap-2 space-x-2'>
+                                        
+
+                                        <Tooltip target=".custom-choose-btn" content="Choose" position="bottom" />
+                                        <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
+                                        <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
+
+                                        <FileUpload disabled={isLoading} ref={fileUploadRef} name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000}
+                                            onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
+                                            headerTemplate={headerTemplate}
+                                            chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
+                                    </div>
+                                </ModalBody>
+                                <ModalFooter className='flex justify-center'>
+                                    <div className='flex flex-col w-full'>
+                                        <div className='flex justify-center'>
+                                            <Button  
+                                                className='m-2 border-2 border-greenCanadog bg-mentaCanadog hover:bg-greenCanadog text-white text-lg px-6' 
+                                                radius="full" 
+                                                size="md"
+                                                isLoading={isLoading}
+                                                onClick={(e)=>{
+                                                    UpdatePets(e)
+                                                }}>
+                                                Guardar
+                                            </Button>
+                                            <Button  
+                                                className={`m-2 ${enable ? "bg-redGora" : "bg-orangeGora"} text-white text-lg px-6`}
+                                                radius="full" 
+                                                size="md"
+                                                isLoading={isLoading}
+                                                onClick={(e)=>{
+                                                    UpdatePets(e, (enable ? 0 : 1))
+                                                }}>
+                                                {enable? "Eliminar " : "Habilitar"}
+                                            </Button>                              
+                                        </div>
+                                    </div>
+                                </ModalFooter>
+                            </>
+                            :
+                            
+                            <>  
+                                <Toast ref={toast}></Toast>
+                                <ModalHeader className="flex justify-center text-greenGora">
+                                    ¡Bienvenido {<p className='text-blackGora ml-1'> aqui podras editar tus productos</p>}!
+                                </ModalHeader>
+                                <ModalBody>
+                                    <h1 className='text-center py-4 text-blackGora font-semibold'>
+                                        Edita la informacion del producto.
+                                    </h1>
+                                    <div className="flex w-full flex-col gap-4">
                                     <div className="flex mb-6 md:mb-0 gap-4">
-                                        <Input required disabled={isLoading} value={name} onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Nombre"/>
-                                        { !isHistory && <Input required disabled={isLoading} value={yearOlds} onChange={((e)=> setYearosld(e.target.value))} type="edad" variant={'faded'} label="Edad"/> }
-                                    </div>
-                                    <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
-                                        <Textarea required disabled={isLoading} value={description} maxLength={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
-                                    </div>
-                                </div> 
-                                <h1 className='text-center py-4 text-blackGora font-semibold'>
-                                    Fotos de la Mascota
-                                </h1>
-                                <div className='flex flex-row justify-center my-2 gap-2 space-x-2'>
-                                    
+                                            <Input value={name} required disabled={isLoading} onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Nombre"/>
+                                        </div>
+                                        <div className="flex mb-6 md:mb-0 gap-4">
+                                            <Input value={unity} required disabled={isLoading} onChange={((e)=> setUnity(e.target.value))} type="unity" variant={'faded'} label="Unidades"/>
+                                            <Input value={cost} required onChange={((e)=> setCost(e.target.value))} type="cost" variant={'faded'} label="Costo"/>
+                                        </div>
+                                        <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
+                                            <Textarea value={description} required disabled={isLoading} maxLength={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
+                                        </div>
+                                    </div> 
+                                    <h1 className='text-center py-4 text-blackGora font-semibold'>
+                                        Fotos del producto
+                                    </h1>
+                                    <div className='flex flex-row justify-center my-2 gap-2 space-x-2'>
+                                        
 
-                                    <Tooltip target=".custom-choose-btn" content="Choose" position="bottom" />
-                                    <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
-                                    <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
+                                        <Tooltip target=".custom-choose-btn" content="Choose" position="bottom" />
+                                        <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
+                                        <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
 
-                                    <FileUpload disabled={isLoading} ref={fileUploadRef} name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000}
-                                        onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
-                                        headerTemplate={headerTemplate}
-                                        chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
-                                </div>
-                            </ModalBody>
-                            <ModalFooter className='flex justify-center'>
-                                <div className='flex flex-col w-full'>
-                                    <div className='flex justify-center'>
-                                        <Button  
-                                            className='m-2 border-2 border-greenCanadog bg-mentaCanadog hover:bg-greenCanadog text-white text-lg px-6' 
-                                            radius="full" 
-                                            size="md"
-                                            isLoading={isLoading}
-                                            onClick={(e)=>{
-                                                UpdatePets(e)
-                                            }}>
-                                            Guardar
-                                        </Button>
-                                        <Button  
-                                            className={`m-2 ${enable ? "bg-redGora" : "bg-orangeGora"} text-white text-lg px-6`}
-                                            radius="full" 
-                                            size="md"
-                                            isLoading={isLoading}
-                                            onClick={(e)=>{
-                                                UpdatePets(e, (enable ? 0 : 1))
-                                            }}>
-                                            {enable? "Eliminar " : "Habilitar"}
-                                        </Button>                              
+                                        <FileUpload disabled={isLoading} ref={fileUploadRef} name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000}
+                                            onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
+                                            headerTemplate={headerTemplate}
+                                            chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
                                     </div>
-                                </div>
-                            </ModalFooter>
-                        </>
-                    )}
-                    </ModalContent>
-                </Modal>
-            </div>
-            <div className="flex mn:justify-center md:justify-start">
-                <Modal isOpen={isOpenProduct} onOpenChange={setIsOpenProduct} size='xl'>
-                    <ModalContent>
-                    {(onClose) => (
-                        <>
-                            <Toast ref={toast}></Toast>
-                            <ModalHeader className="flex justify-center text-greenGora">
-                                ¡Bienvenido {<p className='text-blackGora ml-1'> aca podras crear los diferentes productos</p>}!
-                            </ModalHeader>
-                            <ModalBody>
-                                <p className='text-greenCanadog px-4 text-xl text-center font-semibold'> 
-                                   Crea un nuevo producto
-                                </p>
-                                <h1 className='text-center py-4 text-blackGora font-semibold'>
-                                    Ingrese la informacion del producto.
-                                </h1>
-                                <div className="flex w-full flex-col gap-4">
-                                    <div className="flex mb-6 md:mb-0 gap-4">
-                                        <Input required disabled={isLoading} onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Nombre"/>
+                                </ModalBody>
+                                <ModalFooter className='flex justify-center'>
+                                    <div className='flex flex-col w-full'>
+                                        <div className='flex justify-center'>
+                                            <Button  
+                                                className='m-2 border-2 border-greenCanadog bg-mentaCanadog hover:bg-greenCanadog text-white text-lg px-6' 
+                                                radius="full" 
+                                                size="md"
+                                                isLoading={isLoading}
+                                                onClick={(e)=>{
+                                                    UpdateProducts(e)
+                                                }}>
+                                                Guardar
+                                            </Button>
+                                            <Button  
+                                                className={`m-2 ${enable ? "bg-redGora" : "bg-orangeGora"} text-white text-lg px-6`}
+                                                radius="full" 
+                                                size="md"
+                                                isLoading={isLoading}
+                                                onClick={(e)=>{
+                                                    UpdatePets(e, (enable ? 0 : 1))
+                                                }}>
+                                                {enable? "Eliminar " : "Habilitar"}
+                                            </Button>                              
+                                        </div>
                                     </div>
-                                    <div className="flex mb-6 md:mb-0 gap-4">
-                                        <Input value={unity} required disabled={isLoading} onChange={((e)=> setCost(e.target.value))} type="unity" variant={'faded'} label="Unidades"/>
-                                        <Input value={cost} required disabled={isLoading} onChange={((e)=> setUnity(e.target.value))} type="cost" variant={'faded'} label="Costo"/>
-                                    </div>
-                                    <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
-                                        <Textarea required disabled={isLoading} maxLength={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
-                                    </div>
-                                </div> 
-                                <h1 className='text-center py-4 text-blackGora font-semibold'>
-                                    Fotos del producto
-                                </h1>
-                                <div className='flex flex-row justify-center my-2 gap-2 space-x-2'>
-                                    
-
-                                    <Tooltip target=".custom-choose-btn" content="Choose" position="bottom" />
-                                    <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
-                                    <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
-
-                                    <FileUpload
-                                        ref={fileUploadRef} 
-                                        name="demo[]"
-                                        disabled={isLoading}
-                                        accept="image/*"
-                                        maxFileSize={1000000}
-                                        onUpload={onTemplateUpload} 
-                                        onSelect={onTemplateSelect} 
-                                        onError={onTemplateClear} 
-                                        onClear={onTemplateClear}
-                                        headerTemplate={headerTemplate} 
-                                        uploadHandler={(event) => [onTemplateUpload(event)]}
-                                        chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} 
-                                        customUpload/>
-                                </div>
-                            </ModalBody>
-                            <ModalFooter className='flex justify-center'>
-                                <div className='flex flex-col w-full'>
-                                    <div className='flex justify-center'>
-                                        <Button onClick={sendProduct}  isLoading={isLoading} className='border-2 border-greenCanadog bg-mentaCanadog hover:bg-greenCanadog text-white text-lg px-6' radius="full" size="md">
-                                            Guardar
-                                        </Button>                              
-                                    </div>
-                                </div>
-                            </ModalFooter>
-                        </>
-                    )}
-                    </ModalContent>
-                </Modal>
-            </div>
-            <div className="flex mn:justify-center md:justify-start">
-                <Modal isOpen={isEditProduct}  onOpenChange={setIsEdit} size='xl'>
-                    <ModalContent>
-                    {(onClose) => (
-                        <>  
-                            <Toast ref={toast}></Toast>
-                            <ModalHeader className="flex justify-center text-greenGora">
-                                ¡Bienvenido {<p className='text-blackGora ml-1'> aqui podras editar tus productos</p>}!
-                            </ModalHeader>
-                            <ModalBody>
-                                <h1 className='text-center py-4 text-blackGora font-semibold'>
-                                    Edita la informacion del producto.
-                                </h1>
-                                <div className="flex w-full flex-col gap-4">
-                                <div className="flex mb-6 md:mb-0 gap-4">
-                                        <Input required disabled={isLoading} onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Nombre"/>
-                                    </div>
-                                    <div className="flex mb-6 md:mb-0 gap-4">
-                                        <Input required disabled={isLoading} onChange={((e)=> setUnity(e.target.value))} type="unity" variant={'faded'} label="Unidades"/>
-                                        <Input required onChange={((e)=> setCost(e.target.value))} type="cost" variant={'faded'} label="Costo"/>
-                                    </div>
-                                    <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
-                                        <Textarea required disabled={isLoading} maxLength={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
-                                    </div>
-                                </div> 
-                                <h1 className='text-center py-4 text-blackGora font-semibold'>
-                                    Fotos del producto
-                                </h1>
-                                <div className='flex flex-row justify-center my-2 gap-2 space-x-2'>
-                                    
-
-                                    <Tooltip target=".custom-choose-btn" content="Choose" position="bottom" />
-                                    <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
-                                    <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
-
-                                    <FileUpload disabled={isLoading} ref={fileUploadRef} name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000}
-                                        onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
-                                        headerTemplate={headerTemplate}
-                                        chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
-                                </div>
-                            </ModalBody>
-                            <ModalFooter className='flex justify-center'>
-                                <div className='flex flex-col w-full'>
-                                    <div className='flex justify-center'>
-                                        <Button  
-                                            className='m-2 border-2 border-greenCanadog bg-mentaCanadog hover:bg-greenCanadog text-white text-lg px-6' 
-                                            radius="full" 
-                                            size="md"
-                                            isLoading={isLoading}
-                                            onClick={(e)=>{
-                                                UpdatePets(e)
-                                            }}>
-                                            Guardar
-                                        </Button>
-                                        <Button  
-                                            className={`m-2 ${enable ? "bg-redGora" : "bg-orangeGora"} text-white text-lg px-6`}
-                                            radius="full" 
-                                            size="md"
-                                            isLoading={isLoading}
-                                            onClick={(e)=>{
-                                                UpdatePets(e, (enable ? 0 : 1))
-                                            }}>
-                                            {enable? "Eliminar " : "Habilitar"}
-                                        </Button>                              
-                                    </div>
-                                </div>
-                            </ModalFooter>
+                                </ModalFooter>
+                            </>
+                        }
                         </>
                     )}
                     </ModalContent>
@@ -649,15 +669,6 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                 className='bg-transparent border border-greenCanadog text-mentaCanadog mn:text-sm xl:text-xl pi pi-plus' 
                                 radius="full" 
                             />
-                             <Button 
-                                type="button"
-                                isLoading={isLoading} 
-                                onClick={() =>[setIsOpenProduct(true)]} 
-                                className={`bg-transparent border border-greenCanadog text-greenCanadog hover:bg-greenCanadog hover:text-white mn:text-sm xl:text-xl`} 
-                                radius="full" 
-                            >
-                                Nuevo producto <i className="pi pi-plus mr-2" />
-                            </Button>
                         </div>
                         <div>
                             <Button 
@@ -865,71 +876,63 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                     )
                     :
                     (
-                        <div className='px-4 py-6'>
-                            <div className='flex max-w-7xl mx-auto'>
-                                <Card
-                                    isBlurred
-                                    className="border-none w-full"
-                                    shadow="md"
-                                >
-                                    <ScrollShadow className="mn:w-[360px] mn:h-[600px] md:w-[1280px] md:h-[600px] mt-4 mb-4" size={0}>
-                                        <div className='flex flex-wrap justify-evenly'>
-                                        {
-                                            Products.map((card: any) => (
-                                                
-                                                <Card key={card.id} className='m-4 w-96'>
-                                                    <div className="flex gap-6 md:gap-2">
-                                                        <Image
-                                                            alt="Album cover"
-                                                            className="object-cover"
-                                                            shadow="md"
-                                                            src={card.image}
-                                                            height={250}
-                                                            width={500}
-                                                        />
-                                                        <CardBody>
-                                                            <div className='flex flex-col'>
-                                                                <h1 className="flex justify-end font-semibold text-greenCanadog text-2xl">
-                                                                    {card.title} 
-                                                                </h1>
-                                                                <h1 className="flex justify-end font-semibold text-greenCanadog text-2xl">
-                                                                    {card.cost} 
-                                                                </h1>
-                                                                <h1 className="flex justify-end font-semibold text-greenCanadog text-2xl">
-                                                                    {card.unity} 
-                                                                </h1>
-                                                                <p className='flex ml-2 justify-center mt-2 text-[12px] text-right w-full'>
-                                                                    {card.shortDescription.substring(0,50)}
-                                                                </p>
-                                                                <div className="flex mn:my-2 justify-center">
-                                                                    <Button  
-                                                                        onClick={(e)=> {
-                                                                            setId(card.id)
-                                                                            setName(card.title)
-                                                                            setDescription(card.longDescription)
-                                                                            setCost(card.cost)
-                                                                            setUnity(card.unity)
-                                                                            setEnable(card.ANIMALS_ENABLE)
-                                                                            setIsEdit(true)
-                                                                        }} 
-                                                                        className='bg-mentaCanadog border-2 border-greenCanadog text-white hover:bg-greenCanadog text-md' 
-                                                                        radius="lg" 
-                                                                        size="sm" 
-                                                                        endContent={
-                                                                            <i className="pi pi-pencil" style={{ color: '#FFFFFF' }}/>
-                                                                        }
-                                                                     >
-                                                                        Editar
-                                                                    </Button>
-                                                                </div>  
-                                                            </div>
-                                                        </CardBody>
+                        <div className='px-4 py-4'>
+                            <div className='flex flex-wrap max-w-7xl mx-auto'>
+                                <Card isBlurred className="border-none w-full" shadow="md">
+                                    <ScrollShadow className="mn:w-full mn:h-[450px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
+                                        <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3  gap-4'>
+                                            {Products.map((card: any) => (
+                                            <div
+                                                key={card.id}
+                                                className={`relative m-4 transition-all duration-300 row-span-1 h-[200px]`}
+                                            >
+                                                <Card isFooterBlurred className="w-full h-[300px] col-span-12 sm:col-span-5">
+                                                    <div className={`flex items-center`}>
+                                                    <CardHeader className="absolute z-10 top-1 flex-col items-start">
+                                                        <h4 className="text-white font-semibold text-2xl">
+                                                            {card.title}
+                                                        </h4>
+                                                    </CardHeader>
+                                                    <Image
+                                                        alt="Album cover"
+                                                        className="z-0 w-full h-full scale-125 -translate-y-6 object-cover"
+                                                        src={card.image}
+                                                    />
+                                                    <CardFooter className="absolute bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
+                                                        <div>
+                                                            <p className="text-white font-medium text-base">
+                                                                Precio: ${card.cost}
+                                                            </p>
+                                                            <p className="text-white font-medium text-sm">
+                                                                Unidades: {card.unity}
+                                                            </p>
+                                                        </div>
+                                                        <Button 
+                                                            onClick={(e : any)=> 
+                                                            {   
+                                                                console.log(card)
+                                                                setId(card.id)
+                                                                setName(card.title)
+                                                                setCost(card.cost)
+                                                                setUnity(card.unity)
+                                                                setDescription(card.longDescription)
+                                                                setEnable(card.PRODUCTS_ENABLE)
+                                                                setIsEdit(true)
+                                                            }} 
+                                                            className="text-base text-white font-medium" 
+                                                            color="success" 
+                                                            radius="full" 
+                                                            size="md"
+                                                        >
+                                                         Editar
+                                                        </Button>
+                                                    </CardFooter>
                                                     </div>
                                                 </Card>
-                                            ))
-                                        }
+                                            </div>
+                                            ))}
                                         </div>
-                                    </ScrollShadow> 
+                                    </ScrollShadow>
                                 </Card>
                             </div>
                         </div>

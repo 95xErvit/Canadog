@@ -36,7 +36,7 @@ export async function GetPets(enable? : boolean, type? : string, web? : string )
 
 }
 
-export async function GetProducts(enable? : boolean, type? : string, web? : string ) {
+export async function GetProducts(enable? : boolean, web? : string ) {
 
     try {
 
@@ -48,7 +48,7 @@ export async function GetProducts(enable? : boolean, type? : string, web? : stri
 
         try {
 
-            const params = {Type: type, Enable:enable, Web: web}
+            const params = {PRODUCTS_ENABLE:enable, PRODUCTS_WEB: web}
 
             const result = await axios.get(`${process.env.HOST_API}/Api/Gora/CMS/Products`,
             {   

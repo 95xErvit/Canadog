@@ -2,7 +2,7 @@ import CMS from "@/app/Components/CMS/CMS";
 import Header from "@/app/Components/LoginStructure/Header";
 import Footer from "@/app/Components/LoginStructure/Footer";
 import { headers } from 'next/headers';
-import { GetPets } from "@/app/Components/Data/Data";
+import { GetPets, GetProducts } from "@/app/Components/Data/Data";
 export default async function Home() 
 {
 	const req = {
@@ -14,9 +14,9 @@ export default async function Home()
 	const result : any = await GetPets(undefined,"Dog", "CANADOG");
 	const result2  : any = await GetPets(undefined, "Cat", "CANADOG");
 	const result3 : any = await GetPets(undefined, 'HISTORY', "CANADOG")
+	const result4 : any = await GetProducts(undefined, "CANADOG")
 
-	console.log("HOLA",result.data.result.recordset)
-	
+	console.log(result4)
 	return (
 		<>
 			<Header/>
@@ -25,13 +25,7 @@ export default async function Home()
 						Dogs={result.data.result.recordset} 
 						Cats={result2.data.result.recordset} 
 						History={result3.data.result.recordset} 
-						Products={[{
-							id:"1",
-							title:"holas",
-							cost:"100",
-							unity:"5",
-							shortDescription:"50",
-						}]}
+						Products={result4.data.result.recordset}
 					/>
 				</main>
 			<Footer/>

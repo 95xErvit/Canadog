@@ -11,7 +11,7 @@ export default async function Home()
 		},
 	};
 
-	const result : any = await GetProducts(true,"PRODUCTOS", "CANADOG");
+	const result : any = await GetProducts(true, "CANADOG")
 	
 	return (
 		<>
