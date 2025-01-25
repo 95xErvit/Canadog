@@ -291,6 +291,14 @@ export default function CMS({Dogs, Cats, History, Products}: any)
         setTimeout(()=>location.reload(), 4000)
     };
 
+    const reset = async () => {
+        setName('')
+        setCost('')
+        setDescription('')
+        setUnity('')
+        setYearosld('')
+    };
+
     const UpdatePets = async (e: React.FormEvent, EnablePet = 1) => {
         setIsLoading(true)
         e.preventDefault();
@@ -502,7 +510,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                         </div>
                                         <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
                                             { 
-                                                isHistory === false ? 
+                                                isHistory === true ? 
                                                 
                                                     <></>
                                                 :
@@ -667,7 +675,8 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                             <Button 
                                 onPress={onOpen} 
                                 className='bg-transparent border border-greenCanadog text-mentaCanadog mn:text-sm xl:text-xl pi pi-plus' 
-                                radius="full" 
+                                radius="full"
+                                onClick={reset}
                             />
                         </div>
                         <div>
