@@ -71,7 +71,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                     setIndiceActual(index)
                 }
             }
-          }, 6000);
+        }, 6000);
 
         updateCardsToShow();
         intervalo
@@ -364,15 +364,15 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                             <Image
                                                                 alt="Album cover"
                                                                 className={`shadow-md transition-all duration-100 ${expandedCard === card.id ? 'w-full h-[220px]' : 'w-[170px] h-[200px]'} bg-greenLightCanadog object-contain`}
-                                                                width={170}
+                                                                width={140}
                                                                 height={200}
                                                                 src={card.image}
                                                             />
                                                         ) : (
                                                             <Image
                                                                 alt="Album cover"
-                                                                className={`shadow-md transition-all duration-100 ${expandedCard === card.id ? 'w-full h-[220px]' : 'w-[170px] h-[200px]'} bg-greenLightCanadog object-contain`}
-                                                                width={170}
+                                                                className={`shadow-md transition-all duration-100 ${expandedCard === card.id ? 'w-full h-[220px]' : 'mn:w-[140px] md:w-[170px] h-[200px]'} bg-greenLightCanadog object-contain`}
+                                                                width={140}
                                                                 height={200}
                                                                 src={card.image}
                                                             />
@@ -406,7 +406,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                             </div>
                 
                                                             <p className={`flex font-normal text-gray ${expandedCard === card.id ? 'w-full h-[150px] text-[14px] px-2.5 mt-1' : ' text-right w-full h-[58px] text-[12px]'}`}>
-                                                                {expandedCard === card.id ? card.longDescription : card.shortDescription.substring(0,75) + "..."}
+                                                                {expandedCard === card.id ? card.longDescription : card.shortDescription.substring(0,50) + "..."}
                                                             </p>
                 
                                                             {expandedCard !== card.id && (

@@ -418,66 +418,66 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                     </ModalFooter>
                                 </>
                                 :
-                                    <>
-                                        <Toast ref={toast}></Toast>
-                                        <ModalHeader className="flex justify-center text-greenGora">
-                                            ¡Bienvenido {<p className='text-blackGora ml-1'> aca podras crear los diferentes productos</p>}!
-                                        </ModalHeader>
-                                        <ModalBody>
-                                            <p className='text-greenCanadog px-4 text-xl text-center font-semibold'> 
-                                            Crea un nuevo producto
-                                            </p>
-                                            <h1 className='text-center py-4 text-blackGora font-semibold'>
-                                                Ingrese la informacion del producto.
-                                            </h1>
-                                            <div className="flex w-full flex-col gap-4">
-                                                <div className="flex mb-6 md:mb-0 gap-4">
-                                                    <Input required disabled={isLoading} onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Nombre"/>
-                                                </div>
-                                                <div className="flex mb-6 md:mb-0 gap-4">
-                                                    <Input value={unity} required disabled={isLoading} onChange={((e)=> setUnity(e.target.value))} type="unity" variant={'faded'} label="Unidades"/>
-                                                    <Input value={cost} required disabled={isLoading} onChange={((e)=> setCost(e.target.value))} type="cost" variant={'faded'} label="Costo"/>
-                                                </div>
-                                                <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
-                                                    <Textarea required disabled={isLoading} maxLength={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
-                                                </div>
-                                            </div> 
-                                            <h1 className='text-center py-4 text-blackGora font-semibold'>
-                                                Fotos del producto
-                                            </h1>
-                                            <div className='flex flex-row justify-center my-2 gap-2 space-x-2'>
-                                                
-
-                                                <Tooltip target=".custom-choose-btn" content="Choose" position="bottom" />
-                                                <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
-                                                <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
-
-                                                <FileUpload
-                                                    ref={fileUploadRef} 
-                                                    name="demo[]"
-                                                    disabled={isLoading}
-                                                    accept="image/*"
-                                                    maxFileSize={1000000}
-                                                    onUpload={onTemplateUpload} 
-                                                    onSelect={onTemplateSelect} 
-                                                    onError={onTemplateClear} 
-                                                    onClear={onTemplateClear}
-                                                    headerTemplate={headerTemplate} 
-                                                    uploadHandler={(event) => [onTemplateUpload(event)]}
-                                                    chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} 
-                                                    customUpload/>
+                                <>
+                                    <Toast ref={toast}></Toast>
+                                    <ModalHeader className="flex justify-center text-greenGora">
+                                        ¡Bienvenido {<p className='text-blackGora ml-1'> aca podras crear los diferentes productos</p>}!
+                                    </ModalHeader>
+                                    <ModalBody>
+                                        <p className='text-greenCanadog px-4 text-xl text-center font-semibold'> 
+                                        Crea un nuevo producto
+                                        </p>
+                                        <h1 className='text-center py-4 text-blackGora font-semibold'>
+                                            Ingrese la informacion del producto.
+                                        </h1>
+                                        <div className="flex w-full flex-col gap-4">
+                                            <div className="flex mb-6 md:mb-0 gap-4">
+                                                <Input required disabled={isLoading} onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Nombre"/>
                                             </div>
-                                        </ModalBody>
-                                        <ModalFooter className='flex justify-center'>
-                                            <div className='flex flex-col w-full'>
-                                                <div className='flex justify-center'>
-                                                    <Button onClick={sendProduct}  isLoading={isLoading} className='border-2 border-greenCanadog bg-mentaCanadog hover:bg-greenCanadog text-white text-lg px-6' radius="full" size="md">
-                                                        Guardar
-                                                    </Button>                              
-                                                </div>
+                                            <div className="flex mb-6 md:mb-0 gap-4">
+                                                <Input value={unity} required disabled={isLoading} onChange={((e)=> setUnity(e.target.value))} type="unity" variant={'faded'} label="Unidades"/>
+                                                <Input value={cost} required disabled={isLoading} onChange={((e)=> setCost(e.target.value))} type="cost" variant={'faded'} label="Costo"/>
                                             </div>
-                                        </ModalFooter>
-                                    </>
+                                            <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
+                                                <Textarea required disabled={isLoading} maxLength={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
+                                            </div>
+                                        </div> 
+                                        <h1 className='text-center py-4 text-blackGora font-semibold'>
+                                            Fotos del producto
+                                        </h1>
+                                        <div className='flex flex-row justify-center my-2 gap-2 space-x-2'>
+                                            
+
+                                            <Tooltip target=".custom-choose-btn" content="Choose" position="bottom" />
+                                            <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
+                                            <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
+
+                                            <FileUpload
+                                                ref={fileUploadRef} 
+                                                name="demo[]"
+                                                disabled={isLoading}
+                                                accept="image/*"
+                                                maxFileSize={1000000}
+                                                onUpload={onTemplateUpload} 
+                                                onSelect={onTemplateSelect} 
+                                                onError={onTemplateClear} 
+                                                onClear={onTemplateClear}
+                                                headerTemplate={headerTemplate} 
+                                                uploadHandler={(event) => [onTemplateUpload(event)]}
+                                                chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} 
+                                                customUpload/>
+                                        </div>
+                                    </ModalBody>
+                                    <ModalFooter className='flex justify-center'>
+                                        <div className='flex flex-col w-full'>
+                                            <div className='flex justify-center'>
+                                                <Button onClick={sendProduct}  isLoading={isLoading} className='border-2 border-greenCanadog bg-mentaCanadog hover:bg-greenCanadog text-white text-lg px-6' radius="full" size="md">
+                                                    Guardar
+                                                </Button>                              
+                                            </div>
+                                        </div>
+                                    </ModalFooter>
+                                </>
                             }
                         </>
                     )}
@@ -708,7 +708,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                         <div className="flex gap-6 md:gap-2">
                                                             <Image
                                                                 alt="Album cover"
-                                                                className={`object-cover shadow-md transition-all duration-300 rounded-none w-full h-[200px]`}
+                                                                className={`object-cover shadow-md transition-all duration-300 rounded-none mn:w-[140px] md:w-[170px] h-[200px]`}
                                                                 src={card.image}
                                                             />
                                                             <CardBody>
@@ -720,7 +720,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                                         Edad: {card.old}
                                                                     </h1>
                                                                     <p className={'flex font-normal text-gray w-full h-[58px] text-right text-[15px]'}>
-                                                                        {card.shortDescription.substring(0,75) + "..."}
+                                                                        {card.shortDescription.substring(0,50) + "..."}
                                                                     </p>
                                                                     <div className="flex mn:my-2 justify-center">
                                                                         <Button  
@@ -786,7 +786,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                                     Edad: {card.old}
                                                                 </h1>
                                                                 <p className={'flex font-normal text-gray w-full h-[58px] text-right text-[15px]'}>
-                                                                    {card.shortDescription.substring(0,75) + "..."}
+                                                                    {card.shortDescription.substring(0,50) + "..."}
                                                                 </p>
                                                                 <div className="flex mn:my-2 justify-center">
                                                                     <Button  
