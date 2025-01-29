@@ -1,10 +1,6 @@
 "use client";
 import React, { useState, useRef } from 'react';
-import { Formik, Form, Field, FormikHelpers } from 'formik';
-import * as Yup from 'yup';
-import { InputText } from 'primereact/inputtext';
-import { FileUpload } from 'primereact/fileupload';
-import { Dropdown } from 'primereact/dropdown';
+import Image from 'next/image';
 import { Toast } from 'primereact/toast';
 import { useRouter } from 'next/navigation'
 import { Button } from "@nextui-org/button";
@@ -12,8 +8,12 @@ import { Input } from "@nextui-org/input";
 import { EyeFilledIcon } from "../../../public/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "../../../public/EyeSlashFilledIcon";
 import { UserIcon } from "../../../public/UserIcon";
+import Canadog from "@/public/canadog.jpg"
+import Feat from "@/public/featuring.png"
+import Innminds from "@/public/Innminds.png"
+import Flyer from "@/public/CuranElAlma.jpg"
 import  axios from 'axios';
-import { Image } from "@nextui-org/react"
+import * as Yup from 'yup';
 
 interface FormValues {
   nombre: string;
@@ -24,8 +24,8 @@ interface FormValues {
 }
 
 const RegistroForm: React.FC = () => {
-  const [logo, setLogo] = useState<File | null>(null);
-  const toast = useRef<Toast>(null);
+    const [logo, setLogo] = useState<File | null>(null);
+    const toast = useRef<Toast>(null);
     const [isVisible, setIsVisible] = React.useState(false);
     const [isLoading, setIsLoading] = React.useState(false);
     const toggleVisibility = () => setIsVisible(!isVisible);
@@ -33,67 +33,83 @@ const RegistroForm: React.FC = () => {
     const [pass, setPass] = React.useState("");
     const router = useRouter()
 
-  const initialValues: FormValues = {
-    nombre: '',
-    correo: '',
-    telefono: '',
-    celular: '',
-    pais: '',
-  };
+    const initialValues: FormValues = {
+        nombre: '',
+        correo: '',
+        telefono: '',
+        celular: '',
+        pais: '',
+    };
 
-  const validationSchema = Yup.object({
-    nombre: Yup.string().required('El nombre es obligatorio'),
-    correo: Yup.string().email('Correo inválido').required('El correo es obligatorio'),
-    telefono: Yup.string()
-      .matches(/^[0-9]+$/, 'Solo se permiten números')
-      .min(8, 'Mínimo 8 caracteres')
-      .required('El teléfono es obligatorio'),
-    celular: Yup.string()
-      .matches(/^[0-9]+$/, 'Solo se permiten números')
-      .min(8, 'Mínimo 8 caracteres')
-      .required('El celular es obligatorio'),
-    pais: Yup.string().required('El país es obligatorio'),
-  });
+    const validationSchema = Yup.object({
+        nombre: Yup.string().required('El nombre es obligatorio'),
+        correo: Yup.string().email('Correo inválido').required('El correo es obligatorio'),
+        telefono: Yup.string()
+        .matches(/^[0-9]+$/, 'Solo se permiten números')
+        .min(8, 'Mínimo 8 caracteres')
+        .required('El teléfono es obligatorio'),
+        celular: Yup.string()
+        .matches(/^[0-9]+$/, 'Solo se permiten números')
+        .min(8, 'Mínimo 8 caracteres')
+        .required('El celular es obligatorio'),
+        pais: Yup.string().required('El país es obligatorio'),
+    });
 
-  const countries = [
-    { label: 'México', value: 'México' },
-    { label: 'Argentina', value: 'Argentina' },
-    { label: 'Colombia', value: 'Colombia' },
-    { label: 'España', value: 'España' },
-  ];
+    const countries = [
+        { label: 'México', value: 'México' },
+        { label: 'Argentina', value: 'Argentina' },
+        { label: 'Colombia', value: 'Colombia' },
+        { label: 'España', value: 'España' },
+    ];
 
-  const handleClick = async (e: any) => {
-    setIsLoading(true)
-    e.preventDefault()
-    const response = await axios.post("/UserGora/CMS/api/users",{data:{values:initialValues, type:"Register"}})
-    console.log(response.data)
-    if(response.data.data)
-    {
-        router.push('/UserGora/CMS')
+    const handleClick = async (e: any) => {
+        setIsLoading(true)
+        e.preventDefault()
+        const response = await axios.post("/UserGora/CMS/api/users",{data:{values:initialValues, type:"Register"}})
+        console.log(response.data)
+        if(response.data.data)
+        {
+            router.push('/UserGora/CMS')
+        }
+        else
+        {
+            toast.current?.show({severity:'error', summary: 'Fallo en el inicio de sesión', detail:'Tienes un error en el usuario o contraseña', life: 7000});
+            setIsLoading(false)
+        }
+        
     }
-    else
-    {
-        toast.current?.show({severity:'error', summary: 'Fallo en el inicio de sesión', detail:'Tienes un error en el usuario o contraseña', life: 7000});
-        setIsLoading(false)
-    }
-    
-}
 
-  return (
+    return (
     <section className="bg-white">
       <Toast ref={toast}/>
       <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
           <div className="relative flex items-end px-4 pb-10 pt-60 sm:pb-16 md:justify-center lg:pb-24 bg-gray-50 sm:px-6 lg:px-8">
               <div className="absolute inset-0">
-                  <img className="w-full h-full object-cover" src="/CuranElAlma.jpg" alt="Login-Canadog"/>
+                    <Image 
+                        className="w-full h-full object-cover" 
+                        src={Flyer} 
+                        alt="Login-Canadog"
+                    />
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-transparent to-black/40"/>
 
               <div className="absolute top-2 right-5 flex flex-col items-center">
                   <div className="flex justify-center items-center gap-4 m-4 mt-6">
-                      <img className="mn:w-8 md:w-14 h-full rounded-full" src="/LogoCanadog.jpg" alt="Canadog"/>
-                      <img className="mn:w-4 md:w-8 h-full" src="/featuring.png" alt="featuring"/>
-                      <img className="mn:w-24 md:w-28 h-full" src="/InnMinds.png" alt="Innminds"/>
+                        <Image 
+                            className="mn:w-8 md:w-14 h-full rounded-full" 
+                            src={Canadog} 
+                            alt="Canadog"
+                        />
+                        <Image 
+                            className="mn:w-4 md:w-8 h-full" 
+                            src={Feat} 
+                            alt="featuring"
+                        />
+                        <Image 
+                            className="mn:w-24 md:w-28 h-full" 
+                            src={Innminds} 
+                            alt="Innminds"
+                        />
                   </div>
               </div>
               
@@ -277,7 +293,7 @@ const RegistroForm: React.FC = () => {
                   </form>
               </div>
           </div>
-      </div>
+       </div>
     </section> 
   );
 };
