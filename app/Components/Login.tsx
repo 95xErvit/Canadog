@@ -7,8 +7,12 @@ import { Input } from "@nextui-org/input";
 import { EyeFilledIcon } from "../../public/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "../../public/EyeSlashFilledIcon";
 import { UserIcon } from "../../public/UserIcon";
+import Image from 'next/image';
+import Canadog from "@/public/LogoCanadog.jpg"
+import Feat from "@/public/featuring.png"
+import Innminds from "@/public/Innminds.png"
+import Flyer from "@/public/CuranElAlma.jpg"
 import  axios from 'axios';
-import { Image } from "@nextui-org/react"
 
 export default function Login() {
     const toast = useRef<Toast>(null)
@@ -42,15 +46,31 @@ export default function Login() {
             <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
                 <div className="relative flex items-end px-4 pb-10 pt-60 sm:pb-16 md:justify-center lg:pb-24 bg-gray-50 sm:px-6 lg:px-8">
                     <div className="absolute inset-0">
-                        <img className="w-full h-full object-cover" src="/CuranElAlma.jpg" alt="Login-Canadog"/>
+                        <Image 
+                            className="w-full h-full object-cover" 
+                            src={Flyer} 
+                            alt="Login-Canadog"
+                        />
                     </div>
                     <div className="absolute inset-0 bg-gradient-to-t from-transparent to-black/40"/>
 
                     <div className="absolute top-2 right-5 flex flex-col items-center">
                         <div className="flex justify-center items-center gap-4 m-4 mt-6">
-                            <img className="mn:w-8 md:w-14 h-full rounded-full" src="/LogoCanadog.jpg" alt="Canadog"/>
-                            <img className="mn:w-4 md:w-8 h-full" src="/featuring.png" alt="featuring"/>
-                            <img className="mn:w-24 md:w-28 h-full" src="/InnMinds.png" alt="Innminds"/>
+                            <Image 
+                                className="mn:w-8 md:w-14 h-full rounded-full" 
+                                src={Canadog} 
+                                alt="Canadog"
+                            />
+                            <Image 
+                                className="mn:w-4 md:w-8 h-full" 
+                                src={Feat} 
+                                alt="featuring"
+                            />
+                            <Image 
+                                className="mn:w-24 md:w-28 h-full" 
+                                src={Innminds} 
+                                alt="Innminds"
+                            />
                         </div>
                     </div>
                     
@@ -72,8 +92,11 @@ export default function Login() {
                             </span>  */}
                         </div>
                         
-                        <p className="mt-4 text-base text-gray-600">Ingresa tus datos de administrador para iniciar sesión, En caso de no tenerlos o haberlos olvidado contactate con 
-                            <a href="#" title="" className="font-medium text-blue-600 transition-all duration-200 hover:text-blue-700 focus:text-blue-700 hover:underline ml-2">InnMinds</a>
+                        <p className="mt-4 text-base text-gray-600">
+                            Ingresa tus datos de administrador para iniciar sesión, En caso de no tenerlos o haberlos olvidado contactate con 
+                            <a href="#" title="" className="font-medium text-blue-600 transition-all duration-200 hover:text-blue-700 focus:text-blue-700 hover:underline ml-2">
+                                InnMinds
+                            </a>
                         </p>
 
                         <form action="#" method="POST" className="mt-4">
@@ -89,7 +112,7 @@ export default function Login() {
                                                             label="Usuario"
                                                             size="lg" 
                                                             labelPlacement={'outside'}
-                                                            description={'Ingrese su correo'}
+                                                            description={'Ingrese su usuario'}
                                                             className=''
                                                             onChange={((e)=> setUser(e.target.value))}
                                                             required
