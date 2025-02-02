@@ -1,12 +1,13 @@
 "use client";
 import React, { useState, useRef } from 'react';
-import { Button, Textarea, Card, Input,CardBody, CardHeader,CardFooter ,Image, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Pagination } from "@nextui-org/react";
+import { Button, Textarea, Card, Input,CardBody, CardHeader,CardFooter , Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Pagination } from "@nextui-org/react";
 import { ScrollShadow } from "@nextui-org/react";
 import { Toast } from 'primereact/toast';
 import { FileUpload, FileUploadHeaderTemplateOptions, FileUploadSelectEvent, FileUploadUploadEvent, ItemTemplateOptions,} from 'primereact/fileupload';
 import { ProgressBar } from 'primereact/progressbar';
 import { Tooltip } from 'primereact/tooltip';
 import { useRouter } from 'next/navigation'
+import Image from 'next/image';
 import 'primeicons/primeicons.css';
 import axios from 'axios';
 
@@ -708,8 +709,10 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                         <div className="flex gap-6 md:gap-2">
                                                             <Image
                                                                 alt="Album cover"
-                                                                className={`object-cover shadow-md transition-all duration-300 rounded-none mn:w-[140px] md:w-[170px] h-[200px]`}
+                                                                className={`object-cover shadow-md transition-all duration-300 rounded-none w-[170px] h-[200px]`}
                                                                 src={card.image}
+                                                                width={140}
+                                                                height={200}
                                                             />
                                                             <CardBody>
                                                                 <div className='flex flex-col'>
@@ -774,8 +777,10 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                     <div className="flex gap-6 md:gap-2">
                                                         <Image
                                                             alt="Album cover"
-                                                            className={`object-cover shadow-md transition-all duration-300 rounded-none w-full h-[200px]`}
+                                                            className={`object-cover shadow-md transition-all duration-300 rounded-none w-[170px] h-[200px]`}
                                                             src={card.image}
+                                                            width={140}
+                                                            height={200}
                                                         />
                                                         <CardBody>
                                                             <div className='flex flex-col'>
@@ -838,7 +843,6 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                         <Image
                                                             alt="Album cover"
                                                             className="object-cover"
-                                                            shadow="md"
                                                             src={card.image}
                                                             height={250}
                                                             width={500}
@@ -895,47 +899,49 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                 key={card.id}
                                                 className={`relative m-4 transition-all duration-300 row-span-1 h-[200px]`}
                                             >
-                                                <Card isFooterBlurred className="w-full h-[300px] col-span-12 sm:col-span-5">
+                                                <Card isFooterBlurred className="w-full h-[330px]">
                                                     <div className={`flex items-center`}>
-                                                    <CardHeader className="absolute z-10 top-1 flex-col items-start">
-                                                        <h4 className="text-white font-semibold text-2xl">
-                                                            {card.title}
-                                                        </h4>
-                                                    </CardHeader>
-                                                    <Image
-                                                        alt="Album cover"
-                                                        className="z-0 w-full h-full scale-125 -translate-y-6 object-cover"
-                                                        src={card.image}
-                                                    />
-                                                    <CardFooter className="absolute bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
-                                                        <div>
-                                                            <p className="text-white font-medium text-base">
-                                                                Precio: ${card.cost}
-                                                            </p>
-                                                            <p className="text-white font-medium text-sm">
-                                                                Unidades: {card.unity}
-                                                            </p>
-                                                        </div>
-                                                        <Button 
-                                                            onClick={(e : any)=> 
-                                                            {   
-                                                                console.log(card)
-                                                                setId(card.id)
-                                                                setName(card.title)
-                                                                setCost(card.cost)
-                                                                setUnity(card.unity)
-                                                                setDescription(card.longDescription)
-                                                                setEnable(card.PRODUCTS_ENABLE)
-                                                                setIsEdit(true)
-                                                            }} 
-                                                            className="text-base text-white font-medium" 
-                                                            color="success" 
-                                                            radius="full" 
-                                                            size="md"
-                                                        >
-                                                         Editar
-                                                        </Button>
-                                                    </CardFooter>
+                                                        <CardHeader className="absolute z-10 top-1 flex-col items-start">
+                                                            <h4 className="text-white font-semibold mn:text-2xl md:text-3xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+                                                                {card.title}
+                                                            </h4>
+                                                        </CardHeader>
+                                                        <Image
+                                                            alt="Album cover"
+                                                            className="z-0 w-full h-60 object-cover"
+                                                            src={card.image}
+                                                            width={100}
+                                                            height={100}
+                                                        />
+                                                        <CardFooter className="absolute bg-greenCanadog/50 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
+                                                            <div className='flex flex-col'>
+                                                                <p className="text-white font-medium text-base">
+                                                                    Precio: ${card.cost}
+                                                                </p>
+                                                                <p className="text-white font-medium text-sm">
+                                                                    Unidades: {card.unity}
+                                                                </p>
+                                                            </div>
+                                                            <Button 
+                                                                onClick={(e : any)=> 
+                                                                {   
+                                                                    console.log(card)
+                                                                    setId(card.id)
+                                                                    setName(card.title)
+                                                                    setCost(card.cost)
+                                                                    setUnity(card.unity)
+                                                                    setDescription(card.longDescription)
+                                                                    setEnable(card.PRODUCTS_ENABLE)
+                                                                    setIsEdit(true)
+                                                                }} 
+                                                                className="text-base text-white font-medium" 
+                                                                color="success" 
+                                                                radius="full" 
+                                                                size="md"
+                                                            >
+                                                            Editar
+                                                            </Button>
+                                                        </CardFooter>
                                                     </div>
                                                 </Card>
                                             </div>

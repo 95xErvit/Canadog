@@ -15,9 +15,15 @@ export default function Donations() {
                             {/* <span className="filter drop-shadow-[0_0_0.2rem_#f82e03] inline-block">
                                 <Image alt="lovePets" src="/avatarGora.png" height="70" width="70"/>
                             </span>  */}
-                            <h2 className="mt-4 text-3xl font-bold text-blackGora sm:text-4xl xl:text-5xl">Escoge tu forma de ayudar</h2>
-                            <p className="mt-4 text-xl font-normal text-blackGora sm:text-lg xl:text-xl">Tenemos debito automático mensual con el valor que selecciones, para que seas parte de este sueño </p>
-                            <p className="mt-4 text-xl font-normal text-blackGora sm:text-lg xl:text-xl">Gracias padrinos y madrinas de rescate, ellos tendrán lo necesario para empezar una vida feliz.</p>
+                            <h2 className="mt-4 text-3xl font-bold text-black sm:text-4xl xl:text-5xl">
+                                Escoge tu forma de <span className="text-mentaCanadog">ayudar</span>
+                            </h2>
+                            <p className="mt-4 text-xl font-normal text-blackCanadog sm:text-lg xl:text-xl">
+                                Tenemos debito automático mensual con el valor que selecciones, para que seas parte de este sueño 
+                            </p>
+                            <p className="mt-4 text-xl font-normal text-blackCanadog sm:text-lg xl:text-xl">
+                                Gracias padrinos y madrinas de rescate, ellos tendrán lo necesario para empezar una vida feliz.
+                            </p>
                         </div>
 
                         <div className="relative mt-10 md:mt-24 md:order-2">
@@ -25,7 +31,7 @@ export default function Donations() {
                                 <div 
                                     className="w-full h-full max-w-5xl mx-auto rounded-3xl opacity-30 blur-lg filter" 
                                     style={{ 
-                                        background: 'linear-gradient(90deg, #df6536 -0.55%, #f5e8d5 22.86%, #699c83 48.36%, #edbbab 73.33%, #eaad29 99.34%)'
+                                        background: 'linear-gradient(90deg, #69C699 -0.55%, #AFF1D5 22.86%, #1C8C58 48.36%, #AFF1D5 73.33%, #69C699 99.34%)'
                                     }}>
                                 </div>
                             </div>
@@ -35,13 +41,17 @@ export default function Donations() {
                                     <div className="flex flex-col justify-between flex-1 p-6 bg-white lg:py-8 lg:px-7">
                                         <div className="flex-1">
                                             <blockquote className="flex-1 mt-8">
-                                                <p className="text-2xl leading-relaxed text-center text-mentaCanadog font-semibold">
-                                                <span className="text-mentaCanadog">Dona</span> Bancolombia
+                                                <p className="text-2xl leading-relaxed text-center text-greenCanadog font-semibold">
+                                                    <span className="text-mentaCanadog">Dona</span> Bancolombia
                                                 </p>
                                             </blockquote>
 
                                             <div className="flex justify-center items-center mt-8 relative group">
-                                                <a href="/QrBancolombiaGora.jpeg" download="QrBancolombiaGora.jpeg" className="flex-shrink-0">
+                                                <a 
+                                                    href="/QrBancolombiaGora.jpeg" 
+                                                    download="QrBancolombiaGora.jpeg" 
+                                                    className="flex-shrink-0"
+                                                >
                                                     <Image
                                                         className="object-cover mn:w-[250px] mn:h-[250px] xl:w-[300px] xl:h-[300px] transition-all duration-300 ease-in-out group-hover:opacity-50"
                                                         src={QrBancolombia.src}
@@ -49,13 +59,12 @@ export default function Donations() {
                                                     />
                                                 </a>
 
-                                                <div className="absolute inset-0 rounded-xl bg-black bg-opacity-90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"></div>
-
-                                                <i className="pi pi-download text-4xl text-white font-bold absolute z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out" />
+                                                <div className="absolute inset-0 rounded-xl bg-black bg-opacity-90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"/>
+                                                <i className="pi pi-download text-4xl text-white font-bold absolute z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"/>
                                             </div>
 
                                             <blockquote className="flex-1 mt-8">
-                                                <p className="mn:text-sm xl:text-base leading-relaxed text-blackGora">
+                                                <p className="mn:text-sm xl:text-base leading-relaxed text-blackCanadog">
                                                 ¡Lo que puedas! Todo es de gran ayuda
                                                 </p>
                                             </blockquote>
@@ -85,13 +94,12 @@ export default function Donations() {
                                                     />
                                                 </a>
 
-                                                <div className="absolute inset-0 rounded-xl bg-black bg-opacity-90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"></div>
-
-                                                <i className="pi pi-download text-4xl text-white font-bold absolute z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out" />
+                                                <div className="absolute inset-0 rounded-xl bg-black bg-opacity-90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"/>
+                                                <i className="pi pi-download text-4xl text-white font-bold absolute z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"/>
                                             </div>
 
                                             <blockquote className="flex-1 mt-8">
-                                                <p className="mn:text-sm xl:text-base leading-relaxed text-blackGora">
+                                                <p className="mn:text-sm xl:text-base leading-relaxed text-blackCanadog">
                                                     ¡Lo que puedas! Todo es de gran ayuda
                                                 </p>
                                             </blockquote>
@@ -107,11 +115,17 @@ export default function Donations() {
                                             </blockquote>
 
                                             <div className="flex items-center mt-8">
-                                                <Image className="flex-shrink-0 object-cover rounded-full w-11 h-11" src="" alt=""/>
+                                                <Image 
+                                                    className="flex-shrink-0 object-cover rounded-full w-11 h-11" 
+                                                    src="" 
+                                                    alt=""
+                                                />
                                             </div>
 
                                             <blockquote className="flex-1 mt-8">
-                                                <p className="mn:text-sm xl:text-base leading-relaxed text-blackGora">¡Lo que puedas! Todo es de gran ayuda</p>
+                                                <p className="mn:text-sm xl:text-base leading-relaxed text-blackCanadog">
+                                                    ¡Lo que puedas! Todo es de gran ayuda
+                                                </p>
                                             </blockquote>
                                         </div>
                                     </div>
