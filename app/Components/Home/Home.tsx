@@ -26,6 +26,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
     const [expandedCard, setExpandedCard] = useState<number | null>(null);
     const [indiceActual, setIndiceActual] = useState<number>(0);
 
+    console.log(cardsDogs)
     const toggleExpand = (id: number) => {
         setExpandedCard(expandedCard === id ? null : id);
         setIndiceActual(0)
@@ -88,6 +89,21 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
 
     const handlePrevious = () => {
         setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : prevIndex));
+    };
+
+    const productTemplate = (image : any) => {
+        console.log(image.image)
+        return (
+            <div className='w-full'>
+                <Image
+                    alt="Album cover"
+                    className={`shadow-md transition-all duration-100 w-full h-[220px] bg-greenLightCanadog object-contain`}
+                    width={140}
+                    height={200}
+                    src={image.image}
+                />
+            </div>
+        );
     };
 
     return(
@@ -259,13 +275,14 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                     <Card>
                                                         <div className={`flex items-center ${expandedCard === card.id ? 'flex-col gap-2' : ''}`}>
                                                             {expandedCard === card.id ? (
-                                                                <Image
+                                                                /*<Image
                                                                     alt="Album cover"
                                                                     className={`shadow-md transition-all duration-100 ${expandedCard === card.id ? 'w-full h-[220px]' : 'w-[170px] h-[200px]'} bg-greenLightCanadog object-contain`}
                                                                     width={140}
                                                                     height={200}
                                                                     src={card.Image[indiceActual]?.image || card.Image[0]?.image}
-                                                                />
+                                                                />*/
+                                                                <Carousel value={card.Image} numScroll={1} numVisible={1}  itemTemplate={productTemplate} />
                                                             ) : (
                                                                 <Image
                                                                     alt="Album cover"
@@ -361,13 +378,14 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                 <Card className='transition-transform duration-100'>
                                                     <div className={`flex items-center ${expandedCard === card.id ? 'flex flex-col gap-2' : ''}`}>
                                                         {expandedCard === card.id ? (
-                                                            <Image
+                                                            /*<Image
                                                                 alt="Album cover"
                                                                 className={`shadow-md transition-all duration-100 ${expandedCard === card.id ? 'w-full h-[220px]' : 'w-[170px] h-[200px]'} bg-greenLightCanadog object-contain`}
                                                                 width={140}
                                                                 height={200}
                                                                 src={card.image}
-                                                            />
+                                                            />*/
+                                                            <Carousel value={card.Image} numScroll={1} numVisible={1}  itemTemplate={productTemplate} />
                                                         ) : (
                                                             <Image
                                                                 alt="Album cover"

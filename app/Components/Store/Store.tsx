@@ -133,6 +133,9 @@ export default function Store({ CardsProducts }: any) {
                                                         {card.title}
                                                     </h2>
                                                 </CardHeader>
+                                                {
+                                               //<Carousel value={card.Image} numScroll={1} numVisible={1}  itemTemplate={productTemplate} />
+                                                }
                                                 <Image
                                                     alt="Album cover"
                                                     className="z-0 w-full h-60 object-cover"

@@ -30,13 +30,36 @@ export default async function HomeGora()
 			Image:[{image: animal.image},{image: animal.image2},{image: animal.image3}, {image: animal.image4}, {image:animal.image5}]
 		}
 	})
+
+	const cardsCats : any = result2.data.result.recordset.map( (animal : any) =>{ 
+		return {
+			id: animal.id,
+			shortDescription: animal.shortDescription,
+			longDescription: animal.longDescription,
+			title: animal.title,
+			old:animal.old,
+			ANIMALS_TYPE:animal.ANIMALS_TYPE,
+			ANIMALS_USER:animal.ANIMALS_USER,
+			ANIMALS_DATE:animal.ANIMALS_DATE,
+			ANIMALS_ENABLE:animal.ANIMALS_ENABLE,
+			Image:[{image: animal.image},{image: animal.image2},{image: animal.image3}, {image: animal.image4}, {image:animal.image5}]
+		}
+	})
 	
-	for(let i= 0; i < cardsDogs.length; i++)
+	for(let i= 0; i < cardsCats.length; i++)
 	{
-		let arr = cardsDogs[i].Image
+		let arr = cardsCats[i].Image
 		arr = arr.filter((image : any) => image.image !== null && image.image !== undefined)
-		cardsDogs[i].Image = arr
+		cardsCats[i].Image = arr
 	}
+
+	for(let i= 0; i < cardsDogs.length; i++)
+		{
+			let arr = cardsDogs[i].Image
+			arr = arr.filter((image : any) => image.image !== null && image.image !== undefined)
+			cardsDogs[i].Image = arr
+		}
+	
 	
 	return (
 		<>
@@ -44,7 +67,7 @@ export default async function HomeGora()
 				<main className="bg-cover bg-center" style={{backgroundImage:'url("")'}}>
 					<Home 
 						cardsDogs={cardsDogs} /*{[]}*/
-						cardsCats={result2.data.result.recordset} /*{{[]}*/
+						cardsCats={cardsCats} /*{{[]}*/
 						cardsHistory={result3.data.result.recordset} /*{[]}*/ 
 					/>
 				</main>
