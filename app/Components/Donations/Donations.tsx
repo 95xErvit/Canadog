@@ -1,11 +1,19 @@
 "use client"
 import React from "react"
-import { Image } from "@nextui-org/react"
+import Image from 'next/image';
 import QrBancolombia from "@/public/QRBancolombiaGora.jpeg"
-import QrNequi from "@/public/QrNequiGora.jpg"
+import QrNequi from "@/public/NequiCanadog.jpeg"
 
 export default function Donations() {
-      
+    const downloadImage = (imageUrl: string, fileName: string) => {
+        const link = document.createElement('a');
+        link.href = imageUrl;
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
     return(
         <div>
             <section className="py-12 bg-gray-50 sm:py-16 lg:py-20">
@@ -46,18 +54,17 @@ export default function Donations() {
                                                 </p>
                                             </blockquote>
 
-                                            <div className="flex justify-center items-center mt-8 relative group">
-                                                <a 
-                                                    href="/QrBancolombiaGora.jpeg" 
-                                                    download="QrBancolombiaGora.jpeg" 
-                                                    className="flex-shrink-0"
-                                                >
-                                                    <Image
-                                                        className="object-cover mn:w-[250px] mn:h-[250px] xl:w-[300px] xl:h-[300px] transition-all duration-300 ease-in-out group-hover:opacity-50"
-                                                        src={QrBancolombia.src}
-                                                        alt="QrBancolombia"
-                                                    />
-                                                </a>
+                                            <div 
+                                                className="flex justify-center items-center mt-8 relative cursor-pointer group"
+                                                onClick={() => downloadImage(QrBancolombia.src, "QRBancolombiaGora.jpeg")}
+                                            >
+                                                <Image
+                                                    className="object-cover mn:w-[250px] mn:h-[250px] xl:w-[300px] xl:h-[300px] transition-all duration-300 ease-in-out group-hover:opacity-50"
+                                                    src={QrBancolombia.src}
+                                                    alt="QrBancolombia"
+                                                    width={300}
+                                                    height={300}
+                                                />
 
                                                 <div className="absolute inset-0 rounded-xl bg-black bg-opacity-90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"/>
                                                 <i className="pi pi-download text-4xl text-white font-bold absolute z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"/>
@@ -71,7 +78,6 @@ export default function Donations() {
                                         </div>
                                     </div>
                                 </div>
-
                                 <div className="flex flex-col overflow-hidden shadow-xl rounded-2xl">
                                     <div className="flex flex-col justify-between flex-1 p-6 bg-white lg:py-8 lg:px-7">
                                         <div className="flex-1">
@@ -81,20 +87,18 @@ export default function Donations() {
                                                 </p>
                                             </blockquote>
 
-                                            <div className="flex justify-center items-center mt-8 relative group">
-                                                <a
-                                                    href={QrNequi.src}
-                                                    download="QrNequiGora.jpg"
-                                                    className="flex-shrink-0"
-                                                >
-                                                    <Image
-                                                        className="object-cover mn:w-[250px] mn:h-[250px] xl:w-[300px] xl:h-[300px] transition-all duration-300 ease-in-out group-hover:opacity-50"
-                                                        src="/QrNequiGora.jpg"
-                                                        alt="QrNequi"
-                                                    />
-                                                </a>
-
-                                                <div className="absolute inset-0 rounded-xl bg-black bg-opacity-90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"/>
+                                            <div   
+                                                className="flex justify-center items-center mt-8 relative cursor-pointer group" 
+                                                onClick={() => downloadImage(QrNequi.src, "NequiCanadog.jpeg")}
+                                            >
+                                                <Image
+                                                    className="object-cover mn:w-[250px] mn:h-[250px] xl:w-[300px] xl:h-[300px] transition-all duration-300 ease-in-out group-hover:opacity-50"
+                                                    src={QrNequi.src}
+                                                    alt="QrNequi"
+                                                    width={300}
+                                                    height={300}
+                                                />
+                                                <div className="absolute inset-0 rounded-xl bg-black bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"/>
                                                 <i className="pi pi-download text-4xl text-white font-bold absolute z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"/>
                                             </div>
 
@@ -114,12 +118,20 @@ export default function Donations() {
                                                     <span className="text-mentaCanadog">Dona</span> PayPal</p>
                                             </blockquote>
 
-                                            <div className="flex items-center mt-8">
-                                                <Image 
-                                                    className="flex-shrink-0 object-cover rounded-full w-11 h-11" 
-                                                    src="" 
-                                                    alt=""
+                                            <div 
+                                                className="flex justify-center items-center mt-8 relative cursor-pointer group"
+                                                onClick={() => downloadImage(QrBancolombia.src, "QRBancolombiaGora.jpeg")}
+                                            >
+                                                <Image
+                                                    className="object-cover mn:w-[250px] mn:h-[250px] xl:w-[300px] xl:h-[300px] transition-all duration-300 ease-in-out group-hover:opacity-50"
+                                                    src={QrBancolombia.src}
+                                                    alt="QrBancolombia"
+                                                    width={300}
+                                                    height={300}
                                                 />
+
+                                                <div className="absolute inset-0 rounded-xl bg-black bg-opacity-90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"/>
+                                                <i className="pi pi-download text-4xl text-white font-bold absolute z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"/>
                                             </div>
 
                                             <blockquote className="flex-1 mt-8">
