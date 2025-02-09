@@ -282,7 +282,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                                     height={200}
                                                                     src={card.Image[indiceActual]?.image || card.Image[0]?.image}
                                                                 />*/
-                                                                <Carousel value={card.Image} numScroll={1} numVisible={1}  itemTemplate={productTemplate} />
+                                                                <Carousel circular value={card.Image} numScroll={1} numVisible={1}  itemTemplate={productTemplate} />
                                                             ) : (
                                                                 <Image
                                                                     alt="Album cover"
@@ -385,7 +385,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                                 height={200}
                                                                 src={card.image}
                                                             />*/
-                                                            <Carousel value={card.Image} numScroll={1} numVisible={1}  itemTemplate={productTemplate} />
+                                                            <Carousel value={card.Image} circular numScroll={1} numVisible={1}  itemTemplate={productTemplate} />
                                                         ) : (
                                                             <Image
                                                                 alt="Album cover"
