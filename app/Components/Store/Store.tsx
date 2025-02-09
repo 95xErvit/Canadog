@@ -124,10 +124,10 @@ export default function Store({ CardsProducts }: any) {
                                     {CardsProducts.map((card: any) => (
                                     <div
                                         key={card.id}
-                                        className={`m-4`}
+                                        className='m-4'
                                     >
                                         <Card isFooterBlurred className="w-full h-[330px]">
-                                            <div className={`flex justify-center items-center`}>
+                                            <div className='flex justify-center items-center'>
                                                 <CardHeader className="absolute z-10 top-1 flex-col items-start">
                                                     <h2 className="text-white font-semibold mn:text-2xl md:text-3xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
                                                         {card.title}
@@ -145,7 +145,6 @@ export default function Store({ CardsProducts }: any) {
                                                 />
                                                 <CardFooter className="absolute bg-greenCanadog/50 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
                                                     <div className='flex flex-col'>
-                                                        
                                                         <p className="text-white font-medium text-sm">
                                                             Unidades: {card.unity}
                                                         </p>

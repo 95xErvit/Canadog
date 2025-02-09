@@ -349,15 +349,15 @@ export default function CMS({Dogs, Cats, History, Products}: any)
     return(
         <div>
             <div className="flex mn:justify-center md:justify-start">
-                <Modal isOpen={isOpen} onOpenChange={onOpenChange} size='xl'>
+                <Modal className='mn:m-4 md:m-0' isOpen={isOpen} onOpenChange={onOpenChange} size='2xl' backdrop='blur' placement='center'>
                     <ModalContent>
                     {(onClose) => (
                         <>
                             {   !isProduct ?
                                 <>
                                     <Toast ref={toast}></Toast>
-                                    <ModalHeader className="flex justify-center text-greenGora">
-                                        ¡Bienvenido {<p className='text-blackGora ml-1'> a tu próxima gran aventura</p>}!
+                                    <ModalHeader className="flex justify-center text-2xl text-blackCanadog">
+                                        ¡Bienvenido
                                     </ModalHeader>
                                     <ModalBody>
                                         <p className='text-greenCanadog px-4 text-xl text-center font-semibold'> 
@@ -486,7 +486,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                 </Modal>
             </div>
             <div className="flex mn:justify-center md:justify-start">
-                <Modal isOpen={isEdit}  onOpenChange={setIsEdit} size='xl'>
+                <Modal className='mn:m-4 md:m-0' isOpen={isEdit} onOpenChange={setIsEdit} size='2xl' backdrop='blur' placement='center'>
                     <ModalContent>
                     {(onClose) => (
                         <>  
@@ -494,8 +494,8 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                             !isProduct ?
                             <>
                                 <Toast ref={toast}></Toast>
-                                <ModalHeader className="flex justify-center text-greenGora">
-                                    ¡Bienvenido {<p className='text-blackGora ml-1'> a tu próxima gran aventura</p>}!
+                                <ModalHeader className="flex justify-center text-2xl text-blackCanadog">
+                                    ¡Bienvenido
                                 </ModalHeader>
                                 <ModalBody>
                                     <p className='text-greenCanadog px-4 text-xl text-center font-semibold'> 
@@ -694,49 +694,197 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                 </div>
                 {   
                     isDog ?(
-                        <div className='px-4 py-6'>
-                            <div className='flex max-w-7xl mx-auto'>
+                        <div className='md:p-4'>
+                            <div className='flex flex-wrap max-w-7xl mx-auto'>
                                 <Card
                                     isBlurred
                                     className="border-none w-full"
                                     shadow="md"
                                 >
-                                    <ScrollShadow className="mn:w-[360px] mn:h-[600px] md:w-[1280px] md:h-[600px] mt-4 mb-4" size={0}>
-                                        <div className='flex flex-wrap justify-evenly'>
+                                    <ScrollShadow className="mn:w-full mn:h-[450px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
+                                        <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'>
                                             {
                                                 Dogs.map((card: any) => (
-                                                    <Card key={card.id} className='m-4 w-96'>
-                                                        <div className="flex gap-6 md:gap-2">
+                                                    <div 
+                                                        key={card.id} 
+                                                        className='relative m-4 row-span-1 h-[200px]'
+                                                    >
+                                                        <Card>
+                                                            <div className="flex items-center">
+                                                                <Image
+                                                                    alt="Album cover"
+                                                                    className='object-contain shadow-md bg-greenLightCanadog rounded-none mn:w-[140px] md:w-[170px] h-[200px]'
+                                                                    src={card.image}
+                                                                    width={140}
+                                                                    height={200}
+                                                                />
+                                                                <CardBody className='justify-around w-[170px] h-[200px]'>
+                                                                    <div className='flex flex-wrap w-full'>
+                                                                        <h1 className='flex font-semibold text-blackCanadog px-2 justify-end w-full mn:text-xl md:text-2xl'>
+                                                                            {card.title.substring(0, 3)}
+                                                                            <span className='text-greenCanadog'>
+                                                                                {card.title.substring(3, card.title.charCodeAt(card.title))}
+                                                                            </span>
+                                                                        </h1>
+                                                                        <h2 className='flex font-semibold text-greenCanadog px-2 justify-end w-full mn:text-xs xl:text-sm'>
+                                                                            {card.old}
+                                                                        </h2>
+                                                                        <p className='flex font-normal text-gray w-full h-auto text-right text-[15px]'>
+                                                                            {card.shortDescription.substring(0,50) + "..."}
+                                                                        </p>
+                                                                        <div className="flex w-full justify-center flex-wrap py-2">
+                                                                            <Button  
+                                                                                onClick={(e)=> 
+                                                                                    {   
+                                                                                        setId(card.id)
+                                                                                        setName(card.title)
+                                                                                        setDescription(card.longDescription)
+                                                                                        setYearosld(card.old)
+                                                                                        setEnable(card.ANIMALS_ENABLE)
+                                                                                        setIsEdit(true)
+                                                                                    }
+                                                                                } 
+                                                                                className='bg-mentaCanadog border-2 border-greenCanadog text-white hover:bg-greenCanadog text-md text-center' 
+                                                                                radius="lg" 
+                                                                                size="sm" 
+                                                                                endContent={
+                                                                                    <i className="pi pi-pencil" style={{ color: '#FFFFFF' }}/>
+                                                                                }
+                                                                            >
+                                                                                Editar
+                                                                            </Button>
+                                                                        </div>  
+                                                                    </div>
+                                                                </CardBody>
+                                                            </div>
+                                                        </Card>
+                                                        
+                                                    </div>
+                                                ))
+                                            }
+                                        </div>
+                                    </ScrollShadow> 
+                                </Card>
+                            </div>
+                        </div>
+                    ) 
+                    :
+                    isCat?
+                    (
+                        <div className='md:p-4'>
+                            <div className='flex flex-wrap max-w-7xl mx-auto'>
+                                <Card
+                                    isBlurred
+                                    className="border-none w-full"
+                                    shadow="md"
+                                >
+                                    <ScrollShadow className="mn:w-full mn:h-[450px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
+                                        <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'>
+                                        {
+                                            Cats.map((card: any) => (
+                                                <div 
+                                                    key={card.id} 
+                                                    className='relative m-4 row-span-1 h-[200px]'
+                                                >
+                                                    <Card>
+                                                        <div className="flex items-center">
                                                             <Image
                                                                 alt="Album cover"
-                                                                className={`object-cover shadow-md transition-all duration-300 rounded-none w-[170px] h-[200px]`}
+                                                                className='object-contain shadow-md bg-greenLightCanadog rounded-none mn:w-[140px] md:w-[170px] h-[200px]'
                                                                 src={card.image}
                                                                 width={140}
                                                                 height={200}
                                                             />
-                                                            <CardBody>
-                                                                <div className='flex flex-col'>
-                                                                    <h1 className={'flex font-semibold text-greenCanadog px-2 justify-end w-full mn:text-xl md:text-2xl'}>
-                                                                        {card.title.substring(0, 3)}<span className='text-greenGora'>{card.title.substring(3, card.title.charCodeAt(card.title))}</span>
+                                                            <CardBody className='justify-around w-[170px] h-[200px]'>
+                                                                <div className='flex flex-wrap w-full'>
+                                                                    <h1 className='flex font-semibold text-blackCanadog px-2 justify-end w-full mn:text-xl md:text-2xl'>
+                                                                        {card.title.substring(0, 3)}
+                                                                        <span className='text-greenCanadog'>{card.title.substring(3, card.title.charCodeAt(card.title))}</span>
                                                                     </h1>
-                                                                    <h1 className={'flex font-semibold text-greenCanadog px-2 justify-end w-full mn:text-xl md:text-sm'}>
-                                                                        Edad: {card.old}
-                                                                    </h1>
-                                                                    <p className={'flex font-normal text-gray w-full h-[58px] text-right text-[15px]'}>
+                                                                    <h2 className='flex font-semibold text-greenCanadog px-2 justify-end w-full mn:text-xs xl:text-sm'>
+                                                                        {card.old}
+                                                                    </h2>
+                                                                    <p className='flex font-normal text-gray w-full h-auto text-right text-[15px]'>
                                                                         {card.shortDescription.substring(0,50) + "..."}
                                                                     </p>
-                                                                    <div className="flex mn:my-2 justify-center">
+                                                                    <div className="flex w-full justify-center flex-wrap py-2">
                                                                         <Button  
-                                                                            onClick={(e)=> 
-                                                                                {   
-                                                                                    setId(card.id)
-                                                                                    setName(card.title)
-                                                                                    setDescription(card.longDescription)
-                                                                                    setYearosld(card.old)
-                                                                                    setEnable(card.ANIMALS_ENABLE)
-                                                                                    setIsEdit(true)
-                                                                                }
-                                                                            } 
+                                                                            onClick={(e)=>{ 
+                                                                                setId(card.id)
+                                                                                setName(card.title)
+                                                                                setDescription(card.longDescription)
+                                                                                setYearosld(card.old)
+                                                                                setEnable(card.ANIMALS_ENABLE)
+                                                                                setIsEdit(true)} 
+                                                                            }
+                                                                            className='bg-mentaCanadog border-2 border-greenCanadog text-white hover:bg-greenCanadog text-md' 
+                                                                            radius="lg"
+                                                                            size="sm" 
+                                                                            endContent={
+                                                                                <i className="pi pi-pencil" style={{ color: '#FFFFFF' }}/>
+                                                                            }
+                                                                        >
+                                                                            Editar
+                                                                        </Button>
+                                                                    </div>  
+                                                                </div>
+                                                            </CardBody>
+                                                        </div>
+                                                    </Card>
+                                                    
+                                                </div>
+                                            ))
+                                        }
+                                        </div>
+                                    </ScrollShadow> 
+                                </Card>
+                            </div>
+                        </div>
+                    ):
+                    isHistory ?
+                    (
+                        <div className='px-4 py-6'>
+                            <div className='flex flex-wrap max-w-7xl mx-auto'>
+                                <Card
+                                    isBlurred
+                                    className="border-none w-full"
+                                    shadow="md"
+                                >
+                                    <ScrollShadow className="mn:w-full mn:h-[450px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
+                                        <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'>
+                                        {
+                                            History.map((card: any) => (
+                                                <div 
+                                                    key={card.id} 
+                                                    className='relative m-4 row-span-1 h-[200px]'
+                                                >
+                                                    <Card>
+                                                        <div className="flex items-center">
+                                                            <Image
+                                                                alt="Album cover"
+                                                                className='object-contain shadow-md bg-greenLightCanadog rounded-none mn:w-[140px] md:w-[170px] h-[200px]'
+                                                                src={card.image}
+                                                                width={140}
+                                                                height={200}
+                                                            />
+                                                            <CardBody className='justify-center w-[170px] h-[200px]'>
+                                                                <div className='flex flex-col gap-8'>
+                                                                    <h1 className="flex justify-center font-semibold text-greenCanadog text-2xl">
+                                                                        {card.title}
+                                                                    </h1>
+                                                                    {/* <p className='flex ml-2 justify-center mt-2 text-[12px] text-right w-full'>
+                                                                        {card.shortDescription.substring(0,50)}
+                                                                    </p> */}
+                                                                    <div className="flex w-full justify-center flex-wrap py-2">
+                                                                        <Button  
+                                                                            onClick={(e)=> {
+                                                                                setId(card.id)
+                                                                                setName(card.title)
+                                                                                setDescription(card.longDescription)
+                                                                                setYearosld(card.old)
+                                                                                setEnable(card.ANIMALS_ENABLE)
+                                                                                setIsEdit(true)
+                                                                            }} 
                                                                             className='bg-mentaCanadog border-2 border-greenCanadog text-white hover:bg-greenCanadog text-md' 
                                                                             radius="lg" 
                                                                             size="sm" 
@@ -751,134 +899,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                             </CardBody>
                                                         </div>
                                                     </Card>
-                                                ))
-                                            }
-                                        </div>
-                                    </ScrollShadow> 
-                                </Card>
-                            </div>
-                        </div>
-                    ) 
-                    :
-                    isCat?
-                    (
-                        <div className='px-4 py-6'>
-                            <div className='flex max-w-7xl mx-auto'>
-                                <Card
-                                    isBlurred
-                                    className="border-none w-full"
-                                    shadow="md"
-                                >
-                                    <ScrollShadow className="mn:w-[360px] mn:h-[600px] md:w-[1280px] md:h-[600px] mt-4 mb-4" size={0}>
-                                        <div className='flex flex-wrap justify-evenly'>
-                                        {
-                                            Cats.map((card: any) => (
-                                                <Card key={card.id} className='m-4 w-96'>
-                                                    <div className="flex gap-6 md:gap-2">
-                                                        <Image
-                                                            alt="Album cover"
-                                                            className={`object-cover shadow-md transition-all duration-300 rounded-none w-[170px] h-[200px]`}
-                                                            src={card.image}
-                                                            width={140}
-                                                            height={200}
-                                                        />
-                                                        <CardBody>
-                                                            <div className='flex flex-col'>
-                                                                <h1 className={'flex font-semibold text-greenCanadog px-2 justify-end w-full mn:text-xl md:text-2xl'}>
-                                                                    {card.title.substring(0, 3)}<span className='text-greenGora'>{card.title.substring(3, card.title.charCodeAt(card.title))}</span>
-                                                                </h1>
-                                                                <h1 className={'flex font-semibold text-greenCanadog px-2 justify-end w-full mn:text-xl md:text-sm'}>
-                                                                    Edad: {card.old}
-                                                                </h1>
-                                                                <p className={'flex font-normal text-gray w-full h-[58px] text-right text-[15px]'}>
-                                                                    {card.shortDescription.substring(0,50) + "..."}
-                                                                </p>
-                                                                <div className="flex mn:my-2 justify-center">
-                                                                    <Button  
-                                                                        onClick={(e)=>{ 
-                                                                            setId(card.id)
-                                                                            setName(card.title)
-                                                                            setDescription(card.longDescription)
-                                                                            setYearosld(card.old)
-                                                                            setEnable(card.ANIMALS_ENABLE)
-                                                                            setIsEdit(true)} 
-                                                                        }
-                                                                        className='bg-mentaCanadog border-2 border-greenCanadog text-white hover:bg-greenCanadog text-md' 
-                                                                        radius="lg"
-                                                                        size="sm" 
-                                                                        endContent={
-                                                                            <i className="pi pi-pencil" style={{ color: '#FFFFFF' }}/>
-                                                                        }
-                                                                    >
-                                                                        Editar
-                                                                    </Button>
-                                                                </div>  
-                                                            </div>
-                                                        </CardBody>
-                                                    </div>
-                                                </Card>
-                                            ))
-                                        }
-                                        </div>
-                                    </ScrollShadow> 
-                                </Card>
-                            </div>
-                        </div>
-                    ):
-                    isHistory ?
-                    (
-                        <div className='px-4 py-6'>
-                            <div className='flex max-w-7xl mx-auto'>
-                                <Card
-                                    isBlurred
-                                    className="border-none w-full"
-                                    shadow="md"
-                                >
-                                    <ScrollShadow className="mn:w-[360px] mn:h-[600px] md:w-[1280px] md:h-[600px] mt-4 mb-4" size={0}>
-                                        <div className='flex flex-wrap justify-evenly'>
-                                        {
-                                            History.map((card: any) => (
-                                                <Card key={card.id} className='m-4 w-96'>
-                                                    <div className="flex gap-6 md:gap-2">
-                                                        <Image
-                                                            alt="Album cover"
-                                                            className="object-cover"
-                                                            src={card.image}
-                                                            height={250}
-                                                            width={500}
-                                                        />
-                                                        <CardBody>
-                                                            <div className='flex flex-col'>
-                                                                <h1 className="flex justify-end font-semibold text-greenCanadog text-2xl">
-                                                                    {card.title}
-                                                                </h1>
-                                                                <p className='flex ml-2 justify-center mt-2 text-[12px] text-right w-full'>
-                                                                    {card.shortDescription.substring(0,50)}
-                                                                </p>
-                                                                <div className="flex mn:my-2 justify-center">
-                                                                    <Button  
-                                                                        onClick={(e)=> {
-                                                                            setId(card.id)
-                                                                            setName(card.title)
-                                                                            setDescription(card.longDescription)
-                                                                            setYearosld(card.old)
-                                                                            setEnable(card.ANIMALS_ENABLE)
-                                                                            setIsEdit(true)
-                                                                        }} 
-                                                                        className='bg-mentaCanadog border-2 border-greenCanadog text-white hover:bg-greenCanadog text-md' 
-                                                                        radius="lg" 
-                                                                        size="sm" 
-                                                                        endContent={
-                                                                            <i className="pi pi-pencil" style={{ color: '#FFFFFF' }}/>
-                                                                        }
-                                                                     >
-                                                                        Editar
-                                                                    </Button>
-                                                                </div>  
-                                                            </div>
-                                                        </CardBody>
-                                                    </div>
-                                                </Card>
+                                                </div>
                                             ))
                                         }
                                         </div>
@@ -889,18 +910,18 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                     )
                     :
                     (
-                        <div className='px-4 py-4'>
+                        <div className='md:p-4'>
                             <div className='flex flex-wrap max-w-7xl mx-auto'>
                                 <Card isBlurred className="border-none w-full" shadow="md">
                                     <ScrollShadow className="mn:w-full mn:h-[450px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
-                                        <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3  gap-4'>
+                                        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 h-[360px] gap-4'>
                                             {Products.map((card: any) => (
                                             <div
                                                 key={card.id}
-                                                className={`relative m-4 transition-all duration-300 row-span-1 h-[200px]`}
+                                                className='m-4'
                                             >
                                                 <Card isFooterBlurred className="w-full h-[330px]">
-                                                    <div className={`flex items-center`}>
+                                                    <div className='flex items-center'>
                                                         <CardHeader className="absolute z-10 top-1 flex-col items-start">
                                                             <h4 className="text-white font-semibold mn:text-2xl md:text-3xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
                                                                 {card.title}
@@ -908,18 +929,18 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                         </CardHeader>
                                                         <Image
                                                             alt="Album cover"
-                                                            className="z-0 w-full h-60 object-cover"
+                                                            className="z-0 w-full h-[270px] object-cover"
                                                             src={card.image}
                                                             width={100}
                                                             height={100}
                                                         />
                                                         <CardFooter className="absolute bg-greenCanadog/50 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
                                                             <div className='flex flex-col'>
-                                                                <p className="text-white font-medium text-base">
-                                                                    Precio: ${card.cost}
-                                                                </p>
-                                                                <p className="text-white font-medium text-sm">
+                                                            <p className="text-white font-medium text-sm">
                                                                     Unidades: {card.unity}
+                                                                </p>
+                                                                <p className="text-white font-medium text-lg">
+                                                                    ${card.cost}
                                                                 </p>
                                                             </div>
                                                             <Button 
