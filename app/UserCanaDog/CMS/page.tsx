@@ -66,8 +66,8 @@ export default async function Home()
 			<Header/>
 				<main className="bg-cover bg-center" style={{backgroundImage:'url("")'}}>
 					<CMS 
-						cardsDogs={cardsDogs} /*{[]}*/
-						cardsCats={cardsCats} /*{{[]}*/
+						Dogs={cardsDogs} /*{[]}*/
+						Cats={cardsCats} /*{{[]}*/
 						History={result3.data.result.recordset} 
 						Products={result4.data.result.recordset}
 					/>

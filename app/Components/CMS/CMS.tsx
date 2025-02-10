@@ -13,6 +13,7 @@ import axios from 'axios';
 
 export default function CMS({Dogs, Cats, History, Products}: any) 
 { 
+    console.log({Dogs, Cats})
     const toast = useRef<Toast>(null);
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -741,7 +742,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                                 <Image
                                                                     alt="Album cover"
                                                                     className='object-contain shadow-md bg-greenLightCanadog rounded-none mn:w-[140px] md:w-[170px] h-[200px]'
-                                                                    src={card.image}
+                                                                    src={card.Image[0].image}
                                                                     width={140}
                                                                     height={200}
                                                                 />
@@ -769,26 +770,26 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                                                         setYearosld(card.old)
                                                                                         setEnable(card.ANIMALS_ENABLE)
                                                                                         
-                                                                                        setFile(card.Image[0])
+                                                                                        setFile(card.Image[0].image)
 
                                                                                         if(card.Image.length === 2)
                                                                                         {
-                                                                                            setFile2(card.Image[1])
+                                                                                            setFile2(card.Image[1].image)
                                                                                         }
 
                                                                                         if(card.Image.length === 3)
                                                                                         {
-                                                                                            setFile3(card.Image[2])
+                                                                                            setFile3(card.Image[2].image)
                                                                                         }
                                                                                         
                                                                                         if(card.Image.length === 4)
                                                                                         {
-                                                                                            setFile4(card.Image[3])
+                                                                                            setFile4(card.Image[3].image)
                                                                                         }
 
                                                                                         if(card.Image.length === 5)
                                                                                         {
-                                                                                            setFile5(card.Image[4])
+                                                                                            setFile5(card.Image[4].image)
                                                                                         }
 
                                                                                         setIsEdit(true)
@@ -841,7 +842,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                             <Image
                                                                 alt="Album cover"
                                                                 className='object-contain shadow-md bg-greenLightCanadog rounded-none mn:w-[140px] md:w-[170px] h-[200px]'
-                                                                src={card.image}
+                                                                src={card.Image[0].image}
                                                                 width={140}
                                                                 height={200}
                                                             />
@@ -867,26 +868,26 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                                                     setYearosld(card.old)
                                                                                     setEnable(card.ANIMALS_ENABLE)
                                                                                     setIsEdit(true)
-                                                                                    setFile(card.Image[0])
+                                                                                    setFile(card.Image[0].image)
 
                                                                                     if(card.Image.length === 2)
                                                                                     {
-                                                                                        setFile2(card.Image[1])
+                                                                                        setFile2(card.Image[1].image)
                                                                                     }
 
                                                                                     if(card.Image.length === 3)
                                                                                     {
-                                                                                        setFile3(card.Image[2])
+                                                                                        setFile3(card.Image[2].image)
                                                                                     }
                                                                                     
                                                                                     if(card.Image.length === 4)
                                                                                     {
-                                                                                        setFile4(card.Image[3])
+                                                                                        setFile4(card.Image[3].image)
                                                                                     }
 
                                                                                     if(card.Image.length === 5)
                                                                                     {
-                                                                                        setFile5(card.Image[4])
+                                                                                        setFile5(card.Image[4].image)
                                                                                     }
 
                                                                                 } 
