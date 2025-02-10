@@ -283,7 +283,19 @@ export default function CMS({Dogs, Cats, History, Products}: any)
         setIsLoading(true)
         try
         {
-            const response = await axios.post("/UserCanaDog/CMS/api/products",{data:{PRODUCTS_USER:"Administrador_CanaDog",PRODUCTS_ENABLE: 1,CATEGORY_ID:1, PRODUCTS_NAME: name, PRODUCTS_STOCK:unity, PRODUCTS_DESCRIPTION:description, PRODUCTS_WORTH:cost, PRODUCT_IMAGE: file, PRODUCTS_WEB: "CANADOG"}})
+            const response = await axios.post("/UserCanaDog/CMS/api/products",{
+                data:{
+                    PRODUCTS_USER:"Administrador_CanaDog",
+                    PRODUCTS_ENABLE: 1,
+                    CATEGORY_ID:1, 
+                    PRODUCTS_NAME: name, 
+                    PRODUCTS_STOCK:unity, 
+                    PRODUCTS_DESCRIPTION:description, 
+                    PRODUCTS_WORTH:cost, 
+                    PRODUCT_IMAGE: file, 
+                    PRODUCTS_WEB: "CANADOG"
+                }
+            })
             console.log('Contesto:', response);
         }
         catch(err){
@@ -306,7 +318,22 @@ export default function CMS({Dogs, Cats, History, Products}: any)
     
         try
         {
-            const response = await axios.patch("/UserCanaDog/CMS/api/pets",{data:{AnimaldId:id, User:"Administrador_CanaDog",Enable: EnablePet, Name: name, OldDate:yearOlds, Description:description, Type:isDog ? "DOG" : isCat? "CAT": "HISTORY", Images: file, Web: "CANADOG" }})
+            const response = await axios.patch("/UserCanaDog/CMS/api/pets",{
+                data:{
+                    AnimaldId:id, 
+                    User:"Administrador_CanaDog",
+                    Enable: EnablePet, 
+                    Name: name, 
+                    OldDate:yearOlds, 
+                    Description:description,
+                    Type:isDog ? "DOG" : isCat? "CAT": "HISTORY", 
+                    Images: file,
+                    Images2: file2,
+                    Images3: file3,
+                    Images4: file4,
+                    Images5: file5, 
+                    Web: "CANADOG" 
+                }})
             console.log('Contesto:', response);
         }
         catch(err){
@@ -741,6 +768,29 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                                                         setDescription(card.longDescription)
                                                                                         setYearosld(card.old)
                                                                                         setEnable(card.ANIMALS_ENABLE)
+                                                                                        
+                                                                                        setFile(card.Image[0])
+
+                                                                                        if(card.Image.length === 2)
+                                                                                        {
+                                                                                            setFile2(card.Image[1])
+                                                                                        }
+
+                                                                                        if(card.Image.length === 3)
+                                                                                        {
+                                                                                            setFile3(card.Image[2])
+                                                                                        }
+                                                                                        
+                                                                                        if(card.Image.length === 4)
+                                                                                        {
+                                                                                            setFile4(card.Image[3])
+                                                                                        }
+
+                                                                                        if(card.Image.length === 5)
+                                                                                        {
+                                                                                            setFile5(card.Image[4])
+                                                                                        }
+
                                                                                         setIsEdit(true)
                                                                                     }
                                                                                 } 
@@ -809,13 +859,37 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                                     </p>
                                                                     <div className="flex w-full justify-center flex-wrap py-2">
                                                                         <Button  
-                                                                            onClick={(e)=>{ 
-                                                                                setId(card.id)
-                                                                                setName(card.title)
-                                                                                setDescription(card.longDescription)
-                                                                                setYearosld(card.old)
-                                                                                setEnable(card.ANIMALS_ENABLE)
-                                                                                setIsEdit(true)} 
+                                                                            onClick={(e)=> 
+                                                                                { 
+                                                                                    setId(card.id)
+                                                                                    setName(card.title)
+                                                                                    setDescription(card.longDescription)
+                                                                                    setYearosld(card.old)
+                                                                                    setEnable(card.ANIMALS_ENABLE)
+                                                                                    setIsEdit(true)
+                                                                                    setFile(card.Image[0])
+
+                                                                                    if(card.Image.length === 2)
+                                                                                    {
+                                                                                        setFile2(card.Image[1])
+                                                                                    }
+
+                                                                                    if(card.Image.length === 3)
+                                                                                    {
+                                                                                        setFile3(card.Image[2])
+                                                                                    }
+                                                                                    
+                                                                                    if(card.Image.length === 4)
+                                                                                    {
+                                                                                        setFile4(card.Image[3])
+                                                                                    }
+
+                                                                                    if(card.Image.length === 5)
+                                                                                    {
+                                                                                        setFile5(card.Image[4])
+                                                                                    }
+
+                                                                                } 
                                                                             }
                                                                             className='bg-mentaCanadog border-2 border-greenCanadog text-white hover:bg-greenCanadog text-md' 
                                                                             radius="lg"
