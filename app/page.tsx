@@ -54,11 +54,11 @@ export default async function HomeGora()
 	}
 
 	for(let i= 0; i < cardsDogs.length; i++)
-		{
-			let arr = cardsDogs[i].Image
-			arr = arr.filter((image : any) => image.image !== null && image.image !== undefined)
-			cardsDogs[i].Image = arr
-		}
+	{
+		let arr = cardsDogs[i].Image
+		arr = arr.filter((image : any) => image.image !== null && image.image !== undefined)
+		cardsDogs[i].Image = arr
+	}
 	
 	
 	return (

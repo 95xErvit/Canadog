@@ -25,7 +25,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
     const [yearOlds, setYearosld] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [id, setId] = useState<string>('');
-    const [file, setFile] = useState<any>();
+    const [file, setFile] = useState<any>(null);
     const [file2, setFile2] = useState<any>();
     const [file3, setFile3] = useState<any>();
     const [file4, setFile4] = useState<any>();
@@ -35,7 +35,6 @@ export default function CMS({Dogs, Cats, History, Products}: any)
     const [isHistory, setIsHistory] = useState(false);
     const [isProduct, setIsProduct] = useState(false);
     const [enable, setEnable] = useState(true);
-    const [history, setHistory] = useState<any[]>([]); 
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [totalSize, setTotalSize] = useState(0);
     const fileUploadRef = useRef<FileUpload>(null);
@@ -100,102 +99,67 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                 const base64Text = event.target.result;
                 console.log(base64Text);
                 setFile(base64Text);
-
-                setHistory(prev => [
-                    ...prev, 
-                    {
-                        id: Date.now(), 
-                        image: base64Text, 
-                        title: "Nuevo Elemento", 
-                        shortDescription: "Descripción corta"
-                    }
-                ]);
             }
 
             reader2.onloadend = function (event:any) {
                 const base64Text = event.target.result;
                 console.log(base64Text);
                 setFile2(base64Text);
-
-                setHistory(prev => [
-                    ...prev, 
-                    {
-                        id: Date.now(), 
-                        image: base64Text, 
-                        title: "Nuevo Elemento", 
-                        shortDescription: "Descripción corta"
-                    }
-                ]);
             }
 
             reader3.onloadend = function (event:any) {
                 const base64Text = event.target.result;
                 console.log(base64Text);
                 setFile3(base64Text);
-
-                setHistory(prev => [
-                    ...prev, 
-                    {
-                        id: Date.now(), 
-                        image: base64Text, 
-                        title: "Nuevo Elemento", 
-                        shortDescription: "Descripción corta"
-                    }
-                ]);
             }
 
             reader4.onloadend = function (event:any) {
                 const base64Text = event.target.result;
                 console.log(base64Text);
                 setFile4(base64Text);
-
-                setHistory(prev => [
-                    ...prev, 
-                    {
-                        id: Date.now(), 
-                        image: base64Text, 
-                        title: "Nuevo Elemento", 
-                        shortDescription: "Descripción corta"
-                    }
-                ]);
             }
 
             reader5.onloadend = function (event:any) {
                 const base64Text = event.target.result;
                 console.log(base64Text);
                 setFile5(base64Text);
-
-                setHistory(prev => [
-                    ...prev, 
-                    {
-                        id: Date.now(), 
-                        image: base64Text, 
-                        title: "Nuevo Elemento", 
-                        shortDescription: "Descripción corta"
-                    }
-                ]);
             }
 
             reader.readAsDataURL(e.files[0]);
 
+            console.log(e.files.length)
             if(e.files.length === 2)
-            {
+            {  
                 reader2.readAsDataURL(e.files[1]);
             } 
             
             if(e.files.length === 3)
-            {
+            {   
+                console.log(e.files[2])
+                console.log(e.files[1])
+                reader2.readAsDataURL(e.files[1]);
                 reader3.readAsDataURL(e.files[2]);
             }
 
             if(e.files.length === 4)
-            {
-                reader3.readAsDataURL(e.files[3]);
+            {   
+                console.log(e.files[3])
+                console.log(e.files[2])
+                console.log(e.files[1])
+                reader2.readAsDataURL(e.files[1]);
+                reader3.readAsDataURL(e.files[2]);
+                reader4.readAsDataURL(e.files[3]);
             }
 
             if(e.files.length === 5)
-            {
-                reader4.readAsDataURL(e.files[4]);
+            {   
+                console.log(e.files[3])
+                console.log(e.files[2])
+                console.log(e.files[1])
+                reader2.readAsDataURL(e.files[1]);
+                reader3.readAsDataURL(e.files[2]);
+                reader4.readAsDataURL(e.files[3]);
+                reader5.readAsDataURL(e.files[4]);
             }
         }
       
@@ -439,7 +403,54 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                     <ModalFooter className='flex justify-center'>
                                         <div className='flex flex-col w-full'>
                                             <div className='flex justify-center'>
-                                                <Button onClick={sendPets}  isLoading={isLoading} className='border-2 border-greenCanadog bg-mentaCanadog hover:bg-greenCanadog text-white text-lg px-6' radius="full" size="md">
+                                                <Button 
+                                                onClick={(e)=>
+                                                        {   
+                                                            if(isHistory)
+                                                            {
+                                                                if(name === '')
+                                                                {
+                                                                    toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'El nombre es obligatorio'});
+                                                                    return
+                                                                }
+                                                            }
+
+                                                            if(!isHistory)
+                                                            {
+                                                                if(name === '')
+                                                                {
+                                                                    toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'El nombre es obligatorio'});
+                                                                    return
+                                                                }
+
+                                                                if(yearOlds === '')
+                                                                {
+                                                                    toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'La edad es obligatorio'});
+                                                                    return
+                                                                }
+
+                                                                if(description === '')
+                                                                {
+                                                                    toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'La descripcion es obligatorio'});
+                                                                    return
+                                                                }
+                                                            }
+
+                                                            if(file === null)
+                                                            {
+                                                                toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Tienes que subir maximo una imagen'});
+                                                                return
+                                                            }
+                                                            
+                                                            sendPets(e)
+                                                            
+                                                        }
+                                                    } 
+                                                    isLoading={isLoading} 
+                                                    className='border-2 border-greenCanadog bg-mentaCanadog hover:bg-greenCanadog text-white text-lg px-6' 
+                                                    radius="full" 
+                                                    size="md"
+                                                >
                                                     Guardar
                                                 </Button>                              
                                             </div>
@@ -500,7 +511,48 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                     <ModalFooter className='flex justify-center'>
                                         <div className='flex flex-col w-full'>
                                             <div className='flex justify-center'>
-                                                <Button onClick={sendProduct}  isLoading={isLoading} className='border-2 border-greenCanadog bg-mentaCanadog hover:bg-greenCanadog text-white text-lg px-6' radius="full" size="md">
+                                                <Button onClick={(e)=>
+                                                    {
+
+                                                        if(name === '')
+                                                        {
+                                                            toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'El nombre es obligatorio'});
+                                                            return
+                                                        }
+
+                                                        if(unity === '')
+                                                        {
+                                                            toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Las unidades son obligatorias'});
+                                                            return
+                                                        }
+
+                                                        if(cost === '')
+                                                        {
+                                                            toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'El precio es obligatorio'});
+                                                            return
+                                                        }
+
+                                                        if(description === '')
+                                                        {
+                                                            toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'La descripcion es obligatorio'});
+                                                            return
+                                                        }
+
+                                                        if(file === null)
+                                                        {
+                                                            toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Tienes que subir maximo una imagen'});
+                                                            return
+                                                        }
+
+                                                        sendProduct(e)
+                                                        
+                                                    }
+                                                }  
+                                                    isLoading={isLoading} 
+                                                    className='border-2 border-greenCanadog bg-mentaCanadog hover:bg-greenCanadog text-white text-lg px-6' 
+                                                    radius="full" 
+                                                    size="md"
+                                                >
                                                     Guardar
                                                 </Button>                              
                                             </div>
@@ -571,9 +623,48 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                 radius="full" 
                                                 size="md"
                                                 isLoading={isLoading}
-                                                onClick={(e)=>{
-                                                    UpdatePets(e)
-                                                }}>
+                                                onClick={(e)=>
+                                                    {   
+                                                        if(isHistory)
+                                                        {
+                                                            if(name === '')
+                                                            {
+                                                                toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'El nombre es obligatorio'});
+                                                                return
+                                                            }
+                                                        }
+
+                                                        if(!isHistory)
+                                                        {
+                                                            if(name === '')
+                                                            {
+                                                                toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'El nombre es obligatorio'});
+                                                                return
+                                                            }
+
+                                                            if(yearOlds === '')
+                                                            {
+                                                                toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'La edad es obligatorio'});
+                                                                return
+                                                            }
+
+                                                            if(description === '')
+                                                            {
+                                                                toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'La descripcion es obligatorio'});
+                                                                return
+                                                            }
+                                                        }
+
+                                                        if(file === null)
+                                                        {
+                                                            toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Tienes que subir maximo una imagen'});
+                                                            return
+                                                        }
+                                                        
+                                                        UpdatePets(e)
+                                                        
+                                                    }
+                                                }>
                                                 Guardar
                                             </Button>
                                             <Button  
@@ -582,6 +673,42 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                 size="md"
                                                 isLoading={isLoading}
                                                 onClick={(e)=>{
+
+                                                    if(isHistory)
+                                                    {
+                                                        if(name === '')
+                                                        {
+                                                            toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'El nombre es obligatorio'});
+                                                            return
+                                                        }
+                                                    }
+
+                                                    if(!isHistory)
+                                                    {
+                                                        if(name === '')
+                                                        {
+                                                            toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'El nombre es obligatorio'});
+                                                            return
+                                                        }
+
+                                                        if(yearOlds === '')
+                                                        {
+                                                            toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'La edad es obligatorio'});
+                                                            return
+                                                        }
+
+                                                        if(description === '')
+                                                        {
+                                                            toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'La descripcion es obligatorio'});
+                                                            return
+                                                        }
+                                                    }
+
+                                                    if(file === null)
+                                                    {
+                                                        toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Tienes que subir maximo una imagen'});
+                                                        return
+                                                    }
                                                     UpdatePets(e, (enable ? 0 : 1))
                                                 }}>
                                                 {enable? "Eliminar " : "Habilitar"}
@@ -638,6 +765,36 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                 size="md"
                                                 isLoading={isLoading}
                                                 onClick={(e)=>{
+
+                                                    if(name === '')
+                                                    {
+                                                        toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'El nombre es obligatorio'});
+                                                        return
+                                                    }
+
+                                                    if(unity === '')
+                                                    {
+                                                        toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Las unidades son obligatorias'});
+                                                        return
+                                                    }
+
+                                                    if(cost === '')
+                                                    {
+                                                        toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'El precio es obligatorio'});
+                                                        return
+                                                    }
+
+                                                    if(description === '')
+                                                    {
+                                                        toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'La descripcion es obligatorio'});
+                                                        return
+                                                    }
+
+                                                    if(file === null)
+                                                    {
+                                                        toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Tienes que subir maximo una imagen'});
+                                                        return
+                                                    }
                                                     UpdateProducts(e)
                                                 }}>
                                                 Guardar
@@ -647,8 +804,39 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                 radius="full" 
                                                 size="md"
                                                 isLoading={isLoading}
-                                                onClick={(e)=>{
-                                                    UpdatePets(e, (enable ? 0 : 1))
+                                                onClick={(e)=>
+                                                {
+                                                    if(name === '')
+                                                    {
+                                                        toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'El nombre es obligatorio'});
+                                                        return
+                                                    }
+
+                                                    if(unity === '')
+                                                    {
+                                                        toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Las unidades son obligatorias'});
+                                                        return
+                                                    }
+
+                                                    if(cost === '')
+                                                    {
+                                                        toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'El precio es obligatorio'});
+                                                        return
+                                                    }
+
+                                                    if(description === '')
+                                                    {
+                                                        toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'La descripcion es obligatorio'});
+                                                        return
+                                                    }
+
+                                                    if(file === null)
+                                                    {
+                                                        toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Tienes que subir maximo una imagen'});
+                                                        return
+                                                    }
+
+                                                    UpdateProducts(e, (enable ? 0 : 1))
                                                 }}>
                                                 {enable? "Eliminar " : "Habilitar"}
                                             </Button>                              
