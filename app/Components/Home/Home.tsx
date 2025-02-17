@@ -99,7 +99,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
             <div className='w-full'>
                 <Image
                     alt="Album cover"
-                    className={`shadow-md transition-all duration-100 w-full h-[220px] bg-greenLightCanadog object-contain`}
+                    className={`shadow-md transition-all duration-100 w-full h-[220px] object-contain`}
                     width={140}
                     height={200}
                     src={image.image}
@@ -288,7 +288,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                                     height={200}
                                                                     src={card.Image[indiceActual]?.image || card.Image[0]?.image}
                                                                 />*/
-                                                                <Carousel circular value={card.Image} numScroll={1} numVisible={1}  itemTemplate={productTemplate} />
+                                                                <Carousel value={card.Image} numScroll={1} numVisible={1}  itemTemplate={productTemplate} className='bg-greenLightCanadog' showIndicators={false} />
                                                             ) : (
                                                                 <Image
                                                                     alt="Album cover"
