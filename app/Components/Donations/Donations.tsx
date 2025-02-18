@@ -1,7 +1,8 @@
 "use client"
 import React from "react"
 import Image from 'next/image';
-import QrBancolombia from "@/public/QRBancolombiaGora.jpeg"
+import { Button } from "@nextui-org/react";
+import QrBancolombia from "@/public/QRBancolombiaCanadog.jpeg"
 import QrNequi from "@/public/NequiCanadog.jpeg"
 
 export default function Donations() {
@@ -144,21 +145,38 @@ export default function Donations() {
                                 </div>
                             </div>
 
-                            {/* <div className="relative mt-10 grid max-w-lg grid-cols-1 gap-6 mx-auto md:max-w-none lg:gap-10 md:grid-cols-3">
+                            <div className="relative mt-10 grid max-w-lg grid-cols-1 gap-6 mx-auto md:max-w-none lg:gap-10 md:grid-cols-3">
                                 <div className="flex flex-col overflow-hidden shadow-xl rounded-2xl">
                                     <div className="flex flex-col justify-between flex-1 p-6 bg-white lg:py-8 lg:px-7">
                                         <div className="flex-1">
                                             <blockquote className="flex-1 mt-8">
-                                                <p className="text-xl leading-relaxed text-center text-purpleGora font-semibold"><span className="text-greenGora">PLAN</span> “SALVAVIDAS”</p>
+                                                <p className="text-xl leading-relaxed text-center text-greenCanadog font-semibold">
+                                                    <span className="text-blackCanadog">PLAN</span> “SALVAVIDAS”
+                                                </p>
                                             </blockquote>
 
-                                            <div className="flex items-center mt-8">
-                                                <Image className="flex-shrink-0 object-cover rounded-full w-11 h-11" src="" alt=""/>
+                                            <div className="flex justify-center items-center mt-8">
+                                                <p className="font-bold text-4xl text-mentaCanadog">$20.000</p>
+                                                {/* <Image className="flex-shrink-0 object-cover rounded-full w-11 h-11" src="" alt=""/> */}
                                             </div>
 
                                             <blockquote className="flex-1 mt-8">
                                                 <p className="text-base leading-relaxed text-blackGora">“Este valor cubre todos los gastos mensuales de un peludo: <br/> COMIDA, SNACKS, DESPARASITANTES, VACUNAS E HIGIENE”</p>
                                             </blockquote>
+
+                                            <div className="flex justify-center my-2">
+                                                <Button 
+                                                    // onClick={()=> window.open('https://api.whatsapp.com/send?phone=+573104684683&text=Hola%20quiero%20saber%20mas%20sobre%20este%20producto%20' + card.title, '_blank')} 
+                                                    className="text-base text-white font-medium" 
+                                                    color="success"
+                                                    radius="full" 
+                                                    size="md"
+                                                    fullWidth
+                                                >
+                                                    {/* <i className="pi pi-whatsapp" style={{ color: 'white' }}></i> */}
+                                                    Donar
+                                                </Button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -167,16 +185,33 @@ export default function Donations() {
                                     <div className="flex flex-col justify-between flex-1 p-6 bg-white lg:py-8 lg:px-7">
                                         <div className="flex-1">
                                             <blockquote className="flex-1 mt-8">
-                                                <p className="text-xl leading-relaxed text-center text-purpleGora font-semibold"><span className="text-greenGora">PLAN</span> “LLENA UNA BARRIGUITA”</p>
+                                                <p className="text-xl leading-relaxed text-center text-greenCanadog font-semibold">
+                                                    <span className="text-blackCanadog">PLAN</span> “LLENA UNA BARRIGUITA”
+                                                </p>
                                             </blockquote>
 
-                                            <div className="flex items-center mt-8">
-                                                <Image className="flex-shrink-0 object-cover rounded-full w-11 h-11" src="" alt=""/>
+                                            <div className="flex justify-center items-center mt-8">
+                                                <p className="font-bold text-4xl text-mentaCanadog">$50.000</p>
+                                                {/* <Image className="flex-shrink-0 object-cover rounded-full w-11 h-11" src="" alt=""/> */}
                                             </div>
 
                                             <blockquote className="flex-1 mt-8">
                                                 <p className="text-base leading-relaxed text-blackGora">“Gracias a tu donación, un peludo rescatado de las calles nunca más sentirá hambre ¡Todos los días tendrá su plato lleno!”</p>
                                             </blockquote>
+
+                                            <div className="flex justify-center my-2">
+                                                <Button 
+                                                    // onClick={()=> window.open('https://api.whatsapp.com/send?phone=+573104684683&text=Hola%20quiero%20saber%20mas%20sobre%20este%20producto%20' + card.title, '_blank')} 
+                                                    className="text-base text-white font-medium" 
+                                                    color="success"
+                                                    radius="full" 
+                                                    size="md"
+                                                    fullWidth
+                                                >
+                                                    {/* <i className="pi pi-whatsapp" style={{ color: 'white' }}></i> */}
+                                                    Donar
+                                                </Button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -185,20 +220,36 @@ export default function Donations() {
                                     <div className="flex flex-col justify-between flex-1 p-6 bg-white lg:py-8 lg:px-7">
                                         <div className="flex-1">
                                             <blockquote className="flex-1 mt-8">
-                                                <p className="text-xl leading-relaxed text-center text-purpleGora font-semibold"><span className="text-greenGora">PLAN</span> “TODO SUMA”</p>
+                                                <p className="text-xl leading-relaxed text-center text-greenCanadog font-semibold">
+                                                    <span className="text-blackCanadog">PLAN</span> “TODO SUMA”
+                                                </p>
                                             </blockquote>
 
-                                            <div className="flex items-center mt-8">
-                                                <Image className="flex-shrink-0 object-cover rounded-full w-11 h-11" src="" alt=""/>
+                                            <div className="flex justify-center items-center mt-8">
+                                                <p className="font-bold text-4xl text-mentaCanadog">$100.000</p>
+                                                {/* <Image className="flex-shrink-0 object-cover rounded-full w-11 h-11" src="" alt=""/> */}
                                             </div>
 
                                             <blockquote className="flex-1 mt-8">
                                                 <p className="text-base leading-relaxed text-blackGora">“Cada aporte suma y con cada granito de arena podremos construir un mundo mejor para ellos.”</p>
                                             </blockquote>
+                                            <div className="flex justify-center my-2">
+                                                <Button 
+                                                    // onClick={()=> window.open('https://api.whatsapp.com/send?phone=+573104684683&text=Hola%20quiero%20saber%20mas%20sobre%20este%20producto%20' + card.title, '_blank')} 
+                                                    className="text-base text-white font-medium" 
+                                                    color="success"
+                                                    radius="full" 
+                                                    size="md"
+                                                    fullWidth
+                                                >
+                                                    {/* <i className="pi pi-whatsapp" style={{ color: 'white' }}></i> */}
+                                                    Donar
+                                                </Button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div> */}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -291,8 +342,8 @@ export default function Donations() {
                     />
                     <p className="text-sm font-bold">@alexaborn</p>
                     </div> */}
-                {/* </div> */}
-            {/* </section> */}
+                {/* </div> 
+            </section> */}
         </div> 
     )
 }

@@ -18,6 +18,9 @@ import GoodBoy from "@/public/goodboy.jpg"
 import Canadog from "@/public/BabyCanadog.jpg"
 import SenIntimo from "@/public/SEN_ÍNTIMO_LOGO.jpg"
 import EddieRoffing from"@/public/EDDIE_ROOFING_LOGO.jpeg"
+import LogoMarilsa from "@/public/Logo-Marilsa.jpg"
+import LogoVeñata from "@/public/Logo-Veñata.jpg"
+import LogoFamigo from "@/public/Logo_Famigo.jpg"
 import 'primeicons/primeicons.css';
 
 export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
@@ -99,7 +102,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
             <div className='w-full'>
                 <Image
                     alt="Album cover"
-                    className={`shadow-md transition-all duration-100 w-full h-[220px] bg-greenLightCanadog object-contain`}
+                    className={`shadow-md transition-all duration-100 w-full h-[220px] object-contain`}
                     width={140}
                     height={200}
                     src={image.image}
@@ -288,7 +291,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                                     height={200}
                                                                     src={card.Image[indiceActual]?.image || card.Image[0]?.image}
                                                                 />*/
-                                                                <Carousel circular value={card.Image} numScroll={1} numVisible={1}  itemTemplate={productTemplate} />
+                                                                <Carousel value={card.Image} numScroll={1} numVisible={1}  itemTemplate={productTemplate} className='bg-greenLightCanadog' showIndicators={false} />
                                                             ) : (
                                                                 <Image
                                                                     alt="Album cover"
@@ -391,7 +394,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                                 height={200}
                                                                 src={card.image}
                                                             />*/
-                                                            <Carousel value={card.Image} circular numScroll={1} numVisible={1}  itemTemplate={productTemplate} />
+                                                            <Carousel value={card.Image} numScroll={1} numVisible={1}  itemTemplate={productTemplate} className='bg-greenLightCanadog' showIndicators={false} />
                                                         ) : (
                                                             <Image
                                                                 alt="Album cover"
@@ -681,7 +684,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                     </p>
                 </div>
 
-                <div className="mx-10 align-items-center grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-center py-4">
+                <div className="mx-10 align-items-center gap-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 justify-center py-4">
                     {/* Card 1 */}
                     <Link 
                         href='https://www.instagram.com/makropetveterinaria/' 
@@ -786,7 +789,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         </div>
                     </Link>
 
-                    {/* Card 6  */}
+                    {/* Card 6 */}
                     <Link 
                         href='https://www.instagram.com/senintimo/' 
                         target="_blank" 
@@ -807,7 +810,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         </div>
                     </Link>
 
-                    {/* Card 7  */}
+                    {/* Card 7 */}
                     <Link 
                         href='https://www.instagram.com/eddieroofingsolutionllc/' 
                         target="_blank" 
@@ -823,7 +826,70 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                             />
                             <div className='flex flex-col justify-center items-center'>
                                 <p className="text-2xl font-bold">Eddie Roofing</p>
-                                <p className="text-base font-semibold">@eddieroofingsolutionllc</p>
+                                <p className="text-sm font-semibold">@eddieroofingsolutionllc</p>
+                            </div>
+                        </div>
+                    </Link>
+
+                    {/* Card 8 */}
+                    <Link 
+                        href='https://www.instagram.com/marilsaoficial/' 
+                        target="_blank" 
+                        className='flex justify-center items-center'
+                    >
+                        <div className="bg-white text-blackCanadog py-2 flex flex-col items-center gap-2 mn:w-[230px] md:w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
+                            <Image
+                                className="w-28 h-28 rounded-full"
+                                src={LogoMarilsa.src}
+                                width={100}
+                                height={100}
+                                alt="James"
+                            />
+                            <div className='flex flex-col justify-center items-center'>
+                                <p className="text-2xl font-bold">Marilsa</p>
+                                <p className="text-base font-semibold">@marilsaoficial</p>
+                            </div>
+                        </div>
+                    </Link>
+
+                    {/* Card 9 */}
+                    <Link 
+                        href='https://www.instagram.com/venatastudio/' 
+                        target="_blank" 
+                        className='flex justify-center items-center'
+                    >
+                        <div className="bg-white text-blackCanadog py-2 flex flex-col items-center gap-2 mn:w-[230px] md:w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
+                            <Image
+                                className="w-28 h-28 rounded-full"
+                                src={LogoVeñata.src}
+                                width={100}
+                                height={100}
+                                alt="James"
+                            />
+                            <div className='flex flex-col justify-center items-center'>
+                                <p className="text-2xl font-bold">Veñata</p>
+                                <p className="text-base font-semibold">@venatastudio</p>
+                            </div>
+                        </div>
+                    </Link>
+
+                    {/* Card 10 */}
+                    <Link 
+                        href='https://www.instagram.com/famigo.official/' 
+                        target="_blank" 
+                        className='flex justify-center items-center'
+                    >
+                        <div className="bg-white text-blackCanadog py-2 flex flex-col items-center gap-2 mn:w-[230px] md:w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
+                            <Image
+                                className="w-28 h-28 rounded-full"
+                                src={LogoFamigo.src}
+                                width={100}
+                                height={100}
+                                alt="James"
+                            />
+                            <div className='flex flex-col justify-center items-center'>
+                                <p className="text-2xl font-bold">Famigo</p>
+                                <p className="text-base font-semibold">@famigo.official</p>
                             </div>
                         </div>
                     </Link>

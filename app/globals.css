@@ -31,3 +31,13 @@
   .p-toast-summary{
     margin: 6px;
   }
+
+  /*color de fondo e icono de los botones de navegación */
+  .p-carousel-prev,
+  .p-carousel-next {
+    margin: 10px;
+    background-color: #1C8C58 !important;
+    border-radius: 50%;
+    color: #ffffff !important; 
+  }
+  
