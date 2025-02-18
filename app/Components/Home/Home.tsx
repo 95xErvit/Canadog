@@ -684,7 +684,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                     </p>
                 </div>
 
-                <div className="mx-10 align-items-center gap-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 justify-center py-4">
+                <div className="mx-10 align-items-center gap-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 justify-center py-4">
                     {/* Card 1 */}
                     <Link 
                         href='https://www.instagram.com/makropetveterinaria/' 
