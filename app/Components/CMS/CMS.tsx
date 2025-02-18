@@ -26,10 +26,10 @@ export default function CMS({Dogs, Cats, History, Products}: any)
     const [description, setDescription] = useState<string>('');
     const [id, setId] = useState<string>('');
     const [file, setFile] = useState<any>(null);
-    const [file2, setFile2] = useState<any>();
-    const [file3, setFile3] = useState<any>();
-    const [file4, setFile4] = useState<any>();
-    const [file5, setFile5] = useState<any>();
+    const [file2, setFile2] = useState<any>(null);
+    const [file3, setFile3] = useState<any>(null);
+    const [file4, setFile4] = useState<any>(null);
+    const [file5, setFile5] = useState<any>(null);
     const [isDog, setIsDog] = useState(true);
     const [isCat, setIsCat] = useState(false)
     const [isHistory, setIsHistory] = useState(false);
@@ -58,7 +58,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                 _totalSize += files[i].size || 0;
                 const ext = files[i].name.split('.')[1]
 
-                if((ext === "jpg") || (ext === "jpeg")||  (ext === "png") || (ext === "webp"))
+                if((ext === "jpg") || (ext === "jpeg")||  (ext === "png"))
                 {
                     exit = false
                 }
