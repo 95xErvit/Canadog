@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Button } from "@nextui-org/react";
 import QrBancolombia from "@/public/QRBancolombiaCanadog.jpeg"
 import QrNequi from "@/public/NequiCanadog.jpeg"
+import QrDavivienda from "@/public/QR_Davivienda.jpeg"
 
 export default function Donations() {
     const downloadImage = (imageUrl: string, fileName: string) => {
@@ -116,17 +117,17 @@ export default function Donations() {
                                         <div className="flex-1">
                                             <blockquote className="flex-1 mt-8">
                                                 <p className="text-2xl leading-relaxed text-center text-greenCanadog font-semibold">
-                                                    <span className="text-mentaCanadog">Dona</span> PayPal</p>
+                                                    <span className="text-mentaCanadog">Dona</span> Daviplata</p>
                                             </blockquote>
 
                                             <div 
                                                 className="flex justify-center items-center mt-8 relative cursor-pointer group"
-                                                onClick={() => downloadImage(QrBancolombia.src, "QRBancolombiaGora.jpeg")}
+                                                onClick={() => downloadImage(QrDavivienda.src, "QR_Davivienda.jpeg")}
                                             >
                                                 <Image
-                                                    className="object-cover mn:w-[250px] mn:h-[250px] xl:w-[300px] xl:h-[300px] transition-all duration-300 ease-in-out group-hover:opacity-50"
-                                                    src={QrBancolombia.src}
-                                                    alt="QrBancolombia"
+                                                    className="object-cover mn:w-[250px] mn:h-[250px] xl:w-[300px] xl:h-[300px] transition-all duration-300 ease-in-out group-hover:opacity-50 p-4"
+                                                    src={QrDavivienda.src}
+                                                    alt="QrDavivienda"
                                                     width={300}
                                                     height={300}
                                                 />

@@ -4,7 +4,7 @@ import  Footer  from './Components/Footer/Footer';
 import { GetPets } from "./Components/Data/Data";
 import { headers } from 'next/headers';
 
-export default async function HomeGora() 
+export default async function HomeCanadog() 
 {
 	const req = {
 		headers: {

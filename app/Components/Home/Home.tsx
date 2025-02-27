@@ -20,7 +20,7 @@ import SenIntimo from "@/public/SEN_ÍNTIMO_LOGO.jpg"
 import EddieRoffing from"@/public/EDDIE_ROOFING_LOGO.jpeg"
 import LogoMarilsa from "@/public/Logo-Marilsa.jpg"
 import LogoVeñata from "@/public/Logo-Veñata.jpg"
-import LogoFamigo from "@/public/Logo_Famigo.jpg"
+import LogoFamigo from "@/public/Logo_Famigo.png"
 import 'primeicons/primeicons.css';
 
 export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
@@ -579,8 +579,6 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                 </div>
             </div> */}
 
-            <Divider className="my-4"/>
-
             {/* CARDS HISTORIAS */}
             <div className='relative mn:px-6 mn:py-2 mn:mt-2 md:px-6 md:py-6 md:mt-8 text-blackCanadog'>
                 <div className='grid max-w-7xl mx-auto md:grid-cols-2'>
@@ -643,15 +641,19 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                     <button
                         onClick={handlePrevious}
                         disabled={currentIndex === 0}
-                        className="p-4 py-2 bg-mentaCanadog rounded-xl shadow hover:bg-greenCanadog text-white"
+                        className={`p-4 py-2 bg-mentaCanadog rounded-xl shadow text-white transition 
+                            ${currentIndex === 0 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-greenCanadog'}`}
                     >
                         ❮
                     </button>
                 </div>
+
                 <div className="absolute top-1/2 right-0 mn:right-5 lg:right-10 transform -translate-y-1/2">
                     <button
                         onClick={handleNext}
-                        className="p-4 py-2 bg-mentaCanadog rounded-xl shadow hover:bg-greenCanadog text-white"
+                        disabled={currentIndex + cardsToShow >= cardsHistory.length}
+                        className={`p-4 py-2 bg-mentaCanadog rounded-xl shadow text-white transition 
+                            ${currentIndex + cardsToShow >= cardsHistory.length ? 'opacity-50 cursor-not-allowed' : 'hover:bg-greenCanadog'}`}
                     >
                         ❯
                     </button>
@@ -748,7 +750,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         </div>
                     </Link>
                     {/* Card 4 */}
-                    <Link 
+                    {/* <Link 
                         href='https://www.instagram.com/danii.colibri/' 
                         target="_blank" 
                         className='flex justify-center items-center'
@@ -766,7 +768,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                 <p className="text-sm md:text-base font-semibold">@danii.colibri</p>
                             </div>
                         </div>
-                    </Link>
+                    </Link> */}
                     
                     {/* Card 5 */}
                     <Link 

@@ -1,4 +1,4 @@
-import Donations from "@/app/Components/Donations/Donations";
+import About from "@/app/Components/AboutUs/AboutUs";
 import Header from "@/app/Components/Header/Header";
 import Footer from "@/app/Components/Footer/Footer";
 
@@ -8,7 +8,7 @@ export default async function HomeGora() {
         <>
             <Header/>
                 <main className="bg-cover bg-center" style={{backgroundImage:'url("")'}}>
-                    <Donations 
+                    <About 
                     />
                 </main>
             <Footer/>

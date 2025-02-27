@@ -9,21 +9,21 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const router = useRouter();
 
-  const donationNavigation = (path: string) => {
+  const HeaderNavigation = (path: string) => {
     console.log(window.location.href)
     router.push(path);
   };
 
   const handleMenuItemClick = (action: () => void) => {
-    action();            // Ejecuta la acción del item
-    setIsMenuOpen(false); // Cierra el menú
+    action();            
+    setIsMenuOpen(false); 
   };
     
   const menuItems = [
-    { name: "Adopciones", action: () => donationNavigation('/#adopciones') },
-    { name: "Tienda Canadog", action: () => donationNavigation('/Store')},
-    { name: "¿Quiénes somos?", action: () => donationNavigation('#contactanos') },
-    { name: "Ayudanos", action: () => donationNavigation('/Home/Donations') }, 
+    { name: "Adopciones", action: () => HeaderNavigation('/#adopciones') },
+    { name: "Tienda Canadog", action: () => HeaderNavigation('/Store')},
+    { name: "¿Quiénes somos?", action: () => HeaderNavigation('/Home/AboutUs') },
+    { name: "Ayudanos", action: () => HeaderNavigation('/Home/Donations') }, 
   ];
 
   return (
@@ -67,7 +67,7 @@ export default function Header() {
         <NavbarItem>
           <Link
             className="text-xl font-semibold text-greenCanadog hover:text-mentaCanadog relative before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-greenCanadog before:transition-all before:duration-300 hover:before:w-full cursor-pointer"
-            href="#"
+            onClick={() => router.push("/Home/AboutUs")}
           >
             ¿Quiénes somos?
           </Link>
