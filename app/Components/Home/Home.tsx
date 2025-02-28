@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Button, Card, Input,CardBody, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, usePagination, PaginationItemType, Checkbox, Textarea, Link } from "@nextui-org/react";
 import {ScrollShadow} from "@nextui-org/react";
 import {Divider} from "@nextui-org/divider";
@@ -32,10 +32,10 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
     const [indiceActual, setIndiceActual] = useState<number>(0);
 
     console.log(cardsDogs)
-    const toggleExpand = (id: number) => {
-        setExpandedCard(expandedCard === id ? null : id);
-        setIndiceActual(0)
-    };
+    // const toggleExpand = (id: number) => {
+    //     setExpandedCard(expandedCard === id ? null : id);
+    //     setIndiceActual(0)
+    // };
 
     const itemsAdoptions = 9; // Cantidad de tarjetas para mostrar por página
     const cards = isDog ? cardsDogs : cardsCats;
@@ -111,6 +111,24 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
         );
     };
 
+    const cardRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+
+    const toggleExpand = (id: number) => {
+        setExpandedCard(expandedCard === id ? null : id);
+        setIndiceActual(0);
+    
+        // Esperar a que la card se expanda antes de hacer scroll
+        setTimeout(() => {
+            if (cardRefs.current[id]) {
+                cardRefs.current[id]?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                    inline: "center"
+                });
+            }
+        }, 100);
+    };
+
     return(
         <div>
             {/* BANNER */}
@@ -162,7 +180,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
             <Divider className="my-4"/>
 
             {/* CARDS ADOPCION */}
-            <section className='adopciones' id='adopciones'>
+            <section id='adopciones'>
                 <div className='md:px-4 md:mx-4'>
                     <div className='relative px-6 md:mx-6 mn:py-2 mn:mt-2 md:py-6 md:mt-4'>
                         <div className='grid max-w-7xl mx-auto md:gris-cols-2'>
@@ -270,13 +288,16 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                     className="border-none w-full" 
                                     shadow="md"
                                 >
-                                    <ScrollShadow className="mn:w-full mn:h-[450px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
+                                    <ScrollShadow className="mn:w-full mn:h-[500px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
                                         <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'>
                                             {cardsDogs.map((card: any) => (
                                                 <div
                                                     key={card.id}
+                                                    ref={(el) => {
+                                                        cardRefs.current[card.id] = el; 
+                                                    }}
                                                     className={`relative m-4 transition-all duration-300 
-                                                        ${expandedCard === card.id ? 'row-span-2' : 'row-span-1'}
+                                                        ${expandedCard === card.id ? 'row-span-2 z-50' : 'row-span-1'}
                                                         ${expandedCard === card.id ? 'h-auto' : 'h-[200px]'}
                                                     `}
                                                     
@@ -304,7 +325,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
 
                                                             <CardBody className={`${expandedCard === card.id ? 'w-full h-auto' : 'w-[170px] h-[200px] justify-around'}`}>
                                                                 <div className={`${expandedCard === card.id ? 'flex items-center justify-around' : 'flex w-full flex-wrap'}`}>
-                                                                    <h1 className={`flex font-semibold text-blackCanadog ${expandedCard === card.id ? 'justify-start text-2xl' : 'px-2 justify-end w-full mn:text-xl md:text-2xl'}`}>
+                                                                    <h1 className={`flex font-semibold text-blackCanadog ${expandedCard === card.id ? 'justify-start mn:text-[22px] md:text-2xl' : 'px-2 justify-end w-full mn:text-xl md:text-2xl'}`}>
                                                                         {card.title.substring(0, 3)}
                                                                         <span className='text-greenCanadog'>{card.title.substring(3)}</span>
                                                                     </h1>
@@ -314,7 +335,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                                     {expandedCard === card.id && (
                                                                         <div className='flex flex-wrap'>
                                                                             <div className='flex items-center'>
-                                                                                <Button className='bg-greenCanadog border border-greenCanadog text-white text-sm h-7' radius="full" onPress={onOpen}>
+                                                                                <Button className='bg-greenCanadog border border-greenCanadog text-white mn:text-xs md:text-base h-7' radius="full" onPress={onOpen}>
                                                                                     Adoptame
                                                                                 </Button>
                                                                             </div>
@@ -374,13 +395,16 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         <div className='px-4 py-4'>
                             <div className='flex flex-wrap max-w-7xl mx-auto'>
                                 <Card isBlurred className="border-none w-full" shadow="md">
-                                    <ScrollShadow className="mn:w-full mn:h-[450px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
+                                    <ScrollShadow className="mn:w-full mn:h-[500px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
                                         <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'>
                                             {cardsCats.map((card: any) => (
                                             <div
                                                 key={card.id}
+                                                ref={(el) => {
+                                                    cardRefs.current[card.id] = el; 
+                                                }}
                                                 className={`relative m-4 transition-all duration-300 
-                                                    ${expandedCard === card.id ? 'row-span-2' : 'row-span-1'}
+                                                    ${expandedCard === card.id ? 'row-span-2 z-50' : 'row-span-1'}
                                                     ${expandedCard === card.id ? 'h-auto' : 'h-[200px]'}
                                                 `}
                                             >
@@ -406,7 +430,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                         )}
                                                         <CardBody className={`${expandedCard === card.id ? 'w-full h-auto' : 'w-[170px] h-[200px] justify-around'}`}>
                                                             <div className={`${expandedCard === card.id ? 'flex items-center justify-around' : 'flex w-full flex-wrap'}`}>
-                                                                <h1 className={`flex font-semibold text-blackCanadog ${expandedCard === card.id ? 'justify-start text-2xl' : 'px-2 justify-end w-full mn:text-xl md:text-2xl'}`}>
+                                                                <h1 className={`flex font-semibold text-blackCanadog ${expandedCard === card.id ? 'justify-start mn:text-[22px] md:text-2xl' : 'px-2 justify-end w-full mn:text-xl md:text-2xl'}`}>
                                                                     {card.title.substring(0, 3)}
                                                                     <span className='text-greenCanadog'>{card.title.substring(3)}</span>
                                                                 </h1>
@@ -416,16 +440,16 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                                 {expandedCard === card.id && (
                                                                     <div className='flex flex-wrap'>
                                                                         <div className='flex items-center'>
-                                                                            <Button className='bg-greenCanadog border border-greenCanadog text-white text-sm h-7' radius="full" onPress={onOpen}>
+                                                                            <Button className='bg-greenCanadog border border-greenCanadog text-white mn:text-xs md:text-base h-7' radius="full" onPress={onOpen}>
                                                                                 Adoptame
                                                                             </Button>
                                                                         </div>
                                                                         <div className='flex items-center'>
                                                                             <Button
                                                                                 onClick={() => toggleExpand(card.id)}
-                                                                                className='bg-transparent text-greenCanadog text-end'
-                                                                                radius="full"
+                                                                                className='bg-transparent text-greenCanadog text-end mn:min-w-10 xl:min-w-20'
                                                                                 endContent={<i className="pi pi-arrow-circle-up" style={{ color: '#489E84', fontSize: '1.5rem' }} />}
+                                                                                radius="full"
                                                                             />
                                                                         </div>
                                                                     </div>

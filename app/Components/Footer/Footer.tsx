@@ -133,7 +133,7 @@ export default function Footer(){
                         por
                     </p>
                     <Link 
-                        href="https://www.instagram.com/innmindsco/" 
+                        href="https://www.innminds.com.co/" 
                         target='_blank' 
                         className="flex items-center mn:m-4 md:m-0"
                     >
