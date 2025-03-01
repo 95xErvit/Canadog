@@ -19,7 +19,7 @@ export default function About() {
             
             <div className='flex flex-col gap-2 md:w-[400px] lg:w-[580px] xl:w-[820px] mn:text-sm md:text-[14px] lg:text-xl'>
                 <p>
-                    Hola soy Ana Cristina, apasionada por el servicio, el amor y el respeto por la vida.
+                    Hola soy Ana Cristina, una persona apasionada por el servicio, el amor y el respeto por la vida.
                     Tengo un espacio de mi hogar para brindar refugio, atención y rehabilitación a perros en situación de abandono,
                     maltrato y vulnerabilidad, proporcionandoles cuidado, amor y una segunda oportunidad para encontrar un hogar definitivo donde sean valorado y protegidos.
                 </p>

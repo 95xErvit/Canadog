@@ -48,7 +48,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
         let exit = false
         if(e.files.length === 0)
         {
-            toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Tienes que subir maximo una imagen'});
+            toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Tienes que subir mínimo una imagen'});
         }
 
         if(e.files.length <= 5)
@@ -71,13 +71,13 @@ export default function CMS({Dogs, Cats, History, Products}: any)
             }
         }else
         {
-            toast.current?.show({ severity: 'error', summary: 'Error subiendo las imagenes', className:"m-2", detail: 'Solo se pueden subir maximo 5 imagenes'});
+            toast.current?.show({ severity: 'error', summary: 'Error subiendo las imagenes', className:"m-2", detail: 'Solo puedes subir máximo 5 imagenes'});
             return
         }
 
         if(exit)
         {   
-            toast.current?.show({ severity: 'error', summary: 'Error en la imagen', className:"m-2", detail: 'No se permite la extencion que se subio'});
+            toast.current?.show({ severity: 'error', summary: 'Error en la imagen', className:"m-2", detail: 'El formato de la imagen debe ser JPG,JPEG o PNG.'});
             return
         }
 
@@ -437,7 +437,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
 
                                                             if(file === null)
                                                             {
-                                                                toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Tienes que subir maximo una imagen'});
+                                                                toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Tienes que subir mínimo una imagen'});
                                                                 return
                                                             }
                                                             
@@ -539,7 +539,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
 
                                                         if(file === null)
                                                         {
-                                                            toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Tienes que subir maximo una imagen'});
+                                                            toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Tienes que subir mínimo una imagen'});
                                                             return
                                                         }
 
@@ -656,7 +656,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
 
                                                         if(file === null)
                                                         {
-                                                            toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Tienes que subir maximo una imagen'});
+                                                            toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Tienes que subir mínimo una imagen'});
                                                             return
                                                         }
                                                         
@@ -705,7 +705,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
 
                                                     if(file === null)
                                                     {
-                                                        toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Tienes que subir maximo una imagen'});
+                                                        toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Tienes que subir mínimo una imagen'});
                                                         return
                                                     }
                                                     UpdatePets(e, (enable ? 0 : 1))
@@ -791,7 +791,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
 
                                                     if(file === null)
                                                     {
-                                                        toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Tienes que subir maximo una imagen'});
+                                                        toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Tienes que subir mínimo una imagen'});
                                                         return
                                                     }
                                                     UpdateProducts(e)
@@ -831,7 +831,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
 
                                                     if(file === null)
                                                     {
-                                                        toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Tienes que subir maximo una imagen'});
+                                                        toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Tienes que subir mínimo una imagen'});
                                                         return
                                                     }
 
