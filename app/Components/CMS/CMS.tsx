@@ -367,8 +367,10 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                     isHistory === true ? 
                                                     
                                                         <></>
-                                                    :
-                                                        <Textarea required disabled={isLoading} value={description} maxLength={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/> 
+                                                    :   
+                                                    <>
+                                                        <Textarea description={"Maximo 300 caracteres"} required disabled={isLoading} value={description} maxLength={300} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
+                                                    </>
                                                 }
                                             </div>
                                         </div> 
@@ -593,8 +595,10 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                 isHistory === true ? 
                                                 
                                                     <></>
-                                                :
-                                                    <Textarea required disabled={isLoading} value={description} maxLength={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/> 
+                                                :   
+                                                <>
+                                                    <Textarea description={"Maximo 300 caracteres"} required disabled={isLoading} value={description} maxLength={300} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/> 
+                                                </>
                                             }
                                         </div>
                                     </div> 

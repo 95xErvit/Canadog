@@ -352,7 +352,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                                 </div>
                                                     
                                                                 <p className={`font-normal text-gray ${expandedCard === card.id ? 'w-full h-[150px] text-[14px] px-2.5 mt-1' : ' text-right w-full h-[58px] text-[12px]'}`}>
-                                                                    {expandedCard === card.id ? card.longDescription : `${card.shortDescription.substring(0, 50)}...`}
+                                                                    {expandedCard === card.id ? card.longDescription : `${card.shortDescription.substring(0, 75)}...`}
                                                                 </p>
                                                     
                                                                 {expandedCard !== card.id && (
@@ -457,7 +457,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                             </div>
                 
                                                             <p className={`flex font-normal text-gray ${expandedCard === card.id ? 'w-full h-[150px] text-[14px] px-2.5 mt-1' : ' text-right w-full h-[58px] text-[12px]'}`}>
-                                                                {expandedCard === card.id ? card.longDescription : card.shortDescription.substring(0,50) + "..."}
+                                                                {expandedCard === card.id ? card.longDescription : card.shortDescription.substring(0,75) + "..."}
                                                             </p>
                 
                                                             {expandedCard !== card.id && (
