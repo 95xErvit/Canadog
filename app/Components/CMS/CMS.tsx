@@ -369,7 +369,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                         <></>
                                                     :   
                                                     <>
-                                                        <Textarea description={"Maximo 300 caracteres"} required disabled={isLoading} value={description} maxLength={300} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
+                                                        <Textarea description={"Máximo 250 caracteres"} required disabled={isLoading} value={description} maxLength={250} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
                                                     </>
                                                 }
                                             </div>

@@ -351,8 +351,19 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                                     )}
                                                                 </div>
                                                     
-                                                                <p className={`font-normal text-gray ${expandedCard === card.id ? 'w-full h-[150px] text-[14px] px-2.5 mt-1' : ' text-right w-full h-[58px] text-[12px]'}`}>
-                                                                    {expandedCard === card.id ? card.longDescription : `${card.shortDescription.substring(0, 75)}...`}
+                                                                <p className={`font-normal text-gray ${expandedCard === card.id ? 'w-full h-[150px] text-[14px] px-2.5 mt-2' : 'w-full h-[60px] text-[12px]'}`}>
+                                                                    {expandedCard === card.id ? 
+                                                                        (
+                                                                            card.longDescription 
+                                                                        ) 
+                                                                        : 
+                                                                        (
+                                                                            window.innerWidth >= 1024 ? card.shortDescription.substring(0, 88) + "..." : 
+                                                                            window.innerWidth >= 768 ? card.shortDescription.substring(0, 60) + "..." : 
+                                                                            window.innerWidth >= 640 ? card.shortDescription.substring(0, 80) + "..." : 
+                                                                            card.shortDescription.substring(0, 55) + "..."
+                                                                        )
+                                                                    }
                                                                 </p>
                                                     
                                                                 {expandedCard !== card.id && (
