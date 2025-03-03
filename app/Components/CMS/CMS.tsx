@@ -355,7 +355,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                             { isDog ? "Crea un nuevo Guau" : isCat ? "Crea un nuevo Miau" : isHistory ? "Crea una historia emotiva" : ""}
                                         </p>
                                         <h1 className='text-center py-4 text-blackGora font-semibold'>
-                                            Ingrese la informacion de la mascota.
+                                            Ingrese la información de la mascota.
                                         </h1>
                                         <div className="flex w-full flex-col gap-4">
                                             <div className="flex mb-6 md:mb-0 gap-4">
@@ -369,7 +369,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                         <></>
                                                     :   
                                                     <>
-                                                        <Textarea description={"Máximo 250 caracteres"} required disabled={isLoading} value={description} maxLength={250} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
+                                                        <Textarea description={"Máximo 300 caracteres"} required disabled={isLoading} value={description} maxLength={300} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
                                                     </>
                                                 }
                                             </div>
@@ -469,7 +469,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                         Crea un nuevo producto
                                         </p>
                                         <h1 className='text-center py-4 text-blackGora font-semibold'>
-                                            Ingrese la informacion del producto.
+                                            Ingrese la información del producto.
                                         </h1>
                                         <div className="flex w-full flex-col gap-4">
                                             <div className="flex mb-6 md:mb-0 gap-4">
@@ -479,9 +479,9 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                 <Input value={unity} required disabled={isLoading} onChange={((e)=> setUnity(e.target.value))} type="unity" variant={'faded'} label="Unidades"/>
                                                 <Input value={cost} required disabled={isLoading} onChange={((e)=> setCost(e.target.value))} type="cost" variant={'faded'} label="Costo"/>
                                             </div>
-                                            <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
-                                                <Textarea required disabled={isLoading} maxLength={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
-                                            </div>
+                                            {/* <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
+                                                <Textarea required disabled={isLoading} maxLength={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripción"/>
+                                            </div> */}
                                         </div> 
                                         <h1 className='text-center py-4 text-blackGora font-semibold'>
                                             Fotos del producto
@@ -533,11 +533,11 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                             return
                                                         }
 
-                                                        if(description === '')
-                                                        {
-                                                            toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'La descripcion es obligatorio'});
-                                                            return
-                                                        }
+                                                        // if(description === '')
+                                                        // {
+                                                        //     toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'La descripcion es obligatorio'});
+                                                        //     return
+                                                        // }
 
                                                         if(file === null)
                                                         {
@@ -583,7 +583,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                         { isDog ? "Edita un Guau" : isCat ? "Edita un Miau" : isHistory ? "Edita la historia emotiva" : ""}
                                     </p>
                                     <h1 className='text-center py-4 text-blackGora font-semibold'>
-                                        Edita la informacion de la mascota.
+                                        Edita la información de la mascota.
                                     </h1>
                                     <div className="flex w-full flex-col gap-4">
                                         <div className="flex mb-6 md:mb-0 gap-4">
@@ -729,7 +729,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                 </ModalHeader>
                                 <ModalBody>
                                     <h1 className='text-center py-4 text-blackGora font-semibold'>
-                                        Edita la informacion del producto.
+                                        Edita la información del producto.
                                     </h1>
                                     <div className="flex w-full flex-col gap-4">
                                     <div className="flex mb-6 md:mb-0 gap-4">
@@ -739,9 +739,9 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                             <Input value={unity} required disabled={isLoading} onChange={((e)=> setUnity(e.target.value))} type="unity" variant={'faded'} label="Unidades"/>
                                             <Input value={cost} required onChange={((e)=> setCost(e.target.value))} type="cost" variant={'faded'} label="Costo"/>
                                         </div>
-                                        <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
+                                        {/* <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
                                             <Textarea value={description} required disabled={isLoading} maxLength={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
-                                        </div>
+                                        </div> */}
                                     </div> 
                                     <h1 className='text-center py-4 text-blackGora font-semibold'>
                                         Fotos del producto
@@ -787,11 +787,11 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                         return
                                                     }
 
-                                                    if(description === '')
-                                                    {
-                                                        toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'La descripcion es obligatorio'});
-                                                        return
-                                                    }
+                                                    // if(description === '')
+                                                    // {
+                                                    //     toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'La descripcion es obligatorio'});
+                                                    //     return
+                                                    // }
 
                                                     if(file === null)
                                                     {
@@ -948,7 +948,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                                         <h2 className='flex font-semibold text-greenCanadog px-2 justify-end w-full mn:text-xs xl:text-sm'>
                                                                             {card.old}
                                                                         </h2>
-                                                                        <p className='flex font-normal text-gray w-full h-auto text-right text-[15px]'>
+                                                                        <p className='flex font-normal text-gray w-full h-auto text-[15px]'>
                                                                             {card.shortDescription.substring(0,50) + "..."}
                                                                         </p>
                                                                         <div className="flex w-full justify-center flex-wrap py-2">
@@ -1046,7 +1046,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                                     <h2 className='flex font-semibold text-greenCanadog px-2 justify-end w-full mn:text-xs xl:text-sm'>
                                                                         {card.old}
                                                                     </h2>
-                                                                    <p className='flex font-normal text-gray w-full h-auto text-right text-[15px]'>
+                                                                    <p className='flex font-normal text-gray w-full h-auto text-[15px]'>
                                                                         {card.shortDescription.substring(0,50) + "..."}
                                                                     </p>
                                                                     <div className="flex w-full justify-center flex-wrap py-2">

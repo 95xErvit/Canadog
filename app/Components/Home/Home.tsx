@@ -229,21 +229,16 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                 <Modal className='mn:m-2 lg:m-0' isOpen={isOpen} onOpenChange={onOpenChange} size='3xl' backdrop='blur' placement='center'>
                     <ModalContent>
                         <>
-                            <ModalHeader className="flex justify-center text-greenCanadog mn:text-sm md:text-3xl">
+                            <ModalHeader className="flex justify-center text-greenCanadog mn:text-xl md:text-3xl py-4 xl:py-8">
                                 ¡Bienvenido {<p className='text-blackCanadog ml-1'> a tu próxima gran aventura!</p>}
                             </ModalHeader>
                             <ModalBody>
                                 <p className='text-blackCanadog px-4 mn:text-sm xl:text-md'> 
-                                    Nos emociona que estés considerando darle un hogar a uno de nuestros adorables peluditos! Por favor, completa este sencillo formulario para comenzar el proceso de adopción.
+                                    Nos emociona que estés considerando darle un hogar a uno de nuestros adorables peluditos. <br/> Por favor, completa este sencillo formulario para comenzar el proceso de adopción.
                                 </p>
-                                <h3 className='text-center mn:py-2 xl:py-4 text-blackCanadog mn:text-xs xl:text-xl font-semibold'>
+                                <h3 className='text-center mn:pt-2 xl:pt-4 text-blackCanadog mn:text-base xl:text-xl font-semibold'>
                                     Queremos conocerte un poco mejor.
                                 </h3>
-                                <div className='flex flex-col'>
-                                    <p className='text-blackCanadog px-4 mn:text-sm xl:text-md text-center'> 
-                                        Inicia el proceso de adopción diligenciado el siguiente formulario
-                                    </p>
-                                </div>
 
                                 {/* <div className="flex w-full flex-col gap-4">
                                     <div className="flex mb-6 md:mb-0 gap-4 h-[48px]">
@@ -258,7 +253,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                             <ModalFooter className='flex justify-center'>
                                 <div className='flex flex-col w-full'>
                                     <div className='flex justify-evenly'>
-                                        <Button href='' className='bg-greenCanadog text-pinkLightGora my-4 text-sm' radius="full" size="lg" onClick={() => window.open('https://forms.gle/m9oTCTt8n1qibjFU8', '_blank')}>
+                                        <Button href='' className='bg-greenCanadog text-pinkLightGora mb-4 text-base' radius="full" size="lg" onClick={() => window.open('https://forms.gle/m9oTCTt8n1qibjFU8', '_blank')}>
                                             Formulario adopción
                                         </Button>                          
                                     </div>
@@ -268,9 +263,6 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                         <p className='text-center'>
                                             ¡Gracias por tomarte el tiempo para completar este formulario! 
                                             <br/> Nos emociona poder ayudarte a encontrar a tu nuevo mejor amigo peludo.
-                                        </p>
-                                        <p>
-                                            ¡Pronto nos pondremos en contacto contigo para continuar con el proceso de adopción!
                                         </p>
                                     </div> 
                                 </div>
@@ -288,7 +280,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                     className="border-none w-full" 
                                     shadow="md"
                                 >
-                                    <ScrollShadow className="mn:w-full mn:h-[500px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
+                                    <ScrollShadow className="mn:w-full mn:h-[530px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
                                         <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'>
                                             {cardsDogs.map((card: any) => (
                                                 <div
@@ -303,7 +295,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                     
                                                 >
                                                     <Card>
-                                                        <div className={`flex items-center ${expandedCard === card.id ? 'flex-col gap-2' : ''}`}>
+                                                        <div className={`flex items-center ${expandedCard === card.id ? 'flex-col mn:h-[500px] md:h-[470px] lg:h-[450px] gap-2' : ''}`}>
                                                             {expandedCard === card.id ? (
                                                                 /*<Image
                                                                     alt="Album cover"
@@ -358,8 +350,8 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                                         ) 
                                                                         : 
                                                                         (
-                                                                            window.innerWidth >= 1024 ? card.shortDescription.substring(0, 88) + "..." : 
-                                                                            window.innerWidth >= 768 ? card.shortDescription.substring(0, 60) + "..." : 
+                                                                            window.innerWidth >= 1024 ? card.shortDescription.substring(0, 80) + "..." : 
+                                                                            window.innerWidth >= 768 ? card.shortDescription.substring(0, 58) + "..." : 
                                                                             window.innerWidth >= 640 ? card.shortDescription.substring(0, 80) + "..." : 
                                                                             card.shortDescription.substring(0, 55) + "..."
                                                                         )
@@ -721,7 +713,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                     </p>
                 </div>
 
-                <div className="mx-10 align-items-center gap-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 justify-center py-4">
+                <div className="mx-10 align-items-center gap-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 justify-center py-4">
                     {/* Card 1 */}
                     <Link 
                         href='https://www.instagram.com/makropetveterinaria/' 

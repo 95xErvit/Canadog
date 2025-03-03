@@ -126,7 +126,7 @@ export default function Store({ CardsProducts }: any) {
                                         key={card.id}
                                         className='m-4'
                                     >
-                                        <Card isFooterBlurred className="w-full h-[330px]">
+                                        <Card isFooterBlurred className="w-full h-[300px]">
                                             <div className='flex justify-center items-center'>
                                                 <CardHeader className="absolute z-10 top-1 flex-col items-start">
                                                     <h2 className="text-white font-semibold mn:text-2xl md:text-3xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
@@ -148,18 +148,18 @@ export default function Store({ CardsProducts }: any) {
                                                         <p className="text-white font-medium text-sm">
                                                             Unidades: {card.unity}
                                                         </p>
-                                                        <p className='text-white font-medium text-sm'>
+                                                        {/* <p className='text-white font-medium text-sm'>
                                                             Color: 
-                                                        </p>
+                                                        </p> */}
                                                         <p className="text-white font-medium text-lg">
                                                             ${card.cost}
                                                         </p>
                                                     </div>
                                                     <div className='flex flex-col gap-2'>
-                                                        <p className='text-white text-base text-center cursor-pointer'>
+                                                        {/* <p className='text-white text-base text-center cursor-pointer'>
                                                             ver más
                                                             <i className="pi pi-window-maximize ml-2" style={{ color: 'white' }}></i>
-                                                        </p>
+                                                        </p> */}
                                                         <Button 
                                                             onClick={()=> window.open('https://api.whatsapp.com/send?phone=+573104684683&text=Hola%20quiero%20saber%20mas%20sobre%20este%20producto%20' + card.title, '_blank')} 
                                                             className="text-base text-white font-medium" 

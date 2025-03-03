@@ -18,13 +18,10 @@ export default function Donations() {
 
     return(
         <div>
-            <section className="py-12 bg-gray-50 sm:py-16 lg:py-20">
+            <section className="pt-4 pb-12 bg-gray-50 sm:pt-4 sm:pb-16 lg:pt-6 lg:pb-20">
                 <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="flex flex-col items-center">
                         <div className="text-center">
-                            {/* <span className="filter drop-shadow-[0_0_0.2rem_#f82e03] inline-block">
-                                <Image alt="lovePets" src="/avatarGora.png" height="70" width="70"/>
-                            </span>  */}
                             <h2 className="mt-4 text-3xl font-bold text-black sm:text-4xl xl:text-5xl">
                                 Escoge tu forma de <span className="text-mentaCanadog">ayudar</span>
                             </h2>
@@ -68,7 +65,7 @@ export default function Donations() {
                                                     height={300}
                                                 />
 
-                                                <div className="absolute inset-0 rounded-xl bg-black bg-opacity-90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"/>
+                                                <div className="absolute inset-0 rounded-xl bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"/>
                                                 <i className="pi pi-download text-4xl text-white font-bold absolute z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"/>
                                             </div>
 
@@ -100,7 +97,7 @@ export default function Donations() {
                                                     width={300}
                                                     height={300}
                                                 />
-                                                <div className="absolute inset-0 rounded-xl bg-black bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"/>
+                                                <div className="absolute inset-0 rounded-xl bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"/>
                                                 <i className="pi pi-download text-4xl text-white font-bold absolute z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"/>
                                             </div>
 
@@ -132,7 +129,7 @@ export default function Donations() {
                                                     height={300}
                                                 />
 
-                                                <div className="absolute inset-0 rounded-xl bg-black bg-opacity-90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"/>
+                                                <div className="absolute inset-0 rounded-xl bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"/>
                                                 <i className="pi pi-download text-4xl text-white font-bold absolute z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"/>
                                             </div>
 
@@ -146,7 +143,8 @@ export default function Donations() {
                                 </div>
                             </div>
 
-                            <div className="relative mt-10 grid max-w-lg grid-cols-1 gap-6 mx-auto md:max-w-none lg:gap-10 md:grid-cols-3">
+                            {/* PLANES DONACIÓN MENSUAL RECURRENTE */}
+                            {/* <div className="relative mt-10 grid max-w-lg grid-cols-1 gap-6 mx-auto md:max-w-none lg:gap-10 md:grid-cols-3">
                                 <div className="flex flex-col overflow-hidden shadow-xl rounded-2xl">
                                     <div className="flex flex-col justify-between flex-1 p-6 bg-white lg:py-8 lg:px-7">
                                         <div className="flex-1">
@@ -158,7 +156,7 @@ export default function Donations() {
 
                                             <div className="flex justify-center items-center mt-8">
                                                 <p className="font-bold text-4xl text-mentaCanadog">$20.000</p>
-                                                {/* <Image className="flex-shrink-0 object-cover rounded-full w-11 h-11" src="" alt=""/> */}
+                                                <Image className="flex-shrink-0 object-cover rounded-full w-11 h-11" src="" alt=""/> 
                                             </div>
 
                                             <blockquote className="flex-1 mt-8">
@@ -167,14 +165,14 @@ export default function Donations() {
 
                                             <div className="flex justify-center my-2">
                                                 <Button 
-                                                    // onClick={()=> window.open('https://api.whatsapp.com/send?phone=+573104684683&text=Hola%20quiero%20saber%20mas%20sobre%20este%20producto%20' + card.title, '_blank')} 
+                                                    onClick={()=> window.open('https://api.whatsapp.com/send?phone=+573104684683&text=Hola%20quiero%20saber%20mas%20sobre%20este%20producto%20', '_blank')} 
                                                     className="text-base text-white font-medium" 
                                                     color="success"
                                                     radius="full" 
                                                     size="md"
                                                     fullWidth
                                                 >
-                                                    {/* <i className="pi pi-whatsapp" style={{ color: 'white' }}></i> */}
+                                                    <i className="pi pi-whatsapp" style={{ color: 'white' }}></i>
                                                     Donar
                                                 </Button>
                                             </div>
@@ -193,7 +191,7 @@ export default function Donations() {
 
                                             <div className="flex justify-center items-center mt-8">
                                                 <p className="font-bold text-4xl text-mentaCanadog">$50.000</p>
-                                                {/* <Image className="flex-shrink-0 object-cover rounded-full w-11 h-11" src="" alt=""/> */}
+                                                <Image className="flex-shrink-0 object-cover rounded-full w-11 h-11" src="" alt=""/>
                                             </div>
 
                                             <blockquote className="flex-1 mt-8">
@@ -202,14 +200,14 @@ export default function Donations() {
 
                                             <div className="flex justify-center my-2">
                                                 <Button 
-                                                    // onClick={()=> window.open('https://api.whatsapp.com/send?phone=+573104684683&text=Hola%20quiero%20saber%20mas%20sobre%20este%20producto%20' + card.title, '_blank')} 
+                                                    onClick={()=> window.open('https://api.whatsapp.com/send?phone=+573104684683&text=Hola%20quiero%20saber%20mas%20sobre%20este%20producto%20', '_blank')} 
                                                     className="text-base text-white font-medium" 
                                                     color="success"
                                                     radius="full" 
                                                     size="md"
                                                     fullWidth
                                                 >
-                                                    {/* <i className="pi pi-whatsapp" style={{ color: 'white' }}></i> */}
+                                                   <i className="pi pi-whatsapp" style={{ color: 'white' }}></i>
                                                     Donar
                                                 </Button>
                                             </div>
@@ -228,7 +226,7 @@ export default function Donations() {
 
                                             <div className="flex justify-center items-center mt-8">
                                                 <p className="font-bold text-4xl text-mentaCanadog">$100.000</p>
-                                                {/* <Image className="flex-shrink-0 object-cover rounded-full w-11 h-11" src="" alt=""/> */}
+                                                <Image className="flex-shrink-0 object-cover rounded-full w-11 h-11" src="" alt=""/>
                                             </div>
 
                                             <blockquote className="flex-1 mt-8">
@@ -236,25 +234,27 @@ export default function Donations() {
                                             </blockquote>
                                             <div className="flex justify-center my-2">
                                                 <Button 
-                                                    // onClick={()=> window.open('https://api.whatsapp.com/send?phone=+573104684683&text=Hola%20quiero%20saber%20mas%20sobre%20este%20producto%20' + card.title, '_blank')} 
+                                                    onClick={()=> window.open('https://api.whatsapp.com/send?phone=+573104684683&text=Hola%20quiero%20saber%20mas%20sobre%20este%20producto%20', '_blank')} 
                                                     className="text-base text-white font-medium" 
                                                     color="success"
                                                     radius="full" 
                                                     size="md"
                                                     fullWidth
                                                 >
-                                                    {/* <i className="pi pi-whatsapp" style={{ color: 'white' }}></i> */}
+                                                    <i className="pi pi-whatsapp" style={{ color: 'white' }}></i>
                                                     Donar
                                                 </Button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
             </section> 
+
+            {/*Esta sección seria para mostrar perfiles o donadores mensuales destacados en modo de agradecimiento*/}
             {/* <section className="py-8 mb-10"> */}
                 {/* <div className="text-center py-8 max-w-6xl mx-auto">
                     <h2 className="mt-4 text-3xl font-bold text-blackGora sm:text-4xl xl:text-5xl">Gracias padrinos</h2>
