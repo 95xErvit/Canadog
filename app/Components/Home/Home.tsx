@@ -353,7 +353,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                                             window.innerWidth >= 1024 ? card.shortDescription.substring(0, 80) + "..." : 
                                                                             window.innerWidth >= 768 ? card.shortDescription.substring(0, 58) + "..." : 
                                                                             window.innerWidth >= 640 ? card.shortDescription.substring(0, 80) + "..." : 
-                                                                            card.shortDescription.substring(0, 55) + "..."
+                                                                            card.shortDescription.substring(0, 45) + "..."
                                                                         )
                                                                     }
                                                                 </p>
@@ -398,7 +398,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         <div className='px-4 py-4'>
                             <div className='flex flex-wrap max-w-7xl mx-auto'>
                                 <Card isBlurred className="border-none w-full" shadow="md">
-                                    <ScrollShadow className="mn:w-full mn:h-[500px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
+                                    <ScrollShadow className="mn:w-full mn:h-[530px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
                                         <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'>
                                             {cardsCats.map((card: any) => (
                                             <div
@@ -412,7 +412,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                 `}
                                             >
                                                 <Card className='transition-transform duration-100'>
-                                                    <div className={`flex items-center ${expandedCard === card.id ? 'flex flex-col gap-2' : ''}`}>
+                                                    <div className={`flex items-center ${expandedCard === card.id ? 'flex-col mn:h-[500px] md:h-[470px] lg:h-[450px gap-2' : ''}`}>
                                                         {expandedCard === card.id ? (
                                                             /*<Image
                                                                 alt="Album cover"
@@ -459,8 +459,19 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                                 )}
                                                             </div>
                 
-                                                            <p className={`flex font-normal text-gray ${expandedCard === card.id ? 'w-full h-[150px] text-[14px] px-2.5 mt-1' : ' text-right w-full h-[58px] text-[12px]'}`}>
-                                                                {expandedCard === card.id ? card.longDescription : card.shortDescription.substring(0,75) + "..."}
+                                                            <p className={`font-normal text-gray ${expandedCard === card.id ? 'w-full h-[150px] text-[14px] px-2.5 mt-2' : 'w-full h-[60px] text-[12px]'}`}>
+                                                                {expandedCard === card.id ? 
+                                                                    (
+                                                                        card.longDescription 
+                                                                    ) 
+                                                                    : 
+                                                                    (
+                                                                        window.innerWidth >= 1024 ? card.shortDescription.substring(0, 80) + "..." : 
+                                                                        window.innerWidth >= 768 ? card.shortDescription.substring(0, 58) + "..." : 
+                                                                        window.innerWidth >= 640 ? card.shortDescription.substring(0, 80) + "..." : 
+                                                                        card.shortDescription.substring(0, 45) + "..."
+                                                                    )
+                                                                }
                                                             </p>
                 
                                                             {expandedCard !== card.id && (
