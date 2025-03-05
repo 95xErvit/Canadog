@@ -226,17 +226,17 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         </div>
                     </div>
                 </div>
-                <Modal className='mn:m-2 lg:m-0' isOpen={isOpen} onOpenChange={onOpenChange} size='3xl' backdrop='blur' placement='center'>
+                <Modal className='mn:m-2 lg:m-0' isOpen={isOpen} onOpenChange={onOpenChange} size='2xl' backdrop='blur' placement='center'>
                     <ModalContent>
                         <>
-                            <ModalHeader className="flex justify-center text-greenCanadog mn:text-xl md:text-3xl py-4 xl:py-8">
+                            <ModalHeader className="flex justify-center text-greenCanadog mn:text-sm md:text-xl lg:text-3xl py-6 xl:py-8">
                                 ¡Bienvenido {<p className='text-blackCanadog ml-1'> a tu próxima gran aventura!</p>}
                             </ModalHeader>
                             <ModalBody>
-                                <p className='text-blackCanadog px-4 mn:text-sm xl:text-md'> 
-                                    Nos emociona que estés considerando darle un hogar a uno de nuestros adorables peluditos. <br/> Por favor, completa este sencillo formulario para comenzar el proceso de adopción.
+                                <p className='text-blackCanadog px-4 mn:text-xs text-center md:text-base'> 
+                                    Nos emociona que estés considerando darle un hogar a uno de nuestros adorables peluditos. Por favor, completa este sencillo formulario para comenzar el proceso de adopción.
                                 </p>
-                                <h3 className='text-center mn:pt-2 xl:pt-4 text-blackCanadog mn:text-base xl:text-xl font-semibold'>
+                                <h3 className='text-center mn:pt-2 xl:pt-4 text-blackCanadog mn:text-sm xl:text-xl font-semibold'>
                                     Queremos conocerte un poco mejor.
                                 </h3>
 
