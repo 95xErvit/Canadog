@@ -253,7 +253,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                             <ModalFooter className='flex justify-center'>
                                 <div className='flex flex-col w-full'>
                                     <div className='flex justify-evenly'>
-                                        <Button href='' className='bg-greenCanadog text-pinkLightGora mb-4 text-base' radius="full" size="lg" onClick={() => window.open('https://forms.gle/m9oTCTt8n1qibjFU8', '_blank')}>
+                                        <Button href='' className='bg-greenCanadog text-pinkLightGora mb-4 text-base' radius="full" size="lg" onClick={() => window.open('https://forms.gle/3CcTTKzvrmAaTJat8', '_blank')}>
                                             Formulario adopción
                                         </Button>                          
                                     </div>
