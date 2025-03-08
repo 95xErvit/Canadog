@@ -16,8 +16,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html className='h-full' id="id" lang="es">
-      <meta name="google-adsense-account" content="ca-pub-9189120606062802"></meta>
       <head>
+        <meta name="google-adsense-account" content="ca-pub-9189120606062802"></meta>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9189120606062802"
           crossOrigin="anonymous">
         </script>
