@@ -702,7 +702,9 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
 
             {/* PUBLICIDAD */}
             <div className='flex justify-center mt-6 mb-6 py-6'>
-                <div className='relative mn:px-2 mn:py-2 md:px-6 md:py-6'>
+                {
+                <div id="container-fe98476a7a70879b195eafa963b474de"></div>
+                /*<div className='relative mn:px-2 mn:py-2 md:px-6 md:py-6'>
                     <Image
                         alt="Album cover"
                         className="object-cover"
@@ -711,6 +713,8 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                         width={1280}
                     />
                 </div>
+                */
+                }
             </div>
 
             <Divider className="my-4"/>
