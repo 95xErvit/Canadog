@@ -18,9 +18,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html className='h-full' id="id" lang="es">
       <head>
         <meta name="google-adsense-account" content="ca-pub-9189120606062802"></meta>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9189120606062802"
-          crossOrigin="anonymous">
-        </script>
+        <script async={true} data-cfasync="false" src="//pl26062928.effectiveratecpm.com/fe98476a7a70879b195eafa963b474de/invoke.js"></script>
+        <div id="container-fe98476a7a70879b195eafa963b474de"></div>
       </head>
       <body className={popinsFont.className}>
         {children}
