@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Button, Card, Input,CardBody, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, usePagination, PaginationItemType, Checkbox, Textarea, Link } from "@nextui-org/react";
 import {ScrollShadow} from "@nextui-org/react";
 import {Divider} from "@nextui-org/divider";
+import { Dialog } from "primereact/dialog";
 import { Carousel } from 'primereact/carousel';
 import {Pagination} from "@nextui-org/react";
 import Image from 'next/image';
@@ -30,6 +31,8 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
     const [currentPage, setCurrentPage] = useState(1);
     const [expandedCard, setExpandedCard] = useState<number | null>(null);
     const [indiceActual, setIndiceActual] = useState<number>(0);
+    const [isOpenModal, setIsOpenModal] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(null);
 
     console.log(cardsDogs)
     // const toggleExpand = (id: number) => {
@@ -96,16 +99,39 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
         setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : prevIndex));
     };
 
-    const productTemplate = (image : any) => {
+    const imageCarousel = (image : any) => {
         console.log(image.image)
         return (
             <div className='w-full'>
                 <Image
                     alt="Album cover"
-                    className={`shadow-md transition-all duration-100 w-full h-[220px] object-contain`}
+                    className={`shadow-md transition-all duration-100 w-full h-[220px] s8:object-cover s20:object-contain cursor-pointer`}
                     width={140}
                     height={200}
                     src={image.image}
+                    onClick={() => {
+                        setSelectedImage(image.image);
+                        setIsOpenModal(true);
+                    }} 
+                />
+            </div>
+        );
+    };
+
+    const ImageExpand = (image : any) => {
+        console.log(image.image)
+        return (
+            <div className='w-full'>
+                <Image
+                    alt="Album cover"
+                    className={`shadow-md transition-all duration-100 w-full mn:h-[350px] xl:h-[500px] object-cover cursor-pointer`}
+                    width={300}
+                    height={300}
+                    src={image.image}
+                    onClick={() => {
+                        setSelectedImage(image.image);
+                        setIsOpenModal(true);
+                    }} 
                 />
             </div>
         );
@@ -295,7 +321,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                     
                                                 >
                                                     <Card>
-                                                        <div className={`flex items-center ${expandedCard === card.id ? 'flex-col mn:h-[500px] md:h-[470px] lg:h-[450px] gap-2' : ''}`}>
+                                                        <div className={`flex items-center ${expandedCard === card.id ? 'flex-col mn:h-[500px] md:h-[470px] lg:h-[450px]' : ''}`}>
                                                             {expandedCard === card.id ? (
                                                                 /*<Image
                                                                     alt="Album cover"
@@ -304,11 +330,38 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                                     height={200}
                                                                     src={card.Image[indiceActual]?.image || card.Image[0]?.image}
                                                                 />*/
-                                                                <Carousel value={card.Image} numScroll={1} numVisible={1}  itemTemplate={productTemplate} className='bg-greenLightCanadog' showIndicators={false} />
-                                                            ) : (
+                                                                <>
+                                                                    {/* Carousel principal */}
+                                                                    <Carousel 
+                                                                        value={card.Image} 
+                                                                        numScroll={1} 
+                                                                        numVisible={1}  
+                                                                        itemTemplate={imageCarousel} 
+                                                                        className="bg-greenLightCanadog" 
+                                                                        showIndicators={false} 
+                                                                    />
+                                                                    {/* Modal para ver la imagen en grande */}
+                                                                    <Modal
+                                                                        isOpen={isOpenModal}
+                                                                        onOpenChange={setIsOpenModal}
+                                                                        className="flex items-center justify-center w-[90vw] md:w-[50vw] xl:w-[80vw]"
+                                                                    >
+                                                                        <ModalContent className="flex items-center justify-center">
+                                                                            <Carousel 
+                                                                                value={card.Image} 
+                                                                                numScroll={1} 
+                                                                                numVisible={1} 
+                                                                                itemTemplate={ImageExpand} 
+                                                                                className="bg-greenLightCanadog w-full h-full"
+                                                                                showIndicators={false} 
+                                                                            />
+                                                                        </ModalContent>
+                                                                    </Modal>
+                                                                </>
+                                                                ) : (
                                                                 <Image
                                                                     alt="Album cover"
-                                                                    className={`shadow-md transition-all duration-100 ${expandedCard === card.id ? 'w-full h-[220px]' : 'mn:w-[140px] md:w-[170px] h-[200px]'} bg-greenLightCanadog object-contain`}
+                                                                    className={`shadow-md transition-all duration-100 bg-greenLightCanadog object-cover aspect-[4/3] ${expandedCard === card.id ? 'w-full h-[220px]' : 'mn:w-[140px] md:w-[170px] h-[200px]'}`}
                                                                     width={140}
                                                                     height={200}
                                                                     src={card.Image[0]?.image}
@@ -334,7 +387,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                                             <div className='flex items-center'>
                                                                                 <Button
                                                                                     onClick={() => toggleExpand(card.id)}
-                                                                                    className='bg-transparent text-greenCanadog text-end mn:min-w-10 xl:min-w-20'
+                                                                                    className='bg-transparent text-greenCanadog text-end mn:min-w-10 xl:min-w-20 px-0'
                                                                                     endContent={<i className="pi pi-arrow-circle-up" style={{ color: '#489E84', fontSize: '1.5rem' }} />}
                                                                                     radius="full"
                                                                                 />
@@ -343,17 +396,17 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                                     )}
                                                                 </div>
                                                     
-                                                                <p className={`font-normal text-gray ${expandedCard === card.id ? 'w-full h-[150px] text-[14px] px-2.5 mt-2' : 'w-full h-[60px] text-[12px]'}`}>
+                                                                <p className={`font-normal text-gray ${expandedCard === card.id ? 'w-full h-[200px] text-[14px] p-2' : 'w-full h-[60px] text-[12px]'}`}>
                                                                     {expandedCard === card.id ? 
                                                                         (
                                                                             card.longDescription 
                                                                         ) 
                                                                         : 
                                                                         (
-                                                                            window.innerWidth >= 1024 ? card.shortDescription.substring(0, 80) + "..." : 
+                                                                            window.innerWidth >= 1024 ? card.shortDescription.substring(0, 75) + "..." : 
                                                                             window.innerWidth >= 768 ? card.shortDescription.substring(0, 58) + "..." : 
                                                                             window.innerWidth >= 640 ? card.shortDescription.substring(0, 80) + "..." : 
-                                                                            card.shortDescription.substring(0, 45) + "..."
+                                                                            card.shortDescription.substring(0, 55) + "..."
                                                                         )
                                                                     }
                                                                 </p>
@@ -412,7 +465,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                 `}
                                             >
                                                 <Card className='transition-transform duration-100'>
-                                                    <div className={`flex items-center ${expandedCard === card.id ? 'flex-col mn:h-[500px] md:h-[470px] lg:h-[450px gap-2' : ''}`}>
+                                                    <div className={`flex items-center ${expandedCard === card.id ? 'flex-col mn:h-[500px] md:h-[470px] lg:h-[450px] gap-2' : ''}`}>
                                                         {expandedCard === card.id ? (
                                                             /*<Image
                                                                 alt="Album cover"
@@ -421,11 +474,38 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                                 height={200}
                                                                 src={card.image}
                                                             />*/
-                                                            <Carousel value={card.Image} numScroll={1} numVisible={1}  itemTemplate={productTemplate} className='bg-greenLightCanadog' showIndicators={false} />
-                                                        ) : (
+                                                            <>
+                                                                {/* Carousel principal */}
+                                                                <Carousel 
+                                                                    value={card.Image} 
+                                                                    numScroll={1} 
+                                                                    numVisible={1}  
+                                                                    itemTemplate={imageCarousel} 
+                                                                    className="bg-greenLightCanadog" 
+                                                                    showIndicators={false} 
+                                                                />
+                                                                {/* Modal para ver la imagen en grande */}
+                                                                <Modal
+                                                                    isOpen={isOpenModal}
+                                                                    onOpenChange={setIsOpenModal}
+                                                                    className="flex items-center justify-center w-[90vw] md:w-[50vw] xl:w-[80vw]"
+                                                                >
+                                                                    <ModalContent className="flex items-center justify-center">
+                                                                        <Carousel 
+                                                                            value={card.Image} 
+                                                                            numScroll={1} 
+                                                                            numVisible={1} 
+                                                                            itemTemplate={ImageExpand} 
+                                                                            className="bg-greenLightCanadog w-full h-full"
+                                                                            showIndicators={false} 
+                                                                        />
+                                                                    </ModalContent>
+                                                                </Modal>
+                                                            </>
+                                                            ) : (
                                                             <Image
                                                                 alt="Album cover"
-                                                                className={`shadow-md transition-all duration-100 ${expandedCard === card.id ? 'w-full h-[220px]' : 'mn:w-[140px] md:w-[170px] h-[200px]'} bg-greenLightCanadog object-contain`}
+                                                                className={`shadow-md transition-all duration-100 bg-greenLightCanadog object-cover aspect-[4/3] ${expandedCard === card.id ? 'w-full h-[220px]' : 'mn:w-[140px] md:w-[170px] h-[200px]'}`}
                                                                 width={140}
                                                                 height={200}
                                                                 src={card.Image[0]?.image}
@@ -469,7 +549,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                                                         window.innerWidth >= 1024 ? card.shortDescription.substring(0, 80) + "..." : 
                                                                         window.innerWidth >= 768 ? card.shortDescription.substring(0, 58) + "..." : 
                                                                         window.innerWidth >= 640 ? card.shortDescription.substring(0, 80) + "..." : 
-                                                                        card.shortDescription.substring(0, 45) + "..."
+                                                                        card.shortDescription.substring(0, 55) + "..."
                                                                     )
                                                                 }
                                                             </p>
