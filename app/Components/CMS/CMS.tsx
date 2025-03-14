@@ -46,7 +46,8 @@ export default function CMS({Dogs, Cats, History, Products}: any)
         let _totalSize = totalSize;
         let files = e.files;
         let exit = false
-        if(e.files.length === 0)
+        console.log(!isEdit)
+        if(e.files.length === 0 && !isEdit)
         {
             toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Tienes que subir mínimo una imagen'});
         }
@@ -657,12 +658,6 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                                 return
                                                             }
                                                         }
-
-                                                        if(file === null)
-                                                        {
-                                                            toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Tienes que subir mínimo una imagen'});
-                                                            return
-                                                        }
                                                         
                                                         UpdatePets(e)
                                                         
@@ -707,11 +702,6 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                         }
                                                     }
 
-                                                    if(file === null)
-                                                    {
-                                                        toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Tienes que subir mínimo una imagen'});
-                                                        return
-                                                    }
                                                     UpdatePets(e, (enable ? 0 : 1))
                                                 }}>
                                                 {enable? "Eliminar " : "Habilitar"}
@@ -793,11 +783,6 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                     //     return
                                                     // }
 
-                                                    if(file === null)
-                                                    {
-                                                        toast.current?.show({ severity: 'error', summary: 'Obligatorio', className:"m-2", detail: 'Tienes que subir mínimo una imagen'});
-                                                        return
-                                                    }
                                                     UpdateProducts(e)
                                                 }}>
                                                 Guardar
