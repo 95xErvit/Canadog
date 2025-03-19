@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-amplify/adapter-nextjs": "^1.5.5",
     "@lordicon/react": "^1.10.0",
     "@nextui-org/input": "^2.1.21",
     "@nextui-org/react": "^2.3.6",
+    "aws-amplify": "^6.13.5",
     "axios": "^1.6.8",
     "formik": "^2.4.6",
     "framer-motion": "^11.1.7",

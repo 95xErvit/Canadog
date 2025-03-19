@@ -3,6 +3,7 @@ import React, { useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Toast } from 'primereact/toast'
 import { Button } from "@nextui-org/button";
+import { signIn } from 'aws-amplify/auth';
 import { Input } from "@nextui-org/input";
 import { EyeFilledIcon } from "../../public/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "../../public/EyeSlashFilledIcon";
@@ -26,17 +27,26 @@ export default function Login() {
     const handleClick = async (e: any) => {
         setIsLoading(true)
         e.preventDefault()
-        const response = await axios.post("/UserCanaDog/CMS/api/users",{data:{Id:user, Pass:pass}})
-        console.log(response.data)
-        if(response.data.data)
+
+        try
         {
-            router.push('/UserCanaDog/CMS')
+            await signIn({username:user, password: pass, options:{
+                clientMetadata:{
+                    secretHash:"qlv2g2ouhe9jdqh8s74nosm507uqqacsisel1utpu3vld1ockuv"
+                }
+            } })
         }
-        else
+        catch(e){
+            console.log(e)
+        }
+        toast.current?.show({severity:'info', summary: 'Cognito', detail:'Paso', life: 7000});
+        router.push('/UserCanaDog/CMS')
+       
+        /*else
         {
             toast.current?.show({severity:'error', summary: 'Fallo en el inicio de sesión', detail:'Tienes un error en el usuario o contraseña', life: 7000});
             setIsLoading(false)
-        }
+        }*/
         
     }
 

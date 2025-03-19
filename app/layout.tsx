@@ -5,7 +5,7 @@ import 'primeicons/primeicons.css';
 import 'primeflex/themes/primeone-light.css'  
 import { Poppins } from 'next/font/google'
 import { Metadata } from 'next';
-
+import ConfigureAmplifyClientSide from './amplify-cognito-config';
 const popinsFont = Poppins({ weight:['400', '600', '700'], subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -23,7 +23,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script async={true} data-cfasync="false" src="//pl26062928.effectiveratecpm.com/fe98476a7a70879b195eafa963b474de/invoke.js"></script>
       </head>
       <body className={popinsFont.className}>
-        {children}
+        <>
+          <ConfigureAmplifyClientSide/>
+          {children}
+        </>
       </body>
     </html>
   )
