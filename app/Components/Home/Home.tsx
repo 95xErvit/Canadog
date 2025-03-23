@@ -155,6 +155,18 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
         }, 100);
     };
 
+    const allies = [
+        { name: "Makro Pet", username: "@makropetveterinaria", url: "https://www.instagram.com/makropetveterinaria/", image: MakroPet.src },
+        { name: "Formadogs", username: "@formadogs.escuelacanina", url: "https://www.instagram.com/formadogs.escuelacanina/", image: FormaDogs.src },
+        { name: "Animal Clinic", username: "@animalcliniccolina", url: "https://www.instagram.com/animalcliniccolina/", image: AnimalClinic.src },
+        { name: "goodboy", username: "@goodboy_petstudio", url: "https://www.instagram.com/makropetveterinaria/", image: GoodBoy.src },
+        { name: "Sen Intimo", username: "@senintimo", url: "https://www.instagram.com/senintimo/", image: SenIntimo.src },
+        { name: "Eddie Roofing", username: "@eddieroofingsolutionllc", url: "https://www.instagram.com/eddieroofingsolutionllc/", image: EddieRoffing.src },
+        { name: "Marilsa", username: "@marilsaoficial", url: "https://www.instagram.com/marilsaoficial/", image: LogoMarilsa.src },
+        { name: "Veñata", username: "@venatastudio", url: "https://www.instagram.com/venatastudio/", image: LogoVeñata.src },
+        { name: "Famigo", username: "@famigo.official", url: "https://www.instagram.com/famigo.official/", image: LogoFamigo.src }
+      ];
+
     return(
         <div>
             {/* BANNER */}
@@ -800,223 +812,32 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
             <Divider className="my-4"/>
 
             {/*AGRADECIMIENTOS */}
-            <section className="py-8 mb-10">
-                <div className="text-center py-8 mn:max-w-xs md:max-w-[700px] lg:max-w-4xl xl:max-w-7xl mx-auto">
-                    <h2 className="mb-6 text-3xl font-bold text-blackCanadog mn:text-2xl sm:text-4xl xl:text-5xl">Gracias aliados</h2>
+            <section className="py-8 mb-10 overflow-hidden">
+                <div className="text-center py-8 mx-auto max-w-7xl">
+                    <h2 className="mb-6 text-3xl font-bold text-blackCanadog mn:text-2xl sm:text-4xl xl:text-5xl">
+                        Gracias aliados
+                    </h2>
                     <p className="mt-4 text-xl font-normal text-blackCanadog mn:text-base sm:text-lg xl:text-xl">
-                        ¡Su ayuda es {<span className='text-greenCanadog font-semibold'>TODO</span>} para nosotros y para ellos!
+                        ¡Su ayuda es{" "}
+                        <span className="text-greenCanadog font-semibold">TODO</span> para
+                        nosotros y para ellos!
                     </p>
                 </div>
 
-                <div className="mx-10 align-items-center gap-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 justify-center py-4">
-                    {/* Card 1 */}
-                    <Link 
-                        href='https://www.instagram.com/makropetveterinaria/' 
-                        target="_blank" 
-                        className='flex justify-center items-center'
-                    >
-                        <div className="bg-white text-blackCanadog py-2 flex flex-col justify-center items-center gap-2 mn:w-[230px] md:w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
-                            <Image
-                                className="w-28 h-28 rounded-full"
-                                src={MakroPet.src}
-                                width={100}
-                                height={100}
-                                alt="Makro Pet"
-                            />
-                            <div className='flex flex-col justify-center items-center'>
-                                <p className="text-xl md:text-2xl font-bold">Makro Pet</p>
-                                <p className="text-sm md:text-base font-semibold">@makropetveterinaria</p>
-                            </div>
-                        </div>
-                    </Link>
-                    
-                    {/* Card 2 */}
-                    <Link 
-                        href='https://www.instagram.com/formadogs.escuelacanina/' 
-                        target="_blank" 
-                        className='flex justify-center items-center'
-                    >
-                        <div className="bg-white text-blackCanadog py-2 flex flex-col items-center gap-2 mn:w-[230px] md:w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
-                            <Image
-                                className="w-28 h-28 rounded-full"
-                                src={FormaDogs.src}
-                                width={100}
-                                height={100}
-                                alt="Forma Dogs"
-                            />
-                            <div className='flex flex-col justify-center items-center'>
-                                <p className="text-xl md:text-2xl font-bold">Formadogs</p>
-                                <p className="text-sm md:text-base font-semibold">@formadogs.escuelacanina</p>
-                            </div>
-                        </div>
-                    </Link>
-                    
-                    {/* Card 3 */}
-                    <Link 
-                        href='https://www.instagram.com/animalcliniccolina/' 
-                        target="_blank" 
-                        className='flex justify-center items-center'
-                    >
-                        <div className="bg-white text-blackCanadog py-2 flex flex-col items-center gap-2 mn:w-[230px] md:w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
-                            <Image
-                                className="w-28 h-28 rounded-full"
-                                src={AnimalClinic.src}
-                                width={100}
-                                height={100}
-                                alt="James"
-                            />
-                            <div className='flex flex-col justify-center items-center'>
-                                <p className="text-xl md:text-2xl font-bold">Animal Clinic</p>
-                                <p className="text-sm md:text-base font-semibold">@animalcliniccolina</p>
-                            </div>
-                        </div>
-                    </Link>
-                    {/* Card 4 */}
-                    {/* <Link 
-                        href='https://www.instagram.com/danii.colibri/' 
-                        target="_blank" 
-                        className='flex justify-center items-center'
-                    >
-                        <div className="bg-white text-blackCanadog py-2 flex flex-col items-center gap-2 mn:w-[230px] md:w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
-                            <Image
-                                className="w-28 h-28 rounded-full"
-                                src={DaniColibri.src}
-                                width={100}
-                                height={100}
-                                alt="James"
-                            />
-                            <div className='flex flex-col justify-center items-center'>
-                                <p className="text-xl md:text-2xl font-bold">Dani Colibri</p>
-                                <p className="text-sm md:text-base font-semibold">@danii.colibri</p>
-                            </div>
-                        </div>
-                    </Link> */}
-                    
-                    {/* Card 5 */}
-                    <Link 
-                        href='https://www.instagram.com/makropetveterinaria/' 
-                        target="_blank" 
-                        className='flex justify-center items-center'
-                    >
-                        <div className="bg-white text-blackCanadog py-2 flex flex-col items-center gap-2 mn:w-[230px] md:w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
-                            <Image
-                                className="w-28 h-28 rounded-full"
-                                src={GoodBoy.src}
-                                width={100}
-                                height={100}
-                                alt="James"
-                            />
-                            <div className='flex flex-col justify-center items-center'>
-                                <p className="text-xl md:text-2xl font-bold">goodboy</p>
-                                <p className="text-sm md:text-base font-semibold">@goodboy_petstudio</p>
-                            </div>
-                        </div>
-                    </Link>
-
-                    {/* Card 6 */}
-                    <Link 
-                        href='https://www.instagram.com/senintimo/' 
-                        target="_blank" 
-                        className='flex justify-center items-center'
-                    >
-                        <div className="bg-white text-blackCanadog py-2 flex flex-col items-center gap-2 mn:w-[230px] md:w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
-                            <Image
-                                className="w-28 h-28 rounded-full"
-                                src={SenIntimo.src}
-                                width={100}
-                                height={100}
-                                alt="James"
-                            />
-                            <div className='flex flex-col justify-center items-center'>
-                                <p className="text-2xl font-bold">Sen Intimo</p>
-                                <p className="text-base font-semibold">@senintimo</p>
-                            </div>
-                        </div>
-                    </Link>
-
-                    {/* Card 7 */}
-                    <Link 
-                        href='https://www.instagram.com/eddieroofingsolutionllc/' 
-                        target="_blank" 
-                        className='flex justify-center items-center'
-                    >
-                        <div className="bg-white text-blackCanadog py-2 flex flex-col items-center gap-2 mn:w-[230px] md:w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
-                            <Image
-                                className="w-28 h-28 rounded-full"
-                                src={EddieRoffing.src}
-                                width={100}
-                                height={100}
-                                alt="James"
-                            />
-                            <div className='flex flex-col justify-center items-center'>
-                                <p className="text-2xl font-bold">Eddie Roofing</p>
-                                <p className="text-sm font-semibold">@eddieroofingsolutionllc</p>
-                            </div>
-                        </div>
-                    </Link>
-
-                    {/* Card 8 */}
-                    <Link 
-                        href='https://www.instagram.com/marilsaoficial/' 
-                        target="_blank" 
-                        className='flex justify-center items-center'
-                    >
-                        <div className="bg-white text-blackCanadog py-2 flex flex-col items-center gap-2 mn:w-[230px] md:w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
-                            <Image
-                                className="w-28 h-28 rounded-full"
-                                src={LogoMarilsa.src}
-                                width={100}
-                                height={100}
-                                alt="James"
-                            />
-                            <div className='flex flex-col justify-center items-center'>
-                                <p className="text-2xl font-bold">Marilsa</p>
-                                <p className="text-base font-semibold">@marilsaoficial</p>
-                            </div>
-                        </div>
-                    </Link>
-
-                    {/* Card 9 */}
-                    <Link 
-                        href='https://www.instagram.com/venatastudio/' 
-                        target="_blank" 
-                        className='flex justify-center items-center'
-                    >
-                        <div className="bg-white text-blackCanadog py-2 flex flex-col items-center gap-2 mn:w-[230px] md:w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
-                            <Image
-                                className="w-28 h-28 rounded-full"
-                                src={LogoVeñata.src}
-                                width={100}
-                                height={100}
-                                alt="James"
-                            />
-                            <div className='flex flex-col justify-center items-center'>
-                                <p className="text-2xl font-bold">Veñata</p>
-                                <p className="text-base font-semibold">@venatastudio</p>
-                            </div>
-                        </div>
-                    </Link>
-
-                    {/* Card 10 */}
-                    <Link 
-                        href='https://www.instagram.com/famigo.official/' 
-                        target="_blank" 
-                        className='flex justify-center items-center'
-                    >
-                        <div className="bg-white text-blackCanadog py-2 flex flex-col items-center gap-2 mn:w-[230px] md:w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg">
-                            <Image
-                                className="w-28 h-28 rounded-full"
-                                src={LogoFamigo.src}
-                                width={100}
-                                height={100}
-                                alt="James"
-                            />
-                            <div className='flex flex-col justify-center items-center'>
-                                <p className="text-2xl font-bold">Famigo</p>
-                                <p className="text-base font-semibold">@famigo.official</p>
-                            </div>
-                        </div>
-                    </Link>
+                <div className="overflow-hidden relative w-full my-10">
+                    <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
+                        {[...allies, ...allies].map((ally, index) => (
+                            <Link key={index} href={ally.url} target="_blank" className="flex justify-center items-center">
+                                <div className="bg-white text-blackCanadog py-2 flex flex-col items-center gap-2 w-[230px] md:w-[250px] border-2 border-greenCanadog hover:border-mentaCanadog rounded-lg mx-2">
+                                    <Image className="w-28 h-28 rounded-full" src={ally.image} width={100} height={100} alt={ally.name} />
+                                    <div className="flex flex-col justify-center items-center">
+                                        <p className="text-xl md:text-2xl font-bold">{ally.name}</p>
+                                        <p className="text-sm md:text-base font-semibold">{ally.username}</p>
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
                 </div>
             </section>
 

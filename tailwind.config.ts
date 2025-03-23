@@ -81,7 +81,14 @@ module.exports = {
           '50%': { transform: 'scale(1.2)' },
           '100%': { transform: 'scale(1)' },
         },
-      }, 
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" }, // Loop natural
+        },
+      },
+      animation: {
+        marquee: "marquee 30s linear infinite",
+      },
     },
   },
   darkMode: "class",
