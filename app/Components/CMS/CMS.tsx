@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Button, Textarea, Card, Input,CardBody, CardHeader,CardFooter , Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Pagination } from "@nextui-org/react";
 import { ScrollShadow } from "@nextui-org/react";
 import { Toast } from 'primereact/toast';
@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image';
 import 'primeicons/primeicons.css';
 import axios from 'axios';
+import { object } from 'yup';
 
 export default function CMS({Dogs, Cats, History, Products}: any) 
 { 
@@ -30,6 +31,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
     const [file3, setFile3] = useState<any>(null);
     const [file4, setFile4] = useState<any>(null);
     const [file5, setFile5] = useState<any>(null);
+    const [files, setFiles] = useState<any>([]);
     const [isDog, setIsDog] = useState(true);
     const [isCat, setIsCat] = useState(false)
     const [isHistory, setIsHistory] = useState(false);
@@ -53,28 +55,28 @@ export default function CMS({Dogs, Cats, History, Products}: any)
         }
 
         if(e.files.length <= 5)
-        {
-            for (let i = 0; i < files.length; i++) 
             {
-                _totalSize += files[i].size || 0;
-                const ext = files[i].name.split('.')[1]
-
-                if((ext === "jpg") || (ext === "jpeg")||  (ext === "png"))
+                for (let i = 0; i < files.length; i++) 
                 {
-                    exit = false
-                }
-                else
-                {
-                    exit = true
-                }
+                    _totalSize += files[i].size || 0;
+                    const ext = files[i].name.split('.')[1]
 
-                console.log(exit)
+                    if((ext === "jpg") || (ext === "jpeg")||  (ext === "png"))
+                    {
+                        exit = false
+                    }
+                    else
+                    {
+                        exit = true
+                    }
+
+                    console.log(exit)
+                }
+            }else
+            {
+                toast.current?.show({ severity: 'error', summary: 'Error subiendo las imagenes', className:"m-2", detail: 'Solo puedes subir máximo 5 imagenes'});
+                return
             }
-        }else
-        {
-            toast.current?.show({ severity: 'error', summary: 'Error subiendo las imagenes', className:"m-2", detail: 'Solo puedes subir máximo 5 imagenes'});
-            return
-        }
 
         if(exit)
         {   
@@ -193,6 +195,25 @@ export default function CMS({Dogs, Cats, History, Products}: any)
         callback();
     };
 
+    const onTemplateRemoveEdit = (file: any, callback: Function) => {
+
+        let newfile : any = files
+
+        newfile.splice(file.index, 1)
+        newfile =newfile.map((obj : any,index: any )=>{
+            console.log(obj, index)
+            return{
+                image:obj.image,
+                index:index
+            }
+        })
+        console.log(newfile)
+        setFiles(newfile)
+        fileUploadRef.current?.setUploadedFiles(files)
+        
+        callback();
+    };
+
     const onTemplateClear = () => {
         setTotalSize(0);
     };
@@ -214,6 +235,29 @@ export default function CMS({Dogs, Cats, History, Products}: any)
             </div>
         );
     };
+
+    const itemTemplate = (inFile: any, props: ItemTemplateOptions) => {
+        console.log(inFile)
+        const file = inFile;
+        return (
+            <div key={inFile.index} className="flex align-items-center flex-wrap">
+                <div className="flex align-items-center" style={{ width: '40%' }}>
+                <Image
+                    alt="Album cover"
+                    className='object-contain shadow-md rounded-none mn:w-[140px] md:w-[170px] h-[200px]'
+                    src={inFile.image}
+                    width={140}
+                    height={200}
+                />
+                    <span className="flex flex-column text-left ml-3">
+                        {file.name}
+                    </span>
+                </div>
+                <Button type="button" className="p-button-outlined p-button-rounded p-button-danger ml-auto pi pi-times" onClick={() => onTemplateRemoveEdit(file, props.onRemove)} />
+            </div>
+        );
+    };
+
 
     const sendPets = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -338,6 +382,14 @@ export default function CMS({Dogs, Cats, History, Products}: any)
         setCurrentPage(page);
     };
 
+    useEffect(() => {
+        if (fileUploadRef !== null) 
+        {
+            fileUploadRef.current?.setUploadedFiles(files)
+            console.log(fileUploadRef)
+        }
+    },[files]);
+    
     return(
         <div>
             <div className="flex mn:justify-center md:justify-start">
@@ -396,7 +448,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                 onSelect={onTemplateSelect} 
                                                 onError={onTemplateClear} 
                                                 onClear={onTemplateClear}
-                                                headerTemplate={headerTemplate} 
+                                                headerTemplate={headerTemplate}
                                                 uploadHandler={(event) => [onTemplateUpload(event)]}
                                                 chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} 
                                                 customUpload/>
@@ -615,7 +667,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
 
                                         <FileUpload disabled={isLoading} ref={fileUploadRef} name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000}
                                             onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
-                                            headerTemplate={headerTemplate}
+                                            headerTemplate={headerTemplate} itemTemplate={itemTemplate} 
                                             chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
                                     </div>
                                 </ModalBody>
@@ -945,26 +997,45 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                                                         setDescription(card.longDescription)
                                                                                         setYearosld(card.old)
                                                                                         setEnable(card.ANIMALS_ENABLE)
-                                                                                        
                                                                                         setFile(card.Image[0].image)
-
+                                                                                        setFiles([{image: card.Image[0].image, index: 0}])
                                                                                         if(card.Image.length === 2)
-                                                                                        {
+                                                                                        {   
+                                                                                            setFiles([{image: card.Image[0].image, index: 0}, 
+                                                                                                {image: card.Image[1].image, index: 1}])
                                                                                             setFile2(card.Image[1].image)
                                                                                         }
 
                                                                                         if(card.Image.length === 3)
-                                                                                        {
+                                                                                        {   
+                                                                                            setFiles([{image: card.Image[0].image, index: 0}, 
+                                                                                                {image: card.Image[1].image, index: 1}, 
+                                                                                                {image: card.Image[2].image, index: 2}])
+                                                                                            setFile2(card.Image[1].image)
                                                                                             setFile3(card.Image[2].image)
                                                                                         }
                                                                                         
                                                                                         if(card.Image.length === 4)
-                                                                                        {
+                                                                                        {   
+                                                                                            setFiles([{image: card.Image[0].image, index: 0}, 
+                                                                                                {image: card.Image[1].image, index: 1}, 
+                                                                                                {image: card.Image[2].image, index: 2}, 
+                                                                                                {image: card.Image[3].image, index: 3}])
+                                                                                            setFile2(card.Image[1].image)
+                                                                                            setFile3(card.Image[2].image)
                                                                                             setFile4(card.Image[3].image)
                                                                                         }
 
                                                                                         if(card.Image.length === 5)
-                                                                                        {
+                                                                                        {   
+                                                                                            setFiles([{image: card.Image[0].image, index: 0}, 
+                                                                                                {image: card.Image[1].image, index: 1}, 
+                                                                                                {image: card.Image[2].image, index: 2}, 
+                                                                                                {image: card.Image[3].image, index: 3}, 
+                                                                                                {image: card.Image[4].image, index: 4}])
+                                                                                            setFile2(card.Image[1].image)
+                                                                                            setFile3(card.Image[2].image)
+                                                                                            setFile4(card.Image[3].image)
                                                                                             setFile5(card.Image[4].image)
                                                                                         }
 
@@ -1044,25 +1115,33 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                                                     setYearosld(card.old)
                                                                                     setEnable(card.ANIMALS_ENABLE)
                                                                                     setIsEdit(true)
+                                                                                    setFiles(card.Image)
                                                                                     setFile(card.Image[0].image)
-
+                                                                                    fileUploadRef.current?.setFiles(card.Image)
+                                                                                    console.log(fileUploadRef)
                                                                                     if(card.Image.length === 2)
                                                                                     {
                                                                                         setFile2(card.Image[1].image)
                                                                                     }
 
                                                                                     if(card.Image.length === 3)
-                                                                                    {
+                                                                                    {   
+                                                                                        setFile2(card.Image[1].image)
                                                                                         setFile3(card.Image[2].image)
                                                                                     }
                                                                                     
                                                                                     if(card.Image.length === 4)
-                                                                                    {
+                                                                                    {   
+                                                                                        setFile2(card.Image[1].image)
+                                                                                        setFile3(card.Image[2].image)
                                                                                         setFile4(card.Image[3].image)
                                                                                     }
 
                                                                                     if(card.Image.length === 5)
-                                                                                    {
+                                                                                    {   
+                                                                                        setFile2(card.Image[1].image)
+                                                                                        setFile3(card.Image[2].image)
+                                                                                        setFile4(card.Image[3].image)
                                                                                         setFile5(card.Image[4].image)
                                                                                     }
 
