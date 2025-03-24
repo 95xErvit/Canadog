@@ -39,7 +39,7 @@ export default function Login() {
         catch(e){
             console.log(e)
         }
-        toast.current?.show({severity:'info', summary: 'Cognito', detail:'Paso', life: 7000});
+        toast.current?.show({severity:'info', summary: 'Bienvenido', detail:'Inicio de sesión exitoso', life: 7000});
         router.push('/UserCanaDog/CMS')
        
         /*else
