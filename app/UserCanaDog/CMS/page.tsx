@@ -13,7 +13,7 @@ export default async function Home()
 
 	const cardsDogs : any = await GetPets(undefined,"Dog", "CANADOG");
 	const cardsCats  : any = await GetPets(undefined, "Cat", "CANADOG");
-	const result3 : any = await GetPets(undefined, 'HISTORY', "CANADOG")
+	//const result3 : any = await GetPets(undefined, 'HISTORY', "CANADOG")
 	const result4 : any = await GetProducts(undefined, "CANADOG")
 	
 	for(let i= 0; i < cardsCats.length; i++)
@@ -30,15 +30,14 @@ export default async function Home()
 		cardsDogs[i].Image = arr
 	}
 
-	console.log(result4)
 	return (
 		<>
 			<Header/>
 				<main className="bg-cover bg-center" style={{backgroundImage:'url("")'}}>
 					<CMS 
-						Dogs={cardsDogs} /*{[]}*/
+						/* Dogs={cardsDogs} /*{[]}*/
 						Cats={cardsCats} /*{{[]}*/
-						History={result3.data.result.recordset} 
+						/*History={result3.data.result.recordset} */
 						Products={result4.data.result.recordset}
 					/>
 				</main>

@@ -12,9 +12,8 @@ import 'primeicons/primeicons.css';
 import axios from 'axios';
 import { object } from 'yup';
 
-export default function CMS({Dogs, Cats, History, Products}: any) 
+export default function CMS({Cats, Products}: any) 
 { 
-    console.log({Dogs, Cats})
     const toast = useRef<Toast>(null);
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -41,6 +40,8 @@ export default function CMS({Dogs, Cats, History, Products}: any)
     const [totalSize, setTotalSize] = useState(0);
     const fileUploadRef = useRef<FileUpload>(null);
     const [currentPage, setCurrentPage] = useState(1);
+    const [History, setHistory] = useState([])
+    const [Dogs, setDogs] = useState([])
     const router = useRouter()
 
     const onTemplateSelect = (e: FileUploadSelectEvent) => {
@@ -382,11 +383,42 @@ export default function CMS({Dogs, Cats, History, Products}: any)
     };
 
     useEffect(() => {
+
+        const fetchData = async () => {
+            try 
+            {
+                const response = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"HISTORY"}});
+            
+                console.log(response.data.data.recordset)
+                setHistory(response.data.data.recordset)
+
+                const responseDog = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"Dog"}});
+
+                const cardsDogs =  responseDog.data.data
+                
+                for(let i= 0; i < cardsDogs.length; i++)
+                {
+                    let arr = cardsDogs[i].Image
+                    arr = arr.filter((image : any) => image.image !== null && image.image !== undefined)
+                    cardsDogs[i].Image = arr
+                }
+
+                setDogs(cardsDogs)
+                //console.log()
+            } 
+            catch (error) 
+            {
+                console.error('Error:', error);
+            }
+        };
+
         if (fileUploadRef !== null) 
         {
             fileUploadRef.current?.setUploadedFiles(files)
             console.log(fileUploadRef)
         }
+
+        fetchData()
     },[files]);
     
     return(
