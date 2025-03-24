@@ -771,10 +771,10 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                     <button
                         onClick={handlePrevious}
                         disabled={currentIndex === 0}
-                        className={`p-4 py-2 bg-mentaCanadog rounded-xl shadow text-white transition 
-                            ${currentIndex === 0 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-greenCanadog'}`}
+                        className={`p-3 py-2 bg-greenCanadog rounded-xl shadow text-white transition 
+                            ${currentIndex === 0 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-mentaCanadog'}`}
                     >
-                        ❮
+                        <i className="pi pi-angle-left" style={{ fontSize: '1rem' }}/>
                     </button>
                 </div>
 
@@ -782,10 +782,10 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                     <button
                         onClick={handleNext}
                         disabled={currentIndex + cardsToShow >= cardsHistory.length}
-                        className={`p-4 py-2 bg-mentaCanadog rounded-xl shadow text-white transition 
-                            ${currentIndex + cardsToShow >= cardsHistory.length ? 'opacity-50 cursor-not-allowed' : 'hover:bg-greenCanadog'}`}
+                        className={`p-3 py-2 bg-greenCanadog rounded-xl shadow text-white transition 
+                            ${currentIndex + cardsToShow >= cardsHistory.length ? 'opacity-50 cursor-not-allowed' : 'hover:bg-mentaCanadog'}`}
                     >
-                        ❯
+                        <i className="pi pi-angle-right" style={{ fontSize: '1rem' }}/>
                     </button>
                 </div>
             </div>
