@@ -12,39 +12,9 @@ export default async function HomeCanadog()
 		},
 	};
 
-	const result : any = await GetPets(true, "Dog", "CANADOG");
-	const result2  : any = await GetPets(true, "Cat", "CANADOG");
+	const cardsDogs : any = await GetPets(true, "Dog", "CANADOG");
+	const cardsCats  : any = await GetPets(true, "Cat", "CANADOG");
 	const result3 : any = await GetPets(true, "History", "CANADOG")
-
-	const cardsDogs : any = result.data.result.recordset.map( (animal : any) =>{ 
-		return {
-			id: animal.id,
-			shortDescription: animal.shortDescription,
-			longDescription: animal.longDescription,
-			title: animal.title,
-			old:animal.old,
-			ANIMALS_TYPE:animal.ANIMALS_TYPE,
-			ANIMALS_USER:animal.ANIMALS_USER,
-			ANIMALS_DATE:animal.ANIMALS_DATE,
-			ANIMALS_ENABLE:animal.ANIMALS_ENABLE,
-			Image:[{image: animal.image},{image: animal.image2},{image: animal.image3}, {image: animal.image4}, {image:animal.image5}]
-		}
-	})
-
-	const cardsCats : any = result2.data.result.recordset.map( (animal : any) =>{ 
-		return {
-			id: animal.id,
-			shortDescription: animal.shortDescription,
-			longDescription: animal.longDescription,
-			title: animal.title,
-			old:animal.old,
-			ANIMALS_TYPE:animal.ANIMALS_TYPE,
-			ANIMALS_USER:animal.ANIMALS_USER,
-			ANIMALS_DATE:animal.ANIMALS_DATE,
-			ANIMALS_ENABLE:animal.ANIMALS_ENABLE,
-			Image:[{image: animal.image},{image: animal.image2},{image: animal.image3}, {image: animal.image4}, {image:animal.image5}]
-		}
-	})
 	
 	for(let i= 0; i < cardsCats.length; i++)
 	{

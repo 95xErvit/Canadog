@@ -258,7 +258,6 @@ export default function CMS({Dogs, Cats, History, Products}: any)
         );
     };
 
-
     const sendPets = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsLoading(true)
@@ -797,7 +796,7 @@ export default function CMS({Dogs, Cats, History, Products}: any)
 
                                         <FileUpload disabled={isLoading} ref={fileUploadRef} name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000}
                                             onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
-                                            headerTemplate={headerTemplate}
+                                            headerTemplate={headerTemplate} itemTemplate={itemTemplate} 
                                             chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
                                     </div>
                                 </ModalBody>
@@ -1115,36 +1114,47 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                                                     setYearosld(card.old)
                                                                                     setEnable(card.ANIMALS_ENABLE)
                                                                                     setIsEdit(true)
-                                                                                    setFiles(card.Image)
                                                                                     setFile(card.Image[0].image)
-                                                                                    fileUploadRef.current?.setFiles(card.Image)
-                                                                                    console.log(fileUploadRef)
-                                                                                    if(card.Image.length === 2)
-                                                                                    {
-                                                                                        setFile2(card.Image[1].image)
-                                                                                    }
+                                                                                    setFiles([{image: card.Image[0].image, index: 0}])
+                                                                                        if(card.Image.length === 2)
+                                                                                        {   
+                                                                                            setFiles([{image: card.Image[0].image, index: 0}, 
+                                                                                                {image: card.Image[1].image, index: 1}])
+                                                                                            setFile2(card.Image[1].image)
+                                                                                        }
 
-                                                                                    if(card.Image.length === 3)
-                                                                                    {   
-                                                                                        setFile2(card.Image[1].image)
-                                                                                        setFile3(card.Image[2].image)
-                                                                                    }
-                                                                                    
-                                                                                    if(card.Image.length === 4)
-                                                                                    {   
-                                                                                        setFile2(card.Image[1].image)
-                                                                                        setFile3(card.Image[2].image)
-                                                                                        setFile4(card.Image[3].image)
-                                                                                    }
+                                                                                        if(card.Image.length === 3)
+                                                                                        {   
+                                                                                            setFiles([{image: card.Image[0].image, index: 0}, 
+                                                                                                {image: card.Image[1].image, index: 1}, 
+                                                                                                {image: card.Image[2].image, index: 2}])
+                                                                                            setFile2(card.Image[1].image)
+                                                                                            setFile3(card.Image[2].image)
+                                                                                        }
+                                                                                        
+                                                                                        if(card.Image.length === 4)
+                                                                                        {   
+                                                                                            setFiles([{image: card.Image[0].image, index: 0}, 
+                                                                                                {image: card.Image[1].image, index: 1}, 
+                                                                                                {image: card.Image[2].image, index: 2}, 
+                                                                                                {image: card.Image[3].image, index: 3}])
+                                                                                            setFile2(card.Image[1].image)
+                                                                                            setFile3(card.Image[2].image)
+                                                                                            setFile4(card.Image[3].image)
+                                                                                        }
 
-                                                                                    if(card.Image.length === 5)
-                                                                                    {   
-                                                                                        setFile2(card.Image[1].image)
-                                                                                        setFile3(card.Image[2].image)
-                                                                                        setFile4(card.Image[3].image)
-                                                                                        setFile5(card.Image[4].image)
-                                                                                    }
-
+                                                                                        if(card.Image.length === 5)
+                                                                                        {   
+                                                                                            setFiles([{image: card.Image[0].image, index: 0}, 
+                                                                                                {image: card.Image[1].image, index: 1}, 
+                                                                                                {image: card.Image[2].image, index: 2}, 
+                                                                                                {image: card.Image[3].image, index: 3}, 
+                                                                                                {image: card.Image[4].image, index: 4}])
+                                                                                            setFile2(card.Image[1].image)
+                                                                                            setFile3(card.Image[2].image)
+                                                                                            setFile4(card.Image[3].image)
+                                                                                            setFile5(card.Image[4].image)
+                                                                                        }
                                                                                 } 
                                                                             }
                                                                             className='bg-mentaCanadog border-2 border-greenCanadog text-white hover:bg-greenCanadog text-md' 
@@ -1208,12 +1218,15 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                                     <div className="flex w-full justify-center flex-wrap py-2">
                                                                         <Button  
                                                                             onClick={(e)=> {
+                                                                                console.log(card)
                                                                                 setId(card.id)
                                                                                 setName(card.title)
                                                                                 setDescription(card.longDescription)
                                                                                 setYearosld(card.old)
                                                                                 setEnable(card.ANIMALS_ENABLE)
                                                                                 setIsEdit(true)
+                                                                                setFiles([{image: card.image, index: 0}])
+                                                                               
                                                                             }} 
                                                                             className='bg-mentaCanadog border-2 border-greenCanadog text-white hover:bg-greenCanadog text-md' 
                                                                             radius="lg" 
@@ -1284,6 +1297,8 @@ export default function CMS({Dogs, Cats, History, Products}: any)
                                                                     setDescription(card.longDescription)
                                                                     setEnable(card.PRODUCTS_ENABLE)
                                                                     setIsEdit(true)
+                                                                    setFiles([{image: card.image, index: 0}])
+                                                                    
                                                                 }} 
                                                                 className="text-base text-white font-medium" 
                                                                 color="success" 
