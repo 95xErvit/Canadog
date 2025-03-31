@@ -238,27 +238,33 @@ export default function CMS({Cats, Products}: any)
     };
 
     const itemTemplate = (inFile: any, props: ItemTemplateOptions) => {
-        console.log(inFile)
+        console.log(inFile);
         const file = inFile;
+    
         return (
-            <div key={inFile.index} className="flex align-items-center flex-wrap">
-                <div className="flex align-items-center" style={{ width: '40%' }}>
-                <Image
-                    alt="Album cover"
-                    className='object-contain shadow-md rounded-none mn:w-[140px] md:w-[170px] h-[200px]'
-                    src={inFile.image}
-                    width={140}
-                    height={200}
-                />
-                    <span className="flex flex-column text-left ml-3">
-                        {file.name}
-                    </span>
+            <div 
+                key={inFile.index} 
+                className="flex justify-center gap-4 items-center p-2"
+            >
+                <div className="flex items-center gap-4">
+                    <Image
+                        alt="Album cover"
+                        className="object-contain shadow-md rounded-md w-[100px] h-[100px]"
+                        src={inFile.image}
+                        width={140}
+                        height={150}
+                    />
+                    <span className="text-black text-left">{file.name}</span>
+                    <Button 
+                        type="button" 
+                        className="bg-red-500 hover:bg-red-400 text-white pi pi-times" 
+                        onClick={() => onTemplateRemoveEdit(file, props.onRemove)} 
+                    />
                 </div>
-                <Button type="button" className="p-button-outlined p-button-rounded p-button-danger ml-auto pi pi-times" onClick={() => onTemplateRemoveEdit(file, props.onRemove)} />
             </div>
         );
     };
-
+    
     const sendPets = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsLoading(true)
@@ -671,8 +677,26 @@ export default function CMS({Cats, Products}: any)
                                     </h1>
                                     <div className="flex w-full flex-col gap-4">
                                         <div className="flex mb-6 md:mb-0 gap-4">
-                                            <Input required disabled={isLoading} value={name} onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Nombre"/>
-                                            { !isHistory && <Input required disabled={isLoading} value={yearOlds} onChange={((e)=> setYearosld(e.target.value))} type="edad" variant={'faded'} label="Edad"/> }
+                                            <Input 
+                                                required 
+                                                disabled={isLoading} 
+                                                value={name} 
+                                                onChange={((e)=> setName(e.target.value))} 
+                                                type="name" 
+                                                variant={'faded'} 
+                                                label="Nombre"
+                                            />
+                                            { !isHistory && 
+                                                <Input 
+                                                    required 
+                                                    disabled={isLoading} 
+                                                    value={yearOlds} 
+                                                    onChange={((e)=> setYearosld(e.target.value))} 
+                                                    type="edad" 
+                                                    variant={'faded'} 
+                                                    label="Edad"
+                                                />  
+                                            }
                                         </div>
                                         <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
                                             { 
@@ -689,17 +713,30 @@ export default function CMS({Cats, Products}: any)
                                     <h1 className='text-center py-4 text-blackGora font-semibold'>
                                         Fotos de la Mascota
                                     </h1>
-                                    <div className='flex flex-row justify-center my-2 gap-2 space-x-2'>
-                                        
-
+                                    <div className='flex flex-row justify-center my-2 gap-2 w-full'>
                                         <Tooltip target=".custom-choose-btn" content="Choose" position="bottom" />
                                         <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
                                         <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
 
-                                        <FileUpload disabled={isLoading} ref={fileUploadRef} name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000}
-                                            onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
-                                            headerTemplate={headerTemplate} itemTemplate={itemTemplate} 
-                                            chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
+                                        <FileUpload 
+                                            disabled={isLoading} 
+                                            ref={fileUploadRef} 
+                                            name="demo[]" 
+                                            url="/api/upload"  
+                                            accept="image/*" 
+                                            maxFileSize={1000000}
+                                            onUpload={onTemplateUpload} 
+                                            onSelect={onTemplateSelect} 
+                                            onError={onTemplateClear} 
+                                            onClear={onTemplateClear}
+                                            headerTemplate={headerTemplate} 
+                                            itemTemplate={itemTemplate} 
+                                            chooseOptions={chooseOptions} 
+                                            uploadOptions={uploadOptions} 
+                                            cancelOptions={cancelOptions} 
+                                            className='w-full'
+                                            multiple
+                                        />
                                     </div>
                                 </ModalBody>
                                 <ModalFooter className='flex justify-center'>
@@ -806,30 +843,67 @@ export default function CMS({Cats, Products}: any)
                                     </h1>
                                     <div className="flex w-full flex-col gap-4">
                                     <div className="flex mb-6 md:mb-0 gap-4">
-                                            <Input value={name} required disabled={isLoading} onChange={((e)=> setName(e.target.value))} type="name" variant={'faded'} label="Nombre"/>
+                                            <Input 
+                                                value={name} 
+                                                required 
+                                                disabled={isLoading} 
+                                                onChange={((e)=> setName(e.target.value))}
+                                                type="name" 
+                                                variant={'faded'} 
+                                                label="Nombre"
+                                            />
                                         </div>
                                         <div className="flex mb-6 md:mb-0 gap-4">
-                                            <Input value={unity} required disabled={isLoading} onChange={((e)=> setUnity(e.target.value))} type="unity" variant={'faded'} label="Unidades"/>
-                                            <Input value={cost} required onChange={((e)=> setCost(e.target.value))} type="cost" variant={'faded'} label="Costo"/>
+                                            <Input 
+                                                value={unity} 
+                                                required 
+                                                disabled={isLoading} 
+                                                onChange={((e)=> setUnity(e.target.value))} 
+                                                type="unity" 
+                                                variant={'faded'} 
+                                                label="Unidades"
+                                            />
+                                            <Input 
+                                                value={cost} 
+                                                required 
+                                                onChange={((e)=> setCost(e.target.value))} 
+                                                type="cost" 
+                                                variant={'faded'} 
+                                                label="Costo"
+                                            />
                                         </div>
                                         {/* <div className="flex flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
                                             <Textarea value={description} required disabled={isLoading} maxLength={100} onChange={((e)=> setDescription(e.target.value))} type="descripcion" variant={'faded'} label="Descripcion"/>
                                         </div> */}
                                     </div> 
+
                                     <h1 className='text-center py-4 text-blackGora font-semibold'>
                                         Fotos del producto
                                     </h1>
-                                    <div className='flex flex-row justify-center my-2 gap-2 space-x-2'>
-                                        
 
+                                    <div className='flex flex-row justify-center my-2 gap-2 space-x-2'>
                                         <Tooltip target=".custom-choose-btn" content="Choose" position="bottom" />
                                         <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
                                         <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
 
-                                        <FileUpload disabled={isLoading} ref={fileUploadRef} name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000}
-                                            onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
-                                            headerTemplate={headerTemplate} itemTemplate={itemTemplate} 
-                                            chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
+                                        <FileUpload 
+                                            disabled={isLoading} 
+                                            ref={fileUploadRef} 
+                                            name="demo[]" 
+                                            url="/api/upload" 
+                                            accept="image/*" 
+                                            maxFileSize={1000000}
+                                            onUpload={onTemplateUpload} 
+                                            onSelect={onTemplateSelect} 
+                                            onError={onTemplateClear} 
+                                            onClear={onTemplateClear}
+                                            headerTemplate={headerTemplate} 
+                                            itemTemplate={itemTemplate} 
+                                            chooseOptions={chooseOptions} 
+                                            uploadOptions={uploadOptions} 
+                                            cancelOptions={cancelOptions} 
+                                            multiple 
+                                        />
                                     </div>
                                 </ModalBody>
                                 <ModalFooter className='flex justify-center'>
