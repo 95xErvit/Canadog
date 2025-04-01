@@ -34,9 +34,6 @@ module.exports = {
         greenCanadog: '#1C8C58',
         greenLightCanadog: '#AFF1D5',
         mentaCanadog: '#69C699',
-        orangeGora: '#FDB104',
-        pinkLightGora: '#FCEBD7',
-        purpleGora: '#5418AD',
         redGora: '#DF6536',
       },
       fontFamily: {
