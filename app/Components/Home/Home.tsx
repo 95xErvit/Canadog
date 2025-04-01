@@ -6,6 +6,9 @@ import {Divider} from "@nextui-org/divider";
 import { Dialog } from "primereact/dialog";
 import { Carousel } from 'primereact/carousel';
 import {Pagination} from "@nextui-org/react";
+import  Banner from "./Banner"
+import  AdBanner from "./BannerMenor"
+import  AdBannerP from "./BannerPequeño"
 import Image from 'next/image';
 import MakroPet from "@/public/Makropet.jpg"
 import FormaDogs from "@/public/Formadogs.jpg"
@@ -794,19 +797,17 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
 
             {/* PUBLICIDAD */}
             <div className='flex justify-center mt-6 mb-6 py-6'>
-                {
-                <div id="container-fe98476a7a70879b195eafa963b474de"></div>
-                /*<div className='relative mn:px-2 mn:py-2 md:px-6 md:py-6'>
-                    <Image
-                        alt="Album cover"
-                        className="object-cover"
-                        height={250}
-                        src="/BannerAdds.png"
-                        width={1280}
-                    />
-                </div>
-                */
-                }
+            { 
+                window.innerWidth >= 728 ?
+                <Banner/>
+                :  
+                window.innerWidth >= 468 ?
+                <AdBanner/>
+                :
+                <AdBannerP/>
+            }
+            {/*<script async={true} data-cfasync="false" src="//pl26062928.effectiveratecpm.com/fe98476a7a70879b195eafa963b474de/invoke.js"></script>
+            <div id="container-fe98476a7a70879b195eafa963b474de"></div>*/}
             </div>
 
             <Divider className="my-4"/>
