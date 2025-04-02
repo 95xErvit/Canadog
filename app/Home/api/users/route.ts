@@ -72,3 +72,11 @@ export async function PATCH(request: NextRequest) {
     }
 
 }
+
+export const config = {
+    api: {
+      bodyParser: {
+        sizeLimit: '100mb',
+      },
+    },
+  };

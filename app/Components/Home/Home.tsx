@@ -25,9 +25,10 @@ import EddieRoffing from"@/public/EDDIE_ROOFING_LOGO.jpeg"
 import LogoMarilsa from "@/public/Logo-Marilsa.jpg"
 import LogoVeñata from "@/public/Logo-Veñata.jpg"
 import LogoFamigo from "@/public/Logo_Famigo.png"
+import axios from 'axios';
 import 'primeicons/primeicons.css';
 
-export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
+export default function Home({ cardsCats }: any) {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     //const [expand, setExpand] = useState(false);
     const [isDog, setIsDog] = useState(true);
@@ -36,15 +37,17 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
     const [indiceActual, setIndiceActual] = useState<number>(0);
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
+    const [History, setHistory] = useState([])
+    const [Dogs, setDogs] = useState<any>([])
 
-    console.log(cardsDogs)
+    console.log(Dogs)
     // const toggleExpand = (id: number) => {
     //     setExpandedCard(expandedCard === id ? null : id);
     //     setIndiceActual(0)
     // };
 
     const itemsAdoptions = 9; // Cantidad de tarjetas para mostrar por página
-    const cards = isDog ? cardsDogs : cardsCats;
+    const cards = isDog ? Dogs : cardsCats;
     const totalPagesAdoptions = Math.ceil(cards.length / itemsAdoptions);
 
     const handlePageChange = (page: number) => {
@@ -65,12 +68,41 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
           }
         };
 
+        const fetchData = async () => {
+            try 
+            {
+                const response = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"HISTORY"}});
+            
+                console.log(response.data.data.recordset)
+                setHistory(response.data.data.recordset)
+
+                const responseDog = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"Dog"}});
+
+                const cardsDogs =  responseDog.data.data
+                
+                for(let i= 0; i < cardsDogs.length; i++)
+                {
+                    let arr = cardsDogs[i].Image
+                    arr = arr.filter((image : any) => image.image !== null && image.image !== undefined)
+                    cardsDogs[i].Image = arr
+                }
+
+                setDogs(cardsDogs)
+                //console.log()
+            } 
+            catch (error) 
+            {
+                console.error('Error:', error);
+            }
+        };
+        
+
         const intervalo = setInterval(() => {
             if(expandedCard !== null)
             {   console.log("hola")
-                if(cardsDogs.find((card : any) => card.id === expandedCard))
+                if(Dogs.find((card : any) => card.id === expandedCard))
                 {
-                    const leng = cardsDogs.find((card : any) => card.id === expandedCard).Image.length
+                    const leng = Dogs.find((card : any) => card.id === expandedCard).Image.length
     
                     let index = indiceActual
     
@@ -85,6 +117,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
             }
         }, 6000);
 
+        fetchData()
         updateCardsToShow();
         intervalo
         window.addEventListener("resize", updateCardsToShow);
@@ -94,7 +127,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
 
     const handleNext = () => {
         setCurrentIndex((prevIndex) =>
-          prevIndex + cardsToShow < cardsHistory.length ? prevIndex + 1 : prevIndex
+          prevIndex + cardsToShow < History.length ? prevIndex + 1 : prevIndex
         );
     };
 
@@ -323,7 +356,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                                 >
                                     <ScrollShadow className="mn:w-full mn:h-[530px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
                                         <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'>
-                                            {cardsDogs.map((card: any) => (
+                                            {Dogs.map((card: any) => (
                                                 <div
                                                     key={card.id}
                                                     ref={(el) => {
@@ -730,7 +763,7 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
 
             <div className="relative px-4">
                 <div className="flex justify-center gap-4 p-4 md:p-8 overflow-x-auto">
-                    {cardsHistory.map((card: any, index: any) => {
+                    {History.map((card: any, index: any) => {
                         const isVisible =
                         index >= currentIndex &&
                         index < currentIndex + cardsToShow;
@@ -784,9 +817,9 @@ export default function Home({cardsDogs , cardsCats, cardsHistory}: any) {
                 <div className="absolute top-1/2 right-0 mn:right-5 lg:right-10 transform -translate-y-1/2">
                     <button
                         onClick={handleNext}
-                        disabled={currentIndex + cardsToShow >= cardsHistory.length}
+                        disabled={currentIndex + cardsToShow >= History.length}
                         className={`p-3 py-2 bg-greenCanadog rounded-xl shadow text-white transition 
-                            ${currentIndex + cardsToShow >= cardsHistory.length ? 'opacity-50 cursor-not-allowed' : 'hover:bg-mentaCanadog'}`}
+                            ${currentIndex + cardsToShow >= History.length ? 'opacity-50 cursor-not-allowed' : 'hover:bg-mentaCanadog'}`}
                     >
                         <i className="pi pi-angle-right" style={{ fontSize: '1rem' }}/>
                     </button>

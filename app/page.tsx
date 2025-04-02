@@ -12,9 +12,9 @@ export default async function HomeCanadog()
 		},
 	};
 
-	const cardsDogs : any = await GetPets(true, "Dog", "CANADOG");
+	//const cardsDogs : any = await GetPets(true, "Dog", "CANADOG");
 	const cardsCats  : any = await GetPets(true, "Cat", "CANADOG");
-	const result3 : any = await GetPets(true, "History", "CANADOG")
+	//const result3 : any = await GetPets(true, "History", "CANADOG")
 	
 	for(let i= 0; i < cardsCats.length; i++)
 	{
@@ -23,12 +23,12 @@ export default async function HomeCanadog()
 		cardsCats[i].Image = arr
 	}
 
-	for(let i= 0; i < cardsDogs.length; i++)
+	{/*for(let i= 0; i < cardsDogs.length; i++)
 	{
 		let arr = cardsDogs[i].Image
 		arr = arr.filter((image : any) => image.image !== null && image.image !== undefined)
 		cardsDogs[i].Image = arr
-	}
+	}*/}
 	
 	
 	return (
@@ -36,9 +36,9 @@ export default async function HomeCanadog()
 			<Header/>
 				<main className="bg-cover bg-center" style={{backgroundImage:'url("")'}}>
 					<Home 
-						cardsDogs={cardsDogs} /*{[]}*/
+						/*cardsDogs={cardsDogs} /*{[]}*/
 						cardsCats={cardsCats} /*{{[]}*/
-						cardsHistory={result3.data.result.recordset} /*{[]}*/ 
+						/*cardsHistory={result3.data.result.recordset} /*{[]}*/ 
 					/>
 				</main>
 			<Footer/>
