@@ -393,44 +393,14 @@ export default function CMS({Cats, Products}: any)
         const fetchData = async () => {
             try 
             {
-                const { data: { token } } = await axios.get(`http://3.144.235.117:3005/Api/Gora/TokenGora`, {
-                    headers: {
-                        "x-api-key":"c55af7ae-f776-4bea-91cf-b05467981d64"
-                    }
-                })
-        
-                const result = await axios.get(`http://3.144.235.117:3005/Api/Gora/CMS/Pets`,
-                {   
-                    params:{Type:"HISTORY"},
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                })
-                console.log(result.data.result.recordset)
-                setHistory(result.data.result.recordset)
-        
-                const result2 = await axios.get(`http://3.144.235.117:3005/Api/Gora/CMS/Pets`,
-                {   
-                    params:{Type:"Dog"},
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                })
-                console.log(result2.data.result.recordset)
-                const cardsDogs  = result2.data.result.recordset.map( (animal : any) =>{ 
-                    return {
-                        id: animal.id,
-                        shortDescription: animal.shortDescription,
-                        longDescription: animal.longDescription,
-                        title: animal.title,
-                        old:animal.old,
-                        ANIMALS_TYPE:animal.ANIMALS_TYPE,
-                        ANIMALS_USER:animal.ANIMALS_USER,
-                        ANIMALS_DATE:animal.ANIMALS_DATE,
-                        ANIMALS_ENABLE:animal.ANIMALS_ENABLE,
-                        Image:[{image: animal.image},{image: animal.image2},{image: animal.image3}, {image: animal.image4}, {image:animal.image5}]
-                    }
-                })
+                const response = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"HISTORY"}});
+            
+                console.log(response.data.data.recordset)
+                setHistory(response.data.data.recordset)
+
+                const responseDog = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"Dog"}});
+
+                const cardsDogs =  responseDog.data.data
                 
                 for(let i= 0; i < cardsDogs.length; i++)
                 {
