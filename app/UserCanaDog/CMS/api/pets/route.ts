@@ -3,9 +3,6 @@ import axios from "axios"
 import { headers } from "next/headers"
 
 
-export const maxDuration = 60; // Tiempo máximo de ejecución en segundos
-export const sizeLimit = '100mb'; 
-
 export async function POST(request: NextRequest) {
 
     const data = await request.json()
@@ -25,6 +22,8 @@ export async function POST(request: NextRequest) {
                 Authorization: `Bearer ${token}`
             }
         })
+
+        
         
         return NextResponse.json({mensaje: "Procesado correctamente", data: result.data.result})
         
