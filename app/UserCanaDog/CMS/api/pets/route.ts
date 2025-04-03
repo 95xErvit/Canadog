@@ -116,8 +116,3 @@ export async function PATCH(request: NextRequest) {
     }
 
 }
-export const config = {
-    api: {
-      responseLimit: false,
-    },
-  }
