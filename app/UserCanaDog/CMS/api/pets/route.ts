@@ -118,6 +118,6 @@ export async function PATCH(request: NextRequest) {
 }
 export const config = {
     api: {
-      responseLimit: '100mb',
+      responseLimit: false,
     },
   }
