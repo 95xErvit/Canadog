@@ -1,5 +1,3 @@
-export const maxBodySize = 50 * 1024 * 1024; 
-
 import { NextRequest, NextResponse } from "next/server"
 import axios from "axios"
 import { headers } from "next/headers"
