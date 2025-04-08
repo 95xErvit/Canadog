@@ -1,8 +1,10 @@
 "use client"
 import React from 'react';
 import { Link, Image } from "@nextui-org/react"
+import { useRouter } from 'next/navigation'
 
 export default function Footer(){
+    const router = useRouter()
 
     return(
         <div>
@@ -27,20 +29,20 @@ export default function Footer(){
                         Adopciones
                     </Link>
                     <Link 
-                        className="text-white hover:text-mentaCanadog mn:text-lg lg:text-xl py-2" 
-                        href="/"
+                        className="text-white hover:text-mentaCanadog mn:text-lg lg:text-xl py-2 cursor-pointer" 
+                        onClick={() => router.push('/Store')}
                     >
                         Tienda Canadog
                     </Link>
                     <Link 
-                        className="text-white hover:text-mentaCanadog mn:text-lg lg:text-xl py-2" 
-                        href="/"
+                        className="text-white hover:text-mentaCanadog mn:text-lg lg:text-xl py-2 cursor-pointer" 
+                        onClick={() => router.push('/Home/AboutUs')}
                     >
                         ¿Quiénes somos?
                     </Link>
                     <Link 
-                        className="text-white hover:text-mentaCanadog mn:text-lg lg:text-xl py-2" 
-                        href=""
+                        className="text-white hover:text-mentaCanadog mn:text-lg lg:text-xl py-2 cursor-pointer" 
+                        onClick={() => router.push('/Home/Donations')}
                     >
                         Ayúdanos
                     </Link> 

@@ -201,7 +201,7 @@ export default function Home({ cardsCats }: any) {
         { name: "Marilsa", username: "@marilsaoficial", url: "https://www.instagram.com/marilsaoficial/", image: LogoMarilsa.src },
         { name: "Veñata", username: "@venatastudio", url: "https://www.instagram.com/venatastudio/", image: LogoVeñata.src },
         { name: "Famigo", username: "@famigo.official", url: "https://www.instagram.com/famigo.official/", image: LogoFamigo.src }
-      ];
+    ];
 
     return(
         <div>

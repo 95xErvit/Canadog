@@ -2,6 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Card, CardHeader, CardFooter, Input, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, usePagination, PaginationItemType, Checkbox, Textarea, Link } from "@nextui-org/react";
 import {ScrollShadow} from "@nextui-org/react";
+import  Banner from "../Home/Banner"
+import  AdBanner from "../Home/BannerMenor"
+import  AdBannerP from "../Home/BannerPequeño"
 import Image from 'next/image';
 import {Divider} from "@nextui-org/divider";
 import {Pagination} from "@nextui-org/react";
@@ -200,15 +203,17 @@ export default function Store({ CardsProducts }: any) {
 
             {/* PUBLICIDAD */}
             <div className='flex justify-center mt-6 mb-6 py-6'>
-                <div className='relative mn:px-2 mn:py-2 md:px-6 md:py-6'>
-                    <Image
-                        alt="Album cover"
-                        className="object-cover"
-                        height={250}
-                        src="/BannerAdds.png"
-                        width={1280}
-                    />
-                </div>
+            { 
+                window.innerWidth >= 728 ?
+                <Banner/>
+                :  
+                window.innerWidth >= 468 ?
+                <AdBanner/>
+                :
+                <AdBannerP/>
+            }
+            {/*<script async={true} data-cfasync="false" src="//pl26062928.effectiveratecpm.com/fe98476a7a70879b195eafa963b474de/invoke.js"></script>
+            <div id="container-fe98476a7a70879b195eafa963b474de"></div>*/}
             </div>
         </div>
     )
