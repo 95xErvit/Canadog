@@ -59,13 +59,15 @@ export default function Home({ cardsCats }: any) {
 
     useEffect(() => {
         const updateCardsToShow = () => {
-          if (window.innerWidth < 640) {
-            setCardsToShow(1); 
-          } else if (window.innerWidth < 1024) {
-            setCardsToShow(2); 
-          } else {
-            setCardsToShow(4); 
-          }
+            if (window.innerWidth < 640) {
+                setCardsToShow(1); 
+            } else if (window.innerWidth < 1024) {
+                setCardsToShow(2);
+            } else if (window.innerWidth < 1380) {
+                setCardsToShow(3); 
+            } else {
+                setCardsToShow(4); 
+            }
         };
 
         const fetchData = async () => {
@@ -192,15 +194,60 @@ export default function Home({ cardsCats }: any) {
     };
 
     const allies = [
-        { name: "Makro Pet", username: "@makropetveterinaria", url: "https://www.instagram.com/makropetveterinaria/", image: MakroPet.src },
-        { name: "Formadogs", username: "@formadogs.escuelacanina", url: "https://www.instagram.com/formadogs.escuelacanina/", image: FormaDogs.src },
-        { name: "Animal Clinic", username: "@animalcliniccolina", url: "https://www.instagram.com/animalcliniccolina/", image: AnimalClinic.src },
-        { name: "goodboy", username: "@goodboy_petstudio", url: "https://www.instagram.com/makropetveterinaria/", image: GoodBoy.src },
-        { name: "Sen Intimo", username: "@senintimo", url: "https://www.instagram.com/senintimo/", image: SenIntimo.src },
-        { name: "Eddie Roofing", username: "@eddieroofingsolutionllc", url: "https://www.instagram.com/eddieroofingsolutionllc/", image: EddieRoffing.src },
-        { name: "Marilsa", username: "@marilsaoficial", url: "https://www.instagram.com/marilsaoficial/", image: LogoMarilsa.src },
-        { name: "Veñata", username: "@venatastudio", url: "https://www.instagram.com/venatastudio/", image: LogoVeñata.src },
-        { name: "Famigo", username: "@famigo.official", url: "https://www.instagram.com/famigo.official/", image: LogoFamigo.src }
+        { 
+            name: "Makro Pet", 
+            username: "@makropetveterinaria", 
+            url: "https://www.instagram.com/makropetveterinaria/", 
+            image: MakroPet.src 
+        },
+        { 
+            name: "Formadogs", 
+            username: "@formadogs.escuelacanina", 
+            url: "https://www.instagram.com/formadogs.escuelacanina/", 
+            image: FormaDogs.src 
+        },
+        { 
+            name: "Animal Clinic", 
+            username: "@animalcliniccolina", 
+            url: "https://www.instagram.com/animalcliniccolina/", 
+            image: AnimalClinic.src 
+        },
+        { 
+            name: "goodboy", 
+            username: "@goodboy_petstudio", 
+            url: "https://www.instagram.com/makropetveterinaria/", 
+            image: GoodBoy.src 
+        },
+        { 
+            name: "Sen Intimo", 
+            username: "@senintimo", 
+            url: "https://www.instagram.com/senintimo/", 
+            image: SenIntimo.src 
+        },
+        { 
+            name: "Eddie Roofing", 
+            username: "@eddieroofingsolutionllc", 
+            url: "https://www.instagram.com/eddieroofingsolutionllc/", 
+            image: EddieRoffing.src 
+        },
+        { 
+            name: "Marilsa", 
+            username: "@marilsaoficial", 
+            url: "https://www.instagram.com/marilsaoficial/", 
+            image: LogoMarilsa.src 
+        },
+        { 
+            name: "Veñata", 
+            username: "@venatastudio", 
+            url: "https://www.instagram.com/venatastudio/", 
+            image: LogoVeñata.src 
+        },
+        { 
+            name: "Famigo", 
+            username: "@famigo.official", 
+            url: "https://www.instagram.com/famigo.official/", 
+            image: LogoFamigo.src 
+        }
     ];
 
     return(
@@ -300,6 +347,7 @@ export default function Home({ cardsCats }: any) {
                         </div>
                     </div>
                 </div>
+
                 <Modal className='mn:m-2 lg:m-0' isOpen={isOpen} onOpenChange={onOpenChange} size='2xl' backdrop='blur' placement='center'>
                     <ModalContent>
                         <>
@@ -327,7 +375,7 @@ export default function Home({ cardsCats }: any) {
                             <ModalFooter className='flex justify-center'>
                                 <div className='flex flex-col w-full'>
                                     <div className='flex justify-evenly'>
-                                        <Button href='' className='bg-greenCanadog text-pinkLightGora mb-4 text-base' radius="full" size="lg" onClick={() => window.open('https://forms.gle/3CcTTKzvrmAaTJat8', '_blank')}>
+                                        <Button href='' className='bg-greenCanadog text-white mb-4 text-base' radius="full" size="lg" onClick={() => window.open('https://forms.gle/3CcTTKzvrmAaTJat8', '_blank')}>
                                             Formulario adopción
                                         </Button>                          
                                     </div>
@@ -344,6 +392,7 @@ export default function Home({ cardsCats }: any) {
                         </>
                     </ModalContent>
                 </Modal>
+
                 {   
                     isDog ?
                     (
@@ -626,7 +675,7 @@ export default function Home({ cardsCats }: any) {
                                     <div className="flex justify-center mb-4">
                                         <Pagination
                                             showControls
-                                            color={"secondary"}
+                                            color={"success"}
                                             total={totalPagesAdoptions} // Total de páginas basado en el número de cartas
                                             page={currentPage} // Página actual
                                             onChange={handlePageChange} // Función para manejar el cambio de página
@@ -747,7 +796,7 @@ export default function Home({ cardsCats }: any) {
 
             {/* CARDS HISTORIAS */}
             <div className='relative mn:px-6 mn:py-2 mn:mt-2 md:px-6 md:py-6 md:mt-8 text-blackCanadog'>
-                <div className='grid max-w-7xl mx-auto md:grid-cols-2'>
+                <div className='grid max-w-7xl mx-auto'>
                     <h2 className='mn:text-2xl md:text-4xl font-semibold'>
                         Historias {<span className='text-greenCanadog'>Emotivas</span>}
                     </h2>
@@ -762,7 +811,7 @@ export default function Home({ cardsCats }: any) {
             </div>
 
             <div className="relative px-4">
-                <div className="flex justify-center gap-4 p-4 md:p-8 overflow-x-auto">
+                <div className="flex justify-center mn:gap-4 md:gap-8 p-4 md:p-8 overflow-x-auto">
                     {History.map((card: any, index: any) => {
                         const isVisible =
                         index >= currentIndex &&
@@ -777,7 +826,7 @@ export default function Home({ cardsCats }: any) {
                             >
                                 <div className="flex flex-col items-center">
                                     <div className="m-2 border-2 border-mentaCanadog rounded-xl">
-                                        <div className="flex flex-col justify-center gap-6 md:gap-2">
+                                        <div className="flex flex-col justify-center gap-6 md:gap-4">
                                             <div className="m-4">
                                                 <h1 className="flex flex-col justify-center font-bold text-greenCanadog text-2xl gap-2">
                                                     {card.title}
