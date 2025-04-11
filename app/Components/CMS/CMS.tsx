@@ -393,7 +393,9 @@ export default function CMS({Cats, Products}: any)
         const fetchData = async () => {
             try 
             {
-                const response = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"HISTORY"}});
+                const response = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"HISTORY"},headers:{
+                    "Accept-Encoding": "gzip"
+                }});
             
                 console.log(response.data.data.recordset)
                 setHistory(response.data.data.recordset)
