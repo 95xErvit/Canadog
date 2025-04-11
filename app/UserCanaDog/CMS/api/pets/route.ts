@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import axios from "axios"
 import { headers } from "next/headers"
-
+import { gzipSync } from 'zlib';
 
 export async function POST(request: NextRequest) {
 
@@ -79,7 +79,17 @@ export async function GET(request: NextRequest) {
             resultPet =  result.data.result
         }
         console.log("Tamaño JSON:", JSON.stringify(resultPet).length);
-        return NextResponse.json({mensaje: "Procesado correctamente", data: resultPet}, { status: 200 })
+
+        const json = JSON.stringify({ mensaje: 'OK', resultPet });
+        const compressed = gzipSync(json);
+        return new NextResponse(compressed, {
+            status: 200,
+            headers: {
+              'Content-Type': 'application/json',
+              'Content-Encoding': 'gzip',
+              'Content-Length': compressed.length.toString(),
+            },
+          });
           
     }
     catch (err) {
