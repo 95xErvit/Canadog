@@ -75,13 +75,13 @@ export default function Home({ cardsCats }: any) {
             {
                 const response = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"HISTORY"}});
             
-                console.log(response.data.data.recordset)
-                setHistory(response.data.data.recordset)
+                console.log(response.data.resultPet.recordset)
+                setHistory(response.data.resultPet.recordset)
 
                 const responseDog = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"Dog"}});
-
-                const cardsDogs =  responseDog.data.data
-                
+                console.log(responseDog)
+                const cardsDogs =  responseDog.data.resultPet
+                console.log(cardsDogs)
                 for(let i= 0; i < cardsDogs.length; i++)
                 {
                     let arr = cardsDogs[i].Image
