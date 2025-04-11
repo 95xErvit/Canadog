@@ -215,7 +215,7 @@ export default function Home({ cardsCats }: any) {
         { 
             name: "goodboy", 
             username: "@goodboy_petstudio", 
-            url: "https://www.instagram.com/makropetveterinaria/", 
+            url: "https://www.instagram.com/goodboy_petstudio/", 
             image: GoodBoy.src 
         },
         { 
