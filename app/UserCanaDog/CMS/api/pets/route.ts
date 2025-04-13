@@ -61,18 +61,21 @@ export async function GET(request: NextRequest) {
         
         let resultPet : any = null
         if(type === "Dog"){
-            resultPet = result.data.result.recordset.map( (animal : any) =>{ 
-                return {
-                    id: animal.id,
-                    shortDescription: animal.shortDescription,
-                    longDescription: animal.longDescription,
-                    title: animal.title,
-                    old:animal.old,
-                    ANIMALS_TYPE:animal.ANIMALS_TYPE,
-                    ANIMALS_USER:animal.ANIMALS_USER,
-                    ANIMALS_DATE:animal.ANIMALS_DATE,
-                    ANIMALS_ENABLE:animal.ANIMALS_ENABLE,
-                    Image:[{image: animal.image},{image: animal.image2},{image: animal.image3}, {image: animal.image4}, {image:animal.image5}]
+            resultPet = result.data.result.recordset.map( (animal : any, index : any) =>
+            {   if(index > 4)
+                { 
+                    return {
+                        id: animal.id,
+                        shortDescription: animal.shortDescription,
+                        longDescription: animal.longDescription,
+                        title: animal.title,
+                        old:animal.old,
+                        ANIMALS_TYPE:animal.ANIMALS_TYPE,
+                        ANIMALS_USER:animal.ANIMALS_USER,
+                        ANIMALS_DATE:animal.ANIMALS_DATE,
+                        ANIMALS_ENABLE:animal.ANIMALS_ENABLE,
+                        Image:[{image: animal.image},{image: animal.image2},{image: animal.image3}, {image: animal.image4}, {image:animal.image5}]
+                    }
                 }
             })
         }else{

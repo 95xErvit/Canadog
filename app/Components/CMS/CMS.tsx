@@ -12,7 +12,7 @@ import 'primeicons/primeicons.css';
 import axios from 'axios';
 import { object } from 'yup';
 
-export default function CMS({Cats, Products}: any) 
+export default function CMS({CardsDogs, Cats, Products}: any) 
 { 
     const toast = useRef<Toast>(null);
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
@@ -41,7 +41,7 @@ export default function CMS({Cats, Products}: any)
     const fileUploadRef = useRef<FileUpload>(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [History, setHistory] = useState([])
-    const [Dogs, setDogs] = useState([])
+    const [Dogs, setDogs] = useState(CardsDogs)
     const router = useRouter()
 
     const onTemplateSelect = (e: FileUploadSelectEvent) => {
@@ -402,6 +402,7 @@ export default function CMS({Cats, Products}: any)
                 console.log(responseDog)
                 const cardsDogs =  responseDog.data.resultPet
                 console.log(cardsDogs)
+
                 for(let i= 0; i < cardsDogs.length; i++)
                 {
                     let arr = cardsDogs[i].Image
@@ -409,7 +410,7 @@ export default function CMS({Cats, Products}: any)
                     cardsDogs[i].Image = arr
                 }
 
-                setDogs(cardsDogs)
+                setDogs([...CardsDogs,...cardsDogs])
                 //console.log()
             } 
             catch (error) 
