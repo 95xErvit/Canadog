@@ -38,7 +38,7 @@ export default function Home({ CardsDogs, cardsCats }: any) {
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
     const [History, setHistory] = useState([])
-    const [Dogs, setDogs] = useState<any>([])
+    const [Dogs, setDogs] = useState<any>(CardsDogs)
 
     console.log(Dogs)
     // const toggleExpand = (id: number) => {
