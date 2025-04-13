@@ -23,21 +23,30 @@ export async function GetPets(enable? : boolean, type? : string, web? : string )
             })
 
             if(type === "Dog" || type === "Cat")
-            {
-                return result.data.result.recordset.map( (animal : any) =>{ 
-                    return {
-                        id: animal.id,
-                        shortDescription: animal.shortDescription,
-                        longDescription: animal.longDescription,
-                        title: animal.title,
-                        old:animal.old,
-                        ANIMALS_TYPE:animal.ANIMALS_TYPE,
-                        ANIMALS_USER:animal.ANIMALS_USER,
-                        ANIMALS_DATE:animal.ANIMALS_DATE,
-                        ANIMALS_ENABLE:animal.ANIMALS_ENABLE,
-                        Image:[{image: animal.image},{image: animal.image2},{image: animal.image3}, {image: animal.image4}, {image:animal.image5}]
+            {   
+
+                let fin = result.data.result.recordset.Length >= 3 ? 3 :  result.data.result.recordset.Length
+                let array = []
+                for(let i = 0; i < fin;  i++){
+                    let animal : any = {
+                        id: result.data.result.recordset[0].id,
+                        shortDescription: result.data.result.recordset[0].shortDescription,
+                        longDescription: result.data.result.recordset[0].longDescription,
+                        title: result.data.result.recordset[0].title,
+                        old:result.data.result.recordset[0].old,
+                        ANIMALS_TYPE:result.data.result.recordset[0].ANIMALS_TYPE,
+                        ANIMALS_USER:result.data.result.recordset[0].ANIMALS_USER,
+                        ANIMALS_DATE:result.data.result.recordset[0].ANIMALS_DATE,
+                        ANIMALS_ENABLE:result.data.result.recordset[0].ANIMALS_ENABLE,
+                        Image:[{image: result.data.result.recordset[0].image},
+                            {image: result.data.result.recordset[0].image2},
+                            {image: result.data.result.recordset[0].image3}, 
+                            {image: result.data.result.recordset[0].image4}, 
+                            {image:result.data.result.recordset[0].image5}]
                     }
-                })
+                    array.push(animal)
+                }
+                return array
             }
             else
             {

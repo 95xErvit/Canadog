@@ -23,9 +23,7 @@ export default async function Home()
 		cardsCats[i].Image = arr
 	}
 
-	let fin = cardsDogs.Length >= 3 ? 3 :  cardsDogs.Length
-
-	for(let i= 0; i <= fin; i++)
+	for(let i= 0; i < cardsDogs.Length; i++)
 	{
 		let arr = cardsDogs[i].Image
 		arr = arr.filter((image : any) => image.image !== null && image.image !== undefined)
