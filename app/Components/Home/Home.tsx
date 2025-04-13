@@ -28,7 +28,7 @@ import LogoFamigo from "@/public/Logo_Famigo.png"
 import axios from 'axios';
 import 'primeicons/primeicons.css';
 
-export default function Home({ cardsCats }: any) {
+export default function Home({ CardsDogs, cardsCats }: any) {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     //const [expand, setExpand] = useState(false);
     const [isDog, setIsDog] = useState(true);
@@ -89,7 +89,8 @@ export default function Home({ cardsCats }: any) {
                     cardsDogs[i].Image = arr
                 }
 
-                setDogs(cardsDogs)
+                console.log({CardsDogs,cardsDogs})
+                setDogs([...CardsDogs,...cardsDogs])
                 //console.log()
             } 
             catch (error) 

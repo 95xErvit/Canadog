@@ -12,7 +12,7 @@ export default async function HomeCanadog()
 		},
 	};
 
-	//const cardsDogs : any = await GetPets(true, "Dog", "CANADOG");
+	const cardsDogs : any = await GetPets(true, "Dog", "CANADOG");
 	const cardsCats  : any = await GetPets(true, "Cat", "CANADOG");
 	//const result3 : any = await GetPets(true, "History", "CANADOG")
 	
@@ -36,7 +36,7 @@ export default async function HomeCanadog()
 			<Header/>
 				<main className="bg-cover bg-center" style={{backgroundImage:'url("")'}}>
 					<Home 
-						/*cardsDogs={cardsDogs} /*{[]}*/
+						CardsDogs={cardsDogs} /*{[]}*/
 						cardsCats={cardsCats} /*{{[]}*/
 						/*cardsHistory={result3.data.result.recordset} /*{[]}*/ 
 					/>

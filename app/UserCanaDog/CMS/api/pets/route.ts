@@ -61,7 +61,7 @@ export async function GET(request: NextRequest) {
         let resultPet  = []
         if(type === "Dog")
         {
-            let init = result.data.result.recordset.length >= 5 ? 5 :  0
+            let init = result.data.result.recordset.length >= 4 ? 4 :  0
             
             for(let i = init; i < result.data.result.recordset.length;  i++){
                 let animal : any = {
