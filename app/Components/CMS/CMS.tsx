@@ -409,7 +409,7 @@ export default function CMS({CardsDogs, Cats, Products}: any)
                     arr = arr.filter((image : any) => image.image !== null && image.image !== undefined)
                     cardsDogs[i].Image = arr
                 }
-
+                console.log({CardsDogs,cardsDogs})
                 setDogs([...CardsDogs,...cardsDogs])
                 //console.log()
             } 

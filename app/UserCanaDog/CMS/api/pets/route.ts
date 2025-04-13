@@ -58,27 +58,27 @@ export async function GET(request: NextRequest) {
                 Authorization: `Bearer ${token}`
             }
         })
-        
-        let resultPet : any = null
-        if(type === "Dog"){
-            let fin = result.data.result.recordset.Length >= 3 ? 3 :  result.data.result.recordset.Length
-            let resultPet = []
-            for(let i = 0; i < fin;  i++){
+        let resultPet  = []
+        if(type === "Dog")
+        {
+            let init = result.data.result.recordset.length >= 5 ? 5 :  0
+            
+            for(let i = init; i < result.data.result.recordset.length;  i++){
                 let animal : any = {
-                    id: result.data.result.recordset[0].id,
-                    shortDescription: result.data.result.recordset[0].shortDescription,
-                    longDescription: result.data.result.recordset[0].longDescription,
-                    title: result.data.result.recordset[0].title,
-                    old:result.data.result.recordset[0].old,
-                    ANIMALS_TYPE:result.data.result.recordset[0].ANIMALS_TYPE,
-                    ANIMALS_USER:result.data.result.recordset[0].ANIMALS_USER,
-                    ANIMALS_DATE:result.data.result.recordset[0].ANIMALS_DATE,
-                    ANIMALS_ENABLE:result.data.result.recordset[0].ANIMALS_ENABLE,
-                    Image:[{image: result.data.result.recordset[0].image},
-                        {image: result.data.result.recordset[0].image2},
-                        {image: result.data.result.recordset[0].image3}, 
-                        {image: result.data.result.recordset[0].image4}, 
-                        {image:result.data.result.recordset[0].image5}]
+                    id: result.data.result.recordset[i].id,
+                    shortDescription: result.data.result.recordset[i].shortDescription,
+                    longDescription: result.data.result.recordset[i].longDescription,
+                    title: result.data.result.recordset[i].title,
+                    old:result.data.result.recordset[i].old,
+                    ANIMALS_TYPE:result.data.result.recordset[i].ANIMALS_TYPE,
+                    ANIMALS_USER:result.data.result.recordset[i].ANIMALS_USER,
+                    ANIMALS_DATE:result.data.result.recordset[i].ANIMALS_DATE,
+                    ANIMALS_ENABLE:result.data.result.recordset[i].ANIMALS_ENABLE,
+                    Image:[{image: result.data.result.recordset[i].image},
+                        {image: result.data.result.recordset[i].image2},
+                        {image: result.data.result.recordset[i].image3}, 
+                        {image: result.data.result.recordset[i].image4}, 
+                        {image: result.data.result.recordset[i].image5}]
                 }
                 resultPet.push(animal)
             }

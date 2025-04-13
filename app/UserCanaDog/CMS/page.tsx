@@ -29,7 +29,7 @@ export default async function Home()
 		arr = arr.filter((image : any) => image.image !== null && image.image !== undefined)
 		cardsDogs[i].Image = arr
 	}
-
+	console.log(cardsDogs)
 	return (
 		<>
 			<Header/>
