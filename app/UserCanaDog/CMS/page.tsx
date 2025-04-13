@@ -23,7 +23,7 @@ export default async function Home()
 		cardsCats[i].Image = arr
 	}
 
-	let fin = cardsDogs.Length >= 4 ? 4 :  cardsDogs.Length
+	let fin = cardsDogs.Length >= 3 ? 3 :  cardsDogs.Length
 
 	for(let i= 0; i <= fin; i++)
 	{
