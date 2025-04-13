@@ -25,7 +25,7 @@ export async function GetPets(enable? : boolean, type? : string, web? : string )
             if(type === "Dog" || type === "Cat")
             {   
 
-                let fin = result.data.result.recordset.length >= 5 ? 5 :  result.data.result.recordset.length
+                let fin = result.data.result.recordset.length >= 4 ? 4 :  result.data.result.recordset.length
                 let array = []
                 for(let i = 0; i < fin;  i++){
                     let animal : any = {
