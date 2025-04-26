@@ -11,8 +11,10 @@ export default async function Home()
 		},
 	};
 
-	const cardsDogs : any = await GetPets(undefined,"Dog", "CANADOG");
-	const cardsCats  : any = await GetPets(undefined, "Cat", "CANADOG");
+	let array : any = await GetPets(undefined,"Dog", "CANADOG");
+	let cardsDogs = array.array
+	let array2 : any = await GetPets(undefined, "Cat", "CANADOG");
+	let cardsCats  = array2.array
 	//const result3 : any = await GetPets(undefined, 'HISTORY', "CANADOG")
 	const result4 : any = await GetProducts(undefined, "CANADOG")
 	
@@ -23,9 +25,9 @@ export default async function Home()
 		cardsCats[i].Image = arr
 	}
 
-	for(let i= 0; i < cardsDogs.Length; i++)
+	for(let i= 0; i < cardsDogs.length; i++)
 	{
-		let arr = cardsDogs[i].Image
+		let arr =  cardsDogs[i].Image
 		arr = arr.filter((image : any) => image.image !== null && image.image !== undefined)
 		cardsDogs[i].Image = arr
 	}
@@ -37,8 +39,9 @@ export default async function Home()
 					<CMS 
 						CardsDogs={cardsDogs} /*{[]}*/
 						Cats={cardsCats} /*{{[]}*/
-						/*History={result3.data.result.recordset} */
+						//History={result3.data.result.recordset}
 						Products={result4.data.result.recordset}
+						DogsLength={array.petsLength}
 					/>
 				</main>
 			<Footer/>

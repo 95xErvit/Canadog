@@ -46,7 +46,7 @@ export async function GetPets(enable? : boolean, type? : string, web? : string )
                     }
                     array.push(animal)
                 }
-                return array
+                return{ array, petsLength: result.data.result.recordset.length }
             }
             else
             {

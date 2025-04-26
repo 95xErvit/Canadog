@@ -28,7 +28,7 @@ import LogoFamigo from "@/public/Logo_Famigo.png"
 import axios from 'axios';
 import 'primeicons/primeicons.css';
 
-export default function Home({ CardsDogs, cardsCats }: any) {
+export default function Home({ CardsDogs, cardsCats, DogsLength }: any) {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     //const [expand, setExpand] = useState(false);
     const [isDog, setIsDog] = useState(true);
@@ -78,19 +78,29 @@ export default function Home({ CardsDogs, cardsCats }: any) {
                 console.log(response.data.resultPet.recordset)
                 setHistory(response.data.resultPet.recordset)
 
-                const responseDog = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"Dog"}});
-                console.log(responseDog)
-                const cardsDogs =  responseDog.data.resultPet
-                console.log(cardsDogs)
-                for(let i= 0; i < cardsDogs.length; i++)
+                let count = CardsDogs.length
+                let array : any = []
+                while( count < DogsLength )
                 {
-                    let arr = cardsDogs[i].Image
-                    arr = arr.filter((image : any) => image.image !== null && image.image !== undefined)
-                    cardsDogs[i].Image = arr
-                }
+                    const responseDog = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"Dog", length:count}});
 
-                console.log({CardsDogs,cardsDogs})
-                setDogs([...CardsDogs,...cardsDogs])
+                    console.log(responseDog)
+                    const cardsDogs =  responseDog.data.resultPet
+                    console.log(count)
+                    
+                    for(let i= 0; i < cardsDogs.length; i++)
+                    {
+                        let arr = cardsDogs[i].Image
+                        arr = arr.filter((image : any) => image.image !== null && image.image !== undefined)
+                        cardsDogs[i].Image = arr
+                    }
+                    count += cardsDogs.length
+                    console.log(count)
+                    console.log({CardsDogs,cardsDogs})
+                    array=[...array,...cardsDogs]
+                    
+                }
+                setDogs([...CardsDogs,...array])
                 //console.log()
             } 
             catch (error) 

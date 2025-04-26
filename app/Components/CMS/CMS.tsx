@@ -10,9 +10,9 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image';
 import 'primeicons/primeicons.css';
 import axios from 'axios';
-import { object } from 'yup';
+import { array, object } from 'yup';
 
-export default function CMS({CardsDogs, Cats, Products}: any) 
+export default function CMS({CardsDogs, Cats, Products, DogsLength}: any) 
 { 
     const toast = useRef<Toast>(null);
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
@@ -397,20 +397,29 @@ export default function CMS({CardsDogs, Cats, Products}: any)
             
                 console.log(response.data.resultPet.recordset)
                 setHistory(response.data.resultPet.recordset)
-
-                const responseDog = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"Dog"}});
-                console.log(responseDog)
-                const cardsDogs =  responseDog.data.resultPet
-                console.log(cardsDogs)
-
-                for(let i= 0; i < cardsDogs.length; i++)
+                let count = CardsDogs.length
+                let array : any = []
+                while( count < DogsLength )
                 {
-                    let arr = cardsDogs[i].Image
-                    arr = arr.filter((image : any) => image.image !== null && image.image !== undefined)
-                    cardsDogs[i].Image = arr
+                    const responseDog = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"Dog", length:count}});
+
+                    console.log(responseDog)
+                    const cardsDogs =  responseDog.data.resultPet
+                    console.log(count)
+                    
+                    for(let i= 0; i < cardsDogs.length; i++)
+                    {
+                        let arr = cardsDogs[i].Image
+                        arr = arr.filter((image : any) => image.image !== null && image.image !== undefined)
+                        cardsDogs[i].Image = arr
+                    }
+                    count += cardsDogs.length
+                    console.log(count)
+                    console.log({CardsDogs,cardsDogs})
+                    array=[...array,...cardsDogs]
+                    
                 }
-                console.log({CardsDogs,cardsDogs})
-                setDogs([...CardsDogs,...cardsDogs])
+                setDogs([...CardsDogs,...array])
                 //console.log()
             } 
             catch (error) 

@@ -38,9 +38,15 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
     
     const rawParams = request.url.split('?')[1]
-    console.log(rawParams.split('=')[1])
-
-    const type = rawParams.split('=')[1]
+    console.log(rawParams)
+    const type = rawParams.includes('&') ? rawParams.split('&')[0].split('=')[1] : rawParams.split('=')[1]
+    console.log(type)
+    let count = 0
+    if(rawParams.includes('&'))
+    {
+        console.log(rawParams.split('&')[1].split('=')[1])
+        count = Number(rawParams.split('&')[1].split('=')[1])
+    }
     try 
     {
 
@@ -60,10 +66,11 @@ export async function GET(request: NextRequest) {
         })
         let resultPet  = []
         if(type === "Dog")
-        {
-            let init = result.data.result.recordset.length >= 4 ? 4 :  0
-            
-            for(let i = init; i < result.data.result.recordset.length;  i++){
+        {   
+            let fin = count <= result.data.result.recordset.length -4 ? count + 4 : result.data.result.recordset.length 
+            let init = result.data.result.recordset.length >= 4 ? count :  0
+            console.log({init, fin})
+            for(let i = init; i < fin ;  i++){
                 let animal : any = {
                     id: result.data.result.recordset[i].id,
                     shortDescription: result.data.result.recordset[i].shortDescription,

@@ -12,8 +12,10 @@ export default async function HomeCanadog()
 		},
 	};
 
-	const cardsDogs : any = await GetPets(true, "Dog", "CANADOG");
-	const cardsCats  : any = await GetPets(true, "Cat", "CANADOG");
+	let array : any = await GetPets(undefined,"Dog", "CANADOG");
+	let cardsDogs = array.array
+	let array2 : any = await GetPets(undefined, "Cat", "CANADOG");
+	let cardsCats  = array2.array
 	//const result3 : any = await GetPets(true, "History", "CANADOG")
 	
 	for(let i= 0; i < cardsCats.length; i++)
@@ -38,6 +40,7 @@ export default async function HomeCanadog()
 					<Home 
 						CardsDogs={cardsDogs} /*{[]}*/
 						cardsCats={cardsCats} /*{{[]}*/
+						DogsLength={array.petsLength}
 						/*cardsHistory={result3.data.result.recordset} /*{[]}*/ 
 					/>
 				</main>
