@@ -3,7 +3,7 @@ import React, { useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Toast } from 'primereact/toast'
 import { Button } from "@nextui-org/button";
-import { signIn } from 'aws-amplify/auth';
+import { signIn } from 'next-auth/react';
 import { Input } from "@nextui-org/input";
 import { EyeFilledIcon } from "../../public/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "../../public/EyeSlashFilledIcon";
@@ -28,7 +28,20 @@ export default function Login() {
         setIsLoading(true)
         e.preventDefault()
 
-        try
+        setIsLoading(true)
+        const { error, status, ok, url } : any = await signIn('credentials', { redirect: false, Password: pass, User: user, TypeId: "32b3a8f6-1977-4964-b2f0-d98c768764e2" })
+        console.log(error, status, ok, url)
+        if(error !== null && status !== 200)
+        {
+          toast.current?.show({ severity: 'warn', summary: '¡Atención!', detail: "Credenciales incorrectas", life: 3000 });
+          setIsLoading(false)
+        }
+        else
+        {
+            router.push('/UserCanaDog/CMS')
+        }
+
+        /*try
         {
             await signIn({username:user, password: pass, options:{
                 clientMetadata:{

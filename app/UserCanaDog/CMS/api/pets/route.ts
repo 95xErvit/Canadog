@@ -56,7 +56,7 @@ export async function GET(request: NextRequest) {
                 "x-api-key":<string>process.env.API_KEY
             }
         })
-
+        
         const result = await axios.get(`${process.env.HOST_API}/Api/Gora/CMS/Pets`,
         {   
             params:params,
