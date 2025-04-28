@@ -25,13 +25,12 @@ export default async function HomeCanadog()
 		cardsCats[i].Image = arr
 	}
 
-	{/*for(let i= 0; i < cardsDogs.length; i++)
+	for(let i= 0; i < cardsDogs.length; i++)
 	{
 		let arr = cardsDogs[i].Image
 		arr = arr.filter((image : any) => image.image !== null && image.image !== undefined)
 		cardsDogs[i].Image = arr
-	}*/}
-	
+	}
 	
 	return (
 		<>

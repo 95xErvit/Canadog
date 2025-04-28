@@ -78,30 +78,38 @@ export default function Home({ CardsDogs, cardsCats, DogsLength }: any) {
                 console.log(response.data.resultPet.recordset)
                 setHistory(response.data.resultPet.recordset)
 
-                let count = CardsDogs.length
-                let array : any = []
-                while( count < DogsLength )
-                {
-                    const responseDog = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"Dog", length:count}});
-
-                    console.log(responseDog)
-                    const cardsDogs =  responseDog.data.resultPet
-                    console.log(count)
-                    
-                    for(let i= 0; i < cardsDogs.length; i++)
-                    {
-                        let arr = cardsDogs[i].Image
-                        arr = arr.filter((image : any) => image.image !== null && image.image !== undefined)
-                        cardsDogs[i].Image = arr
-                    }
-                    count += cardsDogs.length
-                    console.log(count)
-                    console.log({CardsDogs,cardsDogs})
-                    array=[...array,...cardsDogs]
-                    
+               /* let count = CardsDogs.length
+                let array : any = CardsDogs
+                console.log(DogsLength)
+               /*while (count < DogsLength) {
+                    const { data } = await axios.get('/UserCanaDog/CMS/api/pets', {
+                        params: { Type: "Dog", length: count }
+                    });
+                
+                    const cardsDogs = data.resultPet.map((pet : any) => ({
+                        ...pet,
+                        Image: pet.Image.filter((image : any) => image?.image != null)
+                    }));
+                
+                    count += cardsDogs.length;
+                    array.push(...cardsDogs)
                 }
-                setDogs([...CardsDogs,...array])
+                console.log(CardsDogs)
+                setDogs(CardsDogs)*/
                 //console.log()
+                const responseDog = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"Dog"}});
+                console.log(responseDog)
+                const cardsDogs =  responseDog.data.resultPet
+                console.log(cardsDogs)
+
+                for(let i= 0; i < cardsDogs.length; i++)
+                {
+                    let arr = cardsDogs[i].Image
+                    arr = arr.filter((image : any) => image.image !== null && image.image !== undefined)
+                    cardsDogs[i].Image = arr
+                }
+                console.log({CardsDogs,cardsDogs})
+                setDogs([...CardsDogs,...cardsDogs])
             } 
             catch (error) 
             {
@@ -420,6 +428,7 @@ export default function Home({ CardsDogs, cardsCats, DogsLength }: any) {
                                                 <div
                                                     key={card.id}
                                                     ref={(el) => {
+                                                        console.log(card)
                                                         cardRefs.current[card.id] = el; 
                                                     }}
                                                     className={`relative m-4 transition-all duration-300 

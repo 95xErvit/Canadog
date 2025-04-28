@@ -397,7 +397,7 @@ export default function CMS({CardsDogs, Cats, Products, DogsLength}: any)
             
                 console.log(response.data.resultPet.recordset)
                 setHistory(response.data.resultPet.recordset)
-                let count = CardsDogs.length
+                /*let count = CardsDogs.length
                 let array : any = []
                 while( count < DogsLength )
                 {
@@ -419,8 +419,21 @@ export default function CMS({CardsDogs, Cats, Products, DogsLength}: any)
                     array=[...array,...cardsDogs]
                     
                 }
-                setDogs([...CardsDogs,...array])
+                setDogs([...CardsDogs,...array])*/
                 //console.log()
+                const responseDog = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"Dog"}});
+                console.log(responseDog)
+                const cardsDogs =  responseDog.data.resultPet
+                console.log(cardsDogs)
+
+                for(let i= 0; i < cardsDogs.length; i++)
+                {
+                    let arr = cardsDogs[i].Image
+                    arr = arr.filter((image : any) => image.image !== null && image.image !== undefined)
+                    cardsDogs[i].Image = arr
+                }
+                console.log({CardsDogs,cardsDogs})
+                setDogs([...CardsDogs,...cardsDogs])
             } 
             catch (error) 
             {
