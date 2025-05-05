@@ -36,11 +36,10 @@ export default async function Home()
 		for(let i= 0; i < cardsDogs.length; i++)
 		{
 			let arr =  cardsDogs[i].Image
-			console.log(arr)
 			arr = arr.filter((image : any) => image.image !== null && image.image !== undefined)
 			cardsDogs[i].Image = arr
 		}
-		//console.log(cardsDogs)
+
 		return (
 			<>
 				<Header/>
@@ -49,7 +48,7 @@ export default async function Home()
 							CardsDogs={cardsDogs} /*{[]}*/
 							Cats={cardsCats} /*{{[]}*/
 							//History={result3.data.result.recordset}
-							Products={result4.data.result.recordset}
+							CardsProducts={result4}
 							DogsLength={array.petsLength}
 						/>
 					</main>

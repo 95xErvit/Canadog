@@ -18,7 +18,7 @@ export default async function Home()
 			<Header/>
 				<main className="bg-cover bg-center" style={{backgroundImage:'url("")'}}>
 					<Store 
-						CardsProducts={result.data === undefined ? [{id:1, title:"camara", cost:"1.000.000", unity:"2", image: "https://heroui.com/images/card-example-6.jpeg"}] : result.data.result.recordset}
+						CardsProducts={result === undefined ? [{id:1, title:"camara", cost:"1.000.000", unity:"2", image: "https://heroui.com/images/card-example-6.jpeg"}] : result}
 					/>
 				</main>
 			<Footer/>

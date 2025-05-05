@@ -39,8 +39,7 @@ export default function Home({ CardsDogs, cardsCats, DogsLength }: any) {
     const [selectedImage, setSelectedImage] = useState(null);
     const [History, setHistory] = useState([])
     const [Dogs, setDogs] = useState<any>(CardsDogs)
-
-    console.log(Dogs)
+    
     // const toggleExpand = (id: number) => {
     //     setExpandedCard(expandedCard === id ? null : id);
     //     setIndiceActual(0)

@@ -86,8 +86,14 @@ export async function GetProducts(enable? : boolean, web? : string ) {
                     Authorization: `Bearer ${token}`
                 }
             })
-
-            return result
+            //console.log(result.data.result.recordset)
+            let fin = result.data.result.recordset.length >= 6 ? 6 :  result.data.result.recordset.length
+            let array = []
+            for(let i = 0; i < fin;  i++)
+            {
+                array.push(result.data.result.recordset[i])
+            }
+            return array
         }
         catch (err) {
             console.log(err)

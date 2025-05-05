@@ -12,7 +12,7 @@ import 'primeicons/primeicons.css';
 import axios from 'axios';
 import { array, object } from 'yup';
 
-export default function CMS({CardsDogs, Cats, Products, DogsLength}: any) 
+export default function CMS({CardsDogs, Cats, CardsProducts, DogsLength}: any) 
 { 
     const toast = useRef<Toast>(null);
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
@@ -42,6 +42,7 @@ export default function CMS({CardsDogs, Cats, Products, DogsLength}: any)
     const [currentPage, setCurrentPage] = useState(1);
     const [History, setHistory] = useState([])
     const [Dogs, setDogs] = useState(CardsDogs)
+    const [Products, setProducts] = useState(CardsProducts)
     const router = useRouter()
 
     const onTemplateSelect = (e: FileUploadSelectEvent) => {
@@ -434,6 +435,12 @@ export default function CMS({CardsDogs, Cats, Products, DogsLength}: any)
                 }
                 console.log({CardsDogs,cardsDogs})
                 setDogs([...CardsDogs,...cardsDogs])
+
+                const responseproduct = await axios.get('/UserCanaDog/CMS/api/products');
+                console.log(responseproduct)
+                const cardsProducts =  responseproduct.data.resultProduct
+                console.log(cardsProducts)
+                setProducts([...CardsProducts,...cardsProducts])
             } 
             catch (error) 
             {
