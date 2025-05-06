@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
     
-    /*const rawParams = request.url.split('?')[1]
+    const rawParams = request.url.split('?')[1]
     console.log(rawParams)
     const type = rawParams.includes('&') ? rawParams.split('&')[0].split('=')[1] : rawParams.split('=')[1]
     console.log(type)
@@ -46,11 +46,11 @@ export async function GET(request: NextRequest) {
     {
         console.log(rawParams.split('&')[1].split('=')[1])
         count = Number(rawParams.split('&')[1].split('=')[1])
-    }*/
-    const rawParams = request.url.split('?')[1]
+    }
+    /*const rawParams = request.url.split('?')[1]
     console.log(rawParams.split('=')[1])
 
-    const type = rawParams.split('=')[1]
+    const type = rawParams.split('=')[1]*/
     try 
     {
 
