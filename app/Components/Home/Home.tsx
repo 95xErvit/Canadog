@@ -77,10 +77,10 @@ export default function Home({ CardsDogs, cardsCats, DogsLength }: any) {
                 console.log(response.data.resultPet.recordset)
                 setHistory(response.data.resultPet.recordset)
 
-               /* let count = CardsDogs.length
+               let count = CardsDogs.length
                 let array : any = CardsDogs
                 console.log(DogsLength)
-               /*while (count < DogsLength) {
+               while (count < DogsLength) {
                     const { data } = await axios.get('/UserCanaDog/CMS/api/pets', {
                         params: { Type: "Dog", length: count }
                     });
@@ -94,12 +94,11 @@ export default function Home({ CardsDogs, cardsCats, DogsLength }: any) {
                     array.push(...cardsDogs)
                 }
                 console.log(CardsDogs)
-                setDogs(CardsDogs)*/
-                //console.log()
-                const responseDog = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"Dog"}});
+                setDogs(CardsDogs)
+                /*const responseDog = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"Dog"}});
                 console.log(responseDog)
                 const cardsDogs =  responseDog.data.resultPet
-                console.log(cardsDogs)
+                console.log(cardsDogs)*/
 
                 for(let i= 0; i < cardsDogs.length; i++)
                 {
