@@ -30,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               src={DogsWork.src}
               height={500} 
               width={400} 
-              className="mn:w-44 mn:h-60 xl:w-[600px] xl:h-[500px]"
+              className="mn:w-44 mn:h-60 md:w-60 md:h-80 xl:w-[280px] xl:h-[350px]"
             />
             <h1 className="text-greenCanadog mn:text-xl md:text-4xl xl:text-5xl font-semibold mb-4">
               🚧 Estamos en mantenimiento 🚧
