@@ -36,13 +36,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               🚧 Estamos en mantenimiento 🚧
             </h1>
             <p className="text-blackCanadog mn:text-sm md:text-3xl">
-              Estamos trabajando para mejorar tu experiencia. Vuelve pronto...
+              Estamos trabajando para mejorar tu experiencia. ¡Vuelve pronto!
             </p>
           </div>
 
           <div className='flex flex-wrap flex-col gap-6 text-center'>
             <p className="text-blackCanadog mn:text-sm md:text-2xl items-center px-4">
-              Te gustaria adoptar? contáctanos via whatsapp o visitanos en instagram para estar al tanto de nuestro refugio.
+              ¿Te gustaría adoptar? Contáctanos vía WhatsApp o visítanos en Instagram para estar al tanto de nuestro refugio.
             </p>
 
             <div className="flex mn:flex-col md:flex-row justify-center items-center gap-4"> 
