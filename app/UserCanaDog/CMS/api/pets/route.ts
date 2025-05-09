@@ -72,7 +72,7 @@ export async function GET(request: NextRequest) {
         if(type === "Dog")
         {   
            let fin = count <= result.data.result.recordset.length -4 ? count + 4 : result.data.result.recordset.length 
-            let init = result.data.result.recordset.length >= 4 ? count :  0*/
+            let init = result.data.result.recordset.length >= 4 ? count :  0;
             console.log({init, fin})
             for(let i = init; i < fin ;  i++)
             {
