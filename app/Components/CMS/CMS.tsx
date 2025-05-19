@@ -43,6 +43,7 @@ export default function CMS({CardsDogs, Cats, CardsProducts, DogsLength}: any)
     const [History, setHistory] = useState([])
     const [Dogs, setDogs] = useState(CardsDogs)
     const [Products, setProducts] = useState(CardsProducts)
+    const [isEjecuted, setIsEjecuted] = useState(false);
     const router = useRouter()
 
     const onTemplateSelect = (e: FileUploadSelectEvent) => {
@@ -389,72 +390,66 @@ export default function CMS({CardsDogs, Cats, CardsProducts, DogsLength}: any)
         setCurrentPage(page);
     };
 
-    useEffect(() => {
-
-        const fetchData = async () => {
-            try 
-            {
-                const response = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"HISTORY"}});
-            
-                console.log(response.data.resultPet.recordset)
-                setHistory(response.data.resultPet.recordset)
-                /*let count = CardsDogs.length
-                let array : any = []
-                while( count < DogsLength )
+        useEffect(() =>{
+            const fetchData = async () => {
+                try 
                 {
-                    const responseDog = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"Dog", length:count}});
-
-                    console.log(responseDog)
-                    const cardsDogs =  responseDog.data.resultPet
-                    console.log(count)
+                    const response = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"HISTORY"}});
+                
+                    console.log(response.data.resultPet.recordset)
+                    setHistory(response.data.resultPet.recordset)
                     
-                    for(let i= 0; i < cardsDogs.length; i++)
-                    {
-                        let arr = cardsDogs[i].Image
-                        arr = arr.filter((image : any) => image.image !== null && image.image !== undefined)
-                        cardsDogs[i].Image = arr
+                    let array : any = []
+                    
+                    console.log(DogsLength)
+                    //let isExit = false
+    
+                    for(let i = CardsDogs.length; i < DogsLength; i++ ){
+                        console.log(i)
+                        const { data } = await axios.get('/UserCanaDog/CMS/api/pets', {
+                            params: { Type: "Dog", index: i }
+                        });
+    
+                        const resultDogs = data.resultPet.map((pet: any) => ({
+                            ...pet,
+                            Image: pet.Image.filter((image: any) => image?.image != null)
+                        }));
+    
+                        array.push(...resultDogs);
+                        
                     }
-                    count += cardsDogs.length
-                    console.log(count)
-                    console.log({CardsDogs,cardsDogs})
-                    array=[...array,...cardsDogs]
-                    
-                }
-                setDogs([...CardsDogs,...array])*/
-                //console.log()
-                const responseDog = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"Dog"}});
-                console.log(responseDog)
-                const cardsDogs =  responseDog.data.resultPet
-                console.log(cardsDogs)
+                    array = array.concat(CardsDogs)
+                    setDogs([...array])
 
-                for(let i= 0; i < cardsDogs.length; i++)
+                    const responseproduct = await axios.get('/UserCanaDog/CMS/api/products');
+                    console.log(responseproduct)
+                    const cardsProducts =  responseproduct.data.resultProduct
+                    console.log(cardsProducts)
+                    setProducts([...CardsProducts,...cardsProducts])
+
+                    setIsEjecuted(true)
+
+    
+                } 
+                catch (error) 
                 {
-                    let arr = cardsDogs[i].Image
-                    arr = arr.filter((image : any) => image.image !== null && image.image !== undefined)
-                    cardsDogs[i].Image = arr
+                    console.error('Error:', error);
                 }
-                console.log({CardsDogs,cardsDogs})
-                setDogs([...CardsDogs,...cardsDogs])
-
-                const responseproduct = await axios.get('/UserCanaDog/CMS/api/products');
-                console.log(responseproduct)
-                const cardsProducts =  responseproduct.data.resultProduct
-                console.log(cardsProducts)
-                setProducts([...CardsProducts,...cardsProducts])
-            } 
-            catch (error) 
-            {
-                console.error('Error:', error);
+            };
+    
+            if(!isEjecuted)
+            {   
+                console.log("Ejecutando")
+                fetchData()
             }
-        };
+    }, [])
 
+    useEffect(() => {
         if (fileUploadRef !== null) 
         {
             fileUploadRef.current?.setUploadedFiles(files)
             console.log(fileUploadRef)
         }
-
-        fetchData()
     },[files]);
     
     return(

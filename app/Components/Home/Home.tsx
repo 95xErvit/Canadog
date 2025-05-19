@@ -32,6 +32,7 @@ export default function Home({ CardsDogs, cardsCats, DogsLength }: any) {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     //const [expand, setExpand] = useState(false);
     const [isDog, setIsDog] = useState(true);
+    const [isEjecuted, setIsEjecuted] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [expandedCard, setExpandedCard] = useState<number | null>(null);
     const [indiceActual, setIndiceActual] = useState<number>(0);
@@ -56,6 +57,52 @@ export default function Home({ CardsDogs, cardsCats, DogsLength }: any) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [cardsToShow, setCardsToShow] = useState(4); 
 
+    useEffect(() =>{
+        const fetchData = async () => {
+            try 
+            {
+                const response = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"HISTORY"}});
+            
+                console.log(response.data.resultPet.recordset)
+                setHistory(response.data.resultPet.recordset)
+                
+                let array : any = []
+                
+                console.log(DogsLength)
+                //let isExit = false
+
+                for(let i = CardsDogs.length; i < DogsLength; i++ ){
+                    console.log(i)
+                    const { data } = await axios.get('/UserCanaDog/CMS/api/pets', {
+                        params: { Type: "Dog", index: i }
+                    });
+
+                    const resultDogs = data.resultPet.map((pet: any) => ({
+                        ...pet,
+                        Image: pet.Image.filter((image: any) => image?.image != null)
+                    }));
+
+                    array.push(...resultDogs);
+                    
+                }
+                array = array.concat(CardsDogs)
+                setDogs([...array])
+                setIsEjecuted(true)
+
+            } 
+            catch (error) 
+            {
+                console.error('Error:', error);
+            }
+        };
+
+        if(!isEjecuted)
+        {   
+            console.log("Ejecutando")
+            fetchData()
+        }
+    }, [])
+
     useEffect(() => {
         const updateCardsToShow = () => {
             if (window.innerWidth < 640) {
@@ -66,60 +113,6 @@ export default function Home({ CardsDogs, cardsCats, DogsLength }: any) {
                 setCardsToShow(3); 
             } else {
                 setCardsToShow(4); 
-            }
-        };
-
-        const fetchData = async () => {
-            try 
-            {
-                const response = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"HISTORY"}});
-            
-                console.log(response.data.resultPet.recordset)
-                setHistory(response.data.resultPet.recordset)
-
-               let count = CardsDogs.length
-                let array : any = CardsDogs
-                console.log(DogsLength)
-               while (count < DogsLength) {
-                    const { data } = await axios.get('/UserCanaDog/CMS/api/pets', {
-                        params: { Type: "Dog", length: count }
-                    });
-                
-                    const cardsDogs = data.resultPet.map((pet : any) => ({
-                        ...pet,
-                        Image: pet.Image.filter((image : any) => image?.image != null)
-                    }));
-                
-                    count += cardsDogs.length;
-                    array.push(...cardsDogs)
-                }
-                console.log(CardsDogs)
-                setDogs(CardsDogs)
-                /*const responseDog = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"Dog"}});
-                console.log(responseDog)
-                const cardsDogs =  responseDog.data.resultPet
-                console.log(cardsDogs)*/
-                for(let i= 0; i < CardsDogs.length; i++)
-                {
-                    let arr = CardsDogs[i].Image
-                    arr = arr.filter((image : any) => image.image !== null && image.image !== undefined)
-                    CardsDogs[i].Image = arr
-                }
-                console.log({CardsDogs})
-                setDogs([...CardsDogs])
-
-                // for(let i= 0; i < cardsDogs.length; i++)
-                // {
-                //     let arr = cardsDogs[i].Image
-                //     arr = arr.filter((image : any) => image.image !== null && image.image !== undefined)
-                //     cardsDogs[i].Image = arr
-                // }
-                // console.log({CardsDogs,cardsDogs})
-                // setDogs([...CardsDogs,...cardsDogs])
-            } 
-            catch (error) 
-            {
-                console.error('Error:', error);
             }
         };
         
@@ -144,7 +137,7 @@ export default function Home({ CardsDogs, cardsCats, DogsLength }: any) {
             }
         }, 6000);
 
-        fetchData()
+
         updateCardsToShow();
         intervalo
         window.addEventListener("resize", updateCardsToShow);
@@ -434,7 +427,6 @@ export default function Home({ CardsDogs, cardsCats, DogsLength }: any) {
                                                 <div
                                                     key={card.id}
                                                     ref={(el) => {
-                                                        console.log(card)
                                                         cardRefs.current[card.id] = el; 
                                                     }}
                                                     className={`relative m-4 transition-all duration-300 

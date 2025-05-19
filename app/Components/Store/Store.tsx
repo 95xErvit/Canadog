@@ -10,6 +10,7 @@ import {Divider} from "@nextui-org/divider";
 import {Pagination} from "@nextui-org/react";
 import CanadogStore from "@/public/CanadogCompra.jpg"
 import 'primeicons/primeicons.css';
+import axios from 'axios';
 
 //{Dogs, Cats}: any
 export default function Store({ CardsProducts }: any) {
@@ -19,7 +20,7 @@ export default function Store({ CardsProducts }: any) {
     const [isDog, setIsDog] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [expandedCard, setExpandedCard] = useState<number | null>(null);
-
+    const [Products, setProducts] = useState(CardsProducts)
     const toggleExpand = (id: number) => {
         setExpandedCard(expandedCard === id ? null : id);
     };
@@ -34,6 +35,25 @@ export default function Store({ CardsProducts }: any) {
     
     const [currentIndex, setCurrentIndex] = useState(0);
     const [cardsToShow, setCardsToShow] = useState(4); 
+
+    useEffect(() => {
+
+        const fetchData = async () => {
+            try 
+            {
+                const responseproduct = await axios.get('/UserCanaDog/CMS/api/products');
+                console.log(responseproduct)
+                const cardsProducts =  responseproduct.data.resultProduct
+                console.log(cardsProducts)
+                setProducts([...CardsProducts,...cardsProducts])
+            } 
+            catch (error) 
+            {
+                console.error('Error:', error);
+            }
+        };
+        fetchData()
+    }, []);
 
     useEffect(() => {
         const updateCardsToShow = () => {
@@ -124,7 +144,7 @@ export default function Store({ CardsProducts }: any) {
                         <Card isBlurred className="border-none w-full" shadow="md">
                             <ScrollShadow className="mn:w-full mn:h-[450px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
                                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 h-[360px] gap-4'>
-                                    {CardsProducts.map((card: any) => (
+                                    {Products.map((card: any) => (
                                     <div
                                         key={card.id}
                                         className='m-4'

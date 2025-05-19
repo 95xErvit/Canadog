@@ -41,11 +41,11 @@ export async function GET(request: NextRequest) {
     console.log(rawParams)
     const type = rawParams.includes('&') ? rawParams.split('&')[0].split('=')[1] : rawParams.split('=')[1]
     console.log(type)
-    let count = 0
+    let index = 0
     if(rawParams.includes('&'))
     {
         console.log(rawParams.split('&')[1].split('=')[1])
-        count = Number(rawParams.split('&')[1].split('=')[1])
+        index = Number(rawParams.split('&')[1].split('=')[1])
     }
     /*const rawParams = request.url.split('?')[1]
     console.log(rawParams.split('=')[1])
@@ -71,31 +71,33 @@ export async function GET(request: NextRequest) {
         let resultPet  = []
         if(type === "Dog")
         {   
-           let fin = count <= result.data.result.recordset.length -4 ? count + 4 : result.data.result.recordset.length 
+            /*let fin = count <= result.data.result.recordset.length -4 ? count + 4 : result.data.result.recordset.length 
             let init = result.data.result.recordset.length >= 4 ? count :  0;
             console.log({init, fin})
-            for(let i = init; i < fin ;  i++)
-            {
-                let init = result.data.result.recordset.length >= 4 ? 4 :  0
-            //for(let i = init; i < result.data.result.recordset.length;  i++){
-                let animal : any = {
-                    id: result.data.result.recordset[i].id,
-                    shortDescription: result.data.result.recordset[i].shortDescription,
-                    longDescription: result.data.result.recordset[i].longDescription,
-                    title: result.data.result.recordset[i].title,
-                    old:result.data.result.recordset[i].old,
-                    ANIMALS_TYPE:result.data.result.recordset[i].ANIMALS_TYPE,
-                    ANIMALS_USER:result.data.result.recordset[i].ANIMALS_USER,
-                    ANIMALS_DATE:result.data.result.recordset[i].ANIMALS_DATE,
-                    ANIMALS_ENABLE:result.data.result.recordset[i].ANIMALS_ENABLE,
-                    Image:[{image: result.data.result.recordset[i].image},
-                        {image: result.data.result.recordset[i].image2},
-                        {image: result.data.result.recordset[i].image3}, 
-                        {image: result.data.result.recordset[i].image4}, 
-                        {image: result.data.result.recordset[i].image5}]
-                }
-                resultPet.push(animal)
+            /*for(let i = init; i < fin ;  i++)
+            {   console.log(i)
+               // let init = result.data.result.recordset.length >= 4 ? 4 :  0
+                //for(let i = init; i < result.data.result.recordset.length;  i++){
+          
+            }*/
+
+            let animal : any = {
+                id: result.data.result.recordset[index].id,
+                shortDescription: result.data.result.recordset[index].shortDescription,
+                longDescription: result.data.result.recordset[index].longDescription,
+                title: result.data.result.recordset[index].title,
+                old:result.data.result.recordset[index].old,
+                ANIMALS_TYPE:result.data.result.recordset[index].ANIMALS_TYPE,
+                ANIMALS_USER:result.data.result.recordset[index].ANIMALS_USER,
+                ANIMALS_DATE:result.data.result.recordset[index].ANIMALS_DATE,
+                ANIMALS_ENABLE:result.data.result.recordset[index].ANIMALS_ENABLE,
+                Image:[{image: result.data.result.recordset[index].image},
+                    {image: result.data.result.recordset[index].image2},
+                    {image: result.data.result.recordset[index].image3}, 
+                    {image: result.data.result.recordset[index].image4}, 
+                    {image: result.data.result.recordset[index].image5}]
             }
+            resultPet.push(animal)
         }else{
             resultPet =  result.data.result
         }
