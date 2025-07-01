@@ -366,8 +366,20 @@ export default function CMS({CardsDogs, CardsCats, CardsProducts, DogsLength}: a
         e.preventDefault();
         setIsLoading(true)
         try
-        {
-            const response = await axios.patch("/UserCanaDog/CMS/api/products",{data:{PRODUCTS_ID:id, PRODUCTS_USER:"Administrador_CanaDog",PRODUCTS_ENABLE: EnableProducts,CATEGORY_ID:1, PRODUCTS_NAME: name, PRODUCTS_STOCK:unity, PRODUCTS_DESCRIPTION:description, PRODUCTS_WORTH:cost.toString(), PRODUCT_IMAGE: file, PRODUCTS_WEB: "CANADOG"}})
+        {   console.log(cost)
+            const response = await axios.patch("/UserCanaDog/CMS/api/products",{data:{
+                PRODUCTS_ID:id, 
+                PRODUCTS_USER:"Administrador_CanaDog",
+                PRODUCTS_ENABLE: EnableProducts,
+                CATEGORY_ID:1, 
+                PRODUCTS_NAME: name, 
+                PRODUCTS_STOCK:unity.toString(), 
+                PRODUCTS_DESCRIPTION:description, 
+                PRODUCTS_WORTH:cost.toString(), 
+                PRODUCT_IMAGE: file, 
+                PRODUCTS_WEB: "CANADOG"}
+            })
+
             console.log('Contesto:', response);
         }
         catch(err){
