@@ -1,12 +1,13 @@
 import axios from "axios";
 
-export async function GetPets(enable? : boolean, type? : string, web? : string ) {
+export async function GetPets(enable? : boolean, type? : string, web? : string, call? : boolean ) {
 
-    try {
+    try {  
+        console.log(type)
 
-        const { data: { token } } = await axios.get(`${process.env.HOST_API}/Api/Gora/TokenGora`, {
+        const { data: { token } } = await axios.get(`${call ? 'https://api.innminds.com.co:443' : process.env.HOST_API }/Api/Gora/TokenGora`, {
             headers: {
-                "x-api-key":<string>process.env.API_KEY
+                "x-api-key": call ? 'c55af7ae-f776-4bea-91cf-b05467981d64' :<string>process.env.API_KEY
             }
         })
 
@@ -14,19 +15,20 @@ export async function GetPets(enable? : boolean, type? : string, web? : string )
 
             const params = {Type: type, Enable:enable, Web: web}
 
-            const result = await axios.get(`${process.env.HOST_API}/Api/Gora/CMS/Pets`,
+            const result = await axios.get(`${call ? 'https://api.innminds.com.co:443' : process.env.HOST_API}/Api/Gora/CMS/Pets`,
             {   
                 params: params,
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
-
+            //console.log(result.data.result.recordset)
             if(type === "Dog" || type === "Cat")
             {   
 
-                let fin = result.data.result.recordset.length >= 4 ? 4 :  result.data.result.recordset.length
+                let fin = (call === false) ? result.data.result.recordset.length > 3 ? 4 : result.data.result.recordset.length : result.data.result.recordset.length
                 let array = []
+                console.log(fin)
                 for(let i = 0; i < fin;  i++){
                     let animal : any = {
                         id: result.data.result.recordset[i].id,
@@ -50,7 +52,7 @@ export async function GetPets(enable? : boolean, type? : string, web? : string )
             }
             else
             {
-                return result
+                return { array : result.data.result.recordset , petsLength: result.data.result.recordset.length }
             }
         }
         catch (err) {
@@ -65,13 +67,13 @@ export async function GetPets(enable? : boolean, type? : string, web? : string )
 
 }
 
-export async function GetProducts(enable? : boolean, web? : string ) {
+export async function GetProducts(enable? : boolean, web? : string, call? : boolean ) {
 
     try {
 
-        const { data: { token } } = await axios.get(`${process.env.HOST_API}/Api/Gora/TokenGora`, {
+        const { data: { token } } = await axios.get(`${call ? 'https://api.innminds.com.co:443' : process.env.HOST_API}/Api/Gora/TokenGora`, {
             headers: {
-                "x-api-key":<string>process.env.API_KEY
+                "x-api-key": call ? 'c55af7ae-f776-4bea-91cf-b05467981d64' :<string>process.env.API_KEY
             }
         })
 
@@ -79,7 +81,7 @@ export async function GetProducts(enable? : boolean, web? : string ) {
 
             const params = {PRODUCTS_ENABLE:enable, PRODUCTS_WEB: web}
 
-            const result = await axios.get(`${process.env.HOST_API}/Api/Gora/CMS/Products`,
+            const result = await axios.get(`${call ? 'https://api.innminds.com.co:443' : process.env.HOST_API}/Api/Gora/CMS/Products`,
             {   
                 params: params,
                 headers: {
@@ -87,7 +89,7 @@ export async function GetProducts(enable? : boolean, web? : string ) {
                 }
             })
             //console.log(result.data.result.recordset)
-            let fin = result.data.result.recordset.length >= 6 ? 6 :  result.data.result.recordset.length
+           let fin = (call === false) ? result.data.result.recordset.length > 3 ? 4 : result.data.result.recordset.length : result.data.result.recordset.length
             let array = []
             for(let i = 0; i < fin;  i++)
             {

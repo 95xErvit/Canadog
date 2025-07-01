@@ -19,12 +19,12 @@ export default async function Home()
 
 	if(session)
 	{
-		let array : any = await GetPets(undefined,"Dog", "CANADOG");
+		let array : any = await GetPets(undefined,"Dog", "CANADOG",false);
 		let cardsDogs = array.array
-		let array2 : any = await GetPets(undefined, "Cat", "CANADOG");
+		let array2 : any = await GetPets(undefined, "Cat", "CANADOG",false);
 		let cardsCats  = array2.array
 		//const result3 : any = await GetPets(undefined, 'HISTORY', "CANADOG")
-		const result4 : any = await GetProducts(undefined, "CANADOG")
+		const result4 : any = await GetProducts(undefined, "CANADOG",false)
 		
 		for(let i= 0; i < cardsCats.length; i++)
 		{
@@ -46,7 +46,7 @@ export default async function Home()
 					<main className="bg-cover bg-center" style={{backgroundImage:'url("")'}}>
 						<CMS 
 							CardsDogs={cardsDogs} /*{[]}*/
-							Cats={cardsCats} /*{{[]}*/
+							CardsCats={cardsCats} /*{{[]}*/
 							//History={result3.data.result.recordset}
 							CardsProducts={result4}
 							DogsLength={array.petsLength}

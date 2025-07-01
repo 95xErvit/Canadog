@@ -12,12 +12,12 @@ export default async function HomeCanadog()
 		},
 	};
 
-	let array : any = await GetPets(undefined,"Dog", "CANADOG");
+	let array : any = await GetPets(true,"Dog", "CANADOG", false);
 	let cardsDogs = array.array
-	let array2 : any = await GetPets(undefined, "Cat", "CANADOG");
+	let array2 : any = await GetPets(true, "Cat", "CANADOG", false);
 	let cardsCats  = array2.array
 	//const result3 : any = await GetPets(true, "History", "CANADOG")
-	
+	//console.log(cardsCats)
 	for(let i= 0; i < cardsCats.length; i++)
 	{
 		let arr = cardsCats[i].Image
@@ -38,7 +38,7 @@ export default async function HomeCanadog()
 				<main className="bg-cover bg-center" style={{backgroundImage:'url("")'}}>
 					<Home 
 						CardsDogs={cardsDogs} /*{[]}*/
-						cardsCats={cardsCats} /*{{[]}*/
+						CardsCats={cardsCats} /*{{[]}*/
 						DogsLength={array.petsLength}
 						/*cardsHistory={result3.data.result.recordset} /*{[]}*/ 
 					/>

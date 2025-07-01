@@ -10,6 +10,7 @@ import {Divider} from "@nextui-org/divider";
 import {Pagination} from "@nextui-org/react";
 import CanadogStore from "@/public/CanadogCompra.jpg"
 import 'primeicons/primeicons.css';
+import { GetProducts } from '../Data/Data';
 import axios from 'axios';
 
 //{Dogs, Cats}: any
@@ -41,11 +42,8 @@ export default function Store({ CardsProducts }: any) {
         const fetchData = async () => {
             try 
             {
-                const responseproduct = await axios.get('/UserCanaDog/CMS/api/products');
-                console.log(responseproduct)
-                const cardsProducts =  responseproduct.data.resultProduct
-                console.log(cardsProducts)
-                setProducts([...CardsProducts,...cardsProducts])
+                const result4 : any = await GetProducts(undefined, "CANADOG", true)
+                setProducts(result4)
             } 
             catch (error) 
             {

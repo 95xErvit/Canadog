@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState, useRef } from 'react';
 import { Button, Card, Input,CardBody, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, usePagination, PaginationItemType, Checkbox, Textarea, Link } from "@nextui-org/react";
-import {ScrollShadow} from "@nextui-org/react";
+import { ScrollShadow } from "@nextui-org/react";
 import {Divider} from "@nextui-org/divider";
 import { Dialog } from "primereact/dialog";
 import { Carousel } from 'primereact/carousel';
@@ -25,10 +25,11 @@ import EddieRoffing from"@/public/EDDIE_ROOFING_LOGO.jpeg"
 import LogoMarilsa from "@/public/Logo-Marilsa.jpg"
 import LogoVeñata from "@/public/Logo-Veñata.jpg"
 import LogoFamigo from "@/public/Logo_Famigo.png"
+import { GetPets, GetProducts } from '../Data/Data';
 import axios from 'axios';
 import 'primeicons/primeicons.css';
 
-export default function Home({ CardsDogs, cardsCats, DogsLength }: any) {
+export default function Home({ CardsDogs, CardsCats, DogsLength }: any) {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     //const [expand, setExpand] = useState(false);
     const [isDog, setIsDog] = useState(true);
@@ -40,6 +41,7 @@ export default function Home({ CardsDogs, cardsCats, DogsLength }: any) {
     const [selectedImage, setSelectedImage] = useState(null);
     const [History, setHistory] = useState([])
     const [Dogs, setDogs] = useState<any>(CardsDogs)
+    const [Cats, setCats] = useState<any>(CardsCats)
     
     // const toggleExpand = (id: number) => {
     //     setExpandedCard(expandedCard === id ? null : id);
@@ -47,7 +49,7 @@ export default function Home({ CardsDogs, cardsCats, DogsLength }: any) {
     // };
 
     const itemsAdoptions = 9; // Cantidad de tarjetas para mostrar por página
-    const cards = isDog ? Dogs : cardsCats;
+    const cards = isDog ? Dogs : Cats;
     const totalPagesAdoptions = Math.ceil(cards.length / itemsAdoptions);
 
     const handlePageChange = (page: number) => {
@@ -61,32 +63,32 @@ export default function Home({ CardsDogs, cardsCats, DogsLength }: any) {
         const fetchData = async () => {
             try 
             {
-                const response = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"HISTORY"}});
-            
-                console.log(response.data.resultPet.recordset)
-                setHistory(response.data.resultPet.recordset)
+                //const response = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"HISTORY"}});
+                let arrayHistory : any = await GetPets(true,"HISTORY", "CANADOG", true);
+                console.log(arrayHistory.array)
+                let arrayDogs : any = await GetPets(true,"Dog", "CANADOG", true);
+                let cardsDogs = arrayDogs.array
+                let arrayCats: any = await GetPets(true, "Cat", "CANADOG", true);
+                let cardsCats = arrayCats.array
+                console.log(arrayDogs.array)
                 
-                let array : any = []
+                setHistory(arrayHistory.array)
                 
                 console.log(DogsLength)
                 //let isExit = false
+                
+                const resultDogs = cardsDogs.map((pet: any) => ({
+                    ...pet,
+                    Image: pet.Image.filter((image: any) => image?.image != null)
+                }));
 
-                for(let i = CardsDogs.length; i < DogsLength; i++ ){
-                    console.log(i)
-                    const { data } = await axios.get('/UserCanaDog/CMS/api/pets', {
-                        params: { Type: "Dog", index: i }
-                    });
+                const resultCats = cardsCats.map((pet: any) => ({
+                    ...pet,
+                    Image: pet.Image.filter((image: any) => image?.image != null)
+                }));
 
-                    const resultDogs = data.resultPet.map((pet: any) => ({
-                        ...pet,
-                        Image: pet.Image.filter((image: any) => image?.image != null)
-                    }));
-
-                    array.push(...resultDogs);
-                    
-                }
-                array = array.concat(CardsDogs)
-                setDogs([...array])
+                setDogs(resultDogs)
+                setCats(resultCats)
                 setIsEjecuted(true)
 
             } 
@@ -568,7 +570,7 @@ export default function Home({ CardsDogs, cardsCats, DogsLength }: any) {
                                 <Card isBlurred className="border-none w-full" shadow="md">
                                     <ScrollShadow className="mn:w-full mn:h-[530px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
                                         <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'>
-                                            {cardsCats.map((card: any) => (
+                                            {Cats.map((card: any) => (
                                             <div
                                                 key={card.id}
                                                 ref={(el) => {

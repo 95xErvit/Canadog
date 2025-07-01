@@ -10,9 +10,10 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image';
 import 'primeicons/primeicons.css';
 import axios from 'axios';
+import { GetPets, GetProducts } from '../Data/Data';
 import { array, object } from 'yup';
 
-export default function CMS({CardsDogs, Cats, CardsProducts, DogsLength}: any) 
+export default function CMS({CardsDogs, CardsCats, CardsProducts, DogsLength}: any) 
 { 
     const toast = useRef<Toast>(null);
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
@@ -42,6 +43,7 @@ export default function CMS({CardsDogs, Cats, CardsProducts, DogsLength}: any)
     const [currentPage, setCurrentPage] = useState(1);
     const [History, setHistory] = useState([])
     const [Dogs, setDogs] = useState(CardsDogs)
+    const [Cats, setCats] = useState(CardsCats)
     const [Products, setProducts] = useState(CardsProducts)
     const [isEjecuted, setIsEjecuted] = useState(false);
     const router = useRouter()
@@ -394,41 +396,36 @@ export default function CMS({CardsDogs, Cats, CardsProducts, DogsLength}: any)
             const fetchData = async () => {
                 try 
                 {
-                    const response = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"HISTORY"}});
-                
-                    console.log(response.data.resultPet.recordset)
-                    setHistory(response.data.resultPet.recordset)
-                    
-                    let array : any = []
-                    
+                    //const response = await axios.get('/UserCanaDog/CMS/api/pets',{params:{Type:"HISTORY"}});
+                    let arrayHistory : any = await GetPets(undefined,"HISTORY", "CANADOG", true);
+                    console.log(arrayHistory.array)
+                    setHistory(arrayHistory.array)
+
+                    let arrayDogs : any = await GetPets(undefined,"Dog", "CANADOG", true);
+                    let cardsDogs = arrayDogs.array
+
+                    let arrayCats: any = await GetPets(undefined, "Cat", "CANADOG", true);
+                    let cardsCats = arrayCats.array
+                    console.log(arrayDogs.array)
                     console.log(DogsLength)
+
+                    const result4 : any = await GetProducts(undefined, "CANADOG", true)
+                    setProducts(result4)
                     //let isExit = false
+                    
+                    const resultDogs = cardsDogs.map((pet: any) => ({
+                        ...pet,
+                        Image: pet.Image.filter((image: any) => image?.image != null)
+                    }));
     
-                    for(let i = CardsDogs.length; i < DogsLength; i++ ){
-                        console.log(i)
-                        const { data } = await axios.get('/UserCanaDog/CMS/api/pets', {
-                            params: { Type: "Dog", index: i }
-                        });
+                    const resultCats = cardsCats.map((pet: any) => ({
+                        ...pet,
+                        Image: pet.Image.filter((image: any) => image?.image != null)
+                    }));
     
-                        const resultDogs = data.resultPet.map((pet: any) => ({
-                            ...pet,
-                            Image: pet.Image.filter((image: any) => image?.image != null)
-                        }));
-    
-                        array.push(...resultDogs);
-                        
-                    }
-                    array = array.concat(CardsDogs)
-                    setDogs([...array])
-
-                    const responseproduct = await axios.get('/UserCanaDog/CMS/api/products');
-                    console.log(responseproduct)
-                    const cardsProducts =  responseproduct.data.resultProduct
-                    console.log(cardsProducts)
-                    setProducts([...CardsProducts,...cardsProducts])
-
+                    setDogs(resultDogs)
+                    setCats(resultCats)
                     setIsEjecuted(true)
-
     
                 } 
                 catch (error) 

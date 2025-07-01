@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 // Activar y desactivar web
-const ENABLED = false;
+const ENABLED = true;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   if (!ENABLED) {
