@@ -15,9 +15,9 @@ export const metadata: Metadata = {
   title: 'Adopciones Canadog',
   description: 'Adopciones',
 };
-
+// 
 // Activar y desactivar web
-const ENABLED = false;
+const ENABLED = true;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   if (!ENABLED) {

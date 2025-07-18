@@ -51,13 +51,17 @@ export default function Home({ CardsDogs, CardsCats, DogsLength }: any) {
     const itemsAdoptions = 9; // Cantidad de tarjetas para mostrar por página
     const cards = isDog ? Dogs : Cats;
     const totalPagesAdoptions = Math.ceil(cards.length / itemsAdoptions);
+    const startIndex = (currentPage - 1) * itemsAdoptions;
+    const endIndex = startIndex + itemsAdoptions;
+    const currentCards = cards.slice(startIndex, endIndex);
+
+    // Sección de historias (usa carrusel manual)
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [cardsToShow, setCardsToShow] = useState(4); 
 
     const handlePageChange = (page: number) => {
         setCurrentPage(page); // Actualiza la página actual cuando cambia
     };
-    
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [cardsToShow, setCardsToShow] = useState(4); 
 
     useEffect(() =>{
         const fetchData = async () => {
@@ -133,7 +137,6 @@ export default function Home({ CardsDogs, CardsCats, DogsLength }: any) {
                     if(index >= leng){
                         index = 0
                     }
-    
                     setIndiceActual(index)
                 }
             }
@@ -270,6 +273,17 @@ export default function Home({ CardsDogs, CardsCats, DogsLength }: any) {
         }
     ];
 
+    // Estado para controlar la carga
+    const [isLoadingCards, setIsLoadingCards] = useState(true);
+
+    // Simula la carga de datos (puedes reemplazar esto con tu lógica real de carga)
+    // Si ya tienes un useEffect para cargar los datos, solo pon setIsLoadingCards(false) cuando terminen de cargar
+    React.useEffect(() => {
+        // Simulación de carga de 1 segundo
+        const timer = setTimeout(() => setIsLoadingCards(false), 2000);
+        return () => clearTimeout(timer);
+    }, []);
+
     return(
         <div>
             {/* BANNER */}
@@ -329,35 +343,35 @@ export default function Home({ CardsDogs, CardsCats, DogsLength }: any) {
                                 Encuentra a tu {<span className='text-greenCanadog'>mejor amigo</span>}
                             </h2>
                             <div className="flex gap-4 mn:my-4 md:my-8 mn:justify-center md:justify-start">
-                                <div className="group relative flex flex-col items-center mn:my-4 md:m-0">
-                                    {/* <div className="absolute bottom-12 left-0 flex justify-center items-center w-full h-full transform translate-y-full opacity-0 group-hover:-translate-y-2 group-hover:opacity-100 transition-all duration-300">
+                                <div className="group relative flex flex-col items-center mn:my-4 md:mt-10">
+                                    <div className="absolute bottom-12 left-0 flex justify-center items-center w-full h-full transform translate-y-full opacity-0 group-hover:-translate-y-2 group-hover:opacity-100 transition-all duration-300">
                                         <Image
                                             alt="guauButton"
                                             src="/guauButton.gif"
                                             height="100"
                                             width="100"
                                         />
-                                    </div> */}
+                                    </div>
                                     <Button
                                         onClick={(e) => setIsDog(true)}
-                                        className={`bg-transparent border ${isDog ? "bg-greenCanadog border-2 border-mentaCanadog text-white font-semibold" : "border-2 border-greenCanadog text-greenCanadog font-semibold"} hover:bg-greenCanadog hover:text-pinkLightGora font-semibold rounded-lg`}
+                                        className={`bg-transparent border hover:bg-greenCanadog hover:text-white text-white font-semibold rounded-lg ${isDog ? "bg-greenCanadog border-2 border-mentaCanadog" : "border-2 border-greenCanadog text-greenCanadog"}`}
                                         size="lg"
                                     >
                                         Guaus
                                     </Button>
                                 </div>
-                                <div className="group relative flex flex-col items-center mn:my-4 md:m-0">
-                                    {/* <div className="absolute bottom-12 left-0 flex justify-center items-center w-full h-full transform translate-y-full opacity-0 group-hover:-translate-y-1.5 group-hover:opacity-100 transition-all duration-300">
+                                <div className="group relative flex flex-col items-center mn:my-4 md:mt-10">
+                                    <div className="absolute bottom-12 left-0 flex justify-center items-center w-full h-full transform translate-y-full opacity-0 group-hover:-translate-y-1.5 group-hover:opacity-100 transition-all duration-300">
                                     <Image
                                         alt="catButton"
                                         src="/CatIcon.gif"
                                         height="100"
                                         width="100"
                                     />
-                                    </div> */}
+                                    </div>
                                     <Button
                                         onClick={(e) => setIsDog(false)}
-                                        className={`bg-transparent border ${!isDog ? "bg-greenCanadog border-2 border-mentaCanadog text-white font-medium" : "border-2 border-greenCanadog text-greenCanadog font-semibold"} hover:bg-greenCanadog hover:text-pinkLightGora font-semibold rounded-lg`}
+                                        className={`bg-transparent border hover:bg-greenCanadog hover:text-white text-white font-semibold rounded-lg  ${!isDog ? "bg-greenCanadog border-2 border-mentaCanadog text-white font-medium" : "border-2 border-greenCanadog text-greenCanadog font-semibold"}`}
                                         size="lg"
                                     >
                                         Miaus
@@ -424,128 +438,128 @@ export default function Home({ CardsDogs, CardsCats, DogsLength }: any) {
                                     shadow="md"
                                 >
                                     <ScrollShadow className="mn:w-full mn:h-[530px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
-                                        <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'>
-                                            {Dogs.map((card: any) => (
-                                                <div
-                                                    key={card.id}
-                                                    ref={(el) => {
-                                                        cardRefs.current[card.id] = el; 
-                                                    }}
-                                                    className={`relative m-4 transition-all duration-300 
-                                                        ${expandedCard === card.id ? 'row-span-2 z-50' : 'row-span-1'}
-                                                        ${expandedCard === card.id ? 'h-auto' : 'h-[200px]'}
-                                                    `}
-                                                    
-                                                >
-                                                    <Card>
-                                                        <div className={`flex items-center ${expandedCard === card.id ? 'flex-col mn:h-[500px] md:h-[470px] lg:h-[450px]' : ''}`}>
-                                                            {expandedCard === card.id ? (
-                                                                /*<Image
-                                                                    alt="Album cover"
-                                                                    className={`shadow-md transition-all duration-100 ${expandedCard === card.id ? 'w-full h-[220px]' : 'w-[170px] h-[200px]'} bg-greenLightCanadog object-contain`}
-                                                                    width={140}
-                                                                    height={200}
-                                                                    src={card.Image[indiceActual]?.image || card.Image[0]?.image}
-                                                                />*/
-                                                                <>
-                                                                    {/* Carousel principal */}
-                                                                    <Carousel 
-                                                                        value={card.Image} 
-                                                                        numScroll={1} 
-                                                                        numVisible={1}  
-                                                                        itemTemplate={imageCarousel} 
-                                                                        className="bg-greenLightCanadog" 
-                                                                        showIndicators={false} 
-                                                                    />
-                                                                    {/* Modal para ver la imagen en grande */}
-                                                                    <Modal
-                                                                        isOpen={isOpenModal}
-                                                                        onOpenChange={setIsOpenModal}
-                                                                        className="flex items-center justify-center w-[90vw] md:w-[50vw] xl:w-[80vw]"
-                                                                    >
-                                                                        <ModalContent className="flex items-center justify-center">
-                                                                            <Carousel 
-                                                                                value={card.Image} 
-                                                                                numScroll={1} 
-                                                                                numVisible={1} 
-                                                                                itemTemplate={ImageExpand} 
-                                                                                className="bg-greenLightCanadog w-full h-full"
-                                                                                showIndicators={false} 
-                                                                            />
-                                                                        </ModalContent>
-                                                                    </Modal>
-                                                                </>
-                                                                ) : (
-                                                                <Image
-                                                                    alt="Album cover"
-                                                                    className={`shadow-md transition-all duration-100 bg-greenLightCanadog object-cover aspect-[4/3] ${expandedCard === card.id ? 'w-full h-[220px]' : 'mn:w-[140px] md:w-[170px] h-[200px]'}`}
-                                                                    width={140}
-                                                                    height={200}
-                                                                    src={card.Image[0]?.image}
-                                                                />
-                                                            )}
-
-                                                            <CardBody className={`${expandedCard === card.id ? 'w-full h-auto' : 'w-[170px] h-[200px] justify-around'}`}>
-                                                                <div className={`${expandedCard === card.id ? 'flex items-center justify-around' : 'flex w-full flex-wrap'}`}>
-                                                                    <h1 className={`flex font-semibold text-blackCanadog ${expandedCard === card.id ? 'justify-start mn:text-[22px] md:text-2xl' : 'px-2 justify-end w-full mn:text-xl md:text-2xl'}`}>
-                                                                        {card.title.substring(0, 3)}
-                                                                        <span className='text-greenCanadog'>{card.title.substring(3)}</span>
-                                                                    </h1>
-                                                                    <h2 className={`flex font-semibold text-greenCanadog ${expandedCard === card.id ? 'justify-start mn:text-xl xl:text-2xl mn: hidden' : 'px-2 justify-end w-full mn:text-xs xl:text-sm'}`}>
-                                                                        {card.old}
-                                                                    </h2>
-                                                                    {expandedCard === card.id && (
-                                                                        <div className='flex flex-wrap'>
-                                                                            <div className='flex items-center'>
-                                                                                <Button className='bg-greenCanadog border border-greenCanadog text-white mn:text-xs md:text-base h-7' radius="full" onPress={onOpen}>
-                                                                                    Adoptame
-                                                                                </Button>
-                                                                            </div>
-                                                                            <div className='flex items-center'>
-                                                                                <Button
-                                                                                    onClick={() => toggleExpand(card.id)}
-                                                                                    className='bg-transparent text-greenCanadog text-end mn:min-w-10 xl:min-w-20 px-0'
-                                                                                    endContent={<i className="pi pi-arrow-circle-up" style={{ color: '#489E84', fontSize: '1.5rem' }} />}
-                                                                                    radius="full"
+                                        {isLoadingCards ? (
+                                            <div className="flex flex-col items-center justify-center w-full h-[400px]">
+                                                {/* <Image src="/loading-paw.gif" alt="Cargando..." width={120} height={120} /> */}
+                                                <span className="mt-4 text-greenCanadog font-semibold text-lg md:text-xl">Cargando adopciones...</span>
+                                            </div>
+                                        ) : (
+                                            <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'>
+                                                {currentCards.map((card: any) => (
+                                                    <div
+                                                        key={card.id}
+                                                        ref={(el) => {
+                                                            cardRefs.current[card.id] = el; 
+                                                        }}
+                                                        className={`relative m-4 transition-all duration-300 
+                                                            ${expandedCard === card.id ? 'row-span-2 z-50' : 'row-span-1'}
+                                                            ${expandedCard === card.id ? 'h-auto' : 'h-[200px]'}
+                                                        `}
+                                                        
+                                                    >
+                                                        <Card>
+                                                            <div className={`flex items-center ${expandedCard === card.id ? 'flex-col mn:h-[500px] md:h-[470px] lg:h-[450px]' : ''}`}>
+                                                                {expandedCard === card.id ? (
+                                                                    <>
+                                                                        {/* Carousel principal */}
+                                                                        <Carousel 
+                                                                            value={card.Image} 
+                                                                            numScroll={1} 
+                                                                            numVisible={1}  
+                                                                            itemTemplate={imageCarousel} 
+                                                                            className="bg-greenLightCanadog" 
+                                                                            showIndicators={false} 
+                                                                        />
+                                                                        {/* Modal para ver la imagen en grande */}
+                                                                        <Modal
+                                                                            isOpen={isOpenModal}
+                                                                            onOpenChange={setIsOpenModal}
+                                                                            className="flex items-center justify-center w-[90vw] md:w-[50vw] xl:w-[80vw]"
+                                                                        >
+                                                                            <ModalContent className="flex items-center justify-center">
+                                                                                <Carousel 
+                                                                                    value={card.Image} 
+                                                                                    numScroll={1} 
+                                                                                    numVisible={1} 
+                                                                                    itemTemplate={ImageExpand} 
+                                                                                    className="bg-greenLightCanadog w-full h-full"
+                                                                                    showIndicators={false} 
                                                                                 />
+                                                                            </ModalContent>
+                                                                        </Modal>
+                                                                    </>
+                                                                ) : (
+                                                                    <Image
+                                                                        alt="Album cover"
+                                                                        className={`shadow-md transition-all duration-100 bg-greenLightCanadog object-cover aspect-[4/3] ${expandedCard === card.id ? 'w-full h-[220px]' : 'mn:w-[140px] md:w-[170px] h-[200px]'}`}
+                                                                        width={140}
+                                                                        height={200}
+                                                                        src={card.Image[0]?.image}
+                                                                    />
+                                                                )}
+
+                                                                <CardBody className={`${expandedCard === card.id ? 'w-full h-auto' : 'w-[170px] h-[200px] justify-around'}`}>
+                                                                    <div className={`${expandedCard === card.id ? 'flex items-center justify-around' : 'flex w-full flex-wrap'}`}>
+                                                                        <h1 className={`flex font-semibold text-blackCanadog ${expandedCard === card.id ? 'justify-start mn:text-[22px] md:text-2xl' : 'px-2 justify-end w-full mn:text-xl md:text-2xl'}`}>
+                                                                            {card.title.substring(0, 3)}
+                                                                            <span className='text-greenCanadog'>{card.title.substring(3)}</span>
+                                                                        </h1>
+                                                                        <h2 className={`flex font-semibold text-greenCanadog ${expandedCard === card.id ? 'justify-start mn:text-xl xl:text-2xl mn: hidden' : 'px-2 justify-end w-full mn:text-xs xl:text-sm'}`}>
+                                                                            {card.old}
+                                                                        </h2>
+                                                                        {expandedCard === card.id && (
+                                                                            <div className='flex flex-wrap'>
+                                                                                <div className='flex items-center'>
+                                                                                    <Button className='bg-greenCanadog border border-greenCanadog text-white mn:text-xs md:text-base h-7' radius="full" onPress={onOpen}>
+                                                                                        Adoptame
+                                                                                    </Button>
+                                                                                </div>
+                                                                                <div className='flex items-center'>
+                                                                                    <Button
+                                                                                        onClick={() => toggleExpand(card.id)}
+                                                                                        className='bg-transparent text-greenCanadog text-end mn:min-w-10 xl:min-w-20 px-0'
+                                                                                        endContent={<i className="pi pi-arrow-circle-up" style={{ color: '#489E84', fontSize: '1.5rem' }} />}
+                                                                                        radius="full"
+                                                                                    />
+                                                                                </div>
                                                                             </div>
+                                                                        )}
+                                                                    </div>
+                                                        
+                                                                    <p className={`font-normal text-gray ${expandedCard === card.id ? 'w-full h-[200px] text-[14px] p-2' : 'w-full h-[60px] text-[12px]'}`}>
+                                                                        {expandedCard === card.id ? 
+                                                                            (
+                                                                                card.longDescription 
+                                                                            ) 
+                                                                            : 
+                                                                            (
+                                                                                window.innerWidth >= 1024 ? card.shortDescription.substring(0, 75) + "..." : 
+                                                                                window.innerWidth >= 768 ? card.shortDescription.substring(0, 58) + "..." : 
+                                                                                window.innerWidth >= 640 ? card.shortDescription.substring(0, 80) + "..." : 
+                                                                                card.shortDescription.substring(0, 55) + "..."
+                                                                            )
+                                                                        }
+                                                                    </p>
+                                                        
+                                                                    {expandedCard !== card.id && (
+                                                                        <div className="flex justify-center">
+                                                                            <Button
+                                                                                onClick={() => toggleExpand(card.id)}
+                                                                                className='bg-transparent border border-greenCanadog text-greenCanadog text-xs'
+                                                                                endContent={<i className="pi pi-arrow-circle-down" style={{ color: '#489E84' }} />}
+                                                                                radius="full"
+                                                                            >
+                                                                                Más sobre mi
+                                                                            </Button>
                                                                         </div>
                                                                     )}
-                                                                </div>
-                                                    
-                                                                <p className={`font-normal text-gray ${expandedCard === card.id ? 'w-full h-[200px] text-[14px] p-2' : 'w-full h-[60px] text-[12px]'}`}>
-                                                                    {expandedCard === card.id ? 
-                                                                        (
-                                                                            card.longDescription 
-                                                                        ) 
-                                                                        : 
-                                                                        (
-                                                                            window.innerWidth >= 1024 ? card.shortDescription.substring(0, 75) + "..." : 
-                                                                            window.innerWidth >= 768 ? card.shortDescription.substring(0, 58) + "..." : 
-                                                                            window.innerWidth >= 640 ? card.shortDescription.substring(0, 80) + "..." : 
-                                                                            card.shortDescription.substring(0, 55) + "..."
-                                                                        )
-                                                                    }
-                                                                </p>
-                                                    
-                                                                {expandedCard !== card.id && (
-                                                                    <div className="flex justify-center">
-                                                                        <Button
-                                                                            onClick={() => toggleExpand(card.id)}
-                                                                            className='bg-transparent border border-greenCanadog text-greenCanadog text-xs'
-                                                                            endContent={<i className="pi pi-arrow-circle-down" style={{ color: '#489E84' }} />}
-                                                                            radius="full"
-                                                                        >
-                                                                            Más sobre mi
-                                                                        </Button>
-                                                                    </div>
-                                                                )}
-                                                            </CardBody>
-                                                        </div>
-                                                    </Card>
-                                                </div>
-                                            ))}
-                                        </div>
+                                                                </CardBody>
+                                                            </div>
+                                                        </Card>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
                                     </ScrollShadow>
                 
                                     {/* Paginador */}
@@ -570,7 +584,7 @@ export default function Home({ CardsDogs, CardsCats, DogsLength }: any) {
                                 <Card isBlurred className="border-none w-full" shadow="md">
                                     <ScrollShadow className="mn:w-full mn:h-[530px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
                                         <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'>
-                                            {Cats.map((card: any) => (
+                                            {currentCards.map((card: any) => (
                                             <div
                                                 key={card.id}
                                                 ref={(el) => {
@@ -831,7 +845,7 @@ export default function Home({ CardsDogs, CardsCats, DogsLength }: any) {
             </div>
 
             <div className="relative px-4">
-                <div className="flex justify-center mn:gap-4 md:gap-8 p-4 md:p-8 overflow-x-auto">
+                <div className="flex justify-center mn:gap-4 md:gap-10 p-4 md:p-8 overflow-x-auto">
                     {History.map((card: any, index: any) => {
                         const isVisible =
                         index >= currentIndex &&
