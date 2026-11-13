@@ -7,13 +7,13 @@ export async function GetPets(enable? : boolean, type? : string, web? : string, 
 
         const { data: { token } } = await axios.get(`${call ? 'https://api.innminds.com.co:443' : process.env.HOST_API }/Api/Gora/TokenGora`, {
             headers: {
-                "x-api-key": call ? 'c55af7ae-f776-4bea-91cf-b05467981d64' :<string>process.env.API_KEY
+                "x-api-key": <string>process.env.API_KEY
             }
         })
 
         try {
 
-            const params = {Type: type, Enable:enable, Web: web}
+            const params = {Type: type, Enable:enable}
 
             const result = await axios.get(`${call ? 'https://api.innminds.com.co:443' : process.env.HOST_API}/Api/Gora/CMS/Pets`,
             {   
@@ -22,8 +22,8 @@ export async function GetPets(enable? : boolean, type? : string, web? : string, 
                     Authorization: `Bearer ${token}`
                 }
             })
-            //console.log(result.data.result.recordset)
-            if(type === "Dog" || type === "Cat")
+            console.log(result.data)
+            if(type === "DOG" || type === "CAT")
             {   
 
                 let fin = (call === false) ? result.data.result.recordset.length > 3 ? 4 : result.data.result.recordset.length : result.data.result.recordset.length
@@ -31,20 +31,17 @@ export async function GetPets(enable? : boolean, type? : string, web? : string, 
                 console.log(fin)
                 for(let i = 0; i < fin;  i++){
                     let animal : any = {
-                        id: result.data.result.recordset[i].id,
-                        shortDescription: result.data.result.recordset[i].shortDescription,
-                        longDescription: result.data.result.recordset[i].longDescription,
-                        title: result.data.result.recordset[i].title,
-                        old:result.data.result.recordset[i].old,
+                        id: result.data.result.recordset[i].ANIMALS_ID,
+                        shortDescription: result.data.result.recordset[i].ANIMALS_DESCRIPTION,
+                        longDescription: result.data.result.recordset[i].ANIMALS_DESCRIPTION,
+                        title: result.data.result.recordset[i].ANIMALS_NAME,
+                        old:result.data.result.recordset[i].ANIMALS_OLDDATE,
                         ANIMALS_TYPE:result.data.result.recordset[i].ANIMALS_TYPE,
                         ANIMALS_USER:result.data.result.recordset[i].ANIMALS_USER,
                         ANIMALS_DATE:result.data.result.recordset[i].ANIMALS_DATE,
                         ANIMALS_ENABLE:result.data.result.recordset[i].ANIMALS_ENABLE,
-                        Image:[{image: result.data.result.recordset[i].image},
-                            {image: result.data.result.recordset[i].image2},
-                            {image: result.data.result.recordset[i].image3}, 
-                            {image: result.data.result.recordset[i].image4}, 
-                            {image:result.data.result.recordset[i].image5}]
+                        Image:[{image: result.data.result.recordset[i].ANIMALS_IMAGE_1},
+                            {image: result.data.result.recordset[i].ANIMALS_IMAGE_2}]
                     }
                     array.push(animal)
                 }

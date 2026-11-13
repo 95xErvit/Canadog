@@ -7,7 +7,7 @@ import { headers } from 'next/headers';
 import { GetPets, GetProducts } from "@/app/Components/Data/Data";
 export default async function Home() 
 {	
-	const session = await getServerSession();
+	const session = true;
 	
 	console.log(session)
 		
@@ -19,12 +19,17 @@ export default async function Home()
 
 	if(session)
 	{
-		let array : any = await GetPets(undefined,"Dog", "CANADOG",false);
+		let array : any = await GetPets(undefined,"DOG", "CANADOG",false);
 		let cardsDogs = array.array
-		let array2 : any = await GetPets(undefined, "Cat", "CANADOG",false);
+		let array2 : any = await GetPets(undefined, "CAT", "CANADOG",false);
 		let cardsCats  = array2.array
-		//const result3 : any = await GetPets(undefined, 'HISTORY', "CANADOG")
+		const result3 : any = await GetPets(undefined, 'HISTORY', "CANADOG")
 		const result4 : any = await GetProducts(undefined, "CANADOG",false)
+		
+		console.log("RESULTADO PRODUCTOS", result4)
+		//console.log("HISTORY", result3)
+		//console.log(cardsCats)
+		//console.log(cardsDogs)
 		
 		for(let i= 0; i < cardsCats.length; i++)
 		{
@@ -47,7 +52,7 @@ export default async function Home()
 						<CMS 
 							CardsDogs={cardsDogs} /*{[]}*/
 							CardsCats={cardsCats} /*{{[]}*/
-							//History={result3.data.result.recordset}
+							History={result3.array}
 							CardsProducts={result4}
 							DogsLength={array.petsLength}
 						/>

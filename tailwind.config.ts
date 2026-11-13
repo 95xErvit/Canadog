@@ -24,17 +24,16 @@ module.exports = {
         'md': '768px',
         'lg': '1024px',
         'xl': '1280px',
-        'xxl': '1920px',
+        '2xl': '1920px',
     },
     extend: {
       colors: {
         white: '#FFFFFF',
         gray: '#5C5C5C',
-        blackCanadog: '#3F3F3F',
-        greenCanadog: '#1C8C58',
-        greenLightCanadog: '#AFF1D5',
-        mentaCanadog: '#69C699',
-        redGora: '#DF6536',
+        black: '#3F3F3F',
+        brown: '#4D2308',
+        green: '#C8E395',
+        brownLight: '#59290C',
       },
       fontFamily: {
         AkrobatBL: [

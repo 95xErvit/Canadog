@@ -1,8 +1,17 @@
-import Home from "./Components/Home/Home";
+import Hero from "./Components/Home/Components/Hero";
+import CardsAnimals from "./Components/Home/Components/CardsAnimals";
 import  Header  from './Components/Header/Header';
 import  Footer  from './Components/Footer/Footer';
+import Historys from "./Components/Home/Components/Historys";
+import StepsImages from "./Components/Home/Components/StepsImages";
+import Appreciates from "./Components/Home/Components/Appreciates";
 import { GetPets } from "./Components/Data/Data";
 import { headers } from 'next/headers';
+// import  Banner from "./Banner"
+// import  AdBanner from "."
+// import  AdBannerP from "./BannerPequeño"
+import BannerADS from "../public/BannerAdds.png";
+import Image from 'next/image';
 
 export default async function HomeCanadog() 
 {
@@ -12,12 +21,13 @@ export default async function HomeCanadog()
 		},
 	};
 
-	let array : any = await GetPets(true,"Dog", "CANADOG", false);
+	let array : any = await GetPets(true,"DOG", "CANADOG", false);
 	let cardsDogs = array.array
-	let array2 : any = await GetPets(true, "Cat", "CANADOG", false);
+	let array2 : any = await GetPets(true, "CAT", "CANADOG", false);
 	let cardsCats  = array2.array
-	//const result3 : any = await GetPets(true, "History", "CANADOG")
-	//console.log(cardsCats)
+	const result3 : any = await GetPets(true, "History", "CANADOG")
+	console.log("cats", cardsCats)
+	
 	for(let i= 0; i < cardsCats.length; i++)
 	{
 		let arr = cardsCats[i].Image
@@ -31,19 +41,45 @@ export default async function HomeCanadog()
 		arr = arr.filter((image : any) => image.image !== null && image.image !== undefined)
 		cardsDogs[i].Image = arr
 	}
-	
+
 	return (
 		<>
 			<Header/>
-				<main className="bg-cover bg-center" style={{backgroundImage:'url("")'}}>
-					<Home 
+				<main className="pt-20 bg-cover bg-center" style={{backgroundImage:'url("")'}}>
+					<Hero />
+
+					<CardsAnimals 
 						CardsDogs={cardsDogs} /*{[]}*/
 						CardsCats={cardsCats} /*{{[]}*/
-						DogsLength={array.petsLength}
-						/*cardsHistory={result3.data.result.recordset} /*{[]}*/ 
 					/>
+
+					<Appreciates />
+
+					<Historys CardsHistory={result3.array} />
+
+					{/* PUBLICIDAD */}
+					<div className='flex justify-center mt-6 mb-6 py-6'>
+						<Image src={BannerADS} alt="Publicidad" className="w-full h-full object-cover" />
+					{ 
+						// window.innerWidth >= 728 ?
+						// <Banner/>
+						// :  
+						// window.innerWidth >= 468 ?
+						// <AdBanner/>
+						// :
+						// <AdBannerP/>
+					}
+					{/*<script async={true} data-cfasync="false" src="//pl26062928.effectiveratecpm.com/fe98476a7a70879b195eafa963b474de/invoke.js"></script>
+					<div id="container-fe98476a7a70879b195eafa963b474de"></div>*/}
+					</div>
+
+					<StepsImages />
 				</main>
 			<Footer/>
 		</>
 	)
 }
+/*
+DogsLength={array.petsLength}
+						CardsHistory={result3.array} 
+*/

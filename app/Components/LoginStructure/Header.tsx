@@ -11,7 +11,7 @@ export default function Header()
                 <Image alt="avatarGora" src="/LogoCanadog.jpg" height="60" width="60"/>
             </span> 
             <p className="mn:text-2xl lg:text-4xl font-semibold leading-6">
-              <a className=" text-greenCanadog">Canadog admin</a>
+              <a className=" text-greenCanadog">ComeDog admin</a>
             </p>
           </div>
         </div> 

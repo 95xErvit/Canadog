@@ -1,115 +1,132 @@
-"use client"
-import React from "react";
-import { useRouter } from 'next/navigation';
-import PerritoBlanco from "@/public/PerritoBlanco.jpeg"
-import MotionTransition from '../MotionTransition/MotionTransition';
-import {Navbar, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Image} from "@nextui-org/react";
+
+"use client";
+
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { Navbar, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Image } from "@nextui-org/react";
+import PerritoBlanco from "@/public/PerritoBlanco.jpeg";
+import MotionTransition from "../MotionTransition/MotionTransition";
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const router = useRouter();
+  const router = useRouter();                           // Hook para navegar entre rutas
+  const [isMenuOpen, setIsMenuOpen] = useState(false);  // Estado para controlar el menu de navegación
+  const [isScrolled, setIsScrolled] = useState(false);  // Estado para controlar el fondo del header
 
-  const HeaderNavigation = (path: string) => {
-    console.log(window.location.href)
+  // Detectar el scroll para aplicar el fondo del header
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // Opciones compartidas para escritorio y móvil
+  const menuItems = [
+    { name: "¿Quiénes somos?", path: "/Home/AboutUs" },
+    { name: "Adopciones", path: "/#adopciones" },
+    { name: "Casos", path: "/Home" },
+    { name: "Tienda de beneficios", path: "/Store" },
+    { name: "Ayúdanos", path: "/Home/Donations" },
+  ];
+
+  // Función para navegar entre rutas
+  const handleNavigation = (path: string) => {
+    setIsMenuOpen(false);
     router.push(path);
   };
 
-  const handleMenuItemClick = (action: () => void) => {
-    action();            
-    setIsMenuOpen(false); 
-  };
-    
-  const menuItems = [
-    { name: "Adopciones", action: () => HeaderNavigation('/#adopciones') },
-    { name: "Tienda Canadog", action: () => HeaderNavigation('/Store')},
-    { name: "¿Quiénes somos?", action: () => HeaderNavigation('/Home/AboutUs') },
-    { name: "Ayudanos", action: () => HeaderNavigation('/Home/Donations') }, 
-  ];
+  // Estilos para el menu de navegación
+  const linkStyles =
+    "text-base xl:text-lg font-semibold text-brown " +
+    "hover:text-brownLight relative " +
+    "after:absolute after:-bottom-1 after:left-0 " +
+    "after:h-[2px] after:w-0 after:bg-green " +
+    "after:transition-all after:duration-300 " +
+    "hover:after:w-full whitespace-nowrap";
 
   return (
-    <div className="flex justify-between items-center bg-white py-4 px-4">
-    {/* Logo (visible en móviles) */}
-    <div className="flex lg:hidden items-center">
-      <Link href="/" className="flex items-center">
-        <Image src="/LogoCanadog.jpg" width={100} height={100} alt="Canadog" />
-      </Link>
-    </div>
-
-    {/* Navbar principal */}
-    <Navbar
-      onMenuOpenChange={setIsMenuOpen}
-      isMenuOpen={isMenuOpen}
-      className="bg-white lg:my-8 w-full"
+    <header
+      className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 py-4 ${
+        isScrolled ? "bg-white/95 shadow-sm backdrop-blur-md" : "bg-white"
+      }`}
     >
-      {/* Menú web */}
-      <NavbarContent className="hidden lg:flex w-full items-center gap-10 !justify-center">
-        <NavbarItem>
-          <Link
-            className="text-xl font-semibold text-greenCanadog hover:text-mentaCanadog relative before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-greenCanadog before:transition-all before:duration-300 hover:before:w-full cursor-pointer"
-            onClick={() => router.push("/#adopciones")}
-          >
-            Adopciones
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link
-            className="text-xl font-semibold text-greenCanadog hover:text-mentaCanadog relative before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-greenCanadog before:transition-all before:duration-300 hover:before:w-full cursor-pointer"
-            onClick={() => router.push("/Store")}
-          >
-            Tienda Canadog
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link href="/">
-            <Image src="/LogoCanadog.jpg" width="130" height="100" alt="Canadog" />
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link
-            className="text-xl font-semibold text-greenCanadog hover:text-mentaCanadog relative before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-greenCanadog before:transition-all before:duration-300 hover:before:w-full cursor-pointer"
-            onClick={() => router.push("/Home/AboutUs")}
-          >
-            ¿Quiénes somos?
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link
-            className="text-xl font-semibold text-greenCanadog hover:text-mentaCanadog relative before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] before:bg-greenCanadog before:transition-all before:duration-300 hover:before:w-full cursor-pointer"
-            onClick={() => router.push("/Home/Donations")}
-          >
-            Ayúdanos
-          </Link>
-        </NavbarItem>
-      </NavbarContent>
-
-      {/* Botón menú hamburguesa */}
-      <div className="lg:hidden ml-auto">
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="text-greenCanadog hover:text-mentaCanadog font-bold w-12 h-12 "
-        />
-      </div>
-
-      {/* Menú móvil */}
-      <NavbarMenu className="top-[105px] pt-6">
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item.name}-${index}`}>
-            <Link
-              className="flex justify-center w-full text-3xl py-2 text-greenCanadog hover:text-mentaCanadog cursor-pointer"
-              onClick={() => handleMenuItemClick(item.action)}
-            >
-              {item.name}
+      <Navbar
+        isMenuOpen={isMenuOpen}
+        onMenuOpenChange={setIsMenuOpen}
+        maxWidth="full"
+        className="w-full bg-transparent px-4 sm:px-6 lg:px-10"
+        classNames={{ wrapper: "max-w-none w-full h-20", menu: "gap-4 pt-6", }}
+      >
+        {/* Logo: izquierda en móvil y escritorio */}
+        <NavbarContent justify="start" className="flex flex-1 lg:flex-none">
+          <NavbarItem>
+            <Link href="/" aria-label="ComeDog - Inicio" className="flex items-center">
+              <Image
+                src="/LogoHeader.png"
+                width={80}
+                height={80}
+                alt="Logo ComeDog"
+                className="w-16 sm:w-20"
+              />
             </Link>
+          </NavbarItem>
+        </NavbarContent>
+
+        {/* Navegación de escritorio: alineada a la derecha */}
+        <NavbarContent justify="end" className="hidden flex-1 items-center gap-5 lg:flex xl:gap-8">
+          {menuItems.map((item) => (
+            <NavbarItem key={item.name}>
+              <Link href={item.path} className={linkStyles}>
+                {item.name}
+              </Link>
+            </NavbarItem>
+          ))}
+        </NavbarContent>
+
+        {/* Botón hamburguesa: solo móvil y tablet */}
+        <NavbarContent justify="end" className="flex flex-none lg:hidden">
+          <NavbarMenuToggle aria-label={ isMenuOpen ? "Cerrar menú" : "Abrir menú"} className="text-brown"/>
+        </NavbarContent>
+
+        {/* Menú desplegable */}
+        <NavbarMenu className="top-20 gap-4 bg-white/95 px-6 pb-8 backdrop-blur-md">
+          {menuItems.map((item) => (
+            <NavbarMenuItem key={item.name}>
+              <Link
+                href={item.path}
+                onPress={() => setIsMenuOpen(false)}
+                className="flex w-full justify-center py-3 text-center text-xl font-medium text-brown hover:text-brownLight"
+              >
+                {item.name}
+              </Link>
+            </NavbarMenuItem>
+          ))}
+
+          {/* Imagen decorativa del menú móvil */}
+          <NavbarMenuItem>
+            <MotionTransition>
+              <div className="flex justify-center px-4 pt-4">
+                <Image
+                  src={PerritoBlanco.src}
+                  width={280}
+                  height={320}
+                  alt="Perrito rescatado"
+                  className="max-h-64 w-auto object-contain"
+                />
+              </div>
+            </MotionTransition>
           </NavbarMenuItem>
-        ))}
-        {/* Imagen perrito solo visible en pantallas móviles */}
-        <MotionTransition>
-          <div className="flex justify-center items-center m-4">
-            <Image src={PerritoBlanco.src} width="350" height="450" alt="Logo Gora" />
-          </div>
-        </MotionTransition>
-      </NavbarMenu>
-    </Navbar>
-  </div>
-);
+        </NavbarMenu>
+      </Navbar>
+    </header>
+  );
 }

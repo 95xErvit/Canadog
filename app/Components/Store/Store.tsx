@@ -9,7 +9,6 @@ import Image from 'next/image';
 import {Divider} from "@nextui-org/divider";
 import {Pagination} from "@nextui-org/react";
 import CanadogStore from "@/public/CanadogCompra.jpg"
-import 'primeicons/primeicons.css';
 import { GetProducts } from '../Data/Data';
 import axios from 'axios';
 
@@ -160,7 +159,7 @@ export default function Store({ CardsProducts }: any) {
                                                 <Image
                                                     alt="Album cover"
                                                     className="z-0 w-full h-60 object-cover"
-                                                    src={card.image}
+                                                    src={card.PRODUCT_IMAGE}
                                                     width={100}
                                                     height={100}
                                                 />
