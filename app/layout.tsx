@@ -8,6 +8,7 @@ import { Poppins } from 'next/font/google';
 import { Metadata } from 'next';
 import DogsWork from '@/public/DogsWork.png'
 import ConfigureAmplifyClientSide from './amplify-cognito-config';
+import WhatsAppButton from './Components/Home/Components/WhatsAppButton';
 
 const popinsFont = Poppins({ weight: ['400', '600', '700'], subsets: ['latin'] });
 
@@ -15,7 +16,8 @@ export const metadata: Metadata = {
   title: 'Adopciones Canadog',
   description: 'Adopciones',
 };
-// 
+
+
 // Activar y desactivar web
 const ENABLED = true;
 
@@ -95,11 +97,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           async={true}
           data-cfasync="false"
           src="//pl26062928.effectiveratecpm.com/fe98476a7a70879b195eafa963b474de/invoke.js"
-        ></script>
+        />
       </head>
+      
       <body className={popinsFont.className}>
         <ConfigureAmplifyClientSide />
         {children}
+        <WhatsAppButton />
       </body>
     </html>
   );

@@ -121,18 +121,20 @@ export default function Historys() {
                     </p>
                 </motion.div>
 
-                <div
+                {/* La detección de visibilidad va en el contenedor (ancho de pantalla): el carril del marquee mide
+                    miles de px y en móvil nunca alcanzaría el umbral de visibilidad */}
+                <motion.div
+                    initial={prefersReducedMotion ? false : 'hidden'}
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.1 }}
+                    variants={prefersReducedMotion ? undefined : alliesTrackVariants}
                     className="overflow-hidden relative w-full my-10"
                     style={{
                         maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
                         WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
                     }}
                 >
-                    <motion.div
-                        initial={prefersReducedMotion ? false : 'hidden'}
-                        whileInView="visible"
-                        viewport={{ once: true, amount: 0.1 }}
-                        variants={prefersReducedMotion ? undefined : alliesTrackVariants}
+                    <div
                         className="flex w-max animate-marquee motion-reduce:animate-none hover:[animation-play-state:paused]"
                     >
                         {[...allies, ...allies].map((ally, index) => (
@@ -151,8 +153,8 @@ export default function Historys() {
                                 </Link>
                             </motion.div>
                         ))}
-                    </motion.div>
-                </div>
+                    </div>
+                </motion.div>
             </section>
         </>
     )

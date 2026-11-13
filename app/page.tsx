@@ -4,6 +4,7 @@ import  Header  from './Components/Header/Header';
 import  Footer  from './Components/Footer/Footer';
 import Historys from "./Components/Home/Components/Historys";
 import StepsImages from "./Components/Home/Components/StepsImages";
+import DonationSection from "./Components/Home/Components/DonationSection";
 import Appreciates from "./Components/Home/Components/Appreciates";
 import { GetPets } from "./Components/Data/Data";
 import { headers } from 'next/headers';
@@ -21,11 +22,13 @@ export default async function HomeCanadog()
 		},
 	};
 
-	let array : any = await GetPets(true,"DOG", "CANADOG", false);
+	const [array, array2, result3] : any[] = await Promise.all([
+		GetPets(true, "DOG", "CANADOG", false),
+		GetPets(true, "CAT", "CANADOG", false),
+		GetPets(true, "History", "CANADOG"),
+	])
 	let cardsDogs = array.array
-	let array2 : any = await GetPets(true, "CAT", "CANADOG", false);
-	let cardsCats  = array2.array
-	const result3 : any = await GetPets(true, "History", "CANADOG")
+	let cardsCats = array2.array
 	console.log("cats", cardsCats)
 	
 	for(let i= 0; i < cardsCats.length; i++)
@@ -52,6 +55,8 @@ export default async function HomeCanadog()
 						CardsDogs={cardsDogs} /*{[]}*/
 						CardsCats={cardsCats} /*{{[]}*/
 					/>
+
+					<DonationSection />
 
 					<Appreciates />
 

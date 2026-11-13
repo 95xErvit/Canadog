@@ -43,6 +43,12 @@ const animalCardsStaggerVariants = {
     },
 };
 
+// Transición de layout al expandir/cerrar una tarjeta de mascota
+const layoutTransition = {
+    layout: { duration: 0.45, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] },
+    opacity: { duration: 0.35, ease: 'easeOut' as const },
+};
+
 const entranceItemVariants = {
     hidden: { opacity: 0, y: 12 },
     visible: {
@@ -54,13 +60,14 @@ const entranceItemVariants = {
 
 export default function CardsAnimals({ CardsDogs, CardsCats} : any) {
         const prefersReducedMotion = useReducedMotion();
-        const headerEntranceProps = prefersReducedMotion
-            ? {}
-            : {
-                  initial: 'hidden' as const,
-                  whileInView: 'visible' as const,
-                  viewport: { once: true, amount: 0.3 },
-              };
+        const headerEntranceProps = prefersReducedMotion ? {} : {
+            initial: 'hidden' as const,
+            whileInView: 'visible' as const,
+            viewport: { once: true, amount: 0.3 },
+        };
+        // Solo se anima el contenido interno después de la primera interacción (no en la carga inicial)
+        const hasToggled = useRef(false);
+        const contentInitial = hasToggled.current && !prefersReducedMotion ? { opacity: 0 } : false;
         const {onOpen} = useDisclosure();
         //const [expand, setExpand] = useState(false);
         const [isDog, setIsDog] = useState(true);
@@ -72,12 +79,6 @@ export default function CardsAnimals({ CardsDogs, CardsCats} : any) {
         const [selectedImage, setSelectedImage] = useState(null);
         const [Dogs, setDogs] = useState<any>(CardsDogs)
         const [Cats, setCats] = useState<any>(CardsCats)
-        
-        // const toggleExpand = (id: number) => {
-        //     setExpandedCard(expandedCard === id ? null : id);
-        //     setIndiceActual(0)
-        // };
-    
         const itemsAdoptions = 9; // Cantidad de tarjetas para mostrar por página
         const cards = isDog ? Dogs : Cats;
         const totalPagesAdoptions = Math.ceil(cards.length / itemsAdoptions);
@@ -133,7 +134,7 @@ export default function CardsAnimals({ CardsDogs, CardsCats} : any) {
                 console.log("Ejecutando")
                 fetchData()
             }
-        }, [])
+        }, [isEjecuted])
     
         //  Función para obtener la cantidad de tarjetas a mostrar según el tamaño de la pantalla
         useEffect(() => {
@@ -151,31 +152,26 @@ export default function CardsAnimals({ CardsDogs, CardsCats} : any) {
             
     
             const intervalo = setInterval(() => {
-                if(expandedCard !== null)
-                {   console.log("hola")
-                    if(Dogs.find((card : any) => card.id === expandedCard))
-                    {
-                        const leng = Dogs.find((card : any) => card.id === expandedCard).Image.length
-        
-                        let index = indiceActual
-        
-                        index++
-                        console.log(index)
-                        if(index >= leng){
-                            index = 0
-                        }
-                        setIndiceActual(index)
+                if (expandedCard !== null) {
+                    const expandedDog = Dogs.find((card: any) => card.id === expandedCard);
+                    if (expandedDog) {
+                        setIndiceActual((index) => {
+                            const nextIndex = index + 1;
+                            return nextIndex >= expandedDog.Image.length ? 0 : nextIndex;
+                        });
                     }
                 }
             }, 6000);
     
     
             updateCardsToShow();
-            intervalo
             window.addEventListener("resize", updateCardsToShow);
         
-            return () => window.removeEventListener("resize", updateCardsToShow);
-        }, []);
+            return () => {
+                clearInterval(intervalo);
+                window.removeEventListener("resize", updateCardsToShow);
+            };
+        }, [Dogs, expandedCard]);
     
         // Función para manejar el cambio de página en la paginación
         const handlePageChange = (page: number) => {
@@ -239,6 +235,7 @@ export default function CardsAnimals({ CardsDogs, CardsCats} : any) {
     
         // Función para alternar la expansión de una tarjeta de adopción
         const toggleExpand = (id: number) => {
+            hasToggled.current = true;
             setExpandedCard(expandedCard === id ? null : id);
             setIndiceActual(0);
         
@@ -251,7 +248,7 @@ export default function CardsAnimals({ CardsDogs, CardsCats} : any) {
                         inline: "center"
                     });
                 }
-            }, 100);
+            }, 450); // Espera a que termine la animación de layout (0.45 s)
         };
 
         // Simula la carga de datos (puedes reemplazar esto con tu lógica real de carga)
@@ -335,7 +332,7 @@ export default function CardsAnimals({ CardsDogs, CardsCats} : any) {
                                     className="border-none w-full" 
                                     shadow="md"
                                 >
-                                    <ScrollShadow className="mn:w-full mn:h-[530px] md:w-full md:h-[500px] mt-6 mb-6" size={0}>
+                                    <ScrollShadow className="mn:w-full mn:h-[530px] md:w-full md:h-[500px]" size={0}>
                                         {isLoadingCards ? (
                                             <div className="flex flex-col items-center justify-center w-full mn:h-[530px] md:h-[500px]">
                                                 {/* <Image src="/loading-paw.gif" alt="Cargando..." width={120} height={120} /> */}
@@ -361,18 +358,27 @@ export default function CardsAnimals({ CardsDogs, CardsCats} : any) {
                                                 {currentCards.map((card: any) => (
                                                     <motion.div
                                                         variants={prefersReducedMotion ? undefined : animalCardVariants}
+                                                        layout={!prefersReducedMotion}
+                                                        transition={layoutTransition}
                                                         key={card.id}
                                                         ref={(el) => {
                                                             cardRefs.current[card.id] = el; 
                                                         }}
-                                                        className={`relative m-4 transition-all duration-300 
+                                                        className={`relative m-4 
                                                             ${expandedCard === card.id ? 'row-span-2 z-50' : 'row-span-1'}
                                                             ${expandedCard === card.id ? 'h-auto' : 'h-[200px]'}
                                                         `}
                                                         
                                                     >
                                                         <Card>
-                                                            <div className={`flex items-center ${expandedCard === card.id ? 'flex-col mn:h-[500px] md:h-[470px] lg:h-[450px]' : ''}`}>
+                                                            <motion.div
+                                                                key={expandedCard === card.id ? 'open' : 'closed'}
+                                                                layout={prefersReducedMotion ? false : 'position'}
+                                                                initial={contentInitial}
+                                                                animate={{ opacity: 1 }}
+                                                                transition={{ duration: 0.35, ease: 'easeOut' }}
+                                                                className={`flex items-center ${expandedCard === card.id ? 'flex-col mn:h-[500px] md:h-[470px] lg:h-[450px]' : ''}`}
+                                                            >
                                                                 {expandedCard === card.id ? (
                                                                     <>
                                                                         {/* Carousel principal */}
@@ -472,7 +478,7 @@ export default function CardsAnimals({ CardsDogs, CardsCats} : any) {
                                                                         </div>
                                                                     )}
                                                                 </CardBody>
-                                                            </div>
+                                                            </motion.div>
                                                         </Card>
                                                     </motion.div>
                                                 ))}
@@ -511,17 +517,25 @@ export default function CardsAnimals({ CardsDogs, CardsCats} : any) {
                                             {currentCards.map((card: any) => (
                                             <motion.div
                                                 variants={prefersReducedMotion ? undefined : animalCardVariants}
+                                                layout={!prefersReducedMotion}
+                                                transition={layoutTransition}
                                                 key={card.id}
                                                 ref={(el) => {
                                                     cardRefs.current[card.id] = el; 
                                                 }}
-                                                className={`relative m-4 transition-all duration-300 
+                                                className={`relative m-4 
                                                     ${expandedCard === card.id ? 'row-span-2 z-50' : 'row-span-1'}
                                                     ${expandedCard === card.id ? 'h-auto' : 'h-[200px]'}
                                                 `}
                                             >
                                                 <Card className='transition-transform duration-100'>
-                                                    <div className={`flex items-center ${expandedCard === card.id ? 'flex-col mn:h-[500px] md:h-[470px] lg:h-[450px] gap-2' : ''}`}>
+                                                    <motion.div
+ key={expandedCard === card.id ? 'open' : 'closed'}
+ layout={prefersReducedMotion ? false : 'position'}
+ initial={contentInitial}
+ animate={{ opacity: 1 }}
+ transition={{ duration: 0.35, ease: 'easeOut' }}
+ className={`flex items-center ${expandedCard === card.id ? 'flex-col mn:h-[500px] md:h-[470px] lg:h-[450px] gap-2' : ''}`}>
                                                         {expandedCard === card.id ? (
                                                             /*<Image
                                                                 alt="Album cover"
@@ -628,7 +642,7 @@ export default function CardsAnimals({ CardsDogs, CardsCats} : any) {
                                                                 </div>
                                                             )}
                                                         </CardBody>
-                                                    </div>
+                                                    </motion.div>
                                                 </Card>
                                             </motion.div>
                                             ))}
